@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Regression for Linguists",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n\n[1] 2"
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Meeting\n      Lecture\n      Topic\n      Vorbereitung\n    \n  \n  \n    2023-10-10\n1\nEquation of a line\n\n📚 Winter (2019): Ch. 1-3\n\n    2023-10-11\n2\nLinear regression\n\n📚 Winter (2019): Ch. 4\n📚 Winter (2013)\n\n    2023-10-12\n3\nContinuous predictors\n\n📚 Winter (2019): Ch. 5\n📚 Winter (2013)\n\n    2023-10-10\n4\nMultiple linear regression\n\n📚 Winter (2019): Ch. 6\n📚 Winter (2013)\n\n    2023-10-11\n5\nCategorical predictors\n\n📚 Winter (2019): Ch. 7\n📚 Winter (2013)\n\n    2023-10-12\n6\nModel assumptions\n\n\n    2023-10-10\n7\nLogistic regression\n\n📚 Winter (2019): Ch. 12\n\n    2023-10-11\n8\nLog odds, logits, and odds ratio\n\n\n    2023-10-12\n9\nFoundational Ideas\n\nVasishth & Nicenboim (2016)\n\n    2024-01-12\n10\nLinear mixed models\n\n📚 Winter (2019): Ch. 14\nWinter & Grice (2021); until Section 3\n\n    2024-01-12\n11\nLinear mixed models\n\n\n    2024-01-26\n12\n\n\n    2024-01-26\n13\n\n\n    2024-02-09\n14\n\n\n    2024-02-09\n15"
+  },
+  {
+    "objectID": "kursuebersicht_blatt.html",
+    "href": "kursuebersicht_blatt.html",
+    "title": "Course overview",
+    "section": "",
+    "text": "Moodle\nMoodle: “Regression for Linguists”\nSchlüssel: reg4ling\nThis course is mainly based on (winter_statistics_2019?), which is an excellent introduction into regression for linguists. For even more introductory tutorials, I recommend going through (Winter_2013?) and (Winter_2014?). For a more intermediate textbook, I’d recommend (sondregger_regression_2023?).\nIf you’re interested in the foundational writings on the topic of linear mixed models in (psycho)linguistic research, I’d recommend reading (baayen_2008?); (jaeger_2008?); (barr_2013?); (matschucek_2017?).\nFor this course, I assume that you are familiar with more classical statistical tests, such as the t-test, Chi-square test, etc. I also assume you are familiar with measures of central tendency (mean, median, mode) measures dispersion/spread (standard deviation), and with the concept of a normal distribution. Lacking this knowledge will not impeded your progress in the course, but is an important foundation on which we’ll be building. We can review these concepts in-class as needed."
+  },
+  {
+    "objectID": "kursuebersicht_blatt.html#moodle-1",
+    "href": "kursuebersicht_blatt.html#moodle-1",
+    "title": "Course overview",
+    "section": "Moodle",
+    "text": "Moodle\n\nlecture materials"
+  },
+  {
+    "objectID": "kursuebersicht_blatt.html#course-aims",
+    "href": "kursuebersicht_blatt.html#course-aims",
+    "title": "Course overview",
+    "section": "Course aims",
+    "text": "Course aims\nBy the end of this course, you will\n\nblah blah\n\n\nWhat will you learn?\n\nlinear regression\nmultiple regression\nlogistic regression\nmixed models\nusing the lme4 package\nhow to apply these models appropriately to a variety of data types\n\n\n\nWhat will you not learn?"
+  },
+  {
+    "objectID": "kursuebersicht_blatt.html#install-r",
+    "href": "kursuebersicht_blatt.html#install-r",
+    "title": "Course overview",
+    "section": "Install R",
+    "text": "Install R\n\nwe need the free and open source statistical software R to analyze our data\ndownload and install R: https://www.r-project.org"
+  },
+  {
+    "objectID": "kursuebersicht_blatt.html#install-rstudio",
+    "href": "kursuebersicht_blatt.html#install-rstudio",
+    "title": "Course overview",
+    "section": "Install RStudio",
+    "text": "Install RStudio\n\nwe need RStudio to work with R more easily\nDownload and install RStudio: https://rstudio.com\nit can be helpful to keep English as language in RStudio\n\nwe will find more helpful information if we search error messages in English on the internet\n\nIf you have problems installing R or RStudio, check out this help page (in German): http://methods-berlin.com/wp-content/uploads/Installation.html"
+  },
+  {
+    "objectID": "kursuebersicht_blatt.html#install-latex",
+    "href": "kursuebersicht_blatt.html#install-latex",
+    "title": "Course overview",
+    "section": "Install LaTeX",
+    "text": "Install LaTeX\n\nwe will not work with LaTeX directly, but it is needed in the background\nDownload and install LaTeX: https://www.latex-project.org/get/"
+  },
+  {
+    "objectID": "kursuebersicht_blatt.html#troubleshooting-en-troubleshooting",
+    "href": "kursuebersicht_blatt.html#troubleshooting-en-troubleshooting",
+    "title": "Course overview",
+    "section": "Troubleshooting (EN: Troubleshooting)",
+    "text": "Troubleshooting (EN: Troubleshooting)\n\nError messages are very common in programming, at all levels.\nHow to find solutions for these error messages is an art in itself\nGoogle is your friend! If possible, google in English to get more information"
+  }
+]
