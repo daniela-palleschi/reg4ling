@@ -21,6 +21,13 @@
     "text": "Course aims\nBy the end of this course, you will\n\nblah blah\n\n\nWhat will you learn?\n\nlinear regression\nmultiple regression\nlogistic regression\nmixed models\nusing the lme4 package\nhow to apply these models appropriately to a variety of data types\n\n\n\nWhat will you not learn?\n\nstuff"
   },
   {
+    "objectID": "index.html#style-guide",
+    "href": "index.html#style-guide",
+    "title": "Regression for Linguists",
+    "section": "Style guide",
+    "text": "Style guide\nAs a self-respecting Canadian, I bounce between what is typically considered ‘American’ and ‘British’ spelling. This will be most notable in my use of -ise and -ize, but will never result in a dropped ‘u’ from words like colour, which is used often in plots. I say this so that non-native speakers don’t start to think they’ve been spelling words wrong."
+  },
+  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
@@ -32,7 +39,7 @@
     "href": "kursuebersicht_blatt.html",
     "title": "Resources and Set-up",
     "section": "",
-    "text": "Resources\nThis course is mainly based on (winter_statistics_2019?), which is an excellent introduction into regression for linguists. For even more introductory tutorials, I recommend going through (Winter_2013?) and (Winter_2014?). For a more intermediate textbook, I’d recommend (sondregger_regression_2023?).\nIf you’re interested in the foundational writings on the topic of linear mixed models in (psycho)linguistic research, I’d recommend reading (baayen_2008?); (jaeger_2008?); (barr_2013?); (matschucek_2017?).\nFor this course, I assume that you are familiar with more classical statistical tests, such as the t-test, Chi-square test, etc. I also assume you are familiar with measures of central tendency (mean, median, mode) measures dispersion/spread (standard deviation), and with the concept of a normal distribution. Lacking this knowledge will not impeded your progress in the course, but is an important foundation on which we’ll be building. We can review these concepts in-class as needed."
+    "text": "Resources\nThis course is mainly based on Winter (2019), which is an excellent introduction into regression for linguists. For even more introductory tutorials, I recommend going through (Winter_2013?) and (Winter_2014?). For a more intermediate textbook, I’d recommend (sondregger_regression_2023?).\nIf you’re interested in the foundational writings on the topic of linear mixed models in (psycho)linguistic research, I’d recommend reading (baayen_2008?); (jaeger_2008?); (barr_2013?); (matschucek_2017?).\nFor this course, I assume that you are familiar with more classical statistical tests, such as the t-test, Chi-square test, etc. I also assume you are familiar with measures of central tendency (mean, median, mode) measures dispersion/spread (standard deviation), and with the concept of a normal distribution. Lacking this knowledge will not impeded your progress in the course, but is an important foundation on which we’ll be building. We can review these concepts in-class as needed."
   },
   {
     "objectID": "kursuebersicht_blatt.html#install-r",
@@ -61,5 +68,243 @@
     "title": "Resources and Set-up",
     "section": "Troubleshooting (EN: Troubleshooting)",
     "text": "Troubleshooting (EN: Troubleshooting)\n\nError messages are very common in programming, at all levels.\nHow to find solutions for these error messages is an art in itself\nGoogle is your friend! If possible, google in English to get more information"
+  },
+  {
+    "objectID": "01-equation_of_a_line.html",
+    "href": "01-equation_of_a_line.html",
+    "title": "1  Understanding straight lines",
+    "section": "",
+    "text": "Learning Objectives\nToday we will learn…\nThis lecture is based on the readings for today’s session: Winter (2013) and Winter (2019) (Ch. 3), and to a lesser extent (debruine_understanding_2021?); Winter (2014).\nBy the time we get to the point of wanting to model our data, we should have a pretty good idea of how our data look. We achieve this through running an exploratory data analysis (EDA), which consists of visualising your data and determining outliers (a question for another day: what is an outlier?), generating summary (i.e., descriptive) statistics, and just overall getting to know your data, without making any claims beyond your data.\nHowever, an understanding of the data design and collection procedure is incredibly important and is necessary in order to appropriately fit a model to our data. In fact, planning out your analyses when designing your experiment is highly recommended in order to ensure your data will have the appropriate structure and that the assumptions made by your chosen analyses are taken into consideration before data collection.\nThe next step after conducting an EDA is to model your data, i.e., run inferential statistics, this is where we try to generalise beyond our data.\nData exploration gives us an idea about what our data look like, but if we want to be able to make predictions about hypothetical observations, i.e., to predict values of our DV based on one (or more) IV(s), we need to fit a model to our data. This model can then predict values of our DV based on one (or more) IV(s), i.e., predicting an outcome variable (dependent variable, DV) from one or more predictors (independent variable, IV). Because we’re making predictions, we need to take into account the variability (i.e., error) in our data.\nToday we learned…"
+  },
+  {
+    "objectID": "01-equation_of_a_line.html#statistical-tests-versus-models",
+    "href": "01-equation_of_a_line.html#statistical-tests-versus-models",
+    "title": "1  Understanding straight lines",
+    "section": "2.1 Statistical tests versus models",
+    "text": "2.1 Statistical tests versus models\nMany statistical courses and textbooks still put undue emphasis on classical statistical tests. However, these common statistical tests are simplified linear models, without the added benefits of linear models. In essence, statistical tests tell us something about our data, whereas statistical models can be used to make predictions about hypothetical future observations."
+  },
+  {
+    "objectID": "01-equation_of_a_line.html#types-of-regression",
+    "href": "01-equation_of_a_line.html#types-of-regression",
+    "title": "1  Understanding straight lines",
+    "section": "3.1 Types of regression",
+    "text": "3.1 Types of regression\n\n\n\n\n\nregression type\npredictor\noutcome\n\n\n\n\nsimple regression\nSingle predictor\ncontinuous (numerical)\n\n\nmultiple regression\nmultiple predictor\ncontinuous (numerical)\n\n\nhierarchical/linear mixed models/linear mixed effect models\ninclude random effect\ncontinuous (numerical)\n\n\ngeneralised linear (mixed) models: logistic regression\nas above\nbinary/binomial data\n\n\ngeneralised linear (mixed) models: poisson regression\nas above\ncount data"
+  },
+  {
+    "objectID": "01-equation_of_a_line.html#a-line-intercept-and-slope",
+    "href": "01-equation_of_a_line.html#a-line-intercept-and-slope",
+    "title": "1  Understanding straight lines",
+    "section": "4.1 A line = intercept and slope",
+    "text": "4.1 A line = intercept and slope\n\na line is defined by its intercept and slope\n\nin a regression model, these two are called coefficients\n\n\n\n\n\n\n\nFigure 4.1: Image source: Winter (2019) (all rights reserved)\n\n\n\n\n\n\n\n\n\n\nEquation of a line\n\n\n\n\\[\n\\begin{align}\ny & = mx + c\\\\\nY_i &= (b_0 + b_1X_i) \\\\\noutcome_i & = (model) \\\\\ny_i & = (intercept + slope*x_i)\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "01-equation_of_a_line.html#intercept-b_0",
+    "href": "01-equation_of_a_line.html#intercept-b_0",
+    "title": "1  Understanding straight lines",
+    "section": "4.2 Intercept (\\(b_0\\))",
+    "text": "4.2 Intercept (\\(b_0\\))\n\nthe value of \\(y\\) when \\(x = 0\\)"
+  },
+  {
+    "objectID": "01-equation_of_a_line.html#slopes-b_1",
+    "href": "01-equation_of_a_line.html#slopes-b_1",
+    "title": "1  Understanding straight lines",
+    "section": "4.3 Slopes (\\(b_1\\))",
+    "text": "4.3 Slopes (\\(b_1\\))\nA slope describes a change in \\(x\\) (\\(\\Delta x\\)) over a change in \\(y\\) (\\(\\Delta y\\)), where \\(\\Delta\\) (the Greek letter delta) can be read as ‘difference’ (because it also starts with a ‘d’…). So a slope’s value equals the difference in \\(x\\) for a difference of 1 unit in \\(y\\). Positive slopes indicate that as \\(x\\) increases, \\(y\\) increases. A negative slope value indicates that as \\(x\\) increases, \\(y\\) decreases (or vice versa). A slope of 0 indicates there is no change in \\(y\\) as a function of \\(x\\), or: there is no change in \\(y\\) when the value of \\(x\\) changes.\n\\[\nslope = \\frac{\\Delta x}{\\Delta y}\n\\]\nThis relationship between \\(x\\) and \\(y\\) is sometimes referred to as “rise over run”: how do you ‘rise’ in \\(y\\) for a given ‘run’ in \\(x\\)? For example, if we were to measure children’s heights and ages, we would expect to find an increase in height for every increase in age. Or, for a linguistic example, we would expect to find longer whole-sentence reading times (a measure variable) for longer texts: if a sentence has 9 words (I find straight lines to be really interesting and fun.), we would expect longer reading times than a sentence with 3 words (I love lines.).\n\n\nwhat is the intercept of this line?\nwhat is the slope of this line?"
+  },
+  {
+    "objectID": "01-equation_of_a_line.html#method-of-least-squares",
+    "href": "01-equation_of_a_line.html#method-of-least-squares",
+    "title": "1  Understanding straight lines",
+    "section": "5.1 Method of least squares",
+    "text": "5.1 Method of least squares\n\nso how is any given line chosen to fit any given data?\nthe method of least squares\n\ntake a given line, and square all the residuals (i.e., \\(residual^2\\))\nthe line with the lowest sum of squares is the line with the best fit to the given data\nwhy do we square the residuals before summing them up?\n\nso all values are positive (i.e., so that negative values don’t cancel out positive values)\n\n\nthis is how we find the line of best fit\n\nR fits many lines to find the one with the best fit\n\n\n\n\n\n\n\n\nFigure 5.1: Observed values (A), Residuals for line of best fit (B), A line of worse fit with larger residuals (C)"
+  },
+  {
+    "objectID": "01-equation_of_a_line.html#task-1-pen-and-paper",
+    "href": "01-equation_of_a_line.html#task-1-pen-and-paper",
+    "title": "1  Understanding straight lines",
+    "section": "6.1 Task 1: pen-and-paper",
+    "text": "6.1 Task 1: pen-and-paper\nYou will receive a piece of paper with several grids on it. Follow the instructions, which include drawing some lines. If you aren’t in-class, this is the paper we are using:"
+  },
+  {
+    "objectID": "01-equation_of_a_line.html#task-2-simulating-data",
+    "href": "01-equation_of_a_line.html#task-2-simulating-data",
+    "title": "1  Understanding straight lines",
+    "section": "6.2 Task 2: simulating data",
+    "text": "6.2 Task 2: simulating data\nAll of the figures we just saw (except Figure 4.1, which is from Winter (2019)) were generated in R. Simulating data and plotting is a great way to understand concepts, or even to map out our hypotheses. Let’s use R for the first time to try to simulate some data in order to plot lines. Our goal will be to produce a line that has the following:\n\nintercept = 4.5\nslope = 3\n\n\n6.2.1 Planning\nFirst, think about what steps will be required to create such plots. Can you come up with a workflow plan (without peaking at the next tasks)?\n\n\n6.2.2 Producing our line"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html",
+    "href": "02-simple_linear_regression.html",
+    "title": "2  Simple linear regression",
+    "section": "",
+    "text": "Learning Objectives\nToday we will learn…\nMake sure you always start with a clean R Environment (Session &gt; Restart R). This means you should have no objects stored in your Environment, and no packages loaded. To ensure this, you can go to the Session tab (up where you’ll find File, Help, etc.), and select Restart R. You can also use the keyboard shortcut Cmd/Ctrl+Shift+0 (that’s a zero, not an ‘oh’).\nIn addition, I often prefer to run options(scipen=999) in order to supress scientific notation, which writes very large or very small numbers in an unintuitive way. For example, 0.000005 is written 5e-06 in scientific notation.\n# suppress scientific notation\noptions(scipen=999)\nWe’ll also need to load in our required packages. Hopefully you’ve already install the required packages (if not, go to Chapter 3).\n# load libraries\npacman::p_load(\n               tidyverse,\n               here,\n               broom,\n               lme4,\n               janitor,\n               languageR)\nRecall that \\(y \\sim x\\) can be read as “y as a function of x”, or “y predicted by x”. Following Winter (2019), we will first model some word frequency data. In this experiment, Our first model will be:\n\\[\nRT \\sim frequency\n\\]\nLet’s load our data using the read_csv() function from readr. I also use the clean_names() function from the janitor package, which tidies up variable names (e.g., no spaces, all lower case).\n# load ELP_frequency.csv\ndf_freq &lt;- read_csv(here(\"data\", \"ELP_frequency.csv\")) |&gt; \n  clean_names()\nsummary(fit_rt_1)\nCall:\n1lm(formula = rt ~ 1, data = df_freq)\n\nResiduals:\n     Min       1Q   Median       3Q      Max\n2-172.537  -74.677   -9.137   91.296  197.613\n\nCoefficients:\n3            Estimate Std. Error t value       Pr(&gt;|t|)\n4(Intercept)   679.92      34.02   19.99 0.000000000538 ***\n---\n5Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n\n6Residual standard error: 117.8 on 11 degrees of freedom\n\n\n1\n\nformula repetition\n\n2\n\nresiduals: differences between observed values and those predicted by the model\n\n3\n\nnames for columns Estimates, standard error, t-value, p-value (Pr(&gt;|t|))\n\n4\n\nIntercept (\\(b_0\\))\n\n5\n\nSignificance codes\n\n6\n\nR\\(^2\\), a measure of model fit (squared residuals); percentage of variance in the data shared with the predictor (higher numbers are better…this is pretty low)\nNow let’s include a predictor, which will give us a slope. The slope represents the change in \\(y\\) (DV: rt) when we move 1-unit along \\(y\\) (IV: freq). In other words, it tells us the effect our IV has on the DV. Let’s first plot the data:\ndf_freq |&gt; \n  ggplot() +\n  aes(x = freq, y = rt) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE)\nNow that we’ve fit a model and understand the output, it’s time to think about whether this model is a good fit for our data. We first have to understand some assumptions that need to met in regression modelling. Importantly, these assumptions reate to the residuals of our model, not the raw data points themselves. The two assumptions we’ll focus on for now are the assumptions of normality of the residuals, and the constant variance of the residuals. Both assumptions are often diagnosed visually, so it takes some practice to learn what looks right.\nToday we learned…\nNow it’s your turn. Try to run the following lm() models:"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#load-in-data",
+    "href": "02-simple_linear_regression.html#load-in-data",
+    "title": "2  Simple linear regression",
+    "section": "Load in data",
+    "text": "Load in data\nNow that we’ve loaded our packages, we can take a look at our dataset. Fitting our data to a model typically follows an Exploratory Data Analysis (EDA), which consists of plotting and summarising a data set. We won’t get into the EDA process, but there are many great resources on how to go about it in R (e.g., https://r4ds.hadley.nz/).\nLet’s load our dataset using the read_csv() function from the tidyverse package readr. Alternatively, we could use base R to load in the data with read.csv(). Some additional functions in the code below:\n\nmutate_if(is.character, as.factor) force character variables to factors\nfilter for the verb region from critical items only, remove participant 3, and remove values of first-fixtation that are 0\n\n\n# load in dataset\n# df_freq &lt;-\n#   readr::read_csv(\n#     here::here(\"data/tidy_data_lifetime_pilot.csv\"),\n#     # for special characters\n#     locale = readr::locale(encoding = \"latin1\")\n#   ) |&gt;\n#   mutate_if(is.character, as.factor) |&gt; # all character variables as factor\n#   # mutate(lifetime = fct_relevel(lifetime, \"living\", \"dead\"),\n#   #        tense = fct_relevel(tense, \"PP\", \"SF\")) |&gt;\n#   filter(type == \"critical\", # only critical trials\n#          px != \"px3\", # px3 had a lot of missing values\n#          rt &gt; 0, # only values of rt above 0\n#          region == \"verb\") %&gt;% # critical region only\n#   droplevels() # remove any factor levels with no observations"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#mini-eda",
+    "href": "02-simple_linear_regression.html#mini-eda",
+    "title": "2  Simple linear regression",
+    "section": "3.1 Mini-EDA",
+    "text": "3.1 Mini-EDA\nLet’s explore the data a little bit, which is what we would normally do before fitting any models. First, let’s see how the data is structured.\n\n# print head of df_freq\nhead(df_freq)\n\n# A tibble: 6 × 3\n  word      freq    rt\n  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;\n1 thing    55522  622.\n2 life     40629  520.\n3 door     14895  507.\n4 angel     3992  637.\n5 beer      3850  587.\n6 disgrace   409  705 \n\n\nLooks like there are only 3 columns: word, freq, and rt. We can assume that they correspond to the word, its frequency, and the reaction time, respectively. We can also see in our global environment that there are 12 observations, meaning 12 rows.\n\n# print plot of raw data points\nplot(df_freq$rt)\n\n\n\nplot(df_freq$freq)\n\n\n\n\n\nsummary(df_freq)\n\n     word                freq               rt       \n Length:12          Min.   :    4.0   Min.   :507.4  \n Class :character   1st Qu.:   57.5   1st Qu.:605.2  \n Mode  :character   Median :  325.0   Median :670.8  \n                    Mean   : 9990.2   Mean   :679.9  \n                    3rd Qu.: 6717.8   3rd Qu.:771.2  \n                    Max.   :55522.0   Max.   :877.5  \n\n\nWe see freq has a pretty big range, from 4 to 55522. rt has a range of 507.38 to 877.53, with an average reaction time of 679.9.\n\nsummary(df_freq$rt)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  507.4   605.2   670.8   679.9   771.2   877.5 \n\n\nAnd the range"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#lm",
+    "href": "02-simple_linear_regression.html#lm",
+    "title": "2  Simple linear regression",
+    "section": "3.2 lm()",
+    "text": "3.2 lm()\nThe the lm() function fits simple linear models. As arguments it takes a formula and a dataset, at minimum.\n\\[\nlm(outcome \\sim 1 + predictor,\\;data\\;=\\;df\\_name)\n\\]\nThe lm() function formula syntax can be read as: outcome predicted by the intercept (1 is a placeholder for the intercept) and predictor. The intercept is included by default, so if you omit the 1 the intercept is still included in the formula. If you wanted to remove the intercept (which you often don’t), you could replace 1 with 0.\n\n3.2.1 Running a model\nBefore we add our predictor freq, let’s see what our model looks like without it. We can write it as:\n\nlm(rt ~ 1, data = df_freq) \n\nBut it’s useful to save the model as an object so that we can call on it later. It’s often a good idea to have informative prefixes to your objects\n\nfit_rt_1 &lt;- lm(rt ~ 1, data = df_freq) \n\n\n\n\n\n\n\nObject naming\n\n\n\nYou may have wondered what the letters df are for when loading in our data set as df_freq. These letters stand for ‘data frame’, and serve as a reminder of what exactly that object in our environment is. We might also have wanted to plot the frequency data, in which case we could call save the plot as fig_freq or plot_freq. Here we are saving our model as fit_rt_1, using ‘fit’ to signal that this object is a model fit. You could also save it as mod_freq_1, lm_freq_1, or whatever you see fit. This simply helps keep our environment structured, which will become useful when you begin working with multiple datasets at a time.\n\n\n\n\n3.2.2 Model ouput\nNow that we’ve saved our model in our Enrivonement, we can call it by name. Printing just the model gives us the formula and the coefficients.\n\n# print model\nfit_rt_1\n\n\nCall:\nlm(formula = rt ~ 1, data = df_freq)\n\nCoefficients:\n(Intercept)  \n      679.9  \n\n\nRecall that the intercept and slope are called coefficients. Why do we only see Intercept? Because we didn’t include any predictors in our model. This output isn’t very dense, however. We typically use the summary() function to print full model outputs.\n\nsummary(fit_rt_1)\n\n\nCall:\nlm(formula = rt ~ 1, data = df_freq)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-172.537  -74.677   -9.137   91.296  197.613 \n\nCoefficients:\n            Estimate Std. Error t value       Pr(&gt;|t|)    \n(Intercept)   679.92      34.02   19.99 0.000000000538 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 117.8 on 11 degrees of freedom\n\n\nWe see a lot more information here.\n\n\n\n\n\n\nbroom package\n\n\n\nThe broom package has some useful functions for printing model outputs\n\ntidy() produces a tibble (type of dataframe) of the coefficients\nglance() produces goodness of fit measures (which we won’t discuss)\n\nThe outputs from tidy() and glance() can be fed into kable and/or kable_styling() to create formatted tables\n\ntidy(fit_rt_1)\n\n# A tibble: 1 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)     680.      34.0      20.0 5.38e-10\n\n\n\nglance(fit_rt_1)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1         0             0  118.        NA      NA    NA  -73.7  151.  152.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\naugment() adds model values as columns to your dataframe (e.g., useful for plotting observed vs. fitted values).\n\naugment(fit_rt_1, data = df_freq) %&gt;% summary()"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#fit-model-treatment-contrasts",
+    "href": "02-simple_linear_regression.html#fit-model-treatment-contrasts",
+    "title": "2  Simple linear regression",
+    "section": "5.1 Fit model (treatment contrasts)",
+    "text": "5.1 Fit model (treatment contrasts)\n\n# fit simple linear model\nfit_rt_freq &lt;- lm(rt ~ freq, data = df_freq)\n\n\n5.1.1 Model summary\n\nsummary(fit_rt_freq)\n\n\nCall:\nlm(formula = rt ~ freq, data = df_freq)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-155.947  -73.141    2.117   85.050  163.837 \n\nCoefficients:\n              Estimate Std. Error t value     Pr(&gt;|t|)    \n(Intercept) 713.706298  34.639105   20.60 0.0000000016 ***\nfreq         -0.003382   0.001699   -1.99       0.0746 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 104.6 on 10 degrees of freedom\nMultiple R-squared:  0.2838,    Adjusted R-squared:  0.2121 \nF-statistic: 3.962 on 1 and 10 DF,  p-value: 0.07457\n\n\n\n\n5.1.2 Intercept\nThe intercept in our last model was the mean reaction time. But now it’s a different value.\n\n# print model intercept\ncoef(fit_rt_freq)['(Intercept)']\n\n(Intercept) \n   713.7063 \n\n\n\n# print data mean\nmean(df_freq$rt)\n\n[1] 679.9167\n\n\nOur intercept is no longer the grand mean of first-pass reading times…what is it?\n\n\n5.1.3 Slope\nOur slope was our slope -0.0033823. What does this correspond to?\n\n# print slope\ncoef(fit_rt_freq)['freq']\n\n        freq \n-0.003382289 \n\n\nThis is the change in \\(y\\) (our DV rt) for a 1-unit change in \\(x\\) (our IV: freq). So when we move up 1 unit in frequency, reaction times decrease by -0.0033823. Whether or not it makes sense to consider this number depends on the measurement unit your data is in, e.g., a unit change from one millimeter or one meter will have a drastically different slope value (say, for age), but the actual slope will be the exact same.\n\nheights_m &lt;- c(1.71, 1.56, .9, 2.06, 1.63)\nheights_cm &lt;- c(171, 156, 90, 206, 163)\nheights_mm &lt;- c(1710, 1560, 900, 2060, 1630)\nyear &lt;- c(22,15,10,26,18)\nmonths &lt;- c(22,15,10,26,18)*12\ndays &lt;- c(22,15,10,26,18)*365\n\ndf_heights_age &lt;- cbind(year, months, days, heights_mm, heights_cm, heights_m) |&gt; as.data.frame() |&gt; \n  pivot_longer(\n    cols = c(heights_mm, heights_cm, heights_m),\n    names_to = \"unit\",\n    values_to = \"height\"\n  ) |&gt; \n  pivot_longer(\n    cols = c(year, months, days),\n    names_to = \"unit_age\",\n    values_to = \"age\"\n  )\n\n\n\n\nlm(heights_mm ~ year)\n\n\nCall:\nlm(formula = heights_mm ~ year)\n\nCoefficients:\n(Intercept)         year  \n     396.62        64.58  \n\nlm(heights_cm ~ days)\n\n\nCall:\nlm(formula = heights_cm ~ days)\n\nCoefficients:\n(Intercept)         days  \n   39.66230      0.01769  \n\nlm(heights_m ~ months)\n\n\nCall:\nlm(formula = heights_m ~ months)\n\nCoefficients:\n(Intercept)       months  \n   0.396623     0.005382  \n\nlm(heights_mm ~ year)\n\n\nCall:\nlm(formula = heights_mm ~ year)\n\nCoefficients:\n(Intercept)         year  \n     396.62        64.58  \n\nlm(heights_cm ~ year)\n\n\nCall:\nlm(formula = heights_cm ~ year)\n\nCoefficients:\n(Intercept)         year  \n     39.662        6.458  \n\nlm(heights_m ~ year)\n\n\nCall:\nlm(formula = heights_m ~ year)\n\nCoefficients:\n(Intercept)         year  \n    0.39662      0.06458  \n\n\n\nggplot(data = df_heights_age) +\n  aes(x = height, y = age) +\n  facet_wrap(unit ~ unit_age, scales = \"free\") +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = F) +\n  theme_bw()"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#normality",
+    "href": "02-simple_linear_regression.html#normality",
+    "title": "2  Simple linear regression",
+    "section": "6.1 Normality",
+    "text": "6.1 Normality\nWhen a model satisfies the normalit assumption, its residuals (i.e., the difference between the fitted and observed values) will be approximately normally distributed. Normality is typically visualised using a histogram (Figure 6.1 A) and/or a quantile-quantile (Q-Q) plot (Figure 6.1 B).\n\n\n\n\n\nFigure 6.1: Image source: Winter (2019) (all rights reserved)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nWinter (2019)’s description of how QQ plots are generated (p. 110):\nTo create this plot, every residual is transformed into a percentile (or quantile) […] The question the Q-Q plot answers is: what is the corresponding numerical value of the 13.8th percentile on the normal distribution? If the values are the same, they will fit on a straight line, which indicates that the two distributions (the distribution of the residuals and the theoretical normal distribution) are very similar."
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#constant-variance",
+    "href": "02-simple_linear_regression.html#constant-variance",
+    "title": "2  Simple linear regression",
+    "section": "6.2 Constant variance",
+    "text": "6.2 Constant variance\nWhen a model satisfies the constant variance assumption (also called homoscedasticity, or the absence of heteroscedasticity), the spread of residuals will be equal across the regression line. This is typically visualised using a residual plot, which should look like a blob (Figure 6.1 C)."
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#visualising-model-assumptions",
+    "href": "02-simple_linear_regression.html#visualising-model-assumptions",
+    "title": "2  Simple linear regression",
+    "section": "6.3 Visualising model assumptions",
+    "text": "6.3 Visualising model assumptions\nLet’s plot our residuals to assess whether our model satisfies the assumptions of normality and constant variance.\n\n6.3.1 Histogram\nWe can do this how it’s done in Winter (2019) (in Ch. 6, p. 110-111), by first extracting the residuals from the model and then fitting them them using the base R function hist().\n\n# extract residuals\nres &lt;- residuals(fit_rt_freq)\n\n\n# plot histogram\nhist(res)\n\n\n\n\nOr, we can use the augment() function from broom to append model values to our original data frame, and then feed this into ggplot() from ggplot2 (or even feed it into hist()).\n\n# or, add to df\ndf_freq &lt;- broom::augment(fit_rt_freq, df_freq)\n\n\n# and create ggplot\ndf_freq |&gt; \n  ggplot() +\n  aes(x = .resid) +\n  geom_histogram(bins = 8, fill = \"grey\", colour = \"black\") +\n  theme_bw()\n\n\n\n\n\n\n6.3.2 Q-Q plot\nAgain, we can do it Bodo’s way:\n\nqqnorm(res)\nqqline(res)\n\n\n\n\nOr using augment() and ggplot().\n\ndf_freq |&gt; \n  ggplot() +\n  aes(sample = .resid) +\n  geom_qq(colour = \"red\") +\n  geom_qq_line() \n\n\n\n\n\n\n6.3.3 Residual plot\nBodo’s way:\n\nplot(fitted(fit_rt_freq), res)\n\n\n\n\nOr with ggplot:\n\ndf_freq |&gt; \n  ggplot() +\n  aes(x = .fitted, y = .resid) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = F)"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#performance-package",
+    "href": "02-simple_linear_regression.html#performance-package",
+    "title": "2  Simple linear regression",
+    "section": "6.4 performance package",
+    "text": "6.4 performance package\nI like to use the performance package to visualise model fit (performance_package?).\n\nperformance::check_normality(fit_rt_freq)\n\nOK: residuals appear as normally distributed (p = 0.702).\n\n\n\nperformance::check_heteroscedasticity(fit_rt_freq)\n\nOK: Error variance appears to be homoscedastic (p = 0.980).\n\n\n\nperformance::check_model(fit_rt_freq)\n\n\n\n\n\n6.4.1 Coefficients table with summary()\n\n\n&gt; summary(fit_rt_freq)\n\nCall:\n1lm(formula = rt ~ lifetime, data = df_freq, subset = rt &gt; 0)\n\n2Residuals:\n    Min      1Q  Median      3Q     Max \n-228.99 -109.29  -26.99   58.86  777.71 \n\nCoefficients:\n3             Estimate Std. Error t value Pr(&gt;|t|)\n4(Intercept)  309.142      6.259  49.394 &lt;0.0000000000000002 ***\n5lifetime1     31.701     12.517   2.533              0.0116 *\n---\nSignif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n\nResidual standard error: 57.46 on 541 degrees of freedom\n6Multiple R-squared:  0.01172,   Adjusted R-squared:  0.00989\nF-statistic: 6.414 on 1 and 541 DF,  p-value: 0.0116\n\n\n1\n\nformula\n\n2\n\nResiduals: differences between observed values and those predicted by the model\n\n3\n\nNames for columns Estimates, SE, t-value, p-value\n\n4\n\nIntercept (\\(b_0\\)), i.e., value of \\(y\\) (first-pass) with a move of one unit of \\(x\\) (lifetime)\n\n5\n\nSlope (\\(b_1\\)), i.e., change in first fixation going from dead to living\n\n6\n\nOutput from an ANOVA\n\n\n\n\n\n\n\nwhat is the intercept?\nis the slope positive or negative?\n\nwhat is it’s value?\n\nthis is what the slope would look like:"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#exploring-the-model",
+    "href": "02-simple_linear_regression.html#exploring-the-model",
+    "title": "2  Simple linear regression",
+    "section": "Exploring the model",
+    "text": "Exploring the model\n\n# how many observed values did we enter into the model?\ndf_freq |&gt; \n  nrow()\n\n[1] 12\n\n\n\n# how many observed values did we enter into the model?\nlength(fitted(fit_rt_freq))\n\n[1] 12"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#exploring-the-model-residuals",
+    "href": "02-simple_linear_regression.html#exploring-the-model-residuals",
+    "title": "2  Simple linear regression",
+    "section": "Exploring the model: residuals",
+    "text": "Exploring the model: residuals\n\n# what do our FITTED values look like?\nhead(fitted(fit_rt_freq))\n\n       1        2        3        4        5        6 \n525.9148 576.2873 663.3271 700.2042 700.6845 712.3229 \n\n\n\n# what do our OBSERVED values look like?\nhead(df_freq$rt)\n\n[1] 621.77 519.56 507.38 636.56 587.18 705.00\n\n\n\n# what is the difference between the FITTED and OBSERVED values?\nhead(df_freq$rt) - head(fitted(fit_rt_freq))\n\n          1           2           3           4           5           6 \n  95.855154  -56.727276 -155.947103  -63.644200 -113.504485   -7.322942 \n\n\n\n# what are our RESIDUALS?\nhead(residuals(fit_rt_freq))\n\n          1           2           3           4           5           6 \n  95.855154  -56.727276 -155.947103  -63.644200 -113.504485   -7.322942"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#exploring-the-model-1",
+    "href": "02-simple_linear_regression.html#exploring-the-model-1",
+    "title": "2  Simple linear regression",
+    "section": "Exploring the model",
+    "text": "Exploring the model\n\nwhat were our coefficients?\n\n\ncoef(fit_rt_freq)\n\n  (Intercept)          freq \n713.706297951  -0.003382289 \n\n\n\nwhat would be our predicted reaction time for a word with frequency of 0?\n\n\ncoef(fit_rt_freq)['(Intercept)'] + coef(fit_rt_freq)['freq'] * 0\n\n(Intercept) \n   713.7063 \n\n\n\nignore the (Intercept) label here, R just takes the first label when performing an operation on 2 vectors\nwhat is the mean of our predictor coded as +0.5?\n\n\ncoef(fit_rt_freq)['(Intercept)'] + coef(fit_rt_freq)['freq'] * 5000\n\n(Intercept) \n   696.7949 \n\n\n\n\n\n\n\n\nImage source: Winter (2019) (all rights reserved)"
+  },
+  {
+    "objectID": "02-simple_linear_regression.html#important-terms",
+    "href": "02-simple_linear_regression.html#important-terms",
+    "title": "2  Simple linear regression",
+    "section": "Important terms",
+    "text": "Important terms\n\n\n\n\n\nterm\ndescription/other terms\n\n\n\n\ndependent variable (DV)\noutcome, measure, y\n\n\nindependent variable (IV)\npredictor, fixed effect, y\n\n\nequation for a straight line\ny = intercept + slope*x\n\n\nsimple regression\npredicting outcome of a DV from a single IV\n\n\nslope\nchange in y (DV) associated with a 1-unit change in x (IV)\n\n\nintercept\nvalue of y (DV) when x (IV) = 0\n\n\nresiduals\ndifference between observed values and fitted/predicted values\n\n\nregression coefficients\nestimates of the unknown population parameters; intercept and slope\n\n\nleast squares\nthe method by which the line of best fit is determined; the line with the smallest sum of squared residuals"
+  },
+  {
+    "objectID": "03-continuous_predictors.html",
+    "href": "03-continuous_predictors.html",
+    "title": "3  Continuous predictors",
+    "section": "",
+    "text": "Learning Objectives\nToday we will learn…\n# suppress scientific notation\noptions(scipen=999)\nWe’ll also need to load in our required packages. Hopefully you’ve already install the required packages (if not, go to Chapter 3).\n# load libraries\npacman::p_load(\n               tidyverse,\n               here,\n               broom,\n               lme4,\n               janitor,\n               languageR)\nIn the last lectures we saw that the equation for a straight line boils down to its intercept and slope, and that linear regression fits a line to our data. This line results in predicted/fitted values, which fall along the line, and residuals, which are the difference between our observed values and the fitted values.\nWe also learned about two model assumptions: normality of residuals, and constant variance of residuals. We learned that we can plot these with histograms or Q-Q plots (normality), and residual plots (constant variance).\nNow that we understand what a simple linear does, we can take a step back and focus on what we put into the model. So far we’ve looked at reaction times (milliseconds) as a function of word frequency. However, we don’t typically feed raw continuous data into a model, because most continuous linguistic variables are not normally distributed, and so a straight line will not fit it very well (because there will be some large variance for higher values).\nLinear transformations refer to constant changes across values that do not alter the relationship between these values. For example, adding, subtracting, or multiplying by a constant value will not alter the difference between values. Think of the example in the last lecture on the relationship between heights and ages as a function of the measurement unit: the relationship between all the values did not alter, because the difference between heights millimeters, centimeters, and meters is constant, as is the difference between ages in days, months, or years. We’ll now look at some common ways of linearly transforming our data, and the reasons behind doing so.\nThis is really the meat and potates of dealing with continuous variables. In linguistic research, we\nN.B., you would usually also centre numeric predictors. This is done by subtracting some constant from every value (usually by subtracting the mean of the predictor from each value and saving this as a new variable:\ndf_example %&gt;% \n  mutate(predictor_c &lt;- predictor-mean(predictor)\nIf you have interval data with a specific upper and lower bound, you could alternatively subtract the median value.\nToday we learned…"
+  },
+  {
+    "objectID": "03-continuous_predictors.html#load-data",
+    "href": "03-continuous_predictors.html#load-data",
+    "title": "3  Continuous predictors",
+    "section": "3.1 Load data",
+    "text": "3.1 Load data\n\ndf_freq &lt;- read_csv(here(\"data\", \"ELP_frequency.csv\")) |&gt; \n  clean_names()\n\nReminder of our variables:\n\nsummary(df_freq)\n\n     word                freq               rt       \n Length:12          Min.   :    4.0   Min.   :507.4  \n Class :character   1st Qu.:   57.5   1st Qu.:605.2  \n Mode  :character   Median :  325.0   Median :670.8  \n                    Mean   : 9990.2   Mean   :679.9  \n                    3rd Qu.: 6717.8   3rd Qu.:771.2  \n                    Max.   :55522.0   Max.   :877.5"
+  },
+  {
+    "objectID": "03-continuous_predictors.html#centering",
+    "href": "03-continuous_predictors.html#centering",
+    "title": "3  Continuous predictors",
+    "section": "5.1 Centering",
+    "text": "5.1 Centering\nCentering is typically applied to predictor variables. Centering refers to subtracting the mean of a variable from each value, resulting in each centered value representing the original value’s deviance from the mean (i.e., a mean-deviation score). What would a centered value of \\(0\\) represent in terms of the original values?\nLet’s try centering our frequency values. To create a new variable (or alter an existing variable), we can use the mutate() function from dplyr.\n\n# add centered variable\ndf_freq &lt;- \n  df_freq |&gt; \n  mutate(freq_c = freq-mean(freq))\n\nThis can also be done with base R, but it’s a lot more verbose.\n\n# add centered variable with base R\ndf_freq$freq_c &lt;- df_freq$freq-mean(df_freq$freq)\n\nNow let’s fit our models.\n\n# run our model with the original predictor\nfit_rt_freq &lt;- \n  lm(rt ~ freq, data = df_freq)\n\n\n# run our model with the centered predictor\nfit_rt_freq_c &lt;- \n  lm(rt ~ freq_c, data = df_freq)\n\nIf we compare the coefficients from fit_rt_freq and fit_rt_freq_c, what do we see? The only difference is the intercept values: 713.706298 (uncentered) and 679.9166667 (centered).\n\nmean(df_freq$rt)\n\n[1] 679.9167\n\n\nThe intercept for a centered continuous predictor variable corresponds to the mean of a continuous response variable. This is crucial in interpreting interaction effects, which we will discuss tomorrow. For more detail on interpreting interactions, see Chapter 8 in Winter (2019) (we won’t be discussing this chapter as a whole)."
+  },
+  {
+    "objectID": "03-continuous_predictors.html#standardizing-z-scoring",
+    "href": "03-continuous_predictors.html#standardizing-z-scoring",
+    "title": "3  Continuous predictors",
+    "section": "5.2 Standardizing (z-scoring)",
+    "text": "5.2 Standardizing (z-scoring)\nWe can also standardize continuous predictors by dividing centered values by the standard deviation of the sample. Let’s look at our frequency/reaction time data again.\nFirst, what are our mean and standard deviation? This will help us understand the changes to our variables as we center and stardardize them.\n\nmean(df_freq$freq)\n\n[1] 9990.167\n\n\n\nsd(df_freq$freq)\n\n[1] 18558.69\n\n\nWhat are the first six values of freq in the original scale?\n\ndf_freq$freq[1:6]\n\n[1] 55522 40629 14895  3992  3850   409\n\n\nWhat are the first six values of freq_c in the centered scale? These should be the values of freq minus the mean of freq (which we saw above is 9990.1666667).\n\ndf_freq$freq_c[1:6]\n\n[1] 45531.833 30638.833  4904.833 -5998.167 -6140.167 -9581.167\n\n\nNow, let’s create our standardised z-scores for frequency by dividing these centered values by the standard deviation of freq (which will be the same as the standard deviation of freq_c), and which we saw is 18558.6881679. Again, this can be done with mutate() from dplyr, or by using base R syntax.\n\n# standardise using the tidyverse\ndf_freq &lt;- \n  df_freq |&gt; \n  mutate(freq_z = freq_c/sd(freq))\n\n\n# standardize with base R\ndf_freq$freq_z &lt;- df_freq$freq_c/sd(df_freq$freq)\n\n\nhead(df_freq)\n\n# A tibble: 6 × 5\n  word      freq    rt freq_c freq_z\n  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 thing    55522  622. 45532.  2.45 \n2 life     40629  520. 30639.  1.65 \n3 door     14895  507.  4905.  0.264\n4 angel     3992  637. -5998. -0.323\n5 beer      3850  587. -6140. -0.331\n6 disgrace   409  705  -9581. -0.516\n\n\n\n\n\n\n\n\nCorrelation"
+  },
+  {
+    "objectID": "03-continuous_predictors.html#log-transformation",
+    "href": "03-continuous_predictors.html#log-transformation",
+    "title": "3  Continuous predictors",
+    "section": "6.1 Log-transformation",
+    "text": "6.1 Log-transformation"
+  },
+  {
+    "objectID": "03-continuous_predictors.html#important-terms",
+    "href": "03-continuous_predictors.html#important-terms",
+    "title": "3  Continuous predictors",
+    "section": "Important terms",
+    "text": "Important terms\n\n\n\n\n\nterm\ndescription/other terms"
+  },
+  {
+    "objectID": "04-multiple_regression.html",
+    "href": "04-multiple_regression.html",
+    "title": "4  Multiple Regression",
+    "section": "",
+    "text": "Learning Objectives\nToday we will learn…\n# suppress scientific notation\noptions(scipen=999)\nWe’ll also need to load in our required packages. Hopefully you’ve already install the required packages (if not, go to Chapter 3).\n# load libraries\npacman::p_load(\n               tidyverse,\n               here,\n               broom,\n               lme4,\n               janitor,\n               languageR)\nToday we learned…"
+  },
+  {
+    "objectID": "04-multiple_regression.html#important-terms",
+    "href": "04-multiple_regression.html#important-terms",
+    "title": "4  Multiple Regression",
+    "section": "Important terms",
+    "text": "Important terms\n\n\n\n\n\nterm\ndescription/other terms"
+  },
+  {
+    "objectID": "05-categorical_predictors.html",
+    "href": "05-categorical_predictors.html",
+    "title": "5  Categorical predictors",
+    "section": "",
+    "text": "Learning Objectives\nToday we will learn…\n# suppress scientific notation\noptions(scipen=999)\nWe’ll also need to load in our required packages. Hopefully you’ve already install the required packages (if not, go to Chapter 3).\n# load libraries\npacman::p_load(\n               tidyverse,\n               here,\n               broom,\n               lme4,\n               janitor,\n               languageR)\ndf_freq &lt;- read_csv(here(\"data\", \"ELP_frequency.csv\")) |&gt; \n  clean_names()\nToday we learned…"
+  },
+  {
+    "objectID": "05-categorical_predictors.html#important-terms",
+    "href": "05-categorical_predictors.html#important-terms",
+    "title": "5  Categorical predictors",
+    "section": "Important terms",
+    "text": "Important terms\n\n\n\n\n\nterm\ndescription/other terms"
+  },
+  {
+    "objectID": "06-logistic_regression.html",
+    "href": "06-logistic_regression.html",
+    "title": "6  Logistic regression",
+    "section": "",
+    "text": "Learning Objectives\nToday we will learn…\n# suppress scientific notation\noptions(scipen=999)\nWe’ll also need to load in our required packages. Hopefully you’ve already install the required packages (if not, go to Chapter 3).\n# load libraries\npacman::p_load(\n               tidyverse,\n               here,\n               broom,\n               lme4,\n               janitor,\n               languageR)\nToday we learned…"
+  },
+  {
+    "objectID": "06-logistic_regression.html#important-terms",
+    "href": "06-logistic_regression.html#important-terms",
+    "title": "6  Logistic regression",
+    "section": "Important terms",
+    "text": "Important terms\n\n\n\n\n\nterm\ndescription/other terms"
   }
 ]
