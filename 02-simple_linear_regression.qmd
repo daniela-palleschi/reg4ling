@@ -1,0 +1,798 @@
+---
+title: "Simple linear regression"
+subtitle: "Regression for Linguists"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+# footer: "Lecture 1.1 - R und RStudio"
+lang: en
+date: "`r Sys.Date()`"
+format:
+  html:
+    number-sections: true
+    number-depth: 3
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+bibliography: references.bib
+csl: apa.csl
+execute:
+  eval: true
+  echo: true
+  message: false
+  error: false
+  warning: false
+  fig-align: "center"
+  fig-asp: .618
+---
+
+## Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+- how to fit a simple linear model with the `lm()` function
+- how to interpret our model output
+
+## Set-up environment  {.unnumbered}
+
+Make sure you always start with a clean R Environment (`Session > Restart R`). This means you should have no objects stored in your Environment, and no packages loaded. To ensure this, you can go to the `Session` tab (up where you'll find `File`, `Help`, etc.), and select `Restart R`. You can also use the keyboard shortcut `Cmd/Ctrl+Shift+0` (that's a zero, not an 'oh').
+
+In addition, I often prefer to run `options(scipen=999)` in order to supress scientific notation, which writes very large or very small numbers in an unintuitive way. For example, `r format(0.5/100000, scientifi=F)` is written `r format(0.5/100000, scientifi=T)` in scientific notation.
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+```
+
+We'll also need to load in our required packages. Hopefully you've already install the required packages (if not, go to @sec-software).
+
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               lme4,
+               janitor,
+               languageR)
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra,
+               gt,
+               googlesheets4)
+
+# tell googlesheets4 we don't want private
+gs4_deauth()
+
+theme_set(theme_minimal())
+```
+
+### Load in data  {.unnumbered}
+
+Now that we've loaded our packages, we can take a look at our dataset. Fitting our data to a model typically follows an Exploratory Data Analysis (EDA), which consists of plotting and summarising a data set. We won't get into the EDA process, but there are many great resources on how to go about it in R (e.g., https://r4ds.hadley.nz/).
+
+Let's load our dataset using the `read_csv()` function from the `tidyverse` package `readr`. Alternatively, we could use base R to load in the data with `read.csv()`. Some additional functions in the code below:
+
+  - `mutate_if(is.character, as.factor)` force character variables to factors
+  - filter for the verb region from critical items only, remove participant 3, and remove values of first-fixtation that are 0
+
+```{r}
+# load in dataset
+# df_freq <-
+#   readr::read_csv(
+#     here::here("data/tidy_data_lifetime_pilot.csv"),
+#     # for special characters
+#     locale = readr::locale(encoding = "latin1")
+#   ) |>
+#   mutate_if(is.character, as.factor) |> # all character variables as factor
+#   # mutate(lifetime = fct_relevel(lifetime, "living", "dead"),
+#   #        tense = fct_relevel(tense, "PP", "SF")) |>
+#   filter(type == "critical", # only critical trials
+#          px != "px3", # px3 had a lot of missing values
+#          rt > 0, # only values of rt above 0
+#          region == "verb") %>% # critical region only
+#   droplevels() # remove any factor levels with no observations
+```
+
+
+
+## Simple linear model: RT ~ frequency {.smaller}
+
+Recall that $y \sim x$ can be read as "y as a function of x", or "y predicted by x". Following @winter_statistics_2019, we will first model some word frequency data. In this experiment,  Our first model will be:
+
+$$
+RT \sim frequency
+$$
+
+Let's load our data using the `read_csv()` function from `readr`. I also use the `clean_names()` function from the `janitor` package, which tidies up variable names (e.g., no spaces, all lower case).
+
+```{r}
+# load ELP_frequency.csv
+df_freq <- read_csv(here("data", "ELP_frequency.csv")) |> 
+  clean_names()
+```
+
+### Mini-EDA
+
+Let's explore the data a little bit, which is what we would normally do before fitting any models. First, let's see how the data is structured.
+
+```{r}
+# print head of df_freq
+head(df_freq)
+```
+
+Looks like there are only 3 columns: `word`, `freq`, and `rt`. We can assume that they correspond to the word, its frequency, and the reaction time, respectively. We can also see in our global environment that there are 12 observations, meaning 12 rows. 
+
+The `summary()` function provides summaries of each variable in a dataframe. For numeric variables, it will provide descriptive statistics for the centre and spread of the data (mean, median, quartiles). For categorical data, it will provide the count per category. For character variables, simply lists the number of observations.
+
+```{r}
+summary(df_freq)
+```
+
+We see `freq` has a pretty big range, from `r min(df_freq$freq)` to `r max(df_freq$freq)`. `rt` has a range of `r min(df_freq$rt)` to `r max(df_freq$rt)`, with an average reaction time of `r round(mean(df_freq$rt),1)`. Let's now get an overview of the relationship between `freq` and `rt`.
+
+```{r}
+plot(df_freq$freq, df_freq$rt)
+```
+
+We see there are a lot of frequency values below roughly 400, and these seem to have higher reaction times than those with a higher frequency value. Let's fit these data to our first linear model to explore this effect of frequency on reaction times.
+
+### `lm()`
+
+The the `lm()` function fits simple linear models. As arguments it takes a formula and a dataset, at minimum.
+  
+$$
+lm(outcome \sim 1 + predictor,\;data\;=\;df\_name)
+$$
+
+The `lm()` function formula syntax can be read as: `outcome` predicted by the intercept (`1` is a placeholder for the intercept) and predictor. The intercept is included by default, so if you omit the `1` the intercept is still included in the formula. If you wanted to remove the intercept (which you often don't), you could replace `1` with `0`.
+
+#### Running a model
+
+Before we add our predictor `freq`, let's see what our model looks like without it. We can write it as:
+
+```{r}
+#| eval: false
+lm(rt ~ 1, data = df_freq) 
+```
+
+But it's useful to save the model as an object so that we can call on it later. It's often a good idea to have informative prefixes to your objects
+
+```{r}
+fit_rt_1 <- lm(rt ~ 1, data = df_freq) 
+```
+
+::: {.callout-tip}
+
+#### Object naming
+
+You may have wondered what the letters `df` are for when loading in our data set as `df_freq`. These letters stand for 'data frame', and serve as a reminder of what exactly that object in our environment is. We might also have wanted to plot the frequency data, in which case we could call save the plot as `fig_freq` or `plot_freq`. Here we are saving our model as `fit_rt_1`, using 'fit' to signal that this object is a model fit. You could also save it as `mod_freq_1`, `lm_freq_1`, or whatever you see fit. This simply helps keep our environment structured, which will become useful when you begin working with multiple datasets at a time.
+
+:::
+
+#### Model ouput
+
+Now that we've saved our model in our Enrivonement, we can call it by name. Printing just the model gives us the formula and the coefficients.
+
+```{r}
+# print model
+fit_rt_1
+```
+
+Recall that the `intercept` and `slope` are called `coefficients`. Why do we only see `Intercept`? Because we didn't include any predictors in our model. This output isn't very dense, however. We typically use the `summary()` function to print full model outputs.
+
+```{r}
+summary(fit_rt_1)
+```
+
+We see a lot more information here.
+
+::: {.callout-tip}
+#### `broom` package
+
+The `broom` package has some useful functions for printing model outputs
+
+  + `tidy()` produces a `tibble` (type of dataframe) of the `coefficients`
+  + `glance()` produces goodness of fit measures (which we won't discuss)
+
+The outputs from `tidy()` and `glance()` can be fed into `kable` and/or `kable_styling()` to create formatted tables
+
+```{r}
+#| output-location: column-fragment
+tidy(fit_rt_1)
+```
+
+```{r}
+#| output-location: column-fragment
+glance(fit_rt_1)
+``` 
+
+`augment()` adds model values as columns to your dataframe (e.g., useful for plotting observed vs. fitted values).
+
+```{r}
+#| eval: false
+augment(fit_rt_1, data = df_freq) %>% summary()
+```
+
+:::
+
+## Interpreting model output
+
+- let's take a closer look at our model summary
+
+```{r}
+#| eval: false
+summary(fit_rt_1)
+```
+
+```{r, eval = F}
+Call:
+lm(formula = rt ~ 1, data = df_freq) #<1>
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-172.537  -74.677   -9.137   91.296  197.613   #<2>
+
+Coefficients:
+            Estimate Std. Error t value       Pr(>|t|)    #<3>
+(Intercept)   679.92      34.02   19.99 0.000000000538 *** #<4>
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 #<5>
+
+Residual standard error: 117.8 on 11 degrees of freedom #<6>
+```
+
+1) formula repetition
+2) residuals: differences between observed values and those predicted by the model
+3) names for columns `Estimates`, `standard error`, `t-value`, `p-value` (`Pr(>|t|)`)
+4) Intercept ($b_0$)
+5) Significance codes
+6)  R$^2$, a measure of model fit (squared residuals); percentage of variance in the data shared with the predictor (higher numbers are better...this is pretty low)
+
+#### Intercept
+
+Our intercept is roughly `r round(mean(df_freq$rt),1)` milliseconds; what does this number represent?
+
+```{r}
+#| output-location: column-fragment
+
+# print model intercept?
+coef(fit_rt_1)['(Intercept)']
+```
+
+```{r}
+#| output-location: column-fragment
+
+# print data mean
+mean(df_freq$rt)
+```
+
+The intercept corresponds to the mean reaction time value. Let's explore this.
+
+##### Intercept significance
+
+In the model output, the intercept seems to be significant (indicated with a low p-value, and \*\*\*). What does this *mean*? Significance pretty much tells us if a number is equal to (or not statistically significantly different from) 0. So this tells us that the intercept (i.e., the mean reaction time) is different from 0. How do we interpret this? In most cases we don't. Whether or not the intercept is significantly different from 0 this isn't interesting or even theoretically relevant, as reaction times *shouldn't* be near 0, so neither should their mean. This is also true for formant frequencies, reading times, and other types of continuous linguistic data.
+
+#### Standard Error
+
+Standard error takes both the variability in our data and the sample size into account. The equation for standard error is:
+
+$$
+SE = \frac{\hat{\sigma}}{\sqrt{n}}
+$$ {#eq-se}
+
+where $\sigma$ is the standard deviation, and $n$ is the sample size. As a refresher,  the equation for standard deviation (@eq-sd) is the square root of the sum of all squared deviances from the mean ($\sum^n_{i=1}(x_i - \hat{\mu})^2$) divided by the sample size -1. Don't stress about the math for now, but it's helpful to try to understand where there values come from and what they represent.
+
+$$
+\hat{\sigma} = \sqrt{\frac{\sum^n_{i=1}(x_i - \hat{\mu})^2}{n-1}}
+$$ {#eq-sd}
+
+#### t-values
+
+Simple linear regression is equivalent to a t-test. The one-sample *t*-test corresponds to an intercept-only.
+
+```{r}
+df_freq %>% 
+t.test(rt ~ 1, data = .)
+```
+
+
+```{r}
+df_freq %>% 
+lm(rt ~ 1, data = .) %>% 
+  tidy() %>%
+  mutate_if(is.numeric, round, 10)
+```
+
+The *real* power of linear regression is coming tomorrow and in January...multiple regression and mixed models. But for now, it's important to remember that the larger the t-value, the smaller the p-value. But more important is to not rely too heavily on p-values, as such black-and-white classifications have proven a poor substitute for understanding our data and our models.
+
+
+#### p-values
+
+::: {.callout-tip}
+#### A word on t-values and p-values
+
+*t*-values quantify the *difference* between population means. 
+
+*p*-values quantify the probability of obtaining a result equal to or greater than what was observed, given the assumption of no effect (the null hypothesis).
+
+If the null hypothesis were true, we would expect no effect (a flat line). If we have a lot of evidence/are confidence that there is an effect (the line (slope) is in fact *not* flat), then it would be unlikely that we would find such a result under the assumption that there is no effect (the line actually *is* flat) i.e., the null hypothesis. This is reflected in a small p-value.
+:::
+
+#### Plotting `rt ~ 1`
+
+```{r}
+#| echo: false
+df_freq <-
+  df_freq %>%
+  mutate(jitter = rnorm(nrow(.), sd = .1))
+  
+fig_rt_1 <-
+  df_freq %>% 
+  ggplot(aes(x = 0, y = rt)) +
+  labs(title = "rt ~ 1",
+       y = "First-pass RTs (ms)") + 
+  geom_point(alpha = .2) +
+  theme(legend.position = "none") +
+  geom_point(aes(x = 0, y=mean(rt)), colour = "red", size = 3) +
+  geom_hline(aes(yintercept=mean(rt)), colour = "red") +
+  theme_bw() +
+  scale_x_continuous(limits = c(-1,1),breaks = c(-1,-.5,.5,0,1)) +
+  theme(axis.title.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        text = element_text(size=9))
+
+fig_rt_1_pj <-
+  df_freq %>% 
+  ggplot(aes(x = jitter, y = rt)) +
+  labs(title = "with position_jitter(.2)",
+       y = "First-pass RTs (ms)") + 
+  geom_point(alpha = .2) +
+    theme(legend.position = "none") +
+  geom_point(aes(x = 0, y=mean(rt)), colour = "red", size = 3) +
+  geom_hline(aes(yintercept=mean(rt)), colour = "red") +
+  theme_bw() +
+  scale_x_continuous(limits = c(-1,1),breaks = c(-1,-.5,.5,0,1)) +
+  theme(axis.title.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        text = element_text(size=9))
+
+fig_rt_1_pj_res <-
+df_freq %>% 
+  ggplot(aes(x = jitter, y = rt)) +
+  labs(title = "residuals",
+       y = "First-pass RTs (ms)") +
+  geom_linerange(aes(x = jitter, ymin = mean(rt), ymax = rt),
+                 colour = "pink") +
+  geom_point(alpha = .2) +
+  theme(legend.position = "none") +
+  geom_point(aes(x = 0, y = mean(rt)), colour = "red", size = 3) +
+  geom_hline(aes(yintercept = mean(rt)), colour = "red") +
+  theme_bw() +
+  scale_x_continuous(limits = c(-1, 1), breaks = c(-1, -.5, .5, 0, 1)) +
+  theme(axis.title.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        text = element_text(size=9))
+```
+
+- @fig-rt1 shows the intercept (red dot) amongst the observed data (black dots)
+  + along the x-axis we have abstract numerical units (the values don't mean anything)
+  + what would the values of the intercept be?
+
+```{r}
+#| label: fig-rt1
+#| echo: false
+#| fig-cap: "Visualisation of 'rt ~ 1': observed values (black) and mean (intercept; red). Residuals would be the distance from each black dot to the y-value of the read dot"
+#| out-width: "100%"
+#| fig-asp: .6
+fig_rt_1 + fig_rt_1_pj + fig_rt_1_pj_res + plot_annotation(tag_levels = "A")
+```
+
+
+## Adding a fixed effect (slope)
+
+Now let's include a predictor, which will give us a *slope*. The slope represents the change in $y$ (DV: `rt`) when we move 1-unit along $y$ (IV: `freq`). In other words, it tells us the *effect* our IV has on the DV. Let's first plot the data:
+
+```{r}
+df_freq |> 
+  ggplot() +
+  aes(x = freq, y = rt) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+### Fit model (treatment contrasts)
+
+```{r}
+# fit simple linear model
+fit_rt_freq <- lm(rt ~ freq, data = df_freq)
+```
+
+#### Model summary
+
+```{r}
+summary(fit_rt_freq)
+```
+
+#### Intercept
+
+The intercept in our last model was the mean reaction time. But now it's a different value.
+
+```{r}
+#| output-location: column-fragment
+
+# print model intercept
+coef(fit_rt_freq)['(Intercept)']
+```
+
+```{r}
+#| output-location: column-fragment
+
+# print data mean
+mean(df_freq$rt)
+```
+
+Our intercept is no longer the grand mean of first-pass reading times...what is it?
+
+
+
+#### Slope
+
+Our slope was our slope `r coef(fit_rt_freq)['freq']`. What does this correspond to?
+
+```{r}
+#| output-location: fragment
+
+# print slope
+coef(fit_rt_freq)['freq']
+```
+
+This is the change in $y$ (our DV `rt`) for a 1-unit change in $x$ (our IV: `freq`). So when we move up 1 unit in frequency, reaction times decrease by `r coef(fit_rt_freq)['freq']`. Whether or not it makes sense to consider this number depends on the measurement unit your data is in, e.g., a unit change from one millimeter or one meter will have a drastically different slope value (say, for age), but the actual slope will be the exact same.
+
+```{r}
+heights_m <- c(1.71, 1.56, .9, 2.06, 1.63)
+heights_cm <- c(171, 156, 90, 206, 163)
+heights_mm <- c(1710, 1560, 900, 2060, 1630)
+year <- c(22,15,10,26,18)
+months <- c(22,15,10,26,18)*12
+days <- c(22,15,10,26,18)*365
+
+df_heights_age <- cbind(year, months, days, heights_mm, heights_cm, heights_m) |> as.data.frame() |> 
+  pivot_longer(
+    cols = c(heights_mm, heights_cm, heights_m),
+    names_to = "unit",
+    values_to = "height"
+  ) |> 
+  pivot_longer(
+    cols = c(year, months, days),
+    names_to = "unit_age",
+    values_to = "age"
+  )
+
+
+
+
+lm(heights_mm ~ year)
+lm(heights_cm ~ days)
+lm(heights_m ~ months)
+
+lm(heights_mm ~ year)
+lm(heights_cm ~ year)
+lm(heights_m ~ year)
+```
+
+```{r}
+ggplot(data = df_heights_age) +
+  aes(x = height, y = age) +
+  facet_wrap(unit ~ unit_age, scales = "free") +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  theme_bw()
+```
+
+
+
+
+## Model assumptions
+
+Now that we've fit a model and understand the output, it's time to think about whether this model is a good fit for our data. We first have to understand some assumptions that need to met in regression modelling. Importantly, these assumptions reate to the *residuals* of our model, not the raw data points themselves. The two assumptions we'll focus on for now are the assumptions of *normality* of the residuals, and the constant *variance* of the residuals. Both assumptions are often diagnosed visually, so it takes some practice to learn what looks right.
+
+### Normality
+
+When a model satisfies the normalit assumption, its *residuals* (i.e., the difference between the *fitted* and *observed* values) will be approximately normally distributed. Normality is typically visualised using a histogram (@fig-Winter-assumptions A) and/or a quantile-quantile (Q-Q) plot  (@fig-Winter-assumptions B).
+
+
+```{r echo = F, fig.align = "center"}
+#| label: fig-Winter-assumptions
+#| fig-cap: "Image source: @winter_statistics_2019 (all rights reserved)"
+#| fig-cap-location: bottom
+
+magick::image_read(here::here("media/Winter_2019_assumptions_plots.png"))
+```
+
+::: {.callout-note}
+
+@winter_statistics_2019's description of how QQ plots are generated (p. 110):
+
+*To create this plot, every residual is transformed into a percentile (or quantile) [...] The question the Q-Q plot answers is: what is the corresponding numerical value of the 13.8th percentile on the normal distribution? If the values are the same, they will fit on a straight line, which indicates that the two distributions (the distribution of the residuals and the theoretical normal distribution) are very similar.*
+
+:::
+
+### Constant variance
+
+When a model satisfies the constant variance assumption (also called *homoscedasticity*, or the absence of *heteroscedasticity*), the spread of residuals will be equal across the regression line. This is typically visualised using a residual plot, which should look like a blob (@fig-Winter-assumptions C).
+
+### Visualising model assumptions
+
+Let's plot our residuals to assess whether our model satisfies the assumptions of normality and constant variance.
+
+#### Histogram
+
+We can do this how it's done in @winter_statistics_2019 (in Ch. 6, p. 110-111), by first extracting the residuals from the model and then fitting them them using the base R function `hist()`.
+
+```{r}
+# extract residuals
+res <- residuals(fit_rt_freq)
+```
+
+```{r}
+# plot histogram
+hist(res)
+```
+
+Or, we can use the `augment()` function from `broom` to append model values to our original data frame, and then feed this into `ggplot()` from `ggplot2` (or even feed it into `hist()`).
+
+```{r}
+# or, add to df
+df_freq <- broom::augment(fit_rt_freq, df_freq)
+```
+
+```{r}
+# and create ggplot
+df_freq |> 
+  ggplot() +
+  aes(x = .resid) +
+  geom_histogram(bins = 8, fill = "grey", colour = "black") +
+  theme_bw()
+```
+
+#### Q-Q plot
+
+Again, we can do it Bodo's way:
+
+```{r}
+qqnorm(res)
+qqline(res)
+```
+
+Or using `augment()` and `ggplot()`.
+
+```{r}
+df_freq |> 
+  ggplot() +
+  aes(sample = .resid) +
+  geom_qq(colour = "red") +
+  geom_qq_line() 
+```
+
+#### Residual plot
+
+Bodo's way:
+
+```{r}
+plot(fitted(fit_rt_freq), res)
+```
+
+Or with `ggplot`:
+
+```{r}
+df_freq |> 
+  ggplot() +
+  aes(x = .fitted, y = .resid) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F)
+```
+
+### `performance` package
+
+I like to use the `performance` package to visualise model fit [@performance_package].
+
+```{r}
+performance::check_normality(fit_rt_freq)
+```
+
+```{r}
+performance::check_heteroscedasticity(fit_rt_freq)
+```
+
+```{r}
+performance::check_model(fit_rt_freq)
+```
+
+
+#### Coefficients table with `summary()` {.smaller}
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: false
+#| highlight-style: false
+
+> summary(fit_rt_freq)
+
+Call:
+lm(formula = rt ~ lifetime, data = df_freq, subset = rt > 0) #<1>
+
+Residuals:                                                        #<2>
+    Min      1Q  Median      3Q     Max 
+-228.99 -109.29  -26.99   58.86  777.71 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)                #<3>
+(Intercept)  309.142      6.259  49.394 <0.0000000000000002 ***            #<4>
+lifetime1     31.701     12.517   2.533              0.0116 *                #<5>
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 57.46 on 541 degrees of freedom
+Multiple R-squared:  0.01172,	Adjusted R-squared:  0.00989    #<6>
+F-statistic: 6.414 on 1 and 541 DF,  p-value: 0.0116              #<7>
+```
+
+1)  formula
+2)  Residuals: differences between observed values and those predicted by the model
+3)  Names for columns Estimates, SE, t-value, p-value
+4)  Intercept ($b_0$), i.e., value of $y$ (first-pass) with a move of one unit of $x$ (lifetime)
+5)  Slope ($b_1$), i.e., change in first fixation going from `dead` to `living`
+7)  Output from an ANOVA
+:::
+
+
+::: {.column width="30%"}
+-   what is the **intercept**?
+-   is the **slope** positive or negative?
+    -   what is it's value?
+-   this is what the slope would look like:
+
+:::
+
+### Exploring the model {-}
+
+```{r}
+#| output-location: column-fragment
+# how many observed values did we enter into the model?
+df_freq |> 
+  nrow()
+```
+
+```{r}
+#| output-location: column-fragment
+# how many observed values did we enter into the model?
+length(fitted(fit_rt_freq))
+```
+
+### Exploring the model: residuals {-}
+
+```{r}
+#| output-location: fragment
+# what do our FITTED values look like?
+head(fitted(fit_rt_freq))
+```
+
+```{r}
+#| output-location: fragment
+# what do our OBSERVED values look like?
+head(df_freq$rt)
+```
+
+```{r}
+#| output-location: fragment
+# what is the difference between the FITTED and OBSERVED values?
+head(df_freq$rt) - head(fitted(fit_rt_freq))
+```
+
+```{r}
+#| output-location: fragment
+# what are our RESIDUALS?
+head(residuals(fit_rt_freq))
+```
+
+### Exploring the model {-}
+
+- what were our coefficients?
+```{r}
+#| output-location: fragment
+coef(fit_rt_freq)
+```
+
+- what would be our predicted reaction time for a word with frequency of 0?
+```{r}
+#| output-location: fragment
+coef(fit_rt_freq)['(Intercept)'] + coef(fit_rt_freq)['freq'] * 0
+```
+
+- ignore the `(Intercept)` label here, `R` just takes the first label when performing an operation on 2 vectors
+
+- what is the mean of our predictor coded as `+0.5`?
+```{r}
+#| output-location: fragment
+coef(fit_rt_freq)['(Intercept)'] + coef(fit_rt_freq)['freq'] * 5000
+```
+
+---
+
+
+
+::: {.content-visible when-format="revealjs"}
+```{r echo = F, fig.align = "center"}
+#| fig-cap: "Image source: @winter_statistics_2019 (all rights reserved)"
+#| fig-cap-location: bottom
+
+# invert colours for dark mode in slides
+library(magick)
+y <- magick::image_read(here::here("media/Winter_2019_lm_anova.png"))
+
+magick::image_negate(y)
+```
+:::
+
+::: {.content-hidden when-format="revealjs"}
+```{r echo = F, fig.align = "center"}
+#| fig-cap: "Image source: @winter_statistics_2019 (all rights reserved)"
+#| fig-cap-location: bottom
+magick::image_read(here::here("media/Winter_2019_lm_anova.png"))
+```
+:::
+
+## Summary
+
+-   we saw that the equation for a straight line boils down to its intercept and slope
+
+-   we fit our first linear model with a categorical predictor
+
+## Important terms {.unnumbered .smaller}
+
+```{r}
+#| echo: false
+content <- 
+  googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing")
+
+content |> 
+  filter(`Lecture topic` == "02 - Simple linear regression") |> 
+  select(-`Lecture topic`) |> 
+  gt() 
+```
+
+
+## Learning Objectives {.unnumbered .unlisted}
+
+Today we learned...
+
+
+## Task
+
+Now it's your turn. Try to run the following `lm()` models:
+
+1. total reading time at the *verb* region
+2. total reading time at the *verb+1* region.
+
+
+## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

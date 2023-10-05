@@ -1,0 +1,436 @@
+---
+title: "Understanding straight lines"
+subtitle: "Regression for Linguists"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+# footer: "Lecture 1.1 - R und RStudio"
+lang: en
+date: "`r Sys.Date()`"
+format:
+  html:
+    number-sections: true
+    number-depth: 3
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+execute:
+  eval: true
+  echo: false
+  message: false
+  error: true
+  warning: false
+bibliography: references.bib
+csl: apa.csl
+---
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+```
+
+```{r}
+# load libraries
+pacman::p_load(tidyverse,
+               broom,
+               patchwork,
+               knitr,
+               kableExtra,
+               gt,
+               googlesheets4)
+
+# tell googlesheets4 we don't want private
+gs4_deauth()
+```
+
+
+## Learning Objectives {.unnumbered}
+
+Today we will learn...
+
+- the equation of a line
+- about intercepts, slopes, and residuals
+
+## Resources  {.unnumbered}
+
+This lecture is based on the readings for today's session: @winter_linear_2013 and @winter_statistics_2019 (Ch. 3), and to a lesser extent @debruine_understanding_2021; @winter_very_2014.
+
+## When to model your data
+
+By the time we get to the point of wanting to model our data, we should have a pretty good idea of how our data look. We achieve this through running an exploratory data analysis (EDA), which consists of visualising your data and determining outliers (a question for another day: what *is* an outlier?), generating summary (i.e., descriptive) statistics, and just overall getting to know your data, without making any claims beyond your data.
+
+However, an understanding of the data design and collection procedure is incredibly important and is necessary in order to appropriately fit a model to our data. In fact, planning out your analyses when designing your experiment is highly recommended in order to ensure your data will have the appropriate structure and that the assumptions made by your chosen analyses are taken into consideration before data collection.
+  
+The next step after conducting an EDA is to *model* your data, i.e., run **inferential statistics**, this is where we try to generalise beyond our data.
+
+### Statistical tests versus models
+
+Many statistical courses and textbooks still put undue emphasis on classical statistical tests. However, these [common statistical tests are simplified linear models](https://lindeloev.github.io/tests-as-linear/), without the added benefits of linear models. In essence, statistical tests tell us something about our data, whereas statistical *models* can be used to make predictions about hypothetical future observations.
+
+## (Linear) Regression
+
+Data exploration gives us an idea about what our data look like, but if we want to be able to make predictions about hypothetical observations, i.e., to *predict* values of our DV based on one (or more) IV(s), we need to fit a model to our data. This model can then *predict* values of our DV based on one (or more) IV(s), i.e., *predicting* an outcome variable (dependent variable, DV) from one or more predictors (independent variable, IV). Because we're making predictions, we need to take into account the variability (i.e., *error*) in our data.
+
+### Types of regression
+
+```{r}
+#| echo: false
+tribble(
+  ~"regression type", ~"predictor", ~"outcome",
+  "simple regression", "Single predictor", "continuous (numerical)",
+  "multiple regression", "multiple predictor", "continuous (numerical)",
+  "hierarchical/linear mixed models/linear mixed effect models", "include random effect", "continuous (numerical)",
+  "generalised linear (mixed) models: logistic regression", "as above","binary/binomial data",
+  "generalised linear (mixed) models: poisson regression", "as above","count data"
+) %>% 
+  kable() %>% 
+  kable_styling()
+```
+
+## Straight lines
+
+-   *linear regression* summarises the data with a straight line
+    + we *model* our data as/fit our data to a straight line
+-   *straight lines* can be defined by
+    -   Intercept ($b_0$)
+        -   value of $Y$ when $X = 0$
+    -   Slope ($b_1$)
+        -   gradient (slope) of the regression line
+        -   direction/strength of relationship between $x$ and $y$
+        -   regression coefficient for the predictor
+-   so we need to define an intercept and a slope
+
+
+### A line = intercept and slope
+
+- a line is defined by its intercept and slope
+  + in a regression model, these two are called `coefficients`
+
+```{r echo = F, fig.align = "center"}
+#| label: fig-Winter-slopes-intercepts
+#| fig-cap: "Image source: @winter_statistics_2019 (all rights reserved)"
+#| fig-cap-location: bottom
+magick::image_read(here::here("media/Winter_2019_slopes-intercepts.png"))
+```
+
+
+::: callout-tip
+
+### Equation of a line
+
+$$
+\begin{align}
+y & = mx + c\\
+Y_i &= (b_0 + b_1X_i) \\
+outcome_i & = (model) \\
+y_i & = (intercept + slope*x_i)
+\end{align}
+$$
+:::
+
+
+
+### Intercept ($b_0$)
+
+- the value of $y$ when $x = 0$
+
+```{r}
+#| echo: false
+x <- 0:9
+e <- rnorm(10,mean=2,sd=1)
+y <- x*.5+e
+# to keep it exact:
+y <- c(0.7903944 , 3.6750268 , 1.2317196 , 2.9814889 , 3.5957417 , 5.5563679 , 3.5359822 , 5.4734527 , 6.8202345 , 8.6349594)
+
+df_random <- cbind(x,y) %>% 
+  as_data_frame() %>% 
+  mutate(cor_x_y = cor(x,y))
+
+fit_random <- lm(y~x, data = df_random)
+df_random$predicted <- predict(fit_random)
+fit_random$residuals <- residuals(fit_random)
+```
+
+```{r}
+#| echo: false
+df_random %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_abline(aes(intercept=coef(fit_random)["(Intercept)"],
+                  slope=coef(fit_random)["x"]),
+              colour = "blue") +
+  geom_point(aes(x=0,
+                  y=coef(fit_random)["(Intercept)"]),
+             pch=21, 
+             size=5,
+             colour="red") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey") +
+  labs(x = "Word length",
+       y = "Reading time") +
+  theme_bw() + 
+  scale_x_continuous(limits = c(0, 9), breaks = seq(0,9,by=1)) +
+  scale_y_continuous(limits = c(0, 8))
+```
+
+### Slopes ($b_1$)
+
+
+A slope describes a *change in $x$* ($\Delta x$) over a *change in $y$* ($\Delta y$), where $\Delta$ (the Greek letter *delta*) can be read as 'difference' (because it also starts with a 'd'...). So a slope's value equals the difference in $x$ for a difference of 1 unit in $y$. Positive slopes indicate that as $x$ increases, $y$ increases. A negative slope value indicates that as $x$ increases, $y$ decreases (or vice versa). A slope of 0 indicates there is no change in $y$ as a function of $x$, or: there is no change in $y$ when the value of $x$ changes.
+
+
+$$
+slope = \frac{\Delta x}{\Delta y}
+$$
+
+This relationship between $x$ and $y$ is sometimes referred to as "rise over run": how do you 'rise' in $y$ for a given 'run' in $x$? For example, if we were to measure children's heights and ages, we would expect to find an increase in height for every increase in age. Or, for a linguistic example, we would expect to find longer whole-sentence *reading times* (a measure variable) for longer texts: if a sentence has 9 words (*I find straight lines to be really interesting and fun.*), we would expect longer reading times than a sentence with 3 words (*I love lines.*).
+
+
+
+
+::: {.column width="40%"}
+- what is the intercept of this line?
+- what is the slope of this line?
+:::
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+df_random %>%
+  ggplot(aes(x = 3*(x-3), y = 2*(y))) +
+  # geom_point(alpha = .6) +
+  geom_smooth(method = "lm", se = F, alpha = .2) +
+  labs(x = "Word length",
+       y = "Reading time") +
+  theme_bw() + theme(text = element_text(size = 20))           
+```
+:::
+
+
+
+## Error and residuals
+
+- *fixed effects* (IV/predictors): things we can understand/measure 
+- *error* (random effects): things we cannot understand/measure
+  + in biology, social sciences (and linguistic research), there will always sources of random error that we cannot account for
+  + random error is less an issue in e.g., physics (e.g., measuring gravitational pull)
+- *residuals*: the difference (vertical difference) between **observed data** and the **fitted values** (predicted values)
+
+::: callout-tip
+
+### Equation of a line
+
+$$
+\begin{align}
+y & = mx + c\\
+Y_i &= (b_0 + b_1X_i) + \epsilon_i\\
+outcome_i & = (model) + error_i\\
+y_i & = (intercept + slope*x_i) + error_i
+\end{align}
+$$
+:::
+
+
+
+```{r}
+#| echo: false
+df_random %>%
+  ggplot(aes(x = x, y = y)) +
+  labs(title = "A line") +
+  # geom_point(alpha = .6) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey") +
+  geom_abline(aes(intercept=coef(fit_random)["(Intercept)"],
+                  slope=coef(fit_random)["x"]),
+              colour = "blue") +
+  labs(x = "Word length",
+       y = "Reading time") +
+  theme_bw() + 
+  scale_x_continuous(limits = c(0,9.5), breaks = seq(0,9,by=1)) +
+  scale_y_continuous(limits = c(0,9),expand = c(0, 0),breaks = seq(-2,9,by=1))
+
+
+```
+
+---
+
+```{r}
+#| echo: false
+df_random %>%
+  ggplot(aes(x = x, y = y)) +
+  labs(title = "A line with data points") +
+  geom_point(alpha = .6, shape = 17, size = 2) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey") +
+  geom_abline(aes(intercept=coef(fit_random)["(Intercept)"],
+                  slope=coef(fit_random)["x"]),
+              colour = "blue") +
+  labs(x = "Word length",
+       y = "Reading time") +
+  theme_bw() + 
+  scale_x_continuous(limits = c(0,9.5), breaks = seq(0,9,by=1)) +
+  scale_y_continuous(limits = c(0,9),expand = c(0, 0),breaks = seq(-2,9,by=1))
+```
+
+---
+
+```{r}
+#| echo: false
+
+df_random %>%
+  ggplot(aes(x = x, y = y)) +
+  labs(title = "A line with data points and regression line") +
+  geom_point(alpha = .6, shape = 17, size = 2) +
+  geom_point(aes(y = predicted), colour = "blue") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey") +
+  geom_abline(aes(intercept=coef(fit_random)["(Intercept)"],
+                  slope=coef(fit_random)["x"]),
+              colour = "blue") +
+  labs(x = "Word length",
+       y = "Reading time") +
+  geom_segment(aes(xend = x, yend = predicted), colour = "red") +
+  theme_bw() + 
+  scale_x_continuous(limits = c(0,9.5), breaks = seq(0,9,by=1)) +
+  scale_y_continuous(limits = c(0,9),expand = c(0, 0),breaks = seq(-2,9,by=1))
+```
+
+---
+
+```{r}
+#| echo: false
+# df_crit_verb |>
+#   mutate(predicted = predict(lm(rt~tt)),
+#   residuals <- residuals(lm(rt~tt))) |>
+# ggplot(aes(x = tt, y = rt)) +
+#   geom_vline(xintercept = 0, linetype = "dashed", colour = "grey") +
+#   labs(title = "Total reading time x Reaction time",
+#        x = "Total reading time (ms)",
+#        y = "Reaction Time (ms)") +
+#   geom_segment(aes(xend = tt, yend = predicted, colour = condition), alpha = .3) +
+#   geom_point(aes(colour = condition, shape = condition)) +
+#   geom_smooth(method="lm", se=F, fullrange=FALSE, level=0.95) +
+#   theme_bw() +
+#   theme(legend.position = "none",
+#         text = element_text(size=18))
+```
+
+### Method of least squares
+
+- so how is any given line chosen to fit any given data?
+- the ***method of least squares***
+  + take a given line, and square all the residuals (i.e., $residual^2$)
+  + the line with the lowest ***sum of squares*** is the line with the best fit to the given data
+  + why do we square the residuals before summing them up?
+    + so all values are positive (i.e., so that negative values don't cancel out positive values)
+- this is how we find the ***line of best fit***
+  + R fits many lines to find the one with the best fit
+  
+```{r}
+#| echo: false
+
+fig_point <- df_random %>%
+  ggplot(aes(x = x, y = y)) +
+  labs(title = "Observed values") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey") +
+  # geom_smooth(method = "lm", se = F, colour = "red") +
+  # geom_segment(aes(xend = x, yend = predicted), colour = "red") +
+  # geom_segment(aes(xend = x, yend = (x*.5)+1), colour = "cadetblue2") +
+  # geom_abline(slope=.5, intercept=1, colour = "lightblue", size = 1) +
+  geom_point(alpha = .3) +
+  labs(x = "Word length",
+       y = "Reading time") +
+  theme_bw() + 
+  scale_x_continuous(breaks = seq(0,10,by=1)) +
+  scale_y_continuous(breaks = seq(-2,9,by=1))
+
+fig_red <- df_random %>%
+  ggplot(aes(x = x, y = y)) +
+  labs(title = "Line of best fit") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey") +
+  geom_smooth(method = "lm", se = F, colour = "red") +
+  geom_segment(aes(xend = x, yend = predicted), colour = "red") +
+  geom_point(alpha = .3) +
+  labs(x = "Word length",
+       y = "Reading time") +
+  theme_bw() + 
+  scale_x_continuous(breaks = seq(0,10,by=1)) +
+  scale_y_continuous(breaks = seq(-2,9,by=1))
+
+slope_blue <- 0.5
+intercept_blue <- 1.5
+
+fig_blue <- df_random %>%
+  ggplot(aes(x = x, y = y)) +
+  labs(title = "A different line") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey") +
+  geom_smooth(method = "lm", se = F, colour = "pink") +
+  geom_segment(aes(xend = x, yend = (x*slope_blue)+intercept_blue), colour = "cadetblue") +
+  geom_abline(slope=slope_blue, intercept=intercept_blue, colour = "cadetblue", size = 1) +
+  geom_point(alpha = .3) +
+  labs(x = "Word length",
+       y = "Reading time") +
+  theme_bw() + 
+  scale_x_continuous(breaks = seq(0,10,by=1)) +
+  scale_y_continuous(breaks = seq(-2,9,by=1))
+```  
+
+---
+
+```{r}
+#| label: fig-least-squares
+#| fig-cap: Observed values (A), Residuals for line of best fit (B), A line of worse fit with larger residuals (C)
+#| out-width: "100%"
+#| fig-asp: .4
+#| echo: false
+fig_point + fig_red + fig_blue + plot_annotation(tag_levels = "A")
+```
+
+## Learning Objectives {.unnumbered .unlisted}
+
+Today we learned...
+
+## Important terms {.unnumbered .smaller}
+
+```{r}
+#| echo: false
+content <- 
+  googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing")
+
+content |> 
+  filter(`Lecture topic` == "01 - Equation of a line") |> 
+  select(-`Lecture topic`) |> 
+  gt() 
+```
+
+## Tasks
+
+### Task 1: pen-and-paper
+
+You will receive a piece of paper with several grids on it. Follow the instructions, which include drawing some lines. If you aren't in-class, this is the paper we are using:
+
+### Task 2: simulating data
+
+All of the figures we just saw (except @fig-Winter-slopes-intercepts, which is from @winter_statistics_2019) were generated in R. Simulating data and plotting is a great way to understand concepts, or even to map out our hypotheses. Let's use R for the first time to try to simulate some data in order to plot lines. Our goal will be to produce a line that has the following:
+
+- intercept = 4.5
+- slope = 3
+
+#### Planning
+
+First, think about what steps will be required to create such plots. Can you come up with a workflow plan (without peaking at the next tasks)?
+
+#### Producing our line
+
+```{r}
+x <- c(0,1)
+y <- c(4.5,3)
+data <- cbind(x,y) |> as.data.frame()
+ggplot(data = data) +
+  aes(x = x, y = y) +
+  geom_line() +
+  geom_point()
+```
+
+
+
+
+## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::

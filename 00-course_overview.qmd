@@ -1,0 +1,128 @@
+---
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+# footer: "Lecture 1.1 - R und RStudio"
+lang: de
+date: "`r Sys.Date()`"
+format:
+  html:
+    number-sections: true
+    number-depth: 3
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+    fig-width: 6
+bibliography: references.bib
+csl: apa.csl
+execute: 
+  eval: true # evaluate chunks
+  echo: true # 'print code chunk?'
+  message: false # 'print messages (e.g., warnings)?'
+  error: true # ignore errors when rendering?
+  warning: false
+---
+
+# Resources and Set-up {.unnumbered}
+
+```{r, eval = T, cache = F}
+#| echo: false
+# Create references.json file based on the citations in this script
+# make sure you have 'bibliography: references.json' in the YAML
+```
+
+# Resources
+
+This course is mainly based on @winter_statistics_2019, which is an excellent introduction into regression for linguists. For even more introductory tutorials, I recommend going through @winter_linear_2013 and @winter_very_2014 For a more intermediate textbook, I'd recommend @sonderegger_regression_2023.
+
+If you're interested in the foundational writings on the topic of (frequentist) linear mixed models in (psycho)linguistic research, I'd recommend reading @baayen_analyzing_2008; @baayen_mixed-effects_2008;@barr_random_2013-1; @bates_parsimonious_2015; @jaeger_categorical_2008; @matuschek_balancing_2017; @vasishth_right_2022-1; @vasishth_statistical_2016.
+    
+# Assumptions about you
+
+For this course, I assume that you are familiar with more classical statistical tests, such as the t-test, Chi-square test, etc. I also assume you are familiar with measures of central tendency (mean, median, mode) measures dispersion/spread (standard deviation), and with the concept of a normal distribution. Lacking this knowledge will not impeded your progress in the course, but is an important foundation on which we'll be building. We can review these concepts in-class as needed.
+
+# Software {#sec-software}
+
+- R: a statistical programming language (the underlying language)
+- RStudio: an program that facilitates working with R; our preferred IDE integrated development environment
+- LaTeX: a typesetting system that generates documents in PDF format
+
+- why R?
+  -  R and RStudio are open-source and free software
+  -  they are widely used in science and business
+
+::: {.content-hidden when-format="pdf"}
+::: {.column width="30%"}
+```{r eval = F, fig.env = "figure", out.width="50%", fig.align = "center"}
+#| echo: false
+
+magick::image_read(here::here("media/R_logo.png"))
+```
+:::
+
+::: {.column width="30%"}
+```{r eval =F , fig.env = "figure", out.width="75%", fig.align = "center"}
+#| echo: false
+
+magick::image_read(here::here("./media/RStudio_logo.png"))
+```
+:::
+:::
+
+```{r eval = F, fig.env = "figure", out.width="75%", fig.align = "center"}
+#| echo: false
+
+magick::image_read(here::here("./media/LaTeX_logo.png"))
+```
+
+
+::: {.content-visible when-format="pdf"}
+```{r eval = F, fig.env = "figure", fig.pos="H", out.width="75%", fig.align = "center"}
+#| echo: false
+
+R <- grid::rasterGrob(as.raster(png::readPNG(here::here("./media", "R_logo.png"))))
+
+RStudio <- grid::rasterGrob(as.raster(png::readPNG(here::here("./media", "RStudio_logo.png"))))
+
+latex <- grid::rasterGrob(as.raster(png::readPNG(here::here("./media", "LaTeX_logo2.png"))))
+
+gridExtra::grid.arrange(R, NULL, RStudio, NULL, latex, ncol=5,
+                        widths=c(.25,.125,.25,.125,.25))
+```
+:::
+
+## Install R
+
+- we need the free and open source statistical software R to analyze our data
+- download and install R: <https://www.r-project.org>
+
+## Install RStudio
+
+- we need RStudio to work with R more easily
+- Download and install RStudio: <https://rstudio.com>
+- it can be helpful to keep English as language in RStudio
+    - we will find more helpful information if we search error messages in English on the internet
+
+- If you have problems installing R or RStudio, check out this help page (in German): <http://methods-berlin.com/wp-content/uploads/Installation.html>
+
+## Install LaTeX
+
+- we will not work with LaTeX directly, but it is needed in the background
+- Download and install LaTeX: <https://www.latex-project.org/get/>
+
+# resources
+
+- many aspects of this course are inspired by @nordmann_applied_2022 and @wickham_r_nodate
+    - both freely available online (in English)
+- for German-language resources, visit the website of [Methodengruppe Berlin](http://methods-berlin.com/de/r-lernplattform/)
+
+## Troubleshooting (EN: Troubleshooting)
+
+- Error messages are very common in programming, at all levels.
+- How to find solutions for these error messages is an art in itself
+- Google is your friend! If possible, google in English to get more information
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::

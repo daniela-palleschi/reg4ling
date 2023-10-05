@@ -1,0 +1,272 @@
+---
+title: "Continuous predictors"
+subtitle: "Regression for Linguists"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+# footer: "Lecture 1.1 - R und RStudio"
+lang: en
+date: "`r Sys.Date()`"
+format:
+  html:
+    number-sections: true
+    number-depth: 3
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+bibliography: references.bib
+csl: apa.csl
+execute:
+  eval: true
+  echo: true
+  message: false
+  error: false
+  warning: false
+  fig-align: "center"
+  fig-asp: .618
+---
+
+This lecture is based on Ch. 5 (Correlation, Linear, and Nonlinear transformations) from @winter_statistics_2019.
+
+## Learning Objectives {.unnumbered .unlisted visibility="uncounted"}
+
+Today we will learn...
+
+- why and how to centre continuous predictors
+- when and how to standardize continuous predictors
+- why and how to log-transform continuous variables
+
+## Set-up environment  {.unnumbered .unnumbered visibility="uncounted"}
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+```
+
+We'll also need to load in our required packages. Hopefully you've already install the required packages (if not, go to @sec-software).
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               lme4,
+               janitor,
+               languageR)
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra,
+               gt,
+               googlesheets4)
+
+# tell googlesheets4 we don't want private
+gs4_deauth()
+```
+
+### Load data {.unnumbered .unlisted visibility="uncounted"}
+
+```{r}
+df_freq <- read_csv(here("data", "ELP_frequency.csv")) |> 
+  clean_names()
+```
+
+Reminder of our variables:
+
+```{r}
+summary(df_freq)
+```
+
+
+## Summary {.unnumbered .unlisted visibility="uncounted"}
+
+In the last lectures we saw that the equation for a straight line boils down to its intercept and slope, and that linear regression fits a line to our data. This line results in predicted/fitted values, which fall along the line, and residuals, which are the difference between our observed values and the fitted values.
+
+We also learned about two model assumptions: normality of residuals, and constant variance of residuals. We learned that we can plot these with histograms or Q-Q plots (normality), and residual plots (constant variance).
+
+Now that we understand what a simple linear does, we can take a step back and focus on what we put into the model. So far we've looked at reaction times (milliseconds) as a function of word frequency. However, we don't typically feed raw continuous data into a model, because most continuous linguistic variables are not normally distributed, and so a straight line will not fit it very well (because there will be some large variance for higher values).
+
+## Linear transformations
+
+Linear transformations refer to constant changes across values that do not alter the relationship between these values. For example, adding, subtracting, or multiplying by a constant value will not alter the difference between values. Think of the example in the last lecture on the relationship between heights and ages as a function of the measurement unit: the relationship between all the values did not alter, because the difference between heights millimeters, centimeters, and meters is constant, as is the difference between ages in days, months, or years. We'll now look at some common ways of linearly transforming our data, and the reasons behind doing so.
+
+### Centering
+
+Centering is typically applied to predictor variables. Centering refers to subtracting the mean of a variable from each value, resulting in each centered value representing the original value's deviance from the mean (i.e., a mean-deviation score). What would a centered value of $0$ represent in terms of the original values?
+
+Let's try centering our frequency values. To create a new variable (or alter an existing variable), we can use the `mutate()` function from `dplyr`.
+
+```{r}
+# add centered variable
+df_freq <- 
+  df_freq |> 
+  mutate(freq_c = freq-mean(freq))
+```
+
+This can also be done with base R, but it's a lot more verbose.
+
+```{r}
+# add centered variable with base R
+df_freq$freq_c <- df_freq$freq-mean(df_freq$freq)
+```
+
+Now let's fit our models.
+
+```{r}
+# run our model with the original predictor
+fit_rt_freq <- 
+  lm(rt ~ freq, data = df_freq)
+```
+
+```{r}
+# run our model with the centered predictor
+fit_rt_freq_c <- 
+  lm(rt ~ freq_c, data = df_freq)
+```
+
+If we compare the coefficients from `fit_rt_freq` and `fit_rt_freq_c`, what do we see? The only difference is the intercept values: `r coef(fit_rt_freq)['(Intercept)']` (uncentered) and `r coef(fit_rt_freq_c)['(Intercept)']` (centered).
+
+```{r}
+mean(df_freq$rt)
+```
+
+The intercept for a centered continuous predictor variable corresponds to the mean of a continuous response variable. This is crucial in interpreting interaction effects, which we will discuss tomorrow. For more detail on interpreting interactions, see Chapter 8 in @winter_statistics_2019 (we won't be discussing this chapter as a whole).
+
+::: {.callout-tip}
+### Centering interval data
+
+If you have interval data with a specific upper and lower bound, you could alternatively subtract the median value. In linguistic research, this is most typically rating scale data. For example, if you have a dataset consisting of ratings from 1-7, you can centre these ratings by subtracting 4 from all responses. A centred response of -3 would correspond to the lowest rating (1), and of +3 to the highest rating (7), which 0 would correspond to a medial rating (4). This can also be helpful in plotting, as there is no question as to whether 1 or 7 was high or low, because all ratings are now centred around 0 (and negative numbers correspond to our intuition of low-ratings).
+
+:::
+
+### Standardizing (*z*-scoring)
+
+We can also standardize continuous predictors by dividing centered values by the standard deviation of the sample. Let's look at our frequency/reaction time data again.
+
+First, what are our mean and standard deviation? This will help us understand the changes to our variables as we center and stardardize them.
+
+```{r}
+mean(df_freq$freq)
+```
+
+```{r}
+sd(df_freq$freq)
+```
+
+What are the first six values of `freq` in the original scale?
+
+```{r}
+df_freq$freq[1:6]
+```
+
+What are the first six values of `freq_c` in the centered scale? These should be the values of `freq` minus the mean of `freq` (which we saw above is `r mean(df_freq$freq)`).
+
+```{r}
+df_freq$freq_c[1:6]
+```
+
+Now, let's create our standardised z-scores for frequency by dividing these centered values by the standard deviation of `freq` (which will be the same as the standard deviation of `freq_c`), and which we saw is `r sd(df_freq$freq)`. Again, this can be done with `mutate()` from `dplyr`, or by using base R syntax.
+
+```{r}
+# standardise using the tidyverse
+df_freq <- 
+  df_freq |> 
+  mutate(freq_z = freq_c/sd(freq))
+```
+
+
+```{r}
+# standardize with base R
+df_freq$freq_z <- df_freq$freq_c/sd(df_freq$freq)
+```
+
+```{r}
+head(df_freq)
+```
+
+
+::: {.callout-tip}
+
+## Correlation
+
+:::
+
+## Non-linear transformations
+
+This is really the meat and potates of dealing with continuous variables (depending on your subfield). In linguistic research, and especially experimental research, we often deal with continuous variables truncated/bound at 0. Reaction times, reading times and formant frequencies are all examples of such types of data: there is no such thing as a negative reading time or fundamental frequency. The problem with these types of data is that they are almost never normally distributed, which has implications for the normality of residuals for any line that tries to fit to these data. Very often, this type of data will have a 'positive skew', or a long tail off to the right (assuming larger values are plotting to the right). This shape is not symmetrical, meaning that the residuals tend to be much larger for larger values. It is also often the case that these very large, exceptional values will have a stronger influence on the line of best fit, leading to the coefficient estimates that are "suboptimal for the majority of data points" [@@baayen_analyzing_2008; p. 92]. How do we deal with this nonnormality? We use non-linear transformations, the most common of which is the log-transformation.
+
+### Log-transformation
+
+Let's look at our reaction time data again. We'll log-transform our reaction time data and frequency data. Note that in @winter_statistics_2019, frequency is transformed using log to the base 10 for interpretability, but we'll stick to the natural logarithm.
+
+```{r}
+df_freq |> 
+  ggplot() +
+  aes(x = log(freq)) +
+  geom_density()
+```
+
+
+```{r}
+df_freq <-
+  df_freq |> 
+    mutate(rt_log = log(rt),
+           freq_log = log(freq))
+```
+
+```{r}
+lm(rt_log ~ freq_log, data = df_freq) |> tidy()
+```
+
+```{r}
+# or, log-transform directly in the model syntax
+lm(log(rt) ~ log(freq), data = df_freq) |> tidy()
+```
+
+## Learning Objectives {.unnumbered .unlisted}
+
+Today we learned...
+
+- why and how to centre continuous predictors
+- when and how to standardize continuous predictors
+- why and how to log-transform continuous variables
+
+## Important terms {.unnumbered .smaller}
+
+```{r}
+#| echo: false
+content <- 
+  googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing")
+
+content |> 
+  filter(`Lecture topic` == "03 - Continuous predictors") |> 
+  select(-`Lecture topic`) |> 
+  gt() 
+```
+
+
+## Take-home messages {.unnumbered .smaller}
+
+Continuous data are often transformed before fitting a model to this data. Linear transformations, like adding or multiplying all values by a single value, are often performed on continuous predictors by means of centring and standardizing (when there are multiple continuous predictors). Non-linear transformations are often performed on continuous data with a positive skew (a few values much larger than the majority) in order to satisfy the normality assumption. Although the normality assumption refers to the normality of *residuals*, the distribution of the data will have implications for the distribution of the residuals. The most common non-linear transformation is the log-transformation (the inverse of the exponential), which shrinks values, especially making big numbers smaller. This has the result of squeezing big numbers towards smaller numbers, reducing the spread in the distribution (e.g., the log of 3 is `r log(3)`, the log of 30 is `r log(30)`, and the log of 30 is `r log(300)`).
+
+What to do with this information? If you have continuous data truncated at 0 (with no upperbound, e.g., reaction time data or fundamental frequency), visualise the data (histogram and Q-Q plot) in order to check its distribution. If it is not normally distributed, you will likely want to log-transform it. Is this data your *response* variable? Then that is all you will likely want to do. Is this data a *predictor* variable? Then you will want to centre it (subtract the mean of this variable from all values). Do you have more than one continuous predictor variable? Then standardizing these variables will facilitate the interpretation of interaction effects (we'll talk about these soon). 
+
+
+
+## Task
+
+
+
+## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

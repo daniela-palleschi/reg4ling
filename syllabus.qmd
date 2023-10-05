@@ -1,9 +1,105 @@
-# Introduction
+---
+lang: de
+execute:
+  echo: false
+bibliography: references.bib
+csl: apa.csl
+---
 
-This is a book created from markdown and executable code.
-
-See @knuth84 for additional discussion of literate programming.
+# Syllabus {.unnumbered}
 
 ```{r}
-1 + 1
+pacman::p_load(dplyr,
+               lubridate,
+               googlesheets4,
+               gt,
+               timesaveR)
 ```
+
+```{r}
+# tell googlesheets4 we don't want private
+gs4_deauth()
+```
+
+
+
+```{r}
+#| eval: true
+
+# Create syllabus structure ####
+
+# define negative %in%; don't end up using this I think
+'%ni%' <- Negate("%in%")
+
+# create tibble containing all weekly dates from first lecture until last
+dates <-
+  tibble(
+  Meeting = as.character(c(
+    rep(seq(ymd("2023-10-10"), ymd("2023-10-12"), by = "days"),3),
+    rep(ymd("2024-01-12"),2),
+    rep(ymd("2024-01-26"),2),
+    rep(ymd("2024-02-09"),2)
+  )
+  )
+  )
+
+# create vector with dates of holidays
+# holidays <- c("2024-01-03",
+#               "2023-12-27" )
+
+# remove holiday dates and add Meeting, which lists the week number
+syllabus <-
+  dates |> 
+  mutate(Lecture = as.character(1:nrow(dates))) 
+```
+
+```{r}
+# inspiration: https://github.com/vizdata-s23/vizdata-s23/blob/main/index.qmd
+content <- 
+  googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1BAr48Zkv4pe5xG1IUrJYKDMMhzMMYunCOacCBv2mlpo/edit?usp=sharing") |> 
+  mutate(Lecture = as.character(Lecture),
+         Topic = ifelse(is.na(topic_link), topic,
+                        paste0(
+                          "[",topic,"]",
+                          "(","https://daniela-palleschi.github.io/reg4ling/",topic_link,")")), 
+         Vorbereitung = ifelse(is.na(prepare_link), prepare,
+                               paste0("[",prepare,"]","(",prepare_link,")"))) |> 
+  select(Lecture, Topic, Vorbereitung)
+```
+
+```{r}
+left_join(
+  syllabus, content, by = "Lecture"
+) |> 
+  gt() |>
+  sub_missing(columns = c(Meeting, Topic, Vorbereitung), missing_text = "") |>
+  cols_align(
+    align = "center", 
+    columns = c(Meeting)
+    ) |>
+  cols_align(
+    align = "left", 
+    columns = c(Topic, Vorbereitung)
+    ) |>
+  tab_style(
+    style = cell_borders(
+      sides = "right",
+      color = "#D3D3D3",
+      style = "solid"
+    ),
+    locations = cells_body(
+      columns = c(Topic, Vorbereitung)
+    )
+  ) |>
+  fmt_markdown(
+    columns = c(Topic, Vorbereitung)
+  ) |>
+  cols_width(
+    Meeting ~ px(150),
+    Topic ~ px(400),
+    Vorbereitung ~ px(300)
+  ) 
+```
+
+
+

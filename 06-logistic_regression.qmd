@@ -1,0 +1,106 @@
+---
+title: "Logistic regression"
+subtitle: "Regression for Linguists"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+# footer: "Lecture 1.1 - R und RStudio"
+lang: en
+date: "`r Sys.Date()`"
+format:
+  html:
+    number-sections: true
+    number-depth: 3
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+bibliography: references.bib
+csl: apa.csl
+execute:
+  eval: true
+  echo: true
+  message: false
+  error: false
+  warning: false
+  fig-align: "center"
+  fig-asp: .618
+---
+
+This lecture jumpts to chapter 12 'Genearlised Lienar Models 1: Logistic Regression" [@winter_statistics_2019]. We're skipping a few chapters, which I encourage you to go through on your own. However, they cover topics that you presumably have covered in previous courses (namely significance testing, *t*-values and *p*-values).
+
+## Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+
+## Set-up environment  {.unnumbered}
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+```
+
+We'll also need to load in our required packages. Hopefully you've already install the required packages (if not, go to @sec-software).
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               lme4,
+               janitor,
+               languageR)
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra)
+```
+
+## Binomial distribution
+
+## Generalised linear models
+
+## Logistic regression
+
+## Log-odds, odds ratio, and probabilities
+
+
+## Summary
+
+-   we saw that the equation for a straight line boils down to its intercept and slope
+
+-   we fit our first linear model with a categorical predictor
+
+### Important terms {.unnumbered .smaller}
+
+```{r}
+#| echo: false
+tribble(
+ ~"term", ~"description/other terms",
+ 
+) %>% kable() %>% kable_styling()
+```
+
+
+## Learning Objectives {.unnumbered .unlisted}
+
+Today we learned...
+
+
+## Task
+
+
+
+## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

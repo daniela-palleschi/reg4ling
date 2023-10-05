@@ -1,0 +1,69 @@
+---
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+# footer: "Lecture 1.1 - R und RStudio"
+lang: en
+date: "`r Sys.Date()`"
+format:
+  html:
+    number-sections: true
+    number-depth: 3
+    toc: true
+    code-overflow: wrap
+    code-tools: true
+    self-contained: true
+    fig-width: 6
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+    fig-width: 4
+    code-overflow: wrap
+bibliography: references.bib
+csl: apa.csl
+execute: 
+  eval: true # evaluate chunks
+  echo: true # 'print code chunk?'
+  message: false # 'print messages (e.g., warnings)?'
+  error: true # ignore errors when rendering?
+  warning: false
+---
+
+# Course overview {.unnumbered}
+
+## Moodle
+
+- lecture materials
+
+# Kursübersicht
+
+-   Leistungspunkte
+    -   3LP
+        -   1LP: 
+        -   1LP: 
+        -   1LP: 
+
+- Office hours: Wednesdays, 15.00-16.00 (by appointment)
+
+## Course aims
+
+By the end of this course, you will
+  
+  - blah blah
+
+### What will you learn?
+
+-   linear regression
+  + multiple regression
+  + logistic regression
+  + mixed models
+- using the `lme4` package
+- how to apply these models appropriately to a variety of data types
+
+### What will you *not* learn?
+
+-   stuff
+
+## Style guide
+
+As a self-respecting Canadian, I bounce between what is typically considered 'American' and 'British' spelling. This will be most notable in my use of -ise and -ize, but will never result in a dropped 'u' from words like *colour*, which is used often in plots. I say this so that non-native speakers don't start to think they've been spelling words wrong.
