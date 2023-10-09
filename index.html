@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+}
+.hanging-indent div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}</style>
 
 
 <script>const headroomChanged = new CustomEvent("quarto-hrChanged", {
@@ -4668,19 +4687,7 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#course-overview" id="toc-course-overview" class="nav-link active" data-scroll-target="#course-overview">Course overview</a>
-  <ul class="collapse">
-  <li><a href="#moodle" id="toc-moodle" class="nav-link" data-scroll-target="#moodle">Moodle</a></li>
-  </ul></li>
-  <li><a href="#kursübersicht" id="toc-kursübersicht" class="nav-link" data-scroll-target="#kursübersicht">Kursübersicht</a>
-  <ul class="collapse">
-  <li><a href="#course-aims" id="toc-course-aims" class="nav-link" data-scroll-target="#course-aims">Course aims</a>
-  <ul class="collapse">
-  <li><a href="#what-will-you-learn" id="toc-what-will-you-learn" class="nav-link" data-scroll-target="#what-will-you-learn">What will you learn?</a></li>
-  <li><a href="#what-will-you-not-learn" id="toc-what-will-you-not-learn" class="nav-link" data-scroll-target="#what-will-you-not-learn">What will you <em>not</em> learn?</a></li>
-  </ul></li>
-  <li><a href="#style-guide" id="toc-style-guide" class="nav-link" data-scroll-target="#style-guide">Style guide</a></li>
-  </ul></li>
+  <li><a href="#course-overview" id="toc-course-overview" class="nav-link active" data-scroll-target="#course-overview">Course overview</a></li>
   </ul>
 </nav>
     </div>
@@ -4726,59 +4733,21 @@ vertical-align: -.125em;
 
 <section id="course-overview" class="level1 unnumbered">
 <h1 class="unnumbered">Course overview</h1>
-<section id="moodle" class="level2">
-<h2 class="anchored" data-anchor-id="moodle">Moodle</h2>
-<ul>
-<li>lecture materials</li>
-</ul>
-</section>
-</section>
-<section id="kursübersicht" class="level1">
-<h1>Kursübersicht</h1>
-<ul>
-<li>Leistungspunkte
-<ul>
-<li>3LP
-<ul>
-<li>1LP:</li>
-<li>1LP:</li>
-<li>1LP:</li>
-</ul></li>
-</ul></li>
-<li>Office hours: Wednesdays, 15.00-16.00 (by appointment)</li>
-</ul>
-<section id="course-aims" class="level2">
-<h2 class="anchored" data-anchor-id="course-aims">Course aims</h2>
-<p>By the end of this course, you will</p>
-<ul>
-<li>blah blah</li>
-</ul>
-<section id="what-will-you-learn" class="level3">
-<h3 class="anchored" data-anchor-id="what-will-you-learn">What will you learn?</h3>
-<ul>
-<li>linear regression</li>
-<li>multiple regression</li>
-<li>logistic regression</li>
-<li>mixed models</li>
-<li>using the <code>lme4</code> package</li>
-<li>how to apply these models appropriately to a variety of data types</li>
-</ul>
-</section>
-<section id="what-will-you-not-learn" class="level3">
-<h3 class="anchored" data-anchor-id="what-will-you-not-learn">What will you <em>not</em> learn?</h3>
-<ul>
-<li>stuff</li>
-</ul>
-</section>
-</section>
-<section id="style-guide" class="level2">
-<h2 class="anchored" data-anchor-id="style-guide">Style guide</h2>
-<p>As a self-respecting Canadian, I bounce between what is typically considered ‘American’ and ‘British’ spelling. This will be most notable in my use of -ise and -ize, but will never result in a dropped ‘u’ from words like <em>colour</em>, which is used often in plots. I say this so that non-native speakers don’t start to think they’ve been spelling words wrong.</p>
+<p>This course fast tracks through different types of regression most relevant to linguistic research. These materials are by no means exhaustive, and should be supplemented by reading textbook length treatments. The majority of my materials lean heavily on <span class="citation" data-cites="winter_statistics_2019">Winter (<a href="00-course_overview.html#ref-winter_statistics_2019" role="doc-biblioref">2019</a>)</span>, which I highly recommend. I also took inspiration from <span class="citation" data-cites="sonderegger_regression_nodate-1">Sonderegger (<a href="00-course_overview.html#ref-sonderegger_regression_nodate-1" role="doc-biblioref">2023</a>)</span>, which came out this year and I haven’t fully explored yet. So far, it looks like a very thorough textbook that I would also recommend you check out.</p>
+<p>Before you begin the course, I would like to paraphrase something Prof.&nbsp;Shravan Vasishth said in the opening remarks for the annual summer school for Statistcal Methods for Linguistics and Psychology back in 2020 which has stuck with me: <em>get comfortable with partial knowledge</em>. We are not trained statisticians, and likely never will be (Vasishth himself is a certified statistician, in addition to professor of psycholinguistics). So get comfortable with partial understanding of the math behind these models, and focus on their application and interpretation.</p>
+<p>This website is a work-in-progress. Materials will be updated/brushed up throughout the semester.</p>
 
 
 <!-- -->
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-sonderegger_regression_nodate-1" class="csl-entry" role="listitem">
+Sonderegger, M. (2023). <em>Regression <span>Modeling</span> for <span>Linguistic Data</span></em>.
+</div>
+<div id="ref-winter_statistics_2019" class="csl-entry" role="listitem">
+Winter, B. (2019). Statistics for <span>Linguists</span>: <span>An Introduction Using R</span>. In <em>Statistics for Linguists: An Introduction Using R</em>. <span>Routledge</span>. <a href="https://doi.org/10.4324/9781315165547">https://doi.org/10.4324/9781315165547</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -5231,42 +5200,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu"># Course overview {.unnumbered}</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Moodle</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>This course fast tracks through different types of regression most relevant to linguistic research. These materials are by no means exhaustive, and should be supplemented by reading textbook length treatments. The majority of my materials lean heavily on @winter_statistics_2019, which I highly recommend. I also took inspiration from @sonderegger_regression_nodate-1, which came out this year and I haven't fully explored yet. So far, it looks like a very thorough textbook that I would also recommend you check out.</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>lecture materials</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Before you begin the course, I would like to paraphrase something Prof. Shravan Vasishth said in the opening remarks for the annual summer school for Statistcal Methods for Linguistics and Psychology back in 2020 which has stuck with me: *get comfortable with partial knowledge*. We are not trained statisticians, and likely never will be (Vasishth himself is a certified statistician, in addition to professor of psycholinguistics). So get comfortable with partial understanding of the math behind these models, and focus on their application and interpretation.</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu"># Kursübersicht</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Leistungspunkte</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>3LP</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">        -   </span>1LP: </span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">        -   </span>1LP: </span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">        -   </span>1LP: </span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Office hours: Wednesdays, 15.00-16.00 (by appointment)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## Course aims</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>By the end of this course, you will</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>blah blah</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### What will you learn?</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>linear regression</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>multiple regression</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>logistic regression</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>mixed models</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>using the <span class="in">`lme4`</span> package</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to apply these models appropriately to a variety of data types</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### What will you *not* learn?</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>stuff</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Style guide</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>As a self-respecting Canadian, I bounce between what is typically considered 'American' and 'British' spelling. This will be most notable in my use of -ise and -ize, but will never result in a dropped 'u' from words like *colour*, which is used often in plots. I say this so that non-native speakers don't start to think they've been spelling words wrong.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>This website is a work-in-progress. Materials will be updated/brushed up throughout the semester.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
