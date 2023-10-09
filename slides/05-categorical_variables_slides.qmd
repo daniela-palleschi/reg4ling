@@ -1,0 +1,558 @@
+---
+title: "Categorical variables"
+subtitle: "WiSe23/24"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2023-10-11
+format: 
+  pdf:
+    output-file: 04-multiple_regression_slides.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  revealjs:
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    output-location: fragment
+editor_options: 
+  chunk_output_type: console
+bibliography: ../references.bib
+csl: ../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+- about cateogorical predictors
+- how to interpret different contrast coding
+
+# Set-up environment  {.unnumbered}
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+```
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               lme4,
+               janitor,
+               languageR)
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra)
+```
+
+## Load data {.unnumbered .unlisted}
+
+- load in the the dataset from the `languageR` package
+
+
+```{r}
+df_freq_eng <-
+  as.data.frame(english) |> 
+  # keep relevant variables
+  dplyr::select(RTlexdec, RTnaming, Word, LengthInLetters, AgeSubject, WrittenFrequency) |> 
+  # rename some variables
+  rename(rt_lexdec = RTlexdec,
+         rt_naming = RTnaming,
+         freq_written = WrittenFrequency) |> 
+  clean_names() |> 
+  # standardize continuous predictors
+  mutate(
+    freq_z = scale(freq_written),
+    length_z = scale(length_in_letters)
+  ) |> 
+  # move 'word' to front
+  relocate(word) |> 
+  # arrange alphabetically by 'word'
+  arrange(word)
+```
+
+# Bimodal distribution
+
+- in your exploratory data analysis, you might've noticed a *bimodal* distribution.
+
+```{r}
+#| echo: false
+fig_hist_log <- 
+  df_freq_eng |> 
+  ggplot() +
+  aes(x = rt_lexdec) +
+  geom_histogram() 
+
+fig_dens_log <- 
+  df_freq_eng |> 
+  ggplot() +
+  aes(x = rt_lexdec) +
+  geom_density() 
+
+
+fig_hist <-
+  df_freq_eng |> 
+  ggplot() +
+  aes(x = rt_lexdec, fill = age_subject) +
+  geom_histogram(alpha = .5, position = "stack") +
+  # facet_grid(.~age_subject) +
+  theme(legend.position = "none")
+
+fig_dens <-
+  df_freq_eng |> 
+  ggplot() +
+  aes(x = rt_lexdec, colour = age_subject, fill = age_subject) +
+  stat_density(alpha = .4) +
+  theme(legend.position = "bottom")
+
+
+
+  (fig_hist_log + fig_dens_log) /
+  (fig_hist + fig_dens)
+```
+
+---
+
+- this is a *bimodal* distribution
+  + there are two *modes* (most frequent value, i.e., peak in a histogram)
+- We know that there were two subject groups: old and young
+  + it might be that each group has a different mode
+
+---
+
+Running our model of the log reaction times as predicted by frequency and length, we see:
+
+```{r}
+fit_freq_length <-
+  lm(rt_lexdec ~ freq_z*length_z,
+     data = df_freq_eng)
+```
+
+```{r}
+glance(fit_freq_length)$r.squared
+glance(fit_freq_length)$adj.r.squared
+```
+
+Seems like we don't have any overfitting in our model ($R^2$ and adjusted $R^2$ are comparable). Let's look at our coeffiecients.
+
+```{r}
+tidy(fit_freq_length) |> select(term, estimate)
+```
+
+- looks to the dataset we explored in the previously
+- the bimodal distribution suggests we should include age group as a predictor, since the two groups seem to pattern differently in their reading times
+- does the effect of frequency and length also differ as a function of age group?
+
+# Categorical predictors
+
+- we'd predict longer reading times for older participants than younger participants
+  + although we should hypothesise *before* collecting and visualising our data!
+- though age is numerical, all we have is two categories: old or young
+
+## Including a categorical predictor
+
+- include `age_subject` in our model
+
+```{r}
+fit_age <-
+  lm(rt_lexdec ~ freq_z*length_z + age_subject,
+     data = df_freq_eng)
+```
+
+```{r}
+glance(fit_age)$r.squared
+glance(fit_age)$adj.r.squared
+```
+
+- large increase in variance explained
+- and that the $R^2$ and adjusted $R^2$ values are comparable
+
+```{r}
+car::vif(fit_age)
+```
+
+- VIF values for all coefficients are near 1
+  + this indicates that our predictors all contribute to the variance explained by the model and are not correlated
+  
+# Contrasts
+
+- let's take a look at our model estimates
+
+```{r}
+tidy(fit_age) |> select(term,estimate)
+```
+
+- there is a negative slope for `age_subjectyoung`
+  + reaction times decrease when...what?
+- how does a categorical variable get fit to a line? 
+- the factor levels (i.e., the categories in a categorical variable) are given numerical values
+  + We call these numerical values mapped onto factor levels contrast coding
+
+## Dummy contrasts
+
+- we can check the contrasts with `contrasts()`
+
+```{r}
+contrasts(df_freq_eng$age_subject)
+```
+
+- `old` was coded at $0$ and `young` as $1$
+- our slope for `age_subjectyoung` represents the change in reaction times when we move from `old` to `young`
+- this is called `treatment coding` (dummy coding), where one factor level is coded as 0 and the other as 1
+
+---
+
+- remove frequency and length to focus on `age_subject`
+- use raw reaction times, to more easily interpret the results
+
+```{r}
+fit_age <-
+  lm(exp(rt_lexdec) ~ age_subject,
+     data = df_freq_eng)
+```
+
+```{r}
+glance(fit_age)$r.squared
+```
+
+- $R^2$ is lower than when we included frequency and length
+  + but higher than our model with frequeny and length but no age
+
+---
+
+```{r}
+tidy(fit_age) |> select(term, estimate)
+```
+
+- reaction times decrease by 157ms going from old t young group compared to the old group
+- what does the intercept represent here?
+
+```{r}
+#| output-location: column-fragment
+df_freq_eng |> 
+  select(rt_lexdec, age_subject) |> 
+  mutate(rt_lexdec = exp(rt_lexdec)) |> 
+  summary()
+```
+
+- don't see the intercept value there
+
+---
+
+- how does `rt_lexdec` look for the two groups?
+
+```{r}
+#| output-location: column-fragment
+df_freq_eng |> 
+  select(rt_lexdec, age_subject) |> 
+  mutate(rt_lexdec = exp(rt_lexdec)) |> 
+  summarise(mean = mean(rt_lexdec),
+            min = min(rt_lexdec),
+            max = max(rt_lexdec),
+    .by = "age_subject"
+  )
+```
+
+- the intercept corresponds to the mean reaction time for the old group. Why? 
+  + because `old` coded as $0$
+
+---
+
+- which variable is coded as $0$? 
+  + R simply takes the first level name alphabetically: `old` comes before `young`, so `old` was automatically taken as the 'baseline' to which `young` was compared
+
+
+- if we were to add the slope to the intercept, we would get the mean for the $young$ group. Why is this?
+
+```{r}
+coef(fit_age)['(Intercept)'] + coef(fit_age)['age_subjectyoung']
+```
+
+---
+
+- this actually is the same thing as a *t*-test:
+
+```{r}
+t.test(exp(rt_lexdec) ~ age_subject, data = df_freq_eng)
+```
+
+- if we compare this to our model, we see that the *t*- and *p*-values are identical (more on these later).
+
+```{r}
+tidy(fit_age)
+```
+
+---
+
+```{r}
+
+
+fig_nocontrasts <-
+df_freq_eng |> 
+  ggplot() +
+  aes(x = age_subject, y = exp(rt_lexdec)) +
+  labs(title = "No contrasts") +
+  # geom_vline(xintercept = 0, linetype="dashed", size = .5) +  
+  geom_point(position = position_dodge(.6)) + 
+  geom_smooth(method = 'lm', aes(group=1)) + theme_minimal() +
+  theme_bw()
+
+fig_treatment <-
+df_freq_eng |> 
+  mutate(age_subject = if_else(age_subject=="young",1,0)) |>
+  ggplot() +
+  aes(x = age_subject, y = exp(rt_lexdec)) +
+  labs(title = "Treatment contrasts") +
+  geom_vline(xintercept = 0, linetype="dashed", size = .5) +
+  geom_point(position = position_dodge(.6)) + 
+  geom_smooth(method = 'lm', aes(group=1)) + theme_minimal() +
+  theme_bw()
+
+fig_nocontrasts + fig_treatment
+```
+
+
+## Sum contrasts
+
+- sum coding is another frequently used coding scheme
+  + essentially centring categorical variables
+- simplifies interpretation of interaction effects
+- instead of $0$ and $1$, we set our contrasts to +/-1 or 0.5 (I prefer 0.5)
+
+---
+
+```{r}
+# first, make sure your variable is a factor
+df_freq_eng$age_subject <- as.factor(df_freq_eng$age_subject)
+# check
+class(df_freq_eng$age_subject)
+```
+
+---
+
+```{r}
+# next, you could use the contr.sum() function
+contrasts(df_freq_eng$age_subject) <- contr.sum(2) # where 2 means we have 2 levels
+contrasts(df_freq_eng$age_subject)
+```
+
+- `old` is coded as $-1$ and `young` as $+1$
+- I prefer to use +/-0.5 for reasons we don't need to go into here
+  + I would also prefer to have `young` coded in the negative value, and `old` in the positive value
+  + this aids in the way I interpret the slope: a change in reaction times for the older group compared to the younger group
+  
+---
+
+```{r}
+#or, you could manually control the sum contrasts
+# check the order of the levels
+levels(df_freq_eng$age_subject)
+
+# code 'old' as +.5 and 'young' as -.5
+contrasts(df_freq_eng$age_subject) <- c(+0.5, -0.5)
+contrasts(df_freq_eng$age_subject)
+```
+
+- run our model
+
+```{r}
+fit_age_sum <-
+  lm(exp(rt_lexdec) ~ age_subject,
+     data = df_freq_eng)
+```
+
+```{r}
+glance(fit_age_sum)$r.squared
+glance(fit_age)$r.squared
+```
+
+- no difference in variance account for by our model (remember, centering a variable just shifts values, doesn't affect the relationship between values)
+
+---
+
+```{r}
+tidy(fit_age_sum) |> select(term,estimate)
+```
+
+- there is a difference in the intercept
+  + andd a change in sign in our slope. Why is this?
+
+```{r}
+#| label: fig-contrasts
+#| output-location: fragment
+#| code-fold: true
+#| fig-cap: The difference in slope corresponds to which level is coded as 0 (dummy coding) or -5/-1 (sum coding)
+fig_sum1 <-
+df_freq_eng |> 
+  mutate(age_subject = if_else(age_subject=="young",-1,1)) |>
+  ggplot() +
+  aes(x = age_subject, y = exp(rt_lexdec)) +
+  labs(title = "Sum contrasts") +
+  geom_vline(xintercept = 0, linetype="dashed", size = .5) +
+  geom_point(position = position_dodge(.6)) + 
+  geom_smooth(method = 'lm', aes(group=1)) + theme_minimal() +
+  theme_bw()
+
+fig_sum5 <-
+df_freq_eng |> 
+  mutate(age_subject = if_else(age_subject=="young",-.5,.5)) |>
+  ggplot() +
+  aes(x = age_subject, y = exp(rt_lexdec)) +
+  labs(title = "Sum contrasts") +
+  geom_vline(xintercept = 0, linetype="dashed", size = .5) +
+  geom_point(position = position_dodge(.6)) + 
+  geom_smooth(method = 'lm', aes(group=1)) + theme_minimal() +
+  theme_bw()
+
+fig_treatment + fig_sum5 + plot_annotation(tag_levels = "A")
+```
+
+---
+
+- the intercept value is now the overall mean of all observed reaction times, because now the $y$ value when $x$ equals zero lies in the middle of the two groups
+- the slope magnitude (i.e., size of the value) hasn't changed, because the difference betwen the two group means has not changed
+
+```{r}
+mean(exp(df_freq_eng$rt_lexdec))
+```
+
+
+# Exploring predicted values
+
+- let's explore the predicted values of our model with a categorical variable
+
+```{r}
+head(fitted(fit_age), n = 10)
+```
+
+- there are only 2 values, 630 and 787
+  + these correspond to the means for each group that we saw above
+  + they also seem to be in a pattern: mean(young), mean(old), mean(young), mean(old), etc.
+  + how does this correspond to the age group of the participant for the first ten observations?
+
+```{r}
+head(df_freq_eng$age_subject, n = 10)
+```
+
+---
+
+- first ten observations in our data are in young-old pairs. What are the first values in the raw data?
+
+```{r}
+head(exp(df_freq_eng$rt_lexdec), n = 10)
+```
+
+- what is the difference between these reaction times and the fitted values?
+
+```{r}
+head(exp(df_freq_eng$rt_lexdec), n = 10) - head(fitted(fit_age), n = 10)
+```
+
+```{r}
+head(residuals(fit_age))
+```
+
+---
+
+- we see again that predicted values correspond to the $x$ value for the corresponding row in the dataframe
+  + but with our two-level factor, we only have two $x$ values, young and old
+  
+---
+
+```{r}
+df_freq_eng <- 
+  augment(fit_age, df_freq_eng)
+```
+
+```{r}
+df_freq_eng |> 
+  select(word, age_subject, rt_lexdec, .fitted, .resid) |> 
+  mutate(rt_lexdec = exp(rt_lexdec)) |> 
+  head()
+```
+
+
+
+
+  
+
+# Summary
+
+-   we saw that the equation for a straight line boils down to its intercept and slope
+
+-   we fit our first linear model with a categorical predictor
+
+## Important terms {.unnumbered .smaller}
+
+```{r}
+#| echo: false
+tribble(
+ ~"term", ~"description/other terms",
+ 
+) %>% kable() %>% kable_styling()
+```
+
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we learned...
+
+
+# Task
+
+
+
+# Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

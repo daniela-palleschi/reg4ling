@@ -29,7 +29,7 @@ execute:
 ## Summary {.unnumbered .unlisted}
 
 -   we saw that the equation for a straight line boils down to its intercept and slope
--   we fit our first linear model with a categorical predictor
+-   we fit our first linear model with a continuous predictor
 
 ## Learning Objectives {.unnumbered .unlisted}
 
@@ -57,7 +57,6 @@ pacman::p_load(
                tidyverse,
                here,
                broom,
-               lme4,
                janitor,
                languageR)
 ```
@@ -408,10 +407,10 @@ Today we will learn...
 
 ## Task
 
-
 Load in the `english` dataset from the `languageR` package [@languageR-package] (code below). You don't need to load in any CSV file, because this dataset is available if you have the package loaded. From the manual:
 
 > This data set gives mean visual lexical decision latencies and word naming latencies to 2284 monomorphemic English nouns and verbs, averaged for old and young subjects, with various predictor variables.
+
 ([languageR manual, p. 29](https://cran.r-project.org/web/packages/languageR/languageR.pdf))
 
 ```{r}
@@ -437,135 +436,58 @@ We're keeping five variables:
 
 Take the following steps:
 
-1. Perform an exploratory data analysis to understand the data.
+1. Perform an exploratory data analysis to understand the data (produce plots, tables, whatever you think necessary and can do).
 
-### Exploratory data analysis
-
-Let's start with a summary of the data.
+2. Model the data, with *back-transformed* (raw) reaction times as a response variable and written frequency and length in letters as predictors. Perform any tranformations you think necessary. Run model diagnostic checks and assess model fit.
 
 ```{r}
 #| echo: false
-summary(df_freq_eng)
-```
-
-Remember that `word` is a factor, i.e., categorical variable. The numbers beside the words indicate how many observations (i.e., rows) there are per word. To see how many words have how many observations, we can use the `count()` function from the `dplyr` package, and then pipe to `count(n)`.
-
-```{r}
-df_freq_eng |> 
-  count(word) |> 
-  count(n)
-```
-
-This tells us that there are 2110 words that have 2 observations, and 87 that have 4 observations.
-
-Now let's look at the distribution of our raw reaction time data (which is already logged, so we feed it into `exp()`). We'll produce histograms and density plots of the raw and log reaction times.
-
-```{r}
-#| echo: false
-
-fig_hist <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = exp(rt_lexdec)) +
-  geom_histogram() 
-
-fig_dens <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = exp(rt_lexdec)) +
-  geom_density() 
-
-fig_hist_log <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = rt_lexdec) +
-  geom_histogram() 
-
-fig_dens_log <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = rt_lexdec) +
-  geom_density() 
-
-(fig_hist + fig_dens) /
-  (fig_hist_log + fig_dens_log)
-```
-
-This looks like a *bimodal* distribution, i.e., there are two *modes* (most frequent value, i.e., peak in a histogram). What might be driving this? We know that there were two subject groups: old and young. How does the distribution of these two groups look?
-
-```{r}
-#| echo: false
-
-fig_hist <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = rt_lexdec, fill = age_subject) +
-  geom_histogram(alpha = .5) +
-  facet_grid(.~age_subject) +
-  theme(legend.position = "none")
-
-fig_dens <-
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = rt_lexdec, colour = age_subject, fill = age_subject) +
-  geom_density(alpha = .4) +
-  theme(legend.position = "bottom")
-
-(fig_hist + fig_dens)
-```
-
-```{r}
-#| echo: false
-
-fig_freq <-
-df_freq_eng |> 
-  ggplot() +
-  aes(x = exp(freq_written)) +
-  geom_density() 
-
-fig_freq_log <-
-df_freq_eng |> 
-  ggplot() +
-  aes(x = freq_written) +
-  geom_density() 
-
-fig_freq + fig_freq_log
-```
-
-```{r}
-df_freq_eng |> 
-  ggplot() +
-  aes(x = freq_written, y = rt_lexdec, colour = age_subject, shape = age_subject) +
-  geom_point(alpha = .5)
-```
-
-### Model
-
-Now let's run our model, ignoring `age_subject` for now.
-
-```{r}
+#| eval: false
 fit_freq_eng <-
-  lm(rt_lexdec ~ freq_written, data = df_freq_eng)
-```
+  lm(exp(rt_lexdec) ~ freq_written * length_in_letters, data = df_freq_eng)
 
-```{r}
 summary(fit_freq_eng)
-```
 
-
-Let's check our model fit.
-
-```{r}
 performance::check_model(fit_freq_eng)
 ```
 
-```{r}
-tidy(fit_freq_eng)
-```
+3. Re-run the model with log reaction times as a response variable and written frequency and length in letters as predictors. Perform any tranformations you think necessary. Run model diagnostic checks and assess model fit.
+
 
 ```{r}
-glance(fit_freq_eng)$r.squared
+#| echo: false
+#| eval: false
+fit_freq_eng_log <-
+  lm(rt_lexdec ~ freq_written * length_in_letters, data = df_freq_eng)
+
+summary(fit_freq_eng_log)
+glance(fit_freq_eng)
+glance(fit_freq_eng_log)
+car::vif(fit_freq_eng_log)
+car::vif(fit_freq_eng)
+
+# interaction term highly corr'd with frequency
+
+performance::check_model(fit_freq_eng_log)
 ```
+
+4. Remove length in letters as a predictor. How is model fit affected? What can you conclude?
+
+```{r}
+#| echo: false
+#| eval: false
+fit_freq_eng_simp <-
+  lm(rt_lexdec ~ freq_written, data = df_freq_eng)
+
+summary(fit_freq_eng_simp)
+glance(fit_freq_eng_simp)
+glance(fit_freq_eng_log)
+
+performance::check_model(fit_freq_eng_simp)
+
+# decision: should length and interaction effect be included? doesn't hurt or help model fit it seems
+```
+
 
 ## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
 

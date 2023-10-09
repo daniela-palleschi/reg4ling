@@ -35,47 +35,4 @@ This course fast tracks through different types of regression most relevant to l
 
 Before you begin the course, I would like to paraphrase something Prof. Shravan Vasishth said in the opening remarks for the annual summer school for Statistcal Methods for Linguistics and Psychology back in 2020 which has stuck with me: *get comfortable with partial knowledge*. We are not trained statisticians, and likely never will be (Vasishth himself is a certified statistician, in addition to professor of psycholinguistics). So get comfortable with partial understanding of the math behind these models, and focus on their application and interpretation.
 
-## Moodle
-
-- lecture materials
-
-# Course credit
-
-This course is part of [Modul 9 (Forschungsmodul)](https://gremien.hu-berlin.de/de/amb/2018/57/57_2018_ma_linguistik_2018_druck.pdf) and is worth 4 LP. A break down of the course credits:
-
-```{r}
-#| echo: false
-dplyr::tribble(
-  ~"LP", ~"type", ~"task",
-  "1LP","participation", "working through the lecture materials",
-  "1LP","preparation", "readings",
-  "1LP", "preparation", "homework due December 20th",
-  "1LP", "preparation", "final homework due March 29th"
-) |> 
-  gt::gt()
-```
-
-- Office hours: Wednesdays, 15.00-16.00 (by appointment)
-
-## Course aims
-
-By the end of this course, you will
-  
-  - blah blah
-
-### What will you learn?
-
--   linear regression
-  + multiple regression
-  + logistic regression
-  + mixed models
-- using the `lme4` package
-- how to apply these models appropriately to a variety of data types
-
-### What will you *not* learn?
-
--   stuff
-
-## Style guide
-
-I bounce between what is typically considered 'American' and 'British' spelling. This will be most notable in my use of -ise and -ize, but will never result in a dropped 'u' from words like *colour*, which is used often plot aesthetics.
+This website is a work-in-progress. Materials will be updated/brushed up throughout the semester.

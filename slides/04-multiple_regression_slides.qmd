@@ -1,10 +1,10 @@
 ---
-title: "Continuous variables"
+title: "Multiple regression"
 subtitle: "WiSe23/24"
 author: "Daniela Palleschi"
 institute: Humboldt-Universität zu Berlin
 lang: en
-date: 2023-10-10
+date: 2023-10-11
 format: 
   pdf:
     output-file: 04-multiple_regression_slides.pdf
@@ -81,7 +81,6 @@ pacman::p_load(
                tidyverse,
                here,
                broom,
-               lme4,
                janitor,
                languageR)
 ```
@@ -119,7 +118,10 @@ df_freq_full <-
 
 # Multiple regression
 
-- simple linear models do not differ so greatly from a one-sample *t*-test (intercept-only model) or two-sample *t*-test (for a categorical predictor), or Pearson's *r* (for a standardised continuous predictor)
+- so far we've run simple linear models, which are equivalent to
+  + a one-sample *t*-test (intercept-only model)
+  + two-sample *t*-test (for a categorical predictor)
+  + Pearson's *r* (for a standardised continuous predictor)
 - why then should we bother with linear regression?
   + it allows us to include *multiple* predictors in our models simultaneously
     + still boils down to modeling the mean, but while conditioning the mean on multiple variables at once
@@ -137,9 +139,11 @@ $$ {#eq-simple-lin-2}
 $$
 y = b_0 + b_1x + b_2x + ... + e
 $$ {#eq-multiple-reg}
+
 ## One predictor
 
-Let's re-run our simple model with this dataset. Let's keep reaction times in the raw milliseconds for now for interpretability.
+- re-run our simple model with this dataset
+  + keep reaction times un-transformed for now
 
 ```{r}
 fit_freq_full <-
@@ -150,14 +154,17 @@ fit_freq_full <-
 tidy(fit_freq_full)
 ```
 
-We see there is a decrease in reaction times (-37.5 milliseconds) for a 1-unit increase in log frequency. Let's look at the model fit using `glance()`.
+- there is a decrease in reaction times (-37.5 milliseconds) for a 1-unit increase in log frequency
+
+---
+
+- model fit using `glance()`:
 
 ```{r}
 glance(fit_freq_full)$r.squared
 ```
 
-- $R^2$ = 0.383
-  + our model describes 38% of the variance in response times
+- our model describes 38% of the variance in response times
 - is this described variance due solely to frequency?
   + Other effects that are correlated with frequency might be conflating the frequency effect
   + Let's expand our model to include word length [@eq-freq-length]
@@ -166,7 +173,7 @@ $$
 y = b_0 + b_1*log\;frequency + b_2*word\;length
 $$ {#eq-freq-length}
 
-## Adding a predictor
+## Adding another predictor
 
 - add `length` as a predictor
 
@@ -179,24 +186,41 @@ fit_freq_mult <-
 tidy(fit_freq_mult) |> select(term, estimate)
 ```
 
-- length is also a significant predictor of reaction times
-  + an increase in word length (+1 letter) corresponds to a 20ms increase in reaction times
+- an increase in word length (+1 letter) corresponds to a 20ms increase in reaction times
   + our intercept is now 748ms, instead of 907ms
-  + 907ms corresponds to the prediction for reaction times to a word with 0 log frequency and 0 word length, but this is not very interpretable. If we were to center both predictors, the intercept would be the reaction time for a wrd with average frequency and average length.
+  + this corresponds to the prediction for reaction times to a word with 0 log frequency and 0 word length, but this is not very interpretable
+  
+---
+  
+```{r}
+b0 <- tidy(fit_freq_mult)$estimate[1]
+b1_freq <- tidy(fit_freq_mult)$estimate[2]
+b1_length <- tidy(fit_freq_mult)$estimate[3]
+```
 
-The slope for log frequency has also changed: from -37.5 to -29.5. This change tells us that some of the effect in our first model was confounded with length, as controlling for length weakens the effect of frequency.
+```{r}
+b0 + b1_freq*0 + b1_length*0
+```
+
+- centering both predictors would result in an intercept reflecting the reaction time for a word with average frequency and average length (because 0 for each would equal the mean)
+
+- the slope for log frequency has also changed: from -37.5 to -29.5
+  + this tells us that some of the effect in our first model was confounded with length, as controlling for length weakens the effect of frequency
 
 ```{r}
 glance(fit_freq_mult)$r.squared
 ```
 
-We also see that including `length` increases the variance described by our model, reflected in the *R*-squared values (`r glance(fit_freq_mult)$r.squared` instead of `r glance(fit_freq_full)$r.squared`.
+- including `length` increases the variance described by our model, reflected in the $R^2$ values (`r glance(fit_freq_mult)$r.squared` instead of `r glance(fit_freq_full)$r.squared`
 
 # Standardising our predictors
 
-Recall that, when we have multiple continuous predictors, standardising them can help their interpretation, as their slopes are comparable. We could achieve this by centering each variable and then dividing by the standard deviation, or we could use the `scale()` function, which does just this.
+- when we have multiple continuous predictors, standardising them can help their interpretation
+  + because their slopes are comparable
+- we can do this by centering each variable and then dividing by the standard deviation (like yesterday), or we could use the `scale()` function, which has the same result
 
 ```{r}
+#| output-location: column-fragment
 # centre and then standardize
 df_freq_full |> 
   mutate(
@@ -206,7 +230,9 @@ df_freq_full |>
   head()
 ```
 
-Let's use `scale()` for `freq` and `length`.
+---
+
+- use `scale()` for `freq` and `length`.
 
 ```{r}
 df_freq_full <-
@@ -215,57 +241,82 @@ df_freq_full <-
          length_z = scale(length))
 ```
 
+- fit a model with them as predictors
+
 ```{r}
 fit_freq_z <-
   lm(rt ~ freq_z + length_z, data = df_freq_full)
 ```
 
+---
+
 First, let's check the *$R^2$*:
 
 ```{r}
+#| output-location: column-fragment
 glance(fit_freq_z)$r.squared
 ```
 
-We see that our *$R^2$* value is `r glance(fit_freq_z)$r.squared`,  just like above. This serves as a reminder that the predictors still represent the same variance in the underlying model, their units and scales have simply changed. What about our coefficients:
+- *$R^2$* = `r glance(fit_freq_z)$r.squared`, just like above
+  + this is a reminder that the predictors still represent the same variance in the underlying model
+  + their units and scales have simply changed. 
+
+---
+
+- what about our coefficients:
 
 ```{r}
 tidy(fit_freq_z) |> select(term, estimate)
 ```
 
-Here, a 1-unit change always corresponds to a change of 1 standard deviation. Now we see that frequency has a larger magnitude than the effect of length. So, for each instease in frequency by 1 standard deviation (holiding length constant), reaction times decrease by 29.5 ms.
+- a 1-unit change now corresponds to a change of 1 standard deviation (because we standardized, producing z-scores)
+- frequency now has a larger magnitude than the effect of length
+  + a 1-SD increase in frequency (holiding length constant) = decrease in reaction times by 60.6 ms
+  + a 1-SD increase in length (holiding frequency constant) = increase in reaction times by 43.3 ms
+  + does frequency influence the effect of length, and vice versa?
 
 ## Adding an interaction term
 
-We won't spent much time talking about interactions, but please check out Ch. 8 (Interations and nonlinear effects) in @winter_statistics_2019 for a more in-depth treatment. For now, what's important to know is that interactions describe how effects of one predictor may be influenced by changes in another predictor. We can add interactin terms of two predictors by connecting them with a colon (`:`).
+- please check out Ch. 8 (Interations and nonlinear effects) in @winter_statistics_2019 for a more in-depth discussion on interactions
+- For now, what's important to know is that interactions describe how effects of one predictor may be influenced by changes in another predictor
+
+---
+
+- We can add interaction terms of two predictors by connecting them with a colon (`:`).
 
 ```{r}
+#| output-location: column-fragment
 lm(rt ~ freq_z + length_z + freq_z:length_z, 
    data = df_freq_full) |> 
   tidy() |> select(term, estimate)
 ```
 
-Or, we can simply connect the two predictors with an asterisk (`*`) to indicate that we want to look at both predictors and their interaction.
+- Or connect the two predictors with an asterisk (`*`) to indicate that we want to look at both predictors and their interaction
 
 ```{r}
+#| output-location: column-fragment
 lm(rt ~ freq_z*length_z, 
    data = df_freq_full) |> 
   tidy() |> select(term, estimate)
 ```
 
-The model estimates are the same for both models. The intercept is the predicted reaction time for a word with the mean length and mean frequency. Notice that the interaction slope is negative, meaning when both `freq` and `length` increase, reaction times will decrease.
-
-
-
+- the intercept is the predicted reaction time for a word with the mean length and mean frequency
+  + Notice that the interaction slope is negative, meaning when both `freq` and `length` increase, reaction times will decrease
 
 # Model assumptions
 
-We've already discussed the assumptions of normality and homoscedasticity (constant variance), which both refer to the residuals of a model. We typically assess these assumptions visually, with histogram and Q-Q plots.
+- we've discussed the assumptions of normality and homoscedasticity (constant variance), which both refer to the residuals of a model    
+  + We typically assess these assumptions visually
 
 ## Normality and Homoscedasticity
 
-For our model
+- for our model:
 
 ```{r}
+#| code-fold: true
+#| output-location: fragment
+#| out-width: 100%
+#| fig-asp: .35
 fig_hist <-
 fit_freq_z |> 
   ggplot() +
@@ -293,7 +344,7 @@ fig_res <-
 fig_hist + fig_qq + fig_res
 ```
 
-The histogram looks approximately normally distributed, with a bit of a positive skew. The Q-Q plot suggests a less-normal distribution, with the model estimates fitting larger reaction times more poorly. The residual plot also shows that the variance of the residuals is not constant, with much larger residual variance for larger fitted values. This tells us we should probably log reaction times. Let's try it all again, with log-transformed reaction times.
+- not very reassuring, let's try log-transformed reaction times.
 
 ## Log-transformed response variable
 
@@ -311,17 +362,15 @@ glance(fit_freq_log_z)$r.squared
 tidy(fit_freq_log_z) |> select(term, estimate)
 ```
 
-We see now that our values are much smaller, because they're on the log-scale.
+- our coefficients are much smaller, because they're on the log-scale
+
+---
 
 ```{r}
-exp(6.63 + -0.0826*5 + 0.0524*2)
-exp(6.63 + -0.0826*4 + 0.0524*2)
-exp(6.63 + -0.0826*1 + 0.0524*6)
-tidy(fit_freq_log_z)
-```
-
-
-```{r}
+#| code-fold: true
+#| output-location: fragment
+#| out-width: 100%
+#| fig-asp: .35
 fig_hist <-
 fit_freq_log_z |> 
   ggplot() +
@@ -349,35 +398,57 @@ fig_res <-
 fig_hist + fig_qq + fig_res
 ```
 
-Looks much better.
+- looks better
 
 ## Collinearity
 
-Collinearity refers to when continuous predictor variables are correlated, which can make the interpretation of their coefficients difficult, and the results spurious. Regression assumes there is an *absence* of collinearity, i.e., our predictor variables are not correlatded. 
+- collinearity refers to when continuous predictor variables are correlated
+  + can make the interpretation of their coefficients difficult, and the results spurious
+- regression assumes there is an *absence* of collinearity
+  + i.e., our predictor variables are not correlated.
 
-To assess collinearity, you can use the `vif()` function from the `car` package to compare *variance inflation factors*. VIF values close to 1 indicates there is not a high degree of collinearity between your variables.
+---
+
+- the `vif()` function from the `car` package assesses collinearity, comparing *variance inflation factors*
+- VIF values close to 1 indicates there is not a high degree of collinearity between your variables
+  + higher than 1 indicates correlation; above 10 is highly correlated (thresholds may be field-specific)
 
 ```{r}
+#| output-location: fragment
 car::vif(fit_freq_log_z)
 ```
 
-Collinearity is a conceptual problem, and is something that you need to consider in the planning stage. Typically, we want to include predictors that we have specific predictions or research questions about. Shoving a bunch of predictors in a model to see what comes out significant is bad practice. Rather, we should have a principled approach to model building and variable selection. This is not to say that exploratory analyses should be avoided, but that this comes with caveats.
+---
+
+- collinearity is a conceptual problem, and should be considered in the planning stage
+- we want to include predictors that we have specific predictions or research questions about
+  + shoving a bunch of predictors in a model to see what comes out significant is bad practice
+- we should have a principled approach to model building and variable selection
+- of course, we can add predictors in exploratory analyses, but this should always be reported as exploratory
+  + and any observed effects replicated where possible
 
 ## Adjusted $R^2$
 
-Although we should avoid throwing any old predictor into our model, adjusted $R^2$ is a more conservative version of $R^2$ that takes into account the number of predictors in a model. For each additional predictor, adjusted $R^2$ includes the number of predictors ($k$) in its denominator (bottom half of a division), which means that the more predictors there are, the smaller $R^2$ will be, unless each additional predictor explains sufficient variance to counteract this penalisation.
+- adjusted $R^2$ is a more conservative version of $R^2$ that takes into account the number of predictors in a model
+- adjusted $R^2$ includes the number of predictors ($k$) in its denominator (bottom half of a division)
+  + the more predictors there are, the smaller adjusted $R^2$ will be, unless each additional predictor explains sufficient variance to counteract this penalisation
+
+---
 
 ```{r}
+#| output-location: column-fragment
+glance(fit_freq_z)$adj.r.squared
 glance(fit_freq_log_z)$adj.r.squared
 ```
 
-If we were to look at the (adjusted) $R^2$ of our simple linear regression model, where log reaction times are predicted by standardised log frequency, we see that there is a large increase in our model which includes length and its interaction. This suggests that our model is not overfit, and that length contributes to the variance explained by the model.
+- there is a small increase in adjusted $R^2$ when we include length and its interaction with frequency
+  - this suggests that including `length` and the interaction term does not result in overfitting
+  + i.e., length contributes to the variance explained by the model
 
-```{r}
-glance(lm(log(rt) ~ freq_z, data = df_freq_full))$adj.r.squared
-```
+---
 
-If we likewise compare to the same model without an interaction term (log reaction times ~ frequency * length), we see that the adjusted $R^2$ is not very different. If the adjusted $R^2$ were much lower, this would indicate that including the interaction term leads to overfitting.
+- if we compare to the same model without an interaction term (log reaction times ~ frequency + length), we see that the adjusted $R^2$ is not very different. 
+- if the adjusted $R^2$ were much lower, this would indicate that including the interaction term leads to overfitting
 
 ```{r}
 glance(lm(log(rt) ~ freq_z + length_z, data = df_freq_full))$adj.r.squared
@@ -395,15 +466,14 @@ content <-
 content |> 
   filter(`Lecture topic` == "04 - Multiple regression") |> 
   select(-`Lecture topic`) |> 
-  gt() 
+  knitr::kable() |> 
+  kableExtra::kable_styling()
 ```
 
 
 # Learning Objectives {.unnumbered .unlisted}
 
 Today we learned...
-
-Today we will learn...
 
 - what multiple regression is
 - how to include multiple predictor variables
@@ -413,10 +483,10 @@ Today we will learn...
 
 # Task
 
-
 Load in the `english` dataset from the `languageR` package [@languageR-package] (code below). You don't need to load in any CSV file, because this dataset is available if you have the package loaded. From the manual:
 
 > This data set gives mean visual lexical decision latencies and word naming latencies to 2284 monomorphemic English nouns and verbs, averaged for old and young subjects, with various predictor variables.
+
 ([languageR manual, p. 29](https://cran.r-project.org/web/packages/languageR/languageR.pdf))
 
 ```{r}
@@ -442,134 +512,56 @@ We're keeping five variables:
 
 Take the following steps:
 
-1. Perform an exploratory data analysis to understand the data.
+1. Perform an exploratory data analysis to understand the data (produce plots, tables, whatever you think necessary and can do).
 
-## Exploratory data analysis
-
-Let's start with a summary of the data.
+2. Model the data, with *back-transformed* (raw) reaction times as a response variable and written frequency and length in letters as predictors. Perform any tranformations you think necessary. Run model diagnostic checks and assess model fit.
 
 ```{r}
 #| echo: false
-summary(df_freq_eng)
-```
-
-Remember that `word` is a factor, i.e., categorical variable. The numbers beside the words indicate how many observations (i.e., rows) there are per word. To see how many words have how many observations, we can use the `count()` function from the `dplyr` package, and then pipe to `count(n)`.
-
-```{r}
-df_freq_eng |> 
-  count(word) |> 
-  count(n)
-```
-
-This tells us that there are 2110 words that have 2 observations, and 87 that have 4 observations.
-
-Now let's look at the distribution of our raw reaction time data (which is already logged, so we feed it into `exp()`). We'll produce histograms and density plots of the raw and log reaction times.
-
-```{r}
-#| echo: false
-
-fig_hist <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = exp(rt_lexdec)) +
-  geom_histogram() 
-
-fig_dens <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = exp(rt_lexdec)) +
-  geom_density() 
-
-fig_hist_log <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = rt_lexdec) +
-  geom_histogram() 
-
-fig_dens_log <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = rt_lexdec) +
-  geom_density() 
-
-(fig_hist + fig_dens) /
-  (fig_hist_log + fig_dens_log)
-```
-
-This looks like a *bimodal* distribution, i.e., there are two *modes* (most frequent value, i.e., peak in a histogram). What might be driving this? We know that there were two subject groups: old and young. How does the distribution of these two groups look?
-
-```{r}
-#| echo: false
-
-fig_hist <- 
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = rt_lexdec, fill = age_subject) +
-  geom_histogram(alpha = .5) +
-  facet_grid(.~age_subject) +
-  theme(legend.position = "none")
-
-fig_dens <-
-  df_freq_eng |> 
-  ggplot() +
-  aes(x = rt_lexdec, colour = age_subject, fill = age_subject) +
-  geom_density(alpha = .4) +
-  theme(legend.position = "bottom")
-
-(fig_hist + fig_dens)
-```
-
-```{r}
-#| echo: false
-
-fig_freq <-
-df_freq_eng |> 
-  ggplot() +
-  aes(x = exp(freq_written)) +
-  geom_density() 
-
-fig_freq_log <-
-df_freq_eng |> 
-  ggplot() +
-  aes(x = freq_written) +
-  geom_density() 
-
-fig_freq + fig_freq_log
-```
-
-```{r}
-df_freq_eng |> 
-  ggplot() +
-  aes(x = freq_written, y = rt_lexdec, colour = age_subject, shape = age_subject) +
-  geom_point(alpha = .5)
-```
-
-## Model
-
-Now let's run our model, ignoring `age_subject` for now.
-
-```{r}
+#| eval: false
 fit_freq_eng <-
-  lm(rt_lexdec ~ freq_written, data = df_freq_eng)
-```
+  lm(exp(rt_lexdec) ~ freq_written * length_in_letters, data = df_freq_eng)
 
-```{r}
 summary(fit_freq_eng)
-```
 
-
-Let's check our model fit.
-
-```{r}
 performance::check_model(fit_freq_eng)
 ```
 
-```{r}
-tidy(fit_freq_eng)
-```
+3. Re-run the model with log reaction times as a response variable and written frequency and length in letters as predictors. Perform any tranformations you think necessary. Run model diagnostic checks and assess model fit.
+
 
 ```{r}
-glance(fit_freq_eng)$r.squared
+#| echo: false
+#| eval: false
+fit_freq_eng_log <-
+  lm(rt_lexdec ~ freq_written * length_in_letters, data = df_freq_eng)
+
+summary(fit_freq_eng_log)
+glance(fit_freq_eng)
+glance(fit_freq_eng_log)
+car::vif(fit_freq_eng_log)
+car::vif(fit_freq_eng)
+
+# interaction term highly corr'd with frequency
+
+performance::check_model(fit_freq_eng_log)
+```
+
+4. Remove length in letters as a predictor. How is model fit affected? What can you conclude?
+
+```{r}
+#| echo: false
+#| eval: false
+fit_freq_eng_simp <-
+  lm(rt_lexdec ~ freq_written, data = df_freq_eng)
+
+summary(fit_freq_eng_simp)
+glance(fit_freq_eng_simp)
+glance(fit_freq_eng_log)
+
+performance::check_model(fit_freq_eng_simp)
+
+# decision: should length and interaction effect be included? doesn't hurt or help model fit it seems
 ```
 
 # Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
