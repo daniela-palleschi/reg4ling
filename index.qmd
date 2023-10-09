@@ -31,17 +31,29 @@ execute:
 
 # Course overview {.unnumbered}
 
+This course fast tracks through different types of regression most relevant to linguistic research. These materials are by no means exhaustive, and should be supplemented by reading textbook length treatments. The majority of my materials lean heavily on @winter_statistics_2019, which I highly recommend. I also took inspiration from @sonderegger_regression_nodate-1, which came out this year and I haven't fully explored yet. So far, it looks like a very thorough textbook that I would also recommend you check out.
+
+Before you begin the course, I would like to paraphrase something Prof. Shravan Vasishth said in the opening remarks for the annual summer school for Statistcal Methods for Linguistics and Psychology back in 2020 which has stuck with me: *get comfortable with partial knowledge*. We are not trained statisticians, and likely never will be (Vasishth himself is a certified statistician, in addition to professor of psycholinguistics). So get comfortable with partial understanding of the math behind these models, and focus on their application and interpretation.
+
 ## Moodle
 
 - lecture materials
 
-# Kursübersicht
+# Course credit
 
--   Leistungspunkte
-    -   3LP
-        -   1LP: 
-        -   1LP: 
-        -   1LP: 
+This course is part of [Modul 9 (Forschungsmodul)](https://gremien.hu-berlin.de/de/amb/2018/57/57_2018_ma_linguistik_2018_druck.pdf) and is worth 4 LP. A break down of the course credits:
+
+```{r}
+#| echo: false
+dplyr::tribble(
+  ~"LP", ~"type", ~"task",
+  "1LP","participation", "working through the lecture materials",
+  "1LP","preparation", "readings",
+  "1LP", "preparation", "homework due December 20th",
+  "1LP", "preparation", "final homework due March 29th"
+) |> 
+  gt::gt()
+```
 
 - Office hours: Wednesdays, 15.00-16.00 (by appointment)
 
@@ -66,4 +78,4 @@ By the end of this course, you will
 
 ## Style guide
 
-As a self-respecting Canadian, I bounce between what is typically considered 'American' and 'British' spelling. This will be most notable in my use of -ise and -ize, but will never result in a dropped 'u' from words like *colour*, which is used often in plots. I say this so that non-native speakers don't start to think they've been spelling words wrong.
+I bounce between what is typically considered 'American' and 'British' spelling. This will be most notable in my use of -ise and -ize, but will never result in a dropped 'u' from words like *colour*, which is used often plot aesthetics.

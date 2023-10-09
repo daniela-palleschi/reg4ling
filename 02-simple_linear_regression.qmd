@@ -75,34 +75,6 @@ gs4_deauth()
 theme_set(theme_minimal())
 ```
 
-### Load in data  {.unnumbered}
-
-Now that we've loaded our packages, we can take a look at our dataset. Fitting our data to a model typically follows an Exploratory Data Analysis (EDA), which consists of plotting and summarising a data set. We won't get into the EDA process, but there are many great resources on how to go about it in R (e.g., https://r4ds.hadley.nz/).
-
-Let's load our dataset using the `read_csv()` function from the `tidyverse` package `readr`. Alternatively, we could use base R to load in the data with `read.csv()`. Some additional functions in the code below:
-
-  - `mutate_if(is.character, as.factor)` force character variables to factors
-  - filter for the verb region from critical items only, remove participant 3, and remove values of first-fixtation that are 0
-
-```{r}
-# load in dataset
-# df_freq <-
-#   readr::read_csv(
-#     here::here("data/tidy_data_lifetime_pilot.csv"),
-#     # for special characters
-#     locale = readr::locale(encoding = "latin1")
-#   ) |>
-#   mutate_if(is.character, as.factor) |> # all character variables as factor
-#   # mutate(lifetime = fct_relevel(lifetime, "living", "dead"),
-#   #        tense = fct_relevel(tense, "PP", "SF")) |>
-#   filter(type == "critical", # only critical trials
-#          px != "px3", # px3 had a lot of missing values
-#          rt > 0, # only values of rt above 0
-#          region == "verb") %>% # critical region only
-#   droplevels() # remove any factor levels with no observations
-```
-
-
 
 ## Simple linear model: RT ~ frequency {.smaller}
 
@@ -756,6 +728,10 @@ magick::image_negate(y)
 magick::image_read(here::here("media/Winter_2019_lm_anova.png"))
 ```
 :::
+
+## Reporting your model
+
+Section 
 
 ## Summary
 
