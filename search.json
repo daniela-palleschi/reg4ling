@@ -102,7 +102,7 @@
     "href": "01-equation_of_a_line.html#important-terms",
     "title": "1  Understanding straight lines",
     "section": "Important terms",
-    "text": "Important terms\n\n\n\n\n\n\n  \n    \n    \n      Term\n      Definition\n      Equation/Code\n    \n  \n  \n    Intercept\nNA\nNA"
+    "text": "Important terms\n\n\n\n\n\n\n  \n    \n    \n      Term\n      Definition\n      Equation/Code\n    \n  \n  \n    Intercept\nValue of y for x=0\nb0"
   },
   {
     "objectID": "01-equation_of_a_line.html#tasks",
@@ -382,7 +382,7 @@
     "href": "05-categorical_predictors.html#task",
     "title": "5  Categorical predictors",
     "section": "5.4 Task",
-    "text": "5.4 Task"
+    "text": "5.4 Task\nWe’ll use a dataset from (biondo_yesterday_2022?), an eye-tracking reading study exploring the processing of adverb-tense concord in Spanish past and future tenses. Participants read sentences that began with a temporal adverb (e.g., yesterday/tomorrow), and had a verb marked with the congruent or incongruent tense (past/future).\nLoad in the data.\n\ndf_tense &lt;-\n  read_csv(here(\"data\", \"Biondo.Soilemezidi.Mancini_dataset_ET.csv\"),\n           locale = locale(encoding = \"Latin1\") # for special characters in Spanish\n           ) |&gt; \n  mutate(gramm = ifelse(gramm == \"0\", \"ungramm\", \"gramm\")) |&gt; \n  clean_names()\n\n\n5.4.1 Treatment contrasts\nWe will look at the measure total reading time (tt) at the verb region (roi == 4). Subset the data to only include the verb region.\n\ndf_verb &lt;-\n  df_tense |&gt; \n  filter(roi == 4)\n\n\nRun a simple linear model with (log-transformed) total reading time (tt) as an independent variable and grammaticality (gramm) as a dependent variable. Use treatment contrasts.\nInspect your coefficients again. What conclusions do you draw?\nRun model diagnostics:\n\ncheck model assumptions where relevant (normality, constant variance, collinearity)\ncheck model fit (\\(R^2\\))\n\n\n\n\n5.4.2 Sum contrasts\n\nRe-run your model with sum contrasts.\nInspect your coefficients again. Do your conclusions change?\nRe-run your model diagnostics. How does it compare to your first model?\n\n\n\n5.4.3 Multiple regression\n\nAdd verb tense (verb_t: past, future) as a predictor, including an interaction term. Use sum contrasts.\nInspect your coefficients again. Do your conclusions change?\nRe-run your model diagnostics. How does it compare to the last models?"
   },
   {
     "objectID": "05-categorical_predictors.html#literaturverzeichnis",
