@@ -1,0 +1,144 @@
+---
+title: "Understanding straight lines"
+format: 
+  pdf:
+    block-headings: false
+    number-sections: true
+    execute:
+      echo: false
+      fig-width: 8
+      fig-height: 3
+      warning: false
+pdf-engine: xelatex
+editor_options: 
+  chunk_output_type: console
+header-includes:
+  - \usepackage{titling}
+  - \setlength{\droptitle}{-5em} 
+---
+
+```{r}
+pacman::p_load(tidyverse,
+               patchwork,
+               knitr,
+               kableExtra)
+```
+
+```{r}
+# toy data for grids
+df_toy <-
+  dplyr::tibble(
+   x = 1:10,
+   y = 1:10
+  )
+```
+
+```{r}
+fig_blank <-
+  df_toy %>% 
+  ggplot(aes(x,y)) +
+  scale_y_continuous(expand = c(0, 0),limits = c(0, 5), breaks = seq(0, 5, by = 1)) +
+  scale_x_continuous(expand = c(0, 0),limits = c(0, 5), breaks = seq(0, 5, by = 1)) +
+  theme_bw() +
+  theme(text = element_text(size = 16)) 
+```
+
+```{=latex}
+\vspace{-40mm}
+```
+
+# Draw two lines (one solid, one dotted) with the same...
+
+```{=latex}
+\vspace{-5mm}
+```
+
+```{r}
+fig_blank + labs(title = "intercept") + theme(text = element_text(size = 12)) +
+  fig_blank + labs(title = "slope") +  theme(text = element_text(size = 12)) +
+  fig_blank + labs(title = "intercept and slope") + theme(text = element_text(size = 12)) +
+  plot_annotation(tag_levels = "A")
+```
+
+```{=latex}
+\vspace{-10mm}
+```
+
+# Draw two lines (one solid, one dotted) with different...
+
+```{=latex}
+\vspace{-5mm}
+```
+
+```{r}
+fig_blank + labs(title = "intercepts") + xlim(-2, 3) + ylim(5,10) + theme(text = element_text(size = 12)) +
+  fig_blank + labs(title = "slopes") + xlim(-2, 3) + ylim(5,10) + theme(text = element_text(size = 12)) +
+  fig_blank + labs(title = "intercepts and slopes") + xlim(-2, 3) + ylim(5,10) + theme(text = element_text(size = 12))  +
+  plot_annotation(tag_levels = list(c("D", "E", "F")))
+```
+
+```{=latex}
+\vspace{-10mm}
+```
+
+# Calculating values
+
+```{=latex}
+\vspace{-5mm}
+```
+
+The equation of a line is $Y_i = (b_0 + b_1X_i)$. For Plots A-F, define for the **solid** line:
+
+```{r}
+tab_coef <- 
+  tribble(
+    ~"Plot", ~"Intercept", ~"Slope", ~"when x =...", ~"y = ?",
+    "A","","","25","",
+    "B","","","5.4","",
+    "C","","","-6","",
+    "D","","","0","",
+    "E","","","1028","",
+    "F","","","15",""
+)
+```
+
+```{r}
+tab_coef %>%
+  kbl(booktabs = T,
+      align = "c") %>%
+  kable_styling(
+    full_width = T,
+    position = "left",
+    latex_options = c("striped", "repeat_header"),
+    stripe_color = "gray!15",
+    font_size = 12
+  ) %>%
+  column_spec(1, width = "1cm") %>% 
+  column_spec(2:3, width = "3cm")
+```
+
+
+\newpage
+
+```{r}
+# toy data for grids
+df_toy <-
+  dplyr::tibble(
+   x = 1:10,
+   y = 1:10
+  )
+```
+
+```{r}
+fig_blank <-
+  df_toy %>% 
+  ggplot(aes(x,y)) +
+  scale_y_continuous(expand = c(0, 0),limits = c(0, 5), breaks = seq(0, 5, by = 1)) +
+  scale_x_continuous(expand = c(0, 0),limits = c(0, 5), breaks = seq(0, 5, by = 1)) +
+  theme_bw() +
+  theme(text = element_text(size = 16)) 
+```
+
+```{=latex}
+\vspace{-40mm}
+```
