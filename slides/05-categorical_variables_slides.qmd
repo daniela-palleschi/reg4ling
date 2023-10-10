@@ -159,36 +159,49 @@ fig_dens <-
   (fig_hist + fig_dens)
 ```
 
----
+# Bimodal distribution {-}
 
 - this is a *bimodal* distribution
   + there are two *modes* (most frequent value, i.e., peak in a histogram)
 - We know that there were two subject groups: old and young
   + it might be that each group has a different mode
 
----
+# Re-run our model
 
-Running our model of the log reaction times as predicted by frequency and length, we see:
+- re-run our multiple regression model (reaction times ~ frequency + length)
 
 ```{r}
+#| output-location: column-fragment
 fit_freq_length <-
   lm(rt_lexdec ~ freq_z*length_z,
      data = df_freq_eng)
 ```
 
+## Model fit and overfitting
+
 ```{r}
+#| output-location: column-fragment
 glance(fit_freq_length)$r.squared
+```
+
+```{r}
+#| output-location: column-fragment
 glance(fit_freq_length)$adj.r.squared
 ```
 
-Seems like we don't have any overfitting in our model ($R^2$ and adjusted $R^2$ are comparable). Let's look at our coeffiecients.
+- seems like we don't have any overfitting in our model ($R^2$ and adjusted $R^2$ are comparable)
+
+## Model coefficients
+
+- look at our coeffiecients.
 
 ```{r}
+#| output-location: column-fragment
 tidy(fit_freq_length) |> select(term, estimate)
 ```
 
-- looks to the dataset we explored in the previously
-- the bimodal distribution suggests we should include age group as a predictor, since the two groups seem to pattern differently in their reading times
+- looks similar to the dataset we explored yesterday
+- the bimodal distribution we saw earlier suggests age group could be an important a predictor
 - does the effect of frequency and length also differ as a function of age group?
 
 # Categorical predictors
@@ -207,13 +220,38 @@ fit_age <-
      data = df_freq_eng)
 ```
 
+### Model fit
+
+- compare $R^2$ and adjusted $R^2$
+- $R^2$ our model without age as a predictor:
+
 ```{r}
+#| output-location: column-fragment
+# rt_lexdec ~ freq_z*length_z 
+glance(fit_freq_length)$adj.r.squared
+```
+
+- $R^2$ our model with age as a predictor:
+
+```{r}
+#| output-location: column-fragment
+# rt_lexdec ~ freq_z*length_z + age_subject
 glance(fit_age)$r.squared
+```
+
+- adjusted $R^2$ our model with age as a predictor:
+
+```{r}
+#| output-location: column-fragment
+# rt_lexdec ~ freq_z*length_z + age_subject
 glance(fit_age)$adj.r.squared
 ```
 
-- large increase in variance explained
-- and that the $R^2$ and adjusted $R^2$ values are comparable
+- large increase in proportion of variance explained when we include age
+- and the $R^2$ and adjusted $R^2$ values are comparable for the model with age
+- this suggests that age captures variance that was not explained without it
+
+### Check for absence of collinearity
 
 ```{r}
 car::vif(fit_age)
@@ -236,19 +274,20 @@ tidy(fit_age) |> select(term,estimate)
 - the factor levels (i.e., the categories in a categorical variable) are given numerical values
   + We call these numerical values mapped onto factor levels contrast coding
 
-## Dummy contrasts
+## Dummy coding/treatment contrasts
 
 - we can check the contrasts with `contrasts()`
 
 ```{r}
+#| output-location: column-fragment
 contrasts(df_freq_eng$age_subject)
 ```
 
 - `old` was coded at $0$ and `young` as $1$
 - our slope for `age_subjectyoung` represents the change in reaction times when we move from `old` to `young`
-- this is called `treatment coding` (dummy coding), where one factor level is coded as 0 and the other as 1
+- this is called `treatment coding` (a.k.a., dummy coding), where one factor level is coded as $0$ and the other as $1$
 
----
+### Age-only model
 
 - remove frequency and length to focus on `age_subject`
 - use raw reaction times, to more easily interpret the results
@@ -259,6 +298,8 @@ fit_age <-
      data = df_freq_eng)
 ```
 
+- what's the variance explained by our (simple) model with only age as a predictor?
+
 ```{r}
 glance(fit_age)$r.squared
 ```
@@ -266,13 +307,14 @@ glance(fit_age)$r.squared
 - $R^2$ is lower than when we included frequency and length
   + but higher than our model with frequeny and length but no age
 
----
+### Age-only coefficients
 
 ```{r}
+#| output-location: column-fragment
 tidy(fit_age) |> select(term, estimate)
 ```
 
-- reaction times decrease by 157ms going from old t young group compared to the old group
+- reaction times decrease by 157ms going from old to young group compared to the old group
 - what does the intercept represent here?
 
 ```{r}
@@ -285,8 +327,10 @@ df_freq_eng |>
 
 - don't see the intercept value there
 
----
+### Summarisinggroup effects
 
+- our intercept was `r round(tidy(fit_age)$estimate[1],2)`, but that wasn't the grand mean reaction time
+  + what is the intercept?
 - how does `rt_lexdec` look for the two groups?
 
 ```{r}
@@ -304,7 +348,13 @@ df_freq_eng |>
 - the intercept corresponds to the mean reaction time for the old group. Why? 
   + because `old` coded as $0$
 
----
+### Intercept at 0
+
+- the intercept corresponds to the value of $y$ when $x$ is 0
+  + when predictors are *centered*, this will correspond to the mean value of $y$, because when $x$ = 0 it aligns with the centre value of $y$
+  + when predictors are not centered, this will correspond to the value of $y$ when $x$ is 0 in the original unit of measurement
+
+### Default contrasts
 
 - which variable is coded as $0$? 
   + R simply takes the first level name alphabetically: `old` comes before `young`, so `old` was automatically taken as the 'baseline' to which `young` was compared
@@ -316,7 +366,7 @@ df_freq_eng |>
 coef(fit_age)['(Intercept)'] + coef(fit_age)['age_subjectyoung']
 ```
 
----
+### Simple linear regression as a two-sample t-test
 
 - this actually is the same thing as a *t*-test:
 
@@ -330,10 +380,10 @@ t.test(exp(rt_lexdec) ~ age_subject, data = df_freq_eng)
 tidy(fit_age)
 ```
 
----
+### Visualing treatment contrasts
 
 ```{r}
-
+#| code-fold: true
 
 fig_nocontrasts <-
 df_freq_eng |> 
@@ -360,23 +410,33 @@ fig_nocontrasts + fig_treatment
 ```
 
 
-## Sum contrasts
+## Sum contrasts/coding
 
 - sum coding is another frequently used coding scheme
   + essentially centring categorical variables
 - simplifies interpretation of interaction effects
 - instead of $0$ and $1$, we set our contrasts to +/-1 or 0.5 (I prefer 0.5)
 
----
+### Setting sum contrasts
+
+- ensure we're working with a factor
 
 ```{r}
 # first, make sure your variable is a factor
 df_freq_eng$age_subject <- as.factor(df_freq_eng$age_subject)
+```
+
+- check it is a factor (could do this first)
+
+```{r}
 # check
 class(df_freq_eng$age_subject)
 ```
 
----
+#### `contr.sum()`
+
+- we can use the `contr.sum()` function to set sum contrasts
+  + takes as its argument the number of factor levels
 
 ```{r}
 # next, you could use the contr.sum() function
@@ -389,7 +449,7 @@ contrasts(df_freq_eng$age_subject)
   + I would also prefer to have `young` coded in the negative value, and `old` in the positive value
   + this aids in the way I interpret the slope: a change in reaction times for the older group compared to the younger group
   
----
+#### By-hand
 
 ```{r}
 #or, you could manually control the sum contrasts
@@ -401,6 +461,8 @@ contrasts(df_freq_eng$age_subject) <- c(+0.5, -0.5)
 contrasts(df_freq_eng$age_subject)
 ```
 
+### Model with sum coded factor
+
 - run our model
 
 ```{r}
@@ -411,20 +473,25 @@ fit_age_sum <-
 
 ```{r}
 glance(fit_age_sum)$r.squared
+```
+
+```{r}
 glance(fit_age)$r.squared
 ```
 
 - no difference in variance account for by our model (remember, centering a variable just shifts values, doesn't affect the relationship between values)
 
----
+#### Coefficients
 
 ```{r}
 tidy(fit_age_sum) |> select(term,estimate)
 ```
 
 - there is a difference in the intercept
-  + andd a change in sign in our slope. Why is this?
+  + and a change in sign in our slope. Why is this?
 
+#### Treatment/Dummy vs. Sum contrasts
+  
 ```{r}
 #| label: fig-contrasts
 #| output-location: fragment
@@ -455,7 +522,7 @@ df_freq_eng |>
 fig_treatment + fig_sum5 + plot_annotation(tag_levels = "A")
 ```
 
----
+#### Intercept
 
 - the intercept value is now the overall mean of all observed reaction times, because now the $y$ value when $x$ equals zero lies in the middle of the two groups
 - the slope magnitude (i.e., size of the value) hasn't changed, because the difference betwen the two group means has not changed
@@ -464,13 +531,12 @@ fig_treatment + fig_sum5 + plot_annotation(tag_levels = "A")
 mean(exp(df_freq_eng$rt_lexdec))
 ```
 
-
 # Exploring predicted values
 
 - let's explore the predicted values of our model with a categorical variable
 
 ```{r}
-head(fitted(fit_age), n = 10)
+fitted(fit_age)[1:6]
 ```
 
 - there are only 2 values, 630 and 787
@@ -479,7 +545,7 @@ head(fitted(fit_age), n = 10)
   + how does this correspond to the age group of the participant for the first ten observations?
 
 ```{r}
-head(df_freq_eng$age_subject, n = 10)
+df_freq_eng$age_subject[1:6]
 ```
 
 ---
@@ -487,17 +553,17 @@ head(df_freq_eng$age_subject, n = 10)
 - first ten observations in our data are in young-old pairs. What are the first values in the raw data?
 
 ```{r}
-head(exp(df_freq_eng$rt_lexdec), n = 10)
+exp(df_freq_eng$rt_lexdec[1:6])
 ```
 
 - what is the difference between these reaction times and the fitted values?
 
 ```{r}
-head(exp(df_freq_eng$rt_lexdec), n = 10) - head(fitted(fit_age), n = 10)
+exp(df_freq_eng$rt_lexdec[1:6]) - fitted(fit_age)[1:6]
 ```
 
 ```{r}
-head(residuals(fit_age))
+residuals(fit_age)[1:6]
 ```
 
 ---
@@ -520,10 +586,6 @@ df_freq_eng |>
 ```
 
 
-
-
-  
-
 # Summary
 
 -   we saw that the equation for a straight line boils down to its intercept and slope
@@ -545,8 +607,12 @@ tribble(
 
 Today we learned...
 
+- about cateogorical predictors
+- how to interpret different contrast coding
 
 # Task
+
+
 
 
 

@@ -439,7 +439,53 @@ Today we learned...
 
 ## Task
 
+We'll use a dataset from @biondo_yesterday_2022, an eye-tracking reading study exploring the processing of adverb-tense concord in Spanish past and future tenses. Participants read sentences that began with a temporal adverb (e.g., yesterday/tomorrow), and had a verb marked with the congruent or incongruent tense (past/future).
 
+Load in the data.
+
+```{r}
+df_tense <-
+  read_csv(here("data", "Biondo.Soilemezidi.Mancini_dataset_ET.csv"),
+           locale = locale(encoding = "Latin1") # for special characters in Spanish
+           ) |> 
+  mutate(gramm = ifelse(gramm == "0", "ungramm", "gramm")) |> 
+  clean_names()
+```
+
+### Treatment contrasts
+
+We will look at the measure *total reading time* (`tt`) at the *verb* region (`roi == 4`). Subset the data to only include the verb region.
+
+```{r}
+df_verb <-
+  df_tense |> 
+  filter(roi == 4)
+```
+
+
+1. Run a simple linear model with (log-transformed) total reading time (`tt`) as an independent variable and grammaticality (`gramm`) as a dependent variable. Use treatment contrasts.
+
+2. Inspect your coefficients again. What conclusions do you draw?
+
+3. Run model diagnostics:
+    + check model assumptions where relevant (normality, constant variance, collinearity)
+    + check model fit ($R^2$)
+    
+### Sum contrasts
+
+1. Re-run your model with sum contrasts.
+
+2. Inspect your coefficients again. Do your conclusions change?
+
+3. Re-run your model diagnostics. How does it compare to your first model?
+
+### Multiple regression
+
+1. Add verb tense (`verb_t`: past, future) as a predictor, including an interaction term. Use sum contrasts.
+
+2. Inspect your coefficients again. Do your conclusions change?
+
+3. Re-run your model diagnostics.  How does it compare to the last models?
 
 ## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
 

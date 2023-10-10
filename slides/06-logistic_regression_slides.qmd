@@ -1,0 +1,738 @@
+---
+title: "Logistic regression"
+subtitle: "WiSe23/24"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2023-10-11
+format: 
+  pdf:
+    output-file: 04-multiple_regression_slides.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  revealjs:
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    output-location: fragment
+editor_options: 
+  chunk_output_type: console
+bibliography: ../references.bib
+csl: ../apa.csl
+---
+
+- this lecture covers chapter 12 \'Genearlised Lienar Models 1: Logistic Regression' [@winter_statistics_2019]
+  + we're skipping a few chapters, which I encourage you to go through on your own
+  + they cover topics that you presumably have covered in previous courses (namely significance testing, *t*-values and *p*-values).
+
+## Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+- how to model binomial data with logistic regression
+- how to interpret log-odds and odds ratio
+
+## Set-up environment  {.unnumbered}
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+options(pillar.sigfig = 5)
+```
+
+```{r}
+#| echo: false
+library(broman)
+# function to format p-values
+format_pval <- function(x){
+  if (x < .001) return(paste('<', '.001'))
+  if (x < .01) return(paste('<', '.01'))
+  if (x < .05) return(paste('<', '.05'))
+  paste('=', myround(x, 3))  # if above .05, print p-value to 3 decimalp points
+}
+```
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               janitor,
+               languageR)
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra)
+```
+
+```{r}
+# set preferred ggplot2 theme
+theme_set(theme_bw() + theme(plot.title = element_text(size = 10)))
+```
+
+
+
+## Generalised linear models
+
+Logistic regression is a type of genearlised linear model (GLM), and is used to model binomial response data. Whereas continuous response variables, such as reaction times, assume a normal distribution (a.k.a., a Gaussian distribution), logistic regression assumes a binomial distribution (a.k.a., Bernoulli distribution). These are formalised in equations @eq-normal, where $\mu$ and $\sigma$ correspond to the mean and standard deviation, and @eq-binomial, where $N$ and $p$ refer to the number of trials and the probability of $y$ being $1$ or $0$. 
+
+$$
+y \sim Normal(\mu,\sigma)
+$$ {#eq-normal}
+
+$$
+y \sim binomial(N = 1, p)
+$$ {#eq-binomial}
+
+Don't stress about this for now, I find the math behind everything will start to make more sense the more often you see it. However, *some* math is necessary in order to understand the output of our models, namely the relation between probabilities, odds, and log odds.
+
+### Log-odds, odds ratio, and probabilities
+
+In logistic regression, we the probability ($p$) of observing one outcome or another as a function of a predictor variable. In linguistic research, these outcomes could be the absence or presence of some phenomenon (pause, schwa, etc.) or button responses (yes/no, accept/reject). In logistic regression, we describe the probability, odds, or log-odds of a particular outcome over another.
+
+```{r}
+#| echo: false
+df_odds <-
+  tibble(
+  log_odds = seq(from = -5, to = 5, by = 0.25),
+  odds = exp(log_odds),
+  prob = plogis(log_odds),
+  q = 1 - prob
+)
+```
+
+Probability is quite intuitive, and ranges from 0 (no chance) to 1 (certain). A 50% chance corresponds to a probability of 0.5. You're also likely familiar with odds, which can range from 0 to infinity. Odds are often used in betting, such as *the odds that I'll win are 2:1*, which corresponds to $\frac{2}{1} = 2$ in favour of my winning. Conversely, *the odds that you'll win are 1:2*, corresponding to  $\frac{1}{2} = 0.5$, meaning it's less likely that you'll win compared to you losing. If the odds are even, then: $\frac{1}{1} = 1$. So, odds of 1 correspond to a probability of 0.5. Log-odds are just the logarithmically-transformed odds: $log(2) =$ `r log(2)`; $log(0.5) =$ `r log(0.5)`; $log(1) =$ `r log(1)`. Probability can also be computed using the odds, as shown in @eq-odds: $\frac{2}{1+2} =$ `r 2/(1+2)`; $\frac{1}{1+1} =$ `r 1/(1+1)`; $\frac{0.5}{1+0.5} =$ `r 0.5/(1+0.5)`.
+
+We can get the probability from a log odds value using `plogis()`, which performs the following calculation:
+
+$$
+p = \frac{exp(log\;odds)}{1 + exp(log\;odds)} = \frac{odds}{1 + odds}
+$$ {#eq-odds}
+
+@tbl-odds gives an example of how the three relate to each other. The grey cells are all where chances re 50/50, with increasingly more likely (green) or less likely (red) values/
+
+```{r}
+#| echo: false
+#| label: tbl-odds
+#| tbl-cap: Comparison of different values of probabilities/odds/log-odds
+library(gt)
+col_func <- colorRampPalette(c('lightblue', '#DE77AE'))
+
+# Test function:
+
+# col_func(4)
+
+df_odds |> 
+  filter(row_number() %% 5 == 1) |> 
+  select(-q) |> 
+  mutate(row = row_number()) %>%
+  pivot_longer(
+    cols = c(prob, odds, log_odds)
+  ) |> 
+  # pivot_wider(names_from = Cor, values_from = value)
+  pivot_wider(
+    # id_cols = names,
+    names_from = row,
+    values_from = value
+  ) |> 
+  gt::gt() |>
+  # gt::rm_header() |> 
+  gt::fmt_number(decimals = 5,
+                 drop_trailing_zeros = T) |> 
+  gt::data_color(
+    palette = "grey",
+    columns = 6) |> 
+  gt::data_color(
+    palette = "grey",
+    columns = 6) |> 
+  gt::data_color(palette = "lightgreen",
+                 columns = 7:10) |> 
+  gt::data_color(palette = "pink",
+                 columns = 2:5) %>%
+  tab_options(
+    column_labels.hidden = TRUE
+  )
+```
+
+This relationship is demonstrated in @fig-odds. Take your time to really understand these plots, as it will help understand the output of our models.
+
+```{r}
+#| echo: false
+#| label: fig-odds
+#| fig-cap: Relationship between probability, odds, and log-odds
+#| fig-asp: .35
+fig_log_odds <-
+  df_odds |> 
+  ggplot() +
+  aes(x = log_odds, y = odds) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(-5, 5, by = 1)) +
+  labs(title = "Odds versus log-odds") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "slategrey")
+
+fig_prob_odds <-
+  df_odds |> 
+  ggplot() +
+  aes(x = prob, y = odds) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(-5, 5, by = 1)) +
+  labs(title = "Odds versus probability") +
+  geom_vline(xintercept = .5, linetype = "dashed", colour = "slategrey")
+
+fig_prob_log <-
+  df_odds |> 
+  ggplot() +
+  aes(x = prob, y = log_odds) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(-5, 5, by = 1)) +
+  labs(title = "Odds versus probability") +
+  geom_vline(xintercept = .5, linetype = "dashed", colour = "slategrey")
+
+fig_log_odds + fig_prob_odds + fig_prob_log + plot_annotation(tag_levels = "A")
+```
+
+## Logistic regression
+
+I find the more we talk about the math behind the models before even running a model, the more overwhelmed we become. So, let's run our first logistic regression and then dissect it to understand it. Most relevant to the output of a logistic regression model is @fig-odds C, as the model will output log-odds, and we most likely want to interpret them in terms of probabilities.
+
+We'll use a dataset from @biondo_yesterday_2022, an eye-tracking reading study exploring the processing of adverb-tense concord in Spanish past and future tenses. Participants read sentences that began with a temporal adverb (e.g., yesterday/tomorrow), and had a verb marked with the congruent or incongruent tense (past/future). We will look at the measure *regression in* at the *verb* region.
+
+Let's start by loading in the data:
+
+```{r}
+df_tense <-
+  read_csv(here("data", "Biondo.Soilemezidi.Mancini_dataset_ET.csv"),
+           locale = locale(encoding = "Latin1") # for special characters in Spanish
+           ) |> 
+  mutate(gramm = ifelse(gramm == "0", "ungramm", "gramm")) |> 
+  clean_names()
+```
+
+### EDA
+
+And conducting a quick EDA: print summaries and plot the response variables.
+
+```{r}
+head(df_tense)
+```
+
+Let's look at only the verb region, which is `roi == "4"` (region of interest 4).
+
+```{r}
+df_tense |> 
+  filter(roi == "4") |> 
+  select(roi, ri, ro) |> 
+  summary()
+```
+
+And plot some of the continuous eye-tracking measures (fp: first-pass reading time; gp: go-past time/regression path duration; tt: total reading time), just to get an idea of what was is going on in the data. Let's look at both the raw and log reading times.
+
+```{r}
+#| echo: false
+library(introdataviz)
+
+fig_raw <-
+  df_tense |> 
+  filter(roi == "4") |> 
+  mutate(gramm = as_factor(gramm)) |> 
+  pivot_longer(
+    cols = c(fp, gp, tt),
+    names_to = "measure",
+    values_to = "time"
+  ) |> 
+  ggplot() +
+  labs(title = "Raw eye-tracking reading times") +
+  aes(x = verb_t, y = time, shape = gramm, colour = gramm) +
+  geom_point(alpha = .4, position = position_jitterdodge(0.3)) +
+  geom_split_violin(alpha = .5, show.legend =  F) + 
+  facet_grid(.~measure) 
+
+
+fig_log <-
+  df_tense |> 
+  filter(roi == "4") |> 
+  mutate(gramm = as_factor(gramm)) |> 
+  pivot_longer(
+    cols = c(fp, gp, tt),
+    names_to = "measure",
+    values_to = "time"
+  ) |> 
+  ggplot() +
+  labs(title = "Log eye-tracking reading times") +
+  aes(x = verb_t, y = log(time), shape = gramm, colour = gramm) +
+  geom_point(alpha = .4, position = position_jitterdodge(0.3)) +
+  geom_split_violin(alpha = .5, show.legend =  F) + 
+  facet_grid(.~measure) 
+
+fig_raw / fig_log + plot_layout(guides = "collect")
+```
+
+It looks like, at least in total reading time (`tt`), the mode (peak) for ungrammatical conditions was higher than for grammatical conditions. Hard to tell about an effect of tense here. But we're interested in binomial outcome variables: regressions in and out at the verb region.
+
+```{r}
+df_tense |> 
+  mutate(gramm = as_factor(gramm)) 
+```
+
+
+```{r}
+#| echo: false
+fig_reg <-
+  df_tense |> 
+  filter(roi == "4") |> 
+  pivot_longer(
+    cols = c(ri, ro),
+    names_to = "measure",
+    values_to = "regression"
+  ) |> 
+  mutate(gramm = as_factor(gramm),
+         regression = as_factor(regression)) |> 
+  drop_na(regression) |> 
+  ggplot() +
+  labs(title = "Count of regressions in/out") +
+  aes(x = gramm, fill = regression) +
+  geom_bar() +
+  facet_grid(measure~verb_t) 
+
+fig_reg_prop <-
+  df_tense |> 
+  filter(roi == "4") |> 
+  pivot_longer(
+    cols = c(ri, ro),
+    names_to = "measure",
+    values_to = "regression"
+  ) |> 
+  mutate(gramm = as_factor(gramm),
+         regression = as_factor(regression)) |> 
+  drop_na(regression) |> 
+  ggplot() +
+  labs(title = "Proportion of regressions in/out") +
+  aes(x = gramm, fill = regression) +
+  geom_bar(position = "fill") +
+  facet_grid(measure~verb_t) 
+
+fig_reg + fig_reg_prop + plot_layout(guides = "collect")
+```
+
+### Model
+
+Now let's run our model. Verb tense and grammaticality are each two-level factors, so we'll want to set sum coding for each of them. Let's set `past` and `grammatical` to $-0.5$, and `future` and `ungrammatical` to `+0.5`.
+
+```{r}
+df_tense$verb_t <- as.factor(df_tense$verb_t)
+levels(df_tense$verb_t)
+contrasts(df_tense$verb_t) <- c(+0.5, -0.5)
+contrasts(df_tense$verb_t)
+```
+
+
+```{r}
+df_tense$gramm <- as.factor(df_tense$gramm)
+levels(df_tense$gramm)
+contrasts(df_tense$gramm) <- c(-0.5, +0.5)
+contrasts(df_tense$gramm)
+```
+
+Now that we've set our contrasts (if you have continuous predictors, you would centre and potentially standardise them instead), we can fit our model. We use the `glm()` function to fit a genearlised linear model, and use the argument `family = "binomial"` to indicate our data are binomial.
+
+```{r}
+fit_tense_ri <-
+  glm(ri ~ verb_t*gramm,
+    data = df_tense,
+    subset = roi == "4",
+    family = "binomial")
+```
+
+What do our coefficients look like?
+
+```{r}
+tidy(fit_tense_ri) %>%
+  mutate(p.value = as.numeric(p.value)) |> 
+  mutate(p.value = round(p.value*4,10)
+         ) |> 
+  gt() |> 
+  fmt_number(drop_trailing_zeros = T)
+```
+
+Let's first consider the estimates. The intercept is negative, meaning it is below 0. Verb tense is positive, meaning that there are more regressions in for the future compared to the past, holding grammaticality constant. Grammaticality is positive, meaning that there were more regressions in for the ungrammatical than grammatical conditions. But what does zero mean here? Logistic regression gives the estimates in log-odds. This means that a value of 0 means there is an equal probability of a regression in or out for both conditions (as in @tab-odds), i.e., the slope is flat (or not significantly different from 0). How can we convert our log-odds estimates to something more interpretable, like probabilities? Recall the equation in @eq-odds, which would require a lot of typing. Luckily, we can just use the `plogis()` function, which takes a log-odds value and spits out the corresponding probability. We can also just use the `exp()` function to get the odds ratio from the log-odds.
+
+```{r}
+plogis(-1.23) # intercept prob
+plogis(0.0277) # tense prob
+
+exp(-1.23) # intercept odds
+exp(0.0277) # tense odds
+```
+
+This is great, but a bit tedious. We can also just feed a tibble column through the `plogis()` and `exp()` functions to print a table with the relevant probabilities and odds. 
+
+```{r}
+tidy(fit_tense_ri) %>%
+  mutate(p.value = round(p.value*4,10),
+         prob = plogis(estimate),
+         odds = exp(estimate)
+         ) |> 
+  mutate_if(is.numeric, round, 4) |> 
+  gt() |> 
+  fmt_number(drop_trailing_zeros = T)
+```
+
+We see that the odds of the future tense have a regression in versus the past tense is ~1, with the corresponding probability of 0.51. Unsuprisingly, we see this *p*-value indicates this effect was not significant (*p* > .05), and the *z*-value (note: not *t*-value!) is also low.
+
+
+::: {.callout-note}
+
+### *z*-values
+
+*z*-values correspond to the estimate divided by the standard error. It's interpretation is similar to that of the *t*-value: a *z*-value of ~2 or higher will likely have a *p*-value below 0.05. 
+:::
+
+The interaction term is negative, what does this mean? We can interpret this as indicating that the effect of congruence is different in either level of tense. These effects are often more easily interpreted with a visualisation, e.g., using the `plot_model()` function from the `sjPlot` package. This effect is not significant, however.
+
+```{r}
+#| label: fig-inter
+#| fig-cap: "Interaction plot of"
+sjPlot::plot_model(fit_tense_ri, type = "eff", terms = c("gramm", "verb_t")) + geom_line()
+```
+
+We can also use the `predict()` function to extract the predicted values for each condition. We could just simply print the predicted values (`predict(fit_tense_ri)`), append the predicted values to the data frame
+
+```{r}
+# make sure dataset is the same length as the model data
+df_tense_v <-
+  df_tense |> 
+  filter(roi == "4") |> 
+  drop_na(ri)
+
+# append model estimates
+augment(fit_tense_ri, data = df_tense_v) |> 
+  distinct(verb_t, gramm, .keep_all = T) |>
+  arrange(verb_t) |>  
+  select(verb_t, gramm, .fitted)
+```
+
+Or we could create a list of the unique conditions.
+
+```{r}
+df_sim <-
+    tibble(
+    verb_t = rep(c('Past', 'Future'), each = 2),
+    gramm = rep(c('0', '1'), times = 2))
+
+# alternatively, just extract the relevant factor levels from your datafram
+df_sim <-
+  df_tense |> 
+  arrange(verb_t) |> 
+  distinct(verb_t, gramm) 
+
+# and add predicted values
+df_sim$fit <- num(predict(fit_tense_ri, df_sim), digits = 5)
+
+df_sim
+```
+
+And now if we look at the predicted log-odds values for the future and past tenses:
+
+```{r}
+df_sim |> 
+  summarise(
+    mean_tense = mean(fit),
+    .by = verb_t)
+```
+
+What is the difference between these two numbers (in our model summary)?
+
+```{r}
+df_sim |> 
+  summarise(
+    mean_tense = mean(fit),
+    .by = gramm)
+```
+
+What is the difference between these two numbers (in our model summary)?
+
+So, our slopes for `verb_t` and `gramm` correspond to the predicted difference between the two levels of each factor.
+
+## Interpreting our coefficients
+
+What do our coefficient estimates reflect, though? Let's remind ourselves of the rate of regressions in at the verb region:
+
+```{r}
+df_tense |> 
+  filter(roi == "4") |> 
+  drop_na(ri) |> 
+  summary()
+ptab_gramm <-
+  df_tense |> 
+  filter(roi == "4") |> 
+  drop_na(ri) |> 
+  select(gramm, ri) |> 
+  table() |> 
+  prop.table()
+
+ptab_tense <-
+  df_tense |> 
+  filter(roi == "4") |> 
+  drop_na(ri) |> 
+  select(verb_t, ri) |> 
+  table() |> 
+  prop.table()
+
+df_tense |> 
+  filter(roi == "4") |> 
+  drop_na(ri) |> 
+  tabyl(gramm, ri, verb_t) |> 
+  adorn_percentages() |> 
+  adorn_totals()
+```
+
+We want to measure how much more likely a regression in (y = 1) is for ungrammatical conditions (x = 1) than in grammatical conditions (x = 0). Si we want to calculate the odds of a regression in for each case, and take their ratio:
+
+```{r}
+# odds(y = 1 | x = 0)
+odds_ri1_gramm0 <- 
+  ptab_gramm[1,2] / ptab_gramm[1,1] # in gramm conditions: ri 0/1
+odds_ri1_gramm1 <- 
+  ptab_gramm[2,2] / ptab_gramm[2,1] # in ungramm condiitons: ri 0/1
+
+## odds ratio
+odds_ri1_gramm1 / odds_ri1_gramm0
+
+## log odds
+log(odds_ri1_gramm1) - log(odds_ri1_gramm0)
+# or
+log(odds_ri1_gramm1 / odds_ri1_gramm0)
+
+## probability
+plogis(log(odds_ri1_gramm1 / odds_ri1_gramm0))
+```
+
+So the odds of a regression into the verb region is 1.4 times more likely in ungrammatical versus grammatical conditions.
+
+
+```{r}
+intercept <- tidy(fit_tense_ri)$estimate[1]
+tense <- tidy(fit_tense_ri)$estimate[2]
+gramm <- tidy(fit_tense_ri)$estimate[3]
+interact <- tidy(fit_tense_ri)$estimate[4]
+```
+
+What are the log odds for the past (tense = -0.5) grammatical (`gramm` = -0.5)?
+
+```{r}
+plogis(intercept)
+plogis(tense)
+plogis(gramm)
+plogis(interact)
+```
+
+
+```{r}
+tidy(fit_tense_ri) |> 
+  mutate(prob = plogis(estimate))
+```
+
+
+```{r}
+plogis(intercept + tense*-.5 + gramm*-.5)
+```
+
+And past ungrammatical (gramm = +0.5)?
+
+```{r}
+plogis(intercept + tense*-.5 + gramm*.5)
+```
+
+And for the future conditions?
+
+```{r}
+plogis(intercept + tense*.5 + gramm*-.5)
+```
+
+And past ungrammatical (gramm = +0.5)?
+
+```{r}
+plogis(intercept + tense*.5 + gramm*.5)
+```
+
+```{r}
+plogis(-1.22521)
+```
+
+```{r}
+plogis(-1.22521)
+```
+
+$$
+log odds = log(\frac{p}{1-p})
+$$
+$$
+odds = \frac{p}{1-p}
+$$
+
+## Visualising model predictions
+
+Something we haven't really covered is how to visualise our model predictions. So far we've only visualised the raw data, but when interpreting model results it helps to see the predictions. This is especially true for logistic regression, because our estimates are given in log odds, which are not very intuitive.
+
+We can use the `sjPlot` package, which is very handy:
+
+```{r}
+library(sjPlot)
+
+plot_model(fit_tense_ri)
+```
+
+```{r}
+plot_model(fit_tense_ri, type = "eff",
+           terms = "verb_t")
+```
+
+```{r}
+plot_model(fit_tense_ri, type = "eff",
+           terms = "gramm")
+```
+
+```{r}
+plot_model(fit_tense_ri, type = "int")
+```
+
+Or we can use the `ggeffects` package to extract summaries of effects, and then feed them into `ggplot2`.
+
+```{r}
+library(ggeffects)
+```
+
+
+```{r}
+ggeffect(fit_tense_ri)
+
+ggeffect(fit_tense_ri,
+         terms = c("gramm", "verb_t"))
+```
+
+
+
+
+
+## Reporting
+
+@sonderegger_regression_nodate-1 (Section 6.9) says the following:
+
+> Reporting a logistic regression model in a write-up is generally similar to reporting a linear regression model...Reporting a logistic regression model in a write-up is generally similar to reporting a linear regression model: the guidelines and rationale in section 4.6 for reporting individual coefficients and the whole model hold, with some adjustments.
+
+We can produce such a table using the `papaja` package:
+
+```{r}
+#| label: tbl-glm-summary
+#| tbl-cap: "Model summary for regressions in at the verb region. Estimates are given in log odds."
+library(papaja)
+
+fit_tense_ri |> 
+  apa_print() |>
+  apa_table()
+```
+
+Or by extracting the model summary with `tidy()`, and even adding our probabilities:
+
+```{r}
+tidy(fit_tense_ri) |> 
+  mutate(prob = plogis(estimate)) |> 
+  relocate(prob, .after = std.error) |> 
+  apa_table()
+```
+
+
+## Summary
+
+-   we saw that the equation for a straight line boils down to its intercept and slope
+
+-   we fit our first linear model with a categorical predictor
+
+### Important terms {.unnumbered .smaller}
+
+```{r}
+#| echo: false
+tribble(
+ ~"term", ~"description/other terms",
+ 
+) %>% kable() %>% kable_styling()
+```
+
+
+## Learning Objectives {.unnumbered .unlisted}
+
+Today we learned...
+
+- how to model binomial data with logistic regression
+- how to interpret log-odds and odds ratio
+
+## Task
+
+### Regressions out
+
+Using the same dataset, run a logistic model exploring regressions in (`ri`) at the adverb region (`roi = "2"`). Before you run the model, do you have any predictions? Try plotting the regressions in for this region first, and generate some summary tables to get an idea of the distributions of regressions in across conditions.
+
+### Dutch verb regularity
+
+Load in the `regularity` data from the `languageR` package.
+
+```{r}
+df_reg <-
+  regularity |> 
+  clean_names()
+```
+
+> Regular and irregular Dutch verbs and selected lexical and distributional properties.
+
+Our relevant variables will be:
+
+- `written_frequency`: a numeric vector of logarithmically transformed frequencies in written Dutch (as available in the CELEX lexical database).
+- `regularity`: a factor with levels irregular (1) and regular (0).
+- `verb`: a factor with the verbs as levels.
+
+1. Fit a logistic regression model to the data which predicts verb regularity by written frequency. Consider: What type of predictor variable do you have, and what steps should you take before fitting your model?
+
+2. Print the model coefficients, e.g., using `tidy()`.
+
+3. Interpret the coefficients, either in log-odds or probabilities. Report your findings.
+
+
+## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

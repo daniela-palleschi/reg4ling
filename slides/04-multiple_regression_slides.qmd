@@ -7,7 +7,7 @@ lang: en
 date: 2023-10-11
 format: 
   pdf:
-    output-file: 04-multiple_regression_slides.pdf
+    output-file: 04-multiple_regression.pdf
     toc: true
     number-sections: false
     colorlinks: true
@@ -83,6 +83,9 @@ pacman::p_load(
                broom,
                janitor,
                languageR)
+
+# set ggplot theme
+theme_set(theme_bw())
 ```
 
 ```{r}
@@ -167,10 +170,10 @@ glance(fit_freq_full)$r.squared
 - our model describes 38% of the variance in response times
 - is this described variance due solely to frequency?
   + Other effects that are correlated with frequency might be conflating the frequency effect
-  + Let's expand our model to include word length [@eq-freq-length]
+  + Let's expand our model to include word length (@eq-freq-length)
 
 $$
-y = b_0 + b_1*log\;frequency + b_2*word\;length
+y = b_0 + (b_1*log\;frequency) + (b_2*word\;length)
 $$ {#eq-freq-length}
 
 ## Adding another predictor
@@ -190,28 +193,55 @@ tidy(fit_freq_mult) |> select(term, estimate)
   + our intercept is now 748ms, instead of 907ms
   + this corresponds to the prediction for reaction times to a word with 0 log frequency and 0 word length, but this is not very interpretable
   
----
+### Intercept = $y$ when $x_1$ and $x_2$ = $0$
+  
+- centering both predictors would result in an intercept reflecting the reaction time for a word with average frequency and average length (because 0 for each would equal the mean)
   
 ```{r}
-b0 <- tidy(fit_freq_mult)$estimate[1]
-b1_freq <- tidy(fit_freq_mult)$estimate[2]
-b1_length <- tidy(fit_freq_mult)$estimate[3]
+b0 <- tidy(fit_freq_mult)$estimate[1] # intercept estimate
+b1_freq <- tidy(fit_freq_mult)$estimate[2] # freq estimate
+b1_length <- tidy(fit_freq_mult)$estimate[3] # length estimate
 ```
 
 ```{r}
+#| output-location: fragment
 b0 + b1_freq*0 + b1_length*0
 ```
 
-- centering both predictors would result in an intercept reflecting the reaction time for a word with average frequency and average length (because 0 for each would equal the mean)
+### Change in slope
 
 - the slope for log frequency has also changed: from -37.5 to -29.5
   + this tells us that some of the effect in our first model was confounded with length, as controlling for length weakens the effect of frequency
 
 ```{r}
+#| output-location: column
+# simple model (rt ~ freq)
+tidy(fit_freq_full) |> select(term, estimate)
+```
+
+```{r}
+#| output-location: column
+# mult reg model (rt ~ freq + length)
+tidy(fit_freq_mult) |> select(term, estimate)
+```
+
+### Change in $R^2$
+
+- including `length` increases the variance described by our model, reflected in the $R^2$ values (`r round(glance(fit_freq_mult)$r.squared,2)` instead of `r round(glance(fit_freq_full)$r.squared,2)`
+
+```{r}
+#| output-location: column
+# simple model (rt ~ freq)
+glance(fit_freq_full)$r.squared
+```
+
+```{r}
+#| output-location: column
+# mult reg model (rt ~ freq + length)
 glance(fit_freq_mult)$r.squared
 ```
 
-- including `length` increases the variance described by our model, reflected in the $R^2$ values (`r glance(fit_freq_mult)$r.squared` instead of `r glance(fit_freq_full)$r.squared`
+
 
 # Standardising our predictors
 
@@ -230,14 +260,14 @@ df_freq_full |>
   head()
 ```
 
----
+## Model with z-scored predictors
 
 - use `scale()` for `freq` and `length`.
 
 ```{r}
 df_freq_full <-
   df_freq_full |> 
-  mutate(freq_z = scale(freq_log),
+  mutate(freq_log_z = scale(freq_log),
          length_z = scale(length))
 ```
 
@@ -245,34 +275,47 @@ df_freq_full <-
 
 ```{r}
 fit_freq_z <-
-  lm(rt ~ freq_z + length_z, data = df_freq_full)
+  lm(rt ~ freq_log_z + length_z, data = df_freq_full)
 ```
 
----
+## Inspect model: $R^2$
 
-First, let's check the *$R^2$*:
+- let's check the *$R^2$*:
 
 ```{r}
 #| output-location: column-fragment
+# mult reg model: (rt ~ freq + length)
+glance(fit_freq_mult)$r.squared
+```
+
+```{r}
+#| output-location: column-fragment
+# z-scored mult reg model: (rt ~ freq_log_z + length_z)
 glance(fit_freq_z)$r.squared
 ```
 
-- *$R^2$* = `r glance(fit_freq_z)$r.squared`, just like above
+- *$R^2$* = `r round(glance(fit_freq_z)$r.squared,2)`, just like above
   + this is a reminder that the predictors still represent the same variance in the underlying model
-  + their units and scales have simply changed. 
+  + their units and scales have simply changed
 
----
-
-- what about our coefficients:
+## Inspect model: coefficient estimates {.smaller}
 
 ```{r}
+#| output-location: column-fragment
+# rt ~ freq + length
+tidy(fit_freq_mult) |> select(term, estimate)
+```
+
+```{r}
+#| output-location: column-fragment
+# rt ~ freq_log_z + length_z
 tidy(fit_freq_z) |> select(term, estimate)
 ```
 
 - a 1-unit change now corresponds to a change of 1 standard deviation (because we standardized, producing z-scores)
 - frequency now has a larger magnitude than the effect of length
-  + a 1-SD increase in frequency (holiding length constant) = decrease in reaction times by 60.6 ms
-  + a 1-SD increase in length (holiding frequency constant) = increase in reaction times by 43.3 ms
+  + a 1-SD increase in frequency (holding length constant) = decrease in reaction times by 60.6 ms
+  + a 1-SD increase in length (holding frequency constant) = increase in reaction times by 43.3 ms
   + does frequency influence the effect of length, and vice versa?
 
 ## Adding an interaction term
@@ -286,7 +329,7 @@ tidy(fit_freq_z) |> select(term, estimate)
 
 ```{r}
 #| output-location: column-fragment
-lm(rt ~ freq_z + length_z + freq_z:length_z, 
+lm(rt ~ freq_log_z + length_z + freq_log_z:length_z, 
    data = df_freq_full) |> 
   tidy() |> select(term, estimate)
 ```
@@ -295,7 +338,7 @@ lm(rt ~ freq_z + length_z + freq_z:length_z,
 
 ```{r}
 #| output-location: column-fragment
-lm(rt ~ freq_z*length_z, 
+lm(rt ~ freq_log_z*length_z, 
    data = df_freq_full) |> 
   tidy() |> select(term, estimate)
 ```
@@ -350,7 +393,7 @@ fig_hist + fig_qq + fig_res
 
 ```{r}
 fit_freq_log_z <-
-  lm(log(rt) ~ freq_z*length_z,
+  lm(log(rt) ~ freq_log_z*length_z,
      data = df_freq_full)
 ```
 
@@ -451,7 +494,7 @@ glance(fit_freq_log_z)$adj.r.squared
 - if the adjusted $R^2$ were much lower, this would indicate that including the interaction term leads to overfitting
 
 ```{r}
-glance(lm(log(rt) ~ freq_z + length_z, data = df_freq_full))$adj.r.squared
+glance(lm(log(rt) ~ freq_log_z + length_z, data = df_freq_full))$adj.r.squared
 ```
 
 
@@ -483,6 +526,10 @@ Today we learned...
 
 # Task
 
+Follow the instructions on the website ([Multiple regression > Task](https://daniela-palleschi.github.io/reg4ling/04-multiple_regression.html#task)) (or continue to the next slides)
+
+---
+
 Load in the `english` dataset from the `languageR` package [@languageR-package] (code below). You don't need to load in any CSV file, because this dataset is available if you have the package loaded. From the manual:
 
 > This data set gives mean visual lexical decision latencies and word naming latencies to 2284 monomorphemic English nouns and verbs, averaged for old and young subjects, with various predictor variables.
@@ -501,6 +548,8 @@ df_freq_eng <-
   relocate(word)
 ```
 
+---
+
 We're keeping five variables:
 
 - `word`: a factor with 2284 words
@@ -509,6 +558,8 @@ We're keeping five variables:
 - `length_in_letters`: numeric vector with length of the word in letters
 - `AgeSubject`: a factor with as levels the age group of the subject: young versus old.
 - `freq_written`: numeric vector with log frequency in the CELEX lexical database
+
+---
 
 Take the following steps:
 
