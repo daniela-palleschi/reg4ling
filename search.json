@@ -102,7 +102,7 @@
     "href": "01-equation_of_a_line.html#important-terms",
     "title": "1  Understanding straight lines",
     "section": "Important terms",
-    "text": "Important terms\n\n\n\n\n\n\n  \n    \n    \n      Term\n      Definition\n      Equation/Code\n    \n  \n  \n    Intercept\nValue of y for x=0\nb0"
+    "text": "Important terms\n\n\n\n\n\n\n  \n    \n    \n      Term\n      Definition\n      Equation/Code\n    \n  \n  \n    Intercept\nValue of y for x=0\nb0\n    Slope\na change in x over a change in y; regression coefficient for the predictor. Positive as x increases, y increases. \nNegative slopes, as x increases y decreases.\nb1\n    residuals/error\ndifference between observed data and the fitted values\ntidy(model_name)$.resid"
   },
   {
     "objectID": "01-equation_of_a_line.html#tasks",
@@ -179,7 +179,7 @@
     "href": "02-simple_linear_regression.html#important-terms",
     "title": "2  Simple linear regression",
     "section": "Important terms",
-    "text": "Important terms\n\n\n\n\n\n\n  \n    \n    \n      Term\n      Definition\n      Equation/Code\n    \n  \n  \n    Simple linear regression\nNA\n`lm(response ~ predictor, data = data)`"
+    "text": "Important terms\n\n\n\n\n\n\n  \n    \n    \n      Term\n      Definition\n      Equation/Code\n    \n  \n  \n    Coefficients\nthe slope and the intercept are coefficiens\nNA\n    Simple linear regression\nlinear regression with a single predictor and a continuous outcome variable\n`lm(response ~ predictor, data = data)`\n    fitted values\npredicted values\npredict(model_name)\n    continuous variable\nNA\nNA\n    dependent variable\nwhat we measure; a.k.a. measure/outcome/response variable\nNA\n    independent variable\nour predictor; a.k.a., predictor variable, fixed effects\nNA\n    coefficients\nvalues of the intercept and slope of a lm() model\ncoef()\n    equation of a line\nvalue of y = intercept + (slope*value of x)\ny=b0+b1*xi"
   },
   {
     "objectID": "02-simple_linear_regression.html#learning-objectives-1",
@@ -249,7 +249,7 @@
     "href": "03-continuous_predictors.html#important-terms",
     "title": "3  Continuous predictors",
     "section": "Important terms",
-    "text": "Important terms\n\n\n\n\n\n\n  \n    \n    \n      Term\n      Definition\n      Equation/Code\n    \n  \n  \n    Centering\ntype of linear transformation\n`dplyr::mutate(variable = variable - mean(variable))`"
+    "text": "Important terms\n\n\n\n\n\n\n  \n    \n    \n      Term\n      Definition\n      Equation/Code\n    \n  \n  \n    Centering\ntype of linear transformation\n`dplyr::mutate(variable = variable - mean(variable))`\n    standardizing\nlinear transformation (applied for multiple continuous predictors)\ndf_freq$freq_z &lt;- df_freq$freq_c/sd(df_freq$freq)\n    log-transformation\nnon-linear transformation for positively skewed continuous variables\nlog()\n    Error (random effects)\nhings we cannot understand/measure. There are always sources of random error.\nNA"
   },
   {
     "objectID": "03-continuous_predictors.html#take-home-messages",
@@ -264,6 +264,20 @@
     "title": "3  Continuous predictors",
     "section": "3.3 Task",
     "text": "3.3 Task"
+  },
+  {
+    "objectID": "03-continuous_predictors.html#assessing-assumptions",
+    "href": "03-continuous_predictors.html#assessing-assumptions",
+    "title": "3  Continuous predictors",
+    "section": "3.4 Assessing assumptions",
+    "text": "3.4 Assessing assumptions\n\nRe-run the models fit_rt_freq, fit_rt_freq_c, and fit_log\nProduce diagnostic plots for each of them (histograms, Q-Q plots, residual plots)\nInterpret the plots"
+  },
+  {
+    "objectID": "03-continuous_predictors.html#model-comparison",
+    "href": "03-continuous_predictors.html#model-comparison",
+    "title": "3  Continuous predictors",
+    "section": "3.5 Model comparison",
+    "text": "3.5 Model comparison\n\nUse the glance() function to inspect the \\(R^2\\), AIC, and BIC of each model.\nWhich is the best fit? Why?"
   },
   {
     "objectID": "03-continuous_predictors.html#literaturverzeichnis",
