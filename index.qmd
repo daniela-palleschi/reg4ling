@@ -35,4 +35,10 @@ This course fast tracks through different types of regression most relevant to l
 
 Before you begin the course, I would like to paraphrase something Prof. Shravan Vasishth said in the opening remarks for the annual summer school for Statistcal Methods for Linguistics and Psychology back in 2020 which has stuck with me: *get comfortable with partial knowledge*. We are not trained statisticians, and likely never will be (Vasishth himself is a certified statistician, in addition to professor of psycholinguistics). So get comfortable with partial understanding of the math behind these models, and focus on their application and interpretation.
 
-This website is a work-in-progress. Materials will be updated/brushed up throughout the semester.
+## Materials
+
+This website is a work-in-progress. Materials will be updated/brushed up throughout the semester, with the binding course materials available on the course Moodle for those enrolled in the winter semester 2023/24.
+
+This website was created to be viewed in HTML format. The accompanying (PDF) book version can be accessed by clicking on the PDF icon at the top right, but is not optimally formatted. Tables formatted for HTML output are particularly oddly formatted in PDF, as is the order of printed elements in relation to their accompanying text. For this reason, I strongly encourse to follow the web book.
+
+

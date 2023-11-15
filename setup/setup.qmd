@@ -131,3 +131,55 @@ filters:
   - webr
 ```
 
+# Equations
+
+Problem: couldn't render PDF when I had math mode set by `$$` and `\begin{align}`. Also couldn't align multiple equations *and* assign each one its own hypperref label.
+
+Solution (https://github.com/quarto-dev/quarto-cli/issues/2275) :
+
+1. add mathjax.html file (to also render in revealjs, use code suggested in this suggestion: https://github.com/quarto-dev/quarto-cli/issues/2275#issuecomment-1399062224)
+
+```{markdown}
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: {autoNumber: "AMS"} },
+  tex2jax: {inlineMath: [ ['$','$'], ["\\(","\\)"] ]}
+});
+</script>
+
+<!-- This is what works with Quarto -->
+<script>
+  MathJax = {
+    tex: {
+      tags: 'ams'  // should be 'ams', 'none', or 'all'
+    }
+  };
+</script>
+```
+
+2. add it to your header
+
+```{markdown}
+format:
+  html:
+    include-in-header: mathjax.html
+```
+
+
+2. don't use `$$`, just `\begin{align}` and `\end{align}`
+3. add `\label{xyz}` to each equation
+
+```{markdown}
+\begin{align}
+\beta \label{eq1}
+\end{align}
+```
+
+4. reference equations using `\ref{}`, *not* `@eq-equation`
+
+```{markdown}
+Look at equation \ref{eq1}
+```
+
+
+

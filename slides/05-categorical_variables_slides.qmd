@@ -1,5 +1,5 @@
 ---
-title: "Categorical variables"
+title: "Categorical predictors"
 subtitle: "WiSe23/24"
 author: "Daniela Palleschi"
 institute: Humboldt-Universität zu Berlin
@@ -7,7 +7,7 @@ lang: en
 date: 2023-10-11
 format: 
   pdf:
-    output-file: 04-multiple_regression_slides.pdf
+    output-file: 05-categorical_variables.pdf
     toc: true
     number-sections: false
     colorlinks: true
@@ -612,7 +612,127 @@ Today we learned...
 
 # Task
 
+Follow the instructions on the website ([Multiple regression > Task](https://daniela-palleschi.github.io/reg4ling/05-categorical_predictors.html#task)) (or continue to the next slides).
 
+## Reading time data
+
+We'll use a dataset from @biondo_yesterday_2022, an eye-tracking reading study exploring the processing of adverb-tense concord in Spanish past and future tenses. Participants read sentences that began with a temporal adverb (e.g., yesterday/tomorrow), and had a verb marked with the congruent or incongruent tense (past/future).
+
+Load in the data.
+
+```{r}
+df_tense <-
+  read_csv(here("data", "Biondo.Soilemezidi.Mancini_dataset_ET.csv"),
+           locale = locale(encoding = "Latin1") # for special characters in Spanish
+           ) |> 
+  mutate(gramm = ifelse(gramm == "0", "ungramm", "gramm")) |> 
+  clean_names()
+```
+
+### Treatment contrasts
+
+We will look at the measure *total reading time* (`tt`) at the *verb* region (`roi == 4`). Subset the data to only include the verb region.
+
+```{r}
+df_verb <-
+  df_tense |> 
+  filter(roi == 4)
+```
+
+```{r}
+sum_verb_adverb <-
+  df_verb |> 
+  filter(adv_type == "Deic") |> 
+  Rmisc::summarySEwithin(measurevar = "tt", withinvars = c("adv_t", "verb_t"), na.rm = T) 
+
+sum_verb_gramm <-
+  df_verb |> 
+  filter(adv_type == "Deic") |> 
+  Rmisc::summarySEwithin(measurevar = "tt", withinvars = c("gramm", "verb_t"), na.rm = T) 
+
+sum_verb <-
+  df_verb |> 
+  filter(adv_type == "Deic") |> 
+  Rmisc::summarySEwithin(measurevar = "tt", withinvars = c("verb_t"), na.rm = T)
+
+sum_adverb <-
+  df_verb |> 
+  filter(adv_type == "Deic") |> 
+  Rmisc::summarySEwithin(measurevar = "tt", withinvars = c("adv_t"), na.rm = T)
+```
+
+```{r}
+#| eval: false
+fig_verb_adverb <-
+  sum_verb_adverb |> 
+  # filter(adv_type == "Deic") |> 
+  ggplot() +
+  aes(x = adv_t, y = tt, shape = verb_t, colour = verb_t, group = verb_t) +
+  labs(title = "Adverb and verb interaction") +
+  geom_point(size = 3, position = position_dodge(0.2)) +
+  geom_line(aes(linetype = verb_t), position = position_dodge(0.2)) +
+  geom_errorbar(aes(ymin = tt - ci, ymax = tt + ci), width = .2, position = position_dodge(0.2))
+
+fig_verb_gramm <-
+  sum_verb_gramm |> 
+  # filter(adv_type == "Deic") |> 
+  ggplot() +
+  aes(x = gramm, y = tt, shape = verb_t, colour = verb_t, group = verb_t) +
+  labs(title = "Adverb and verb interaction") +
+  geom_point(size = 3, position = position_dodge(0.2)) +
+  geom_line(aes(linetype = verb_t), position = position_dodge(0.2)) +
+  geom_errorbar(aes(ymin = tt - ci, ymax = tt + ci), width = .2, position = position_dodge(0.2))
+
+fig_verb<-
+  sum_verb |> 
+  # filter(adv_type == "Deic") |> 
+  ggplot() +
+  aes(x = verb_t, y = tt, group = 1) +
+  labs(title = "Verb effect") +
+  geom_point(size = 3, position = position_dodge(0.2)) +
+  geom_line(position = position_dodge(0.2)) +
+  geom_errorbar(aes(ymin = tt - ci, ymax = tt + ci), width = .2, position = position_dodge(0.2))
+
+fig_adverb<-
+  sum_adverb |> 
+  # filter(adv_type == "Deic") |> 
+  ggplot() +
+  aes(x = adv_t, y = tt, group = 1) +
+  labs(title = "Adverb effect") +
+  geom_point(size = 3, position = position_dodge(0.2)) +
+  geom_line(position = position_dodge(0.2)) +
+  geom_errorbar(aes(ymin = tt - ci, ymax = tt + ci), width = .2, position = position_dodge(0.2))
+
+library(patchwork)
+fig_verb + fig_adverb + fig_verb_adverb + fig_verb_gramm
+```
+
+
+
+
+1. Run a simple linear model with (log-transformed) total reading time (`tt`) as an independent variable and grammaticality (`gramm`) as a dependent variable. Use treatment contrasts.
+
+2. Inspect your coefficients again. What conclusions do you draw?
+
+3. Run model diagnostics:
+    + check model assumptions where relevant (normality, constant variance, collinearity)
+    + check model fit ($R^2$)
+    
+### Sum contrasts
+
+1. Re-run your model with sum contrasts.
+
+2. Inspect your coefficients again. Do your conclusions change?
+
+3. Re-run your model diagnostics. How does it compare to your first model?
+
+### Multiple regression
+
+1. Add verb tense (`verb_t`: past, future) as a predictor, including an interaction term. Use sum contrasts.
+
+2. Inspect your coefficients again. Do your conclusions change?
+
+3. Re-run your model diagnostics.  How does it compare to the last models?
 
 
 

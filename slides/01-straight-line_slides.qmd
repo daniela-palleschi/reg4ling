@@ -419,7 +419,3 @@ content |>
 
 You will receive a piece of paper with several grids on it. Follow the instructions, which include drawing some lines.
 
-## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
-
-::: {#refs custom-style="Bibliography"}
-:::

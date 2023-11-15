@@ -5,25 +5,8 @@ author: "Daniela Palleschi"
 institute: Humboldt-Universität zu Berlin
 # footer: "Lecture 1.1 - R und RStudio"
 lang: en
-date: "`r Sys.Date()`"
-format:
-  html:
-    number-sections: true
-    number-depth: 3
-    toc: true
-    code-overflow: wrap
-    code-tools: true
-    self-contained: true
-bibliography: references.bib
-csl: apa.csl
-execute:
-  eval: true
-  echo: true
-  message: false
-  error: false
-  warning: false
-  fig-align: "center"
-  fig-asp: .618
+date: "10/11/2023"
+date-modified: last-modified
 ---
 
 ## Learning Objectives {.unnumbered .unlisted}
@@ -435,7 +418,6 @@ tribble(
 ## Learning Objectives {.unnumbered .unlisted}
 
 Today we learned...
-
 
 ## Task
 

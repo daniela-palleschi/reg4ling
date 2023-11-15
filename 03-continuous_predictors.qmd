@@ -5,25 +5,8 @@ author: "Daniela Palleschi"
 institute: Humboldt-Universität zu Berlin
 # footer: "Lecture 1.1 - R und RStudio"
 lang: en
-date: "`r Sys.Date()`"
-format:
-  html:
-    number-sections: true
-    number-depth: 3
-    toc: true
-    code-overflow: wrap
-    code-tools: true
-    self-contained: true
-bibliography: references.bib
-csl: apa.csl
-execute:
-  eval: true
-  echo: true
-  message: false
-  error: false
-  warning: false
-  fig-align: "center"
-  fig-asp: .618
+date: "10/10/2023"
+date-modified: last-modified
 ---
 
 This lecture is based on Ch. 5 (Correlation, Linear, and Nonlinear transformations) from @winter_statistics_2019.
@@ -263,10 +246,136 @@ What to do with this information? If you have continuous data truncated at 0 (wi
 ## Task
 
 
+## Assessing assumptions
 
-## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
+1. Re-run the models `fit_rt_freq`, `fit_rt_freq_c`, and `fit_log`
+2. Produce diagnostic plots for each of them (histograms, Q-Q plots, residual plots)
+3. Interpret the plots
 
-::: {#refs custom-style="Bibliography"}
-:::
+```{r}
+#| echo: false
+#| eval: false
+
+df_freq_raw <- augment(fit_rt_freq, df_freq)
+
+fig_hist_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(x = .resid) +
+  labs(title = "fit_rt_freq") +
+  geom_histogram(bins = 8, fill = "grey", colour = "black") +
+  theme_bw()
+  
+
+fig_qq_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(sample = .resid) +
+  labs(title = "fit_rt_freq") +
+  geom_qq(colour = "red") +
+  geom_qq_line() 
+
+  
+fig_res_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(x = .fitted, y = .resid) +
+  labs(title = "fit_rt_freq") +
+  geom_point() +
+  geom_smooth(method = "lm", se = F)
+
+fig_hist_raw + fig_qq_raw + fig_res_raw + plot_annotation(tag_levels = "A")
+```
+
+```{r}
+#| echo: false
+#| eval: false
+
+df_freq_raw <- augment(fit_rt_freq_c, df_freq)
+
+fig_hist_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(x = .resid) +
+  labs(title = "fit_rt_freq_c") +
+  geom_histogram(bins = 8, fill = "grey", colour = "black") +
+  theme_bw()
+  
+
+fig_qq_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(sample = .resid) +
+  labs(title = "fit_rt_freq_c") +
+  geom_qq(colour = "red") +
+  geom_qq_line() 
+
+  
+fig_res_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(x = .fitted, y = .resid) +
+  labs(title = "fit_rt_freq_c") +
+  geom_point() +
+  geom_smooth(method = "lm", se = F)
+
+fig_hist_raw + fig_qq_raw + fig_res_raw + plot_annotation(tag_levels = "A")
+```
+
+```{r}
+#| echo: false
+#| eval: false
+
+df_freq_raw <- augment(fit_log, df_freq)
+
+fig_hist_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(x = .resid) +
+  labs(title = "fit_log") +
+  geom_histogram(bins = 8, fill = "grey", colour = "black") +
+  theme_bw()
+  
+
+fig_qq_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(sample = .resid) +
+  labs(title = "fit_log") +
+  geom_qq(colour = "red") +
+  geom_qq_line() 
+
+  
+fig_res_raw <-
+  df_freq_raw |> 
+  ggplot() +
+  aes(x = .fitted, y = .resid) +
+  labs(title = "fit_log") +
+  geom_point() +
+  geom_smooth(method = "lm", se = F)
+
+fig_hist_raw + fig_qq_raw + fig_res_raw + plot_annotation(tag_levels = "A")
+```
+
+
+## Model comparison
+
+1. Use the `glance()` function to inspect the $R^2$, AIC, and BIC of each model.
+2. Which is the best fit? Why?
+
+```{r}
+#| echo: false
+#| eval: false
+
+rbind(
+  glance(fit_rt_freq),
+  glance(fit_rt_freq_c),
+  glance(fit_log)
+  )
+
+# log is better fit, but we can't compare models with different non-linear transformations
+```
+
+
 
 

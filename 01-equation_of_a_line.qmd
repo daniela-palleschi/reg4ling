@@ -5,23 +5,8 @@ author: "Daniela Palleschi"
 institute: Humboldt-Universität zu Berlin
 # footer: "Lecture 1.1 - R und RStudio"
 lang: en
-date: "`r Sys.Date()`"
-format:
-  html:
-    number-sections: true
-    number-depth: 3
-    toc: true
-    code-overflow: wrap
-    code-tools: true
-    self-contained: true
-execute:
-  eval: true
-  echo: false
-  message: false
-  error: true
-  warning: false
-bibliography: references.bib
-csl: apa.csl
+date: "10/10/2023"
+date-modified: last-modified
 ---
 
 ```{r}
@@ -118,14 +103,14 @@ magick::image_read(here::here("media/Winter_2019_slopes-intercepts.png"))
 
 ### Equation of a line
 
-$$
+
 \begin{align}
 y & = mx + c\\
 Y_i &= (b_0 + b_1X_i) \\
 outcome_i & = (model) \\
 y_i & = (intercept + slope*x_i)
 \end{align}
-$$
+
 :::
 
 
@@ -177,9 +162,9 @@ df_random %>%
 A slope describes a *change in $x$* ($\Delta x$) over a *change in $y$* ($\Delta y$), where $\Delta$ (the Greek letter *delta*) can be read as 'difference' (because it also starts with a 'd'...). So a slope's value equals the difference in $x$ for a difference of 1 unit in $y$. Positive slopes indicate that as $x$ increases, $y$ increases. A negative slope value indicates that as $x$ increases, $y$ decreases (or vice versa). A slope of 0 indicates there is no change in $y$ as a function of $x$, or: there is no change in $y$ when the value of $x$ changes.
 
 
-$$
+\begin{align}
 slope = \frac{\Delta x}{\Delta y}
-$$
+\end{align}
 
 This relationship between $x$ and $y$ is sometimes referred to as "rise over run": how do you 'rise' in $y$ for a given 'run' in $x$? For example, if we were to measure children's heights and ages, we would expect to find an increase in height for every increase in age. Or, for a linguistic example, we would expect to find longer whole-sentence *reading times* (a measure variable) for longer texts: if a sentence has 9 words (*I find straight lines to be really interesting and fun.*), we would expect longer reading times than a sentence with 3 words (*I love lines.*).
 
@@ -218,14 +203,14 @@ df_random %>%
 
 ### Equation of a line
 
-$$
+
 \begin{align}
 y & = mx + c\\
 Y_i &= (b_0 + b_1X_i) + \epsilon_i\\
 outcome_i & = (model) + error_i\\
 y_i & = (intercept + slope*x_i) + error_i
 \end{align}
-$$
+
 :::
 
 

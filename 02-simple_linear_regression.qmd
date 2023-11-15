@@ -5,25 +5,8 @@ author: "Daniela Palleschi"
 institute: Humboldt-Universität zu Berlin
 # footer: "Lecture 1.1 - R und RStudio"
 lang: en
-date: "`r Sys.Date()`"
-format:
-  html:
-    number-sections: true
-    number-depth: 3
-    toc: true
-    code-overflow: wrap
-    code-tools: true
-    self-contained: true
-bibliography: references.bib
-csl: apa.csl
-execute:
-  eval: true
-  echo: true
-  message: false
-  error: false
-  warning: false
-  fig-align: "center"
-  fig-asp: .618
+date: "10/10/2023"
+date-modified: last-modified
 ---
 
 ## Learning Objectives {.unnumbered .unlisted}
@@ -78,11 +61,11 @@ theme_set(theme_minimal())
 
 ## Simple linear model: RT ~ frequency {.smaller}
 
-Recall that $y \sim x$ can be read as "y as a function of x", or "y predicted by x". Following @winter_statistics_2019, we will first model some word frequency data. In this experiment,  Our first model will be:
+Recall that $y \sim x$ can be read as "y as a function of x", or "y predicted by x". Following @winter_statistics_2019, we will first model some word frequency data. In this experiment,  Our first model is given in equation \ref{eq-rt}:
 
-$$
-RT \sim frequency
-$$
+\begin{equation}
+RT \sim frequency \label{eq-rt}
+\end{equation}
 
 Let's load our data using the `read_csv()` function from `readr`. I also use the `clean_names()` function from the `janitor` package, which tidies up variable names (e.g., no spaces, all lower case).
 
@@ -119,11 +102,11 @@ We see there are a lot of frequency values below roughly 400, and these seem to 
 
 ### `lm()`
 
-The the `lm()` function fits simple linear models. As arguments it takes a formula and a dataset, at minimum.
+The the `lm()` function fits simple linear models. As arguments it takes a formula and a dataset, at minimum, as in equation \ref{eq-lm}.
   
-$$
-lm(outcome \sim 1 + predictor,\;data\;=\;df\_name)
-$$
+\begin{equation}
+lm(outcome \sim 1 + predictor,\;data\;=\;df\_name) \label{eq-lm}
+\end{equation}
 
 The `lm()` function formula syntax can be read as: `outcome` predicted by the intercept (`1` is a placeholder for the intercept) and predictor. The intercept is included by default, so if you omit the `1` the intercept is still included in the formula. If you wanted to remove the intercept (which you often don't), you could replace `1` with `0`.
 
@@ -257,15 +240,15 @@ In the model output, the intercept seems to be significant (indicated with a low
 
 Standard error takes both the variability in our data and the sample size into account. The equation for standard error is:
 
-$$
-SE = \frac{\hat{\sigma}}{\sqrt{n}}
-$$ {#eq-se}
+\begin{equation}
+SE = \frac{\hat{\sigma}}{\sqrt{n}} \label{eq-se}
+\end{equation} 
 
-where $\sigma$ is the standard deviation, and $n$ is the sample size. As a refresher,  the equation for standard deviation (@eq-sd) is the square root of the sum of all squared deviances from the mean ($\sum^n_{i=1}(x_i - \hat{\mu})^2$) divided by the sample size -1. Don't stress about the math for now, but it's helpful to try to understand where there values come from and what they represent.
+where $\sigma$ is the standard deviation, and $n$ is the sample size. As a refresher,  the equation for standard deviation (\ref{eq-sd}) is the square root of the sum of all squared deviances from the mean ($\sum^n_{i=1}(x_i - \hat{\mu})^2$) divided by the sample size -1. Don't stress about the math for now, but it's helpful to try to understand where there values come from and what they represent.
 
-$$
-\hat{\sigma} = \sqrt{\frac{\sum^n_{i=1}(x_i - \hat{\mu})^2}{n-1}}
-$$ {#eq-sd}
+\begin{equation}
+\hat{\sigma} = \sqrt{\frac{\sum^n_{i=1}(x_i - \hat{\mu})^2}{n-1}} \label{eq-sd}
+\end{equation}  
 
 #### t-values
 
@@ -765,10 +748,5 @@ Now it's your turn. Try to run the following `lm()` models:
 1. total reading time at the *verb* region
 2. total reading time at the *verb+1* region.
 
-
-## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}
-
-::: {#refs custom-style="Bibliography"}
-:::
 
 
