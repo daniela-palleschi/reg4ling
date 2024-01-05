@@ -377,5 +377,23 @@ rbind(
 ```
 
 
+## Session Info {.unnumbered visibility="uncounted"}
 
+```{r}
+#| eval: false
+#| echo: false
+RStudio.Version()$version
+```
+
+
+Developed with Quarto using `r R.version.string` (`r R.version$nickname`) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:
+
+```{r}
+sessionInfo()
+```
+
+## References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
 

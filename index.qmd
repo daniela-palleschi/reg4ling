@@ -42,3 +42,6 @@ This website is a work-in-progress. Materials will be updated/brushed up through
 This website was created to be viewed in HTML format. The accompanying (PDF) book version can be accessed by clicking on the PDF icon at the top right, but is not optimally formatted. Tables formatted for HTML output are particularly oddly formatted in PDF, as is the order of printed elements in relation to their accompanying text. For this reason, I strongly encourse to follow the web book.
 
 
+
+
+

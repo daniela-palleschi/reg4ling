@@ -122,6 +122,19 @@ gridExtra::grid.arrange(R, NULL, RStudio, NULL, latex, ncol=5,
 - How to find solutions for these error messages is an art in itself
 - Google is your friend! If possible, google in English to get more information
 
+## Session Information
+
+The current version of this Quarto book was developed using `r R.version.string` (`r R.version$nickname`) in RStudioversion 2023.3.0.386 (Cherry Blossom). At the bottom of each chapter is a list of the packages (and version info) used in that chapter (under Session Information). I highly recommend you do the same at the bottom of each script that you write. You can easily do this by writing the following at the bottom of any Rmarkdown (`.Rmd`) or Quarto (`.qmd`) script: 
+
+````markdown
+# Session Info
+
+```{r}`r ''`
+sessionInfo()
+```
+````
+
+
 # References {.unlisted .unnumbered visibility="uncounted"}
 
 ::: {#refs custom-style="Bibliography"}
