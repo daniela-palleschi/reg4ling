@@ -9,6 +9,8 @@ date: "10/10/2023"
 date-modified: last-modified
 ---
 
+{#sec-simple-regression}
+
 ## Learning Objectives {.unnumbered .unlisted}
 
 Today we will learn...
