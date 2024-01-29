@@ -366,9 +366,12 @@ fig_blue <- df_random %>%
 fig_point + fig_red + fig_blue + plot_annotation(tag_levels = "A")
 ```
 
-## Learning Objectives {.unnumbered .unlisted}
+## Learning Objectives  🏁 {.unnumbered .unlisted}
 
 Today we learned...
+
+- the equation of a line
+- about intercepts, slopes, and residuals
 
 ## Important terms {.unnumbered .smaller}
 

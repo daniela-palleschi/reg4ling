@@ -373,11 +373,9 @@ content |>
 ```
 
 
-## Learning Objectives {.unnumbered .unlisted}
+## Learning Objectives  🏁 {.unnumbered .unlisted}
 
 Today we learned...
-
-Today we will learn...
 
 - what multiple regression is
 - how to include multiple predictor variables

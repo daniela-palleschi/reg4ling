@@ -738,10 +738,12 @@ content |>
 ```
 
 
-## Learning Objectives {.unnumbered .unlisted}
+## Learning Objectives  🏁 {.unnumbered .unlisted}
 
 Today we learned...
 
+- how to fit a simple linear model with the `lm()` function
+- how to interpret our model output
 
 ## Task
 
