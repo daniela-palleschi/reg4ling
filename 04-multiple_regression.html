@@ -327,16 +327,27 @@ MathJax.Hub.Config({
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Mixed models I</span></span>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Mixed models II</span></span>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 5: TBD</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Mixed models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-independence_assumption.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Independence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-mixed_models1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed models 1: Random intercepts</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -367,6 +378,7 @@ MathJax.Hub.Config({
   </ul></li>
   <li><a href="#important-terms" id="toc-important-terms" class="nav-link" data-scroll-target="#important-terms">Important terms</a></li>
   <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task"><span class="header-section-number">4.4</span> Task</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session Info</a></li>
   </ul>
 </nav>
     </div>
@@ -407,7 +419,7 @@ MathJax.Hub.Config({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 15, 2023</p>
+      <p class="date-modified">January 12, 2024</p>
     </div>
   </div>
     
@@ -819,23 +831,23 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="nyhwbjlekq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nyhwbjlekq table {
+<div id="cqvwpezprn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cqvwpezprn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nyhwbjlekq thead, #nyhwbjlekq tbody, #nyhwbjlekq tfoot, #nyhwbjlekq tr, #nyhwbjlekq td, #nyhwbjlekq th {
+#cqvwpezprn thead, #cqvwpezprn tbody, #cqvwpezprn tfoot, #cqvwpezprn tr, #cqvwpezprn td, #cqvwpezprn th {
   border-style: none;
 }
 
-#nyhwbjlekq p {
+#cqvwpezprn p {
   margin: 0;
   padding: 0;
 }
 
-#nyhwbjlekq .gt_table {
+#cqvwpezprn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -861,12 +873,12 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-left-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_caption {
+#cqvwpezprn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nyhwbjlekq .gt_title {
+#cqvwpezprn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -878,7 +890,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-bottom-width: 0;
 }
 
-#nyhwbjlekq .gt_subtitle {
+#cqvwpezprn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -890,7 +902,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-top-width: 0;
 }
 
-#nyhwbjlekq .gt_heading {
+#cqvwpezprn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -902,13 +914,13 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-right-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_bottom_border {
+#cqvwpezprn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_col_headings {
+#cqvwpezprn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -923,7 +935,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-right-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_col_heading {
+#cqvwpezprn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -943,7 +955,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   overflow-x: hidden;
 }
 
-#nyhwbjlekq .gt_column_spanner_outer {
+#cqvwpezprn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -955,15 +967,15 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   padding-right: 4px;
 }
 
-#nyhwbjlekq .gt_column_spanner_outer:first-child {
+#cqvwpezprn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nyhwbjlekq .gt_column_spanner_outer:last-child {
+#cqvwpezprn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nyhwbjlekq .gt_column_spanner {
+#cqvwpezprn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -975,11 +987,11 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   width: 100%;
 }
 
-#nyhwbjlekq .gt_spanner_row {
+#cqvwpezprn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nyhwbjlekq .gt_group_heading {
+#cqvwpezprn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1005,7 +1017,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   text-align: left;
 }
 
-#nyhwbjlekq .gt_empty_group_heading {
+#cqvwpezprn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1020,15 +1032,15 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   vertical-align: middle;
 }
 
-#nyhwbjlekq .gt_from_md > :first-child {
+#cqvwpezprn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nyhwbjlekq .gt_from_md > :last-child {
+#cqvwpezprn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nyhwbjlekq .gt_row {
+#cqvwpezprn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1047,7 +1059,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   overflow-x: hidden;
 }
 
-#nyhwbjlekq .gt_stub {
+#cqvwpezprn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1060,7 +1072,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   padding-right: 5px;
 }
 
-#nyhwbjlekq .gt_stub_row_group {
+#cqvwpezprn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1074,15 +1086,15 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   vertical-align: top;
 }
 
-#nyhwbjlekq .gt_row_group_first td {
+#cqvwpezprn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nyhwbjlekq .gt_row_group_first th {
+#cqvwpezprn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nyhwbjlekq .gt_summary_row {
+#cqvwpezprn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1092,16 +1104,16 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   padding-right: 5px;
 }
 
-#nyhwbjlekq .gt_first_summary_row {
+#cqvwpezprn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_first_summary_row.thick {
+#cqvwpezprn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nyhwbjlekq .gt_last_summary_row {
+#cqvwpezprn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1111,7 +1123,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-bottom-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_grand_summary_row {
+#cqvwpezprn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1121,7 +1133,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   padding-right: 5px;
 }
 
-#nyhwbjlekq .gt_first_grand_summary_row {
+#cqvwpezprn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1131,7 +1143,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-top-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_last_grand_summary_row_top {
+#cqvwpezprn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1141,11 +1153,11 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-bottom-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_striped {
+#cqvwpezprn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nyhwbjlekq .gt_table_body {
+#cqvwpezprn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1154,7 +1166,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-bottom-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_footnotes {
+#cqvwpezprn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1168,7 +1180,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-right-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_footnote {
+#cqvwpezprn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1177,7 +1189,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   padding-right: 5px;
 }
 
-#nyhwbjlekq .gt_sourcenotes {
+#cqvwpezprn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1191,7 +1203,7 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   border-right-color: #D3D3D3;
 }
 
-#nyhwbjlekq .gt_sourcenote {
+#cqvwpezprn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1199,63 +1211,63 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
   padding-right: 5px;
 }
 
-#nyhwbjlekq .gt_left {
+#cqvwpezprn .gt_left {
   text-align: left;
 }
 
-#nyhwbjlekq .gt_center {
+#cqvwpezprn .gt_center {
   text-align: center;
 }
 
-#nyhwbjlekq .gt_right {
+#cqvwpezprn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nyhwbjlekq .gt_font_normal {
+#cqvwpezprn .gt_font_normal {
   font-weight: normal;
 }
 
-#nyhwbjlekq .gt_font_bold {
+#cqvwpezprn .gt_font_bold {
   font-weight: bold;
 }
 
-#nyhwbjlekq .gt_font_italic {
+#cqvwpezprn .gt_font_italic {
   font-style: italic;
 }
 
-#nyhwbjlekq .gt_super {
+#cqvwpezprn .gt_super {
   font-size: 65%;
 }
 
-#nyhwbjlekq .gt_footnote_marks {
+#cqvwpezprn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nyhwbjlekq .gt_asterisk {
+#cqvwpezprn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nyhwbjlekq .gt_indent_1 {
+#cqvwpezprn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nyhwbjlekq .gt_indent_2 {
+#cqvwpezprn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nyhwbjlekq .gt_indent_3 {
+#cqvwpezprn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nyhwbjlekq .gt_indent_4 {
+#cqvwpezprn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nyhwbjlekq .gt_indent_5 {
+#cqvwpezprn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1272,9 +1284,6 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
     <tr><td headers="Term" class="gt_row gt_left">Collinearity</td>
 <td headers="Definition" class="gt_row gt_left">Correlation between two predictors (linear model assumes non-collinearity)</td>
 <td headers="Equation/Code" class="gt_row gt_left">car::vif(model)</td></tr>
-    <tr><td headers="Term" class="gt_row gt_left">NA</td>
-<td headers="Definition" class="gt_row gt_left">NA</td>
-<td headers="Equation/Code" class="gt_row gt_left">NA</td></tr>
   </tbody>
   
   
@@ -1284,9 +1293,8 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
 </div>
 </section>
 <section id="learning-objectives-1" class="level2 unnumbered unlisted">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="learning-objectives-1">Learning Objectives</h2>
+<h2 class="unnumbered unlisted anchored" data-anchor-id="learning-objectives-1">Learning Objectives 🏁</h2>
 <p>Today we learned…</p>
-<p>Today we will learn…</p>
 <ul>
 <li>what multiple regression is</li>
 <li>how to include multiple predictor variables</li>
@@ -1333,11 +1341,62 @@ y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}
 <ol start="4" type="1">
 <li>Remove length in letters as a predictor. How is model fit affected? What can you conclude?</li>
 </ol>
+</section>
+<section id="session-info" class="level2 unnumbered" data-visibility="uncounted">
+<h2 class="unnumbered anchored" data-visibility="uncounted" data-anchor-id="session-info">Session Info</h2>
+<p>Developed with Quarto using R version 4.3.0 (2023-04-21) (Already Tomorrow) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.0 (2023-04-21)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Ventura 13.2.1
 
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
 
-<!-- -->
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+time zone: Europe/Berlin
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] googlesheets4_1.1.0 gt_0.9.0            kableExtra_1.3.4   
+ [4] knitr_1.44          patchwork_1.1.3     languageR_1.5.0    
+ [7] janitor_2.2.0       broom_1.0.5         here_1.0.1         
+[10] lubridate_1.9.2     forcats_1.0.0       stringr_1.5.0      
+[13] dplyr_1.1.3         purrr_1.0.2         readr_2.1.4        
+[16] tidyr_1.3.0         tibble_3.2.1        ggplot2_3.4.3      
+[19] tidyverse_2.0.0    
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.4      xfun_0.39         htmlwidgets_1.6.2 gargle_1.4.0     
+ [5] tzdb_0.4.0        vctrs_0.6.3       tools_4.3.0       generics_0.1.3   
+ [9] curl_5.0.1        parallel_4.3.0    fansi_1.0.4       pacman_0.5.1     
+[13] pkgconfig_2.0.3   webshot_0.5.4     lifecycle_1.0.3   farver_2.1.1     
+[17] compiler_4.3.0    munsell_0.5.0     carData_3.0-5     snakecase_0.11.0 
+[21] sass_0.4.6        htmltools_0.5.5   yaml_2.3.7        car_3.1-2        
+[25] crayon_1.5.2      pillar_1.9.0      abind_1.4-5       tidyselect_1.2.0 
+[29] rvest_1.0.3       digest_0.6.33     stringi_1.7.12    labeling_0.4.3   
+[33] rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.0        colorspace_2.1-0 
+[37] cli_3.6.1         magrittr_2.0.3    utf8_1.2.3        withr_2.5.0      
+[41] scales_1.2.1      backports_1.4.1   bit64_4.0.5       googledrive_2.1.0
+[45] timechange_0.2.0  rmarkdown_2.22    httr_1.4.6        bit_4.0.5        
+[49] cellranger_1.1.0  hms_1.1.3         evaluate_0.21     viridisLite_0.4.2
+[53] rlang_1.1.1       glue_1.6.2        xml2_1.3.4        svglite_2.1.1    
+[57] rstudioapi_0.14   vroom_1.6.3       jsonlite_1.8.7    R6_2.5.1         
+[61] systemfonts_1.0.4 fs_1.6.2         </code></pre>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unlisted unnumbered" data-visibility="uncounted">
+<h2 class="unlisted unnumbered anchored" data-visibility="uncounted" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-custom-style="Bibliography" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-languageR-package" class="csl-entry" role="listitem">
 Baayen, R. H., &amp; Shafaei-Bajestan, E. (2019). <em>languageR: Analyzing linguistic data: A practical introduction to statistics</em>. <a href="https://CRAN.R-project.org/package=languageR">https://CRAN.R-project.org/package=languageR</a>
 </div>
@@ -1345,6 +1404,10 @@ Baayen, R. H., &amp; Shafaei-Bajestan, E. (2019). <em>languageR: Analyzing lingu
 Winter, B. (2019). Statistics for <span>Linguists</span>: <span>An Introduction Using R</span>. In <em>Statistics for Linguists: An Introduction Using R</em>. <span>Routledge</span>. <a href="https://doi.org/10.4324/9781315165547">https://doi.org/10.4324/9781315165547</a>
 </div>
 </div>
+
+
+<!-- -->
+
 </section>
 
 </main> <!-- /main -->
@@ -1767,477 +1830,495 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb50" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Multiple Regression"</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Regression for Linguists"</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Daniela Palleschi"</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> Humboldt-Universität zu Berlin</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># footer: "Lecture 1.1 - R und RStudio"</span></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> en</span></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "10/11/2023"</span></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary {.unnumbered .unlisted}</span></span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we saw that the equation for a straight line boils down to its intercept and slope</span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we fit our first linear model with a continuous predictor</span>
-<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered .unlisted}</span></span>
-<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>Today we will learn...</span>
-<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>what multiple regression is</span>
-<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to include multiple predictor variables</span>
-<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret slopes in multiple regression</span>
-<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret interaction effects</span>
-<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about the assumption of the absence of collinearity</span>
-<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-27"><a href="#cb50-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-28"><a href="#cb50-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Set-up environment  {.unnumbered}</span></span>
-<span id="cb50-29"><a href="#cb50-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-32"><a href="#cb50-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-33"><a href="#cb50-33" aria-hidden="true" tabindex="-1"></a><span class="co"># suppress scientific notation</span></span>
-<span id="cb50-34"><a href="#cb50-34" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span>
-<span id="cb50-35"><a href="#cb50-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-36"><a href="#cb50-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-37"><a href="#cb50-37" aria-hidden="true" tabindex="-1"></a>We'll also need to load in our required packages. Hopefully you've already install the required packages (if not, go to @sec-software).</span>
-<span id="cb50-38"><a href="#cb50-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-41"><a href="#cb50-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-42"><a href="#cb50-42" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
-<span id="cb50-43"><a href="#cb50-43" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb50-44"><a href="#cb50-44" aria-hidden="true" tabindex="-1"></a>               tidyverse,</span>
-<span id="cb50-45"><a href="#cb50-45" aria-hidden="true" tabindex="-1"></a>               here,</span>
-<span id="cb50-46"><a href="#cb50-46" aria-hidden="true" tabindex="-1"></a>               broom,</span>
-<span id="cb50-47"><a href="#cb50-47" aria-hidden="true" tabindex="-1"></a>               janitor,</span>
-<span id="cb50-48"><a href="#cb50-48" aria-hidden="true" tabindex="-1"></a>               languageR)</span>
-<span id="cb50-49"><a href="#cb50-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-50"><a href="#cb50-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-53"><a href="#cb50-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-54"><a href="#cb50-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb50-55"><a href="#cb50-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-56"><a href="#cb50-56" aria-hidden="true" tabindex="-1"></a><span class="co"># extra packages for the lecture notes/slides</span></span>
-<span id="cb50-57"><a href="#cb50-57" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb50-58"><a href="#cb50-58" aria-hidden="true" tabindex="-1"></a>               patchwork,</span>
-<span id="cb50-59"><a href="#cb50-59" aria-hidden="true" tabindex="-1"></a>               knitr,</span>
-<span id="cb50-60"><a href="#cb50-60" aria-hidden="true" tabindex="-1"></a>               kableExtra,</span>
-<span id="cb50-61"><a href="#cb50-61" aria-hidden="true" tabindex="-1"></a>               gt,</span>
-<span id="cb50-62"><a href="#cb50-62" aria-hidden="true" tabindex="-1"></a>               googlesheets4)</span>
-<span id="cb50-63"><a href="#cb50-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-64"><a href="#cb50-64" aria-hidden="true" tabindex="-1"></a><span class="co"># tell googlesheets4 we don't want private</span></span>
-<span id="cb50-65"><a href="#cb50-65" aria-hidden="true" tabindex="-1"></a><span class="fu">gs4_deauth</span>()</span>
-<span id="cb50-66"><a href="#cb50-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-67"><a href="#cb50-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-68"><a href="#cb50-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### Load data {.unnumbered .unlisted}</span></span>
-<span id="cb50-69"><a href="#cb50-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-70"><a href="#cb50-70" aria-hidden="true" tabindex="-1"></a>We'll use the full dataset of the frequency data.</span>
-<span id="cb50-71"><a href="#cb50-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-74"><a href="#cb50-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-75"><a href="#cb50-75" aria-hidden="true" tabindex="-1"></a>df_freq_full <span class="ot">&lt;-</span></span>
-<span id="cb50-76"><a href="#cb50-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"ELP_full_length_frequency.csv"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb50-77"><a href="#cb50-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb50-78"><a href="#cb50-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> <span class="dv">10</span><span class="sc">^</span>(log10freq), <span class="co"># inverse log10</span></span>
-<span id="cb50-79"><a href="#cb50-79" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_log =</span> <span class="fu">log</span>(freq)) <span class="sc">|&gt;</span>  <span class="co"># use natural logarithm</span></span>
-<span id="cb50-80"><a href="#cb50-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(word, rt, length, freq, freq_log)</span>
-<span id="cb50-81"><a href="#cb50-81" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb50-82"><a href="#cb50-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-83"><a href="#cb50-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-84"><a href="#cb50-84" aria-hidden="true" tabindex="-1"></a>We have 4 variables:</span>
-<span id="cb50-85"><a href="#cb50-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-86"><a href="#cb50-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`word`</span></span>
-<span id="cb50-87"><a href="#cb50-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`length`</span></span>
-<span id="cb50-88"><a href="#cb50-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`rt`</span></span>
-<span id="cb50-89"><a href="#cb50-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`freq`</span></span>
-<span id="cb50-90"><a href="#cb50-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`freq_log`</span></span>
-<span id="cb50-91"><a href="#cb50-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`log10freq`</span></span>
-<span id="cb50-92"><a href="#cb50-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-93"><a href="#cb50-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple regression</span></span>
-<span id="cb50-94"><a href="#cb50-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-95"><a href="#cb50-95" aria-hidden="true" tabindex="-1"></a>So far we've worked with simple linear models, which fit a model to a predictor and response variable. These models do not differ so greatly from a one- or two-sample *t*-test (for a categorical predictor) or Pearson's *r* (for a standardised continuous predictor). You might be wondering then we would bother with linear regression. One reason is that it allows us to include *multiple* predictors in our models, which still boils down to modeling the mean, but while condintioning the mean on multiple variables at once.</span>
-<span id="cb50-96"><a href="#cb50-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-97"><a href="#cb50-97" aria-hidden="true" tabindex="-1"></a>Recall the equation of a line (\ref{eq-simple-lin-2}), which states that any value of $y$ equals the intercept ($b_0$) plus the corresponding value of $x$ multiplied by the slope ($b_1x$), plus the error, which are our residuals ($e$). In multiple regression, we can include more than one slope (\ref{eq-multiple-reg}).</span>
-<span id="cb50-98"><a href="#cb50-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-99"><a href="#cb50-99" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb50-100"><a href="#cb50-100" aria-hidden="true" tabindex="-1"></a>y &amp;= b_0 + b_1x + e \label{eq-simple-lin-2} <span class="sc">\\</span></span>
-<span id="cb50-101"><a href="#cb50-101" aria-hidden="true" tabindex="-1"></a>y &amp;= b_0 + b_1x + b_2x + ... + e \label{eq-multiple-reg}</span>
-<span id="cb50-102"><a href="#cb50-102" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb50-103"><a href="#cb50-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-106"><a href="#cb50-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
-<span id="cb50-107"><a href="#cb50-107" aria-hidden="true" tabindex="-1"></a>%%| echo: false</span>
-<span id="cb50-108"><a href="#cb50-108" aria-hidden="true" tabindex="-1"></a>%%| label: fig<span class="ot">-f</span>lowchart</span>
-<span id="cb50-109"><a href="#cb50-109" aria-hidden="true" tabindex="-1"></a>%%| fig<span class="ot">-c</span>ap: Flowchart of common steps <span class="kw">for</span> linear <span class="ot">and</span> non<span class="ot">-l</span>inear transformations of continuous variables. Such decision trees are <span class="ot">not</span> a one<span class="ot">-s</span>ize<span class="ot">-f</span>its-all solution <span class="ot">and</span> cannot replace critical thinking <span class="ot">and</span> understanding of your data.</span>
-<span id="cb50-110"><a href="#cb50-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-111"><a href="#cb50-111" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
-<span id="cb50-112"><a href="#cb50-112" aria-hidden="true" tabindex="-1"></a>  A[Continuous variable] </span>
-<span id="cb50-113"><a href="#cb50-113" aria-hidden="true" tabindex="-1"></a>  A --&gt; F[Zero<span class="ot">-t</span>runcated with positive skew \n e.g., reaction <span class="fu">times</span>]</span>
-<span id="cb50-114"><a href="#cb50-114" aria-hidden="true" tabindex="-1"></a>  A --&gt; H[Interval i.e., lower <span class="ot">and</span> upperbound \n e.g., rating scale]</span>
-<span id="cb50-115"><a href="#cb50-115" aria-hidden="true" tabindex="-1"></a>  H --&gt; I[Centre on median value]</span>
-<span id="cb50-116"><a href="#cb50-116" aria-hidden="true" tabindex="-1"></a>  I --&gt; E(Response)</span>
-<span id="cb50-117"><a href="#cb50-117" aria-hidden="true" tabindex="-1"></a>  E --&gt; Z[Done]</span>
-<span id="cb50-118"><a href="#cb50-118" aria-hidden="true" tabindex="-1"></a>  F --&gt; G[Non<span class="ot">-l</span>inear transformation \n e.g., <span class="fu">log</span><span class="ot">-t</span>ransform]</span>
-<span id="cb50-119"><a href="#cb50-119" aria-hidden="true" tabindex="-1"></a>  G --&gt; B(Predictor)</span>
-<span id="cb50-120"><a href="#cb50-120" aria-hidden="true" tabindex="-1"></a>  I --&gt; B(Predictor)</span>
-<span id="cb50-121"><a href="#cb50-121" aria-hidden="true" tabindex="-1"></a>  B --&gt; C{One predictor}</span>
-<span id="cb50-122"><a href="#cb50-122" aria-hidden="true" tabindex="-1"></a>  C --&gt; X[Centre]</span>
-<span id="cb50-123"><a href="#cb50-123" aria-hidden="true" tabindex="-1"></a>  D --&gt; Y[Centre <span class="ot">and</span> standardise]</span>
-<span id="cb50-124"><a href="#cb50-124" aria-hidden="true" tabindex="-1"></a>  B --&gt; D{Two predictor}</span>
-<span id="cb50-125"><a href="#cb50-125" aria-hidden="true" tabindex="-1"></a>  G --&gt; E(Response)</span>
-<span id="cb50-126"><a href="#cb50-126" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb50-127"><a href="#cb50-127" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb50-128"><a href="#cb50-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-129"><a href="#cb50-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-130"><a href="#cb50-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-131"><a href="#cb50-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### One predictor</span></span>
-<span id="cb50-132"><a href="#cb50-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-133"><a href="#cb50-133" aria-hidden="true" tabindex="-1"></a>Let's re-run our simple model with this dataset. Let's keep reaction times in the raw milliseconds for now for interpretability.</span>
-<span id="cb50-134"><a href="#cb50-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-137"><a href="#cb50-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-138"><a href="#cb50-138" aria-hidden="true" tabindex="-1"></a>fit_freq_full <span class="ot">&lt;-</span></span>
-<span id="cb50-139"><a href="#cb50-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt <span class="sc">~</span> <span class="fu">log</span>(freq), <span class="at">data =</span> df_freq_full)</span>
-<span id="cb50-140"><a href="#cb50-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-141"><a href="#cb50-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-144"><a href="#cb50-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-145"><a href="#cb50-145" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_full)</span>
-<span id="cb50-146"><a href="#cb50-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-147"><a href="#cb50-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-148"><a href="#cb50-148" aria-hidden="true" tabindex="-1"></a>We see there is a decrease in reaction times (-37.5 milliseconds) for a 1-unit increase in log frequency. Let's look at the model fit using <span class="in">`glance()`</span>.</span>
-<span id="cb50-149"><a href="#cb50-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-152"><a href="#cb50-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-153"><a href="#cb50-153" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_full)<span class="sc">$</span>r.squared</span>
-<span id="cb50-154"><a href="#cb50-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-155"><a href="#cb50-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-156"><a href="#cb50-156" aria-hidden="true" tabindex="-1"></a>We see that the *R*-squared is 0.383, meaning our model describes 38% of the variance in response times. We can't be sure that this described variance is due solely to frequency, however. Our models only know what we tell them! Other effects that are correlated with frequency might be conflating the frequency effect, e.g., more frequent words tend to be shorter <span class="co">[</span><span class="ot">@zipf_1949</span><span class="co">]</span>. Let's expand our model to include word length <span class="co">[</span><span class="ot">\ref{eq-freq-length}</span><span class="co">]</span>.</span>
-<span id="cb50-157"><a href="#cb50-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-158"><a href="#cb50-158" aria-hidden="true" tabindex="-1"></a>\begin{equation}</span>
-<span id="cb50-159"><a href="#cb50-159" aria-hidden="true" tabindex="-1"></a>y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}</span>
-<span id="cb50-160"><a href="#cb50-160" aria-hidden="true" tabindex="-1"></a>\end{equation} </span>
-<span id="cb50-161"><a href="#cb50-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-162"><a href="#cb50-162" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding a predictor</span></span>
-<span id="cb50-163"><a href="#cb50-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-164"><a href="#cb50-164" aria-hidden="true" tabindex="-1"></a>Let's add <span class="in">`length`</span> as a predictor to our model.</span>
-<span id="cb50-165"><a href="#cb50-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-168"><a href="#cb50-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-169"><a href="#cb50-169" aria-hidden="true" tabindex="-1"></a>fit_freq_mult <span class="ot">&lt;-</span></span>
-<span id="cb50-170"><a href="#cb50-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt <span class="sc">~</span> <span class="fu">log</span>(freq) <span class="sc">+</span> length, <span class="at">data =</span> df_freq_full)</span>
-<span id="cb50-171"><a href="#cb50-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-172"><a href="#cb50-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-175"><a href="#cb50-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-176"><a href="#cb50-176" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_mult) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
-<span id="cb50-177"><a href="#cb50-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-178"><a href="#cb50-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-179"><a href="#cb50-179" aria-hidden="true" tabindex="-1"></a>We see that length is also a significant predictor of reaction times, with an increase in word length (+1 letter) corresponds to a 20ms increase in reaction times. Our intercept is also now 748ms, instead of 907ms. The 907ms intercept corresponds to the prediction for reaction times to a word with 0 log frequency and 0 word length, but this is not very interpretable. If we were to center both prdictors, the intercept would be the reaction time for a wrd with average frequency and average length.</span>
-<span id="cb50-180"><a href="#cb50-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-181"><a href="#cb50-181" aria-hidden="true" tabindex="-1"></a>The slope for log frequency has also changed: from -37.5 to -29.5. This change tells us that some of the effect in our first model was confounded with length, as controlling for length weakens the effect of frequency.</span>
-<span id="cb50-182"><a href="#cb50-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-185"><a href="#cb50-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-186"><a href="#cb50-186" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_mult)<span class="sc">$</span>r.squared</span>
-<span id="cb50-187"><a href="#cb50-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-188"><a href="#cb50-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-189"><a href="#cb50-189" aria-hidden="true" tabindex="-1"></a>We also see that including <span class="in">`length`</span> increases the variance described by our model, reflected in the *R*-squared values (<span class="in">`r glance(fit_freq_mult)$r.squared`</span> instead of <span class="in">`r glance(fit_freq_full)$r.squared`</span>.</span>
-<span id="cb50-190"><a href="#cb50-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-191"><a href="#cb50-191" aria-hidden="true" tabindex="-1"></a><span class="fu">## Standardising our predictors</span></span>
-<span id="cb50-192"><a href="#cb50-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-193"><a href="#cb50-193" aria-hidden="true" tabindex="-1"></a>Recall that, when we have multiple continuous predictors, standardising them can help their interpretation, as their slopes are comparable. We could achieve this by centering each variable and then dividing by the standard deviation, or we could use the <span class="in">`scale()`</span> function, which does just this.</span>
-<span id="cb50-194"><a href="#cb50-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-197"><a href="#cb50-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-198"><a href="#cb50-198" aria-hidden="true" tabindex="-1"></a><span class="co"># centre and then standardize</span></span>
-<span id="cb50-199"><a href="#cb50-199" aria-hidden="true" tabindex="-1"></a>df_freq_full <span class="sc">|&gt;</span> </span>
-<span id="cb50-200"><a href="#cb50-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb50-201"><a href="#cb50-201" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_z1 =</span> (freq<span class="sc">-</span><span class="fu">mean</span>(freq))<span class="sc">/</span><span class="fu">sd</span>(freq),</span>
-<span id="cb50-202"><a href="#cb50-202" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_z2 =</span> <span class="fu">scale</span>(freq)) <span class="sc">|&gt;</span> </span>
-<span id="cb50-203"><a href="#cb50-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(freq_z1, freq_z2) <span class="sc">|&gt;</span> </span>
-<span id="cb50-204"><a href="#cb50-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
-<span id="cb50-205"><a href="#cb50-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-206"><a href="#cb50-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-207"><a href="#cb50-207" aria-hidden="true" tabindex="-1"></a>Let's use <span class="in">`scale()`</span> for <span class="in">`freq`</span> and <span class="in">`length`</span>.</span>
-<span id="cb50-208"><a href="#cb50-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-211"><a href="#cb50-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-212"><a href="#cb50-212" aria-hidden="true" tabindex="-1"></a>df_freq_full <span class="ot">&lt;-</span></span>
-<span id="cb50-213"><a href="#cb50-213" aria-hidden="true" tabindex="-1"></a>  df_freq_full <span class="sc">|&gt;</span> </span>
-<span id="cb50-214"><a href="#cb50-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq_z =</span> <span class="fu">scale</span>(freq_log),</span>
-<span id="cb50-215"><a href="#cb50-215" aria-hidden="true" tabindex="-1"></a>         <span class="at">length_z =</span> <span class="fu">scale</span>(length))</span>
-<span id="cb50-216"><a href="#cb50-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-217"><a href="#cb50-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-220"><a href="#cb50-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-221"><a href="#cb50-221" aria-hidden="true" tabindex="-1"></a>fit_freq_z <span class="ot">&lt;-</span></span>
-<span id="cb50-222"><a href="#cb50-222" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt <span class="sc">~</span> freq_z <span class="sc">+</span> length_z, <span class="at">data =</span> df_freq_full)</span>
-<span id="cb50-223"><a href="#cb50-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-224"><a href="#cb50-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-225"><a href="#cb50-225" aria-hidden="true" tabindex="-1"></a>First, let's check the *$R^2$*:</span>
-<span id="cb50-226"><a href="#cb50-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-229"><a href="#cb50-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-230"><a href="#cb50-230" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_z)<span class="sc">$</span>r.squared</span>
-<span id="cb50-231"><a href="#cb50-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-232"><a href="#cb50-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-233"><a href="#cb50-233" aria-hidden="true" tabindex="-1"></a>We see that our *$R^2$* value is <span class="in">`r glance(fit_freq_z)$r.squared`</span>,  just like above. This serves as a reminder that the predictors still represent the same variance in the underlying model, their units and scales have simply changed. What about our coefficients:</span>
-<span id="cb50-234"><a href="#cb50-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-237"><a href="#cb50-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-238"><a href="#cb50-238" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_z) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
-<span id="cb50-239"><a href="#cb50-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-240"><a href="#cb50-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-241"><a href="#cb50-241" aria-hidden="true" tabindex="-1"></a>Here, a 1-unit change always corresponds to a change of 1 standard deviation. Now we see that frequency has a larger magnitude than the effect of length. So, for each instease in frequency by 1 standard deviation (holiding length constant), reaction times decrease by 29.5 ms.</span>
-<span id="cb50-242"><a href="#cb50-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-243"><a href="#cb50-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding an interaction term</span></span>
-<span id="cb50-244"><a href="#cb50-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-245"><a href="#cb50-245" aria-hidden="true" tabindex="-1"></a>We won't spent much time talking about interactions, but please check out Ch. 8 (Interations and nonlinear effects) in @winter_statistics_2019 for a more in-depth treatment. For now, what's important to know is that interactions describe how effects of one predictor may be influenced by changes in another predictor. We can add interactin terms of two predictors by connecting them with a colon (<span class="in">`:`</span>).</span>
-<span id="cb50-246"><a href="#cb50-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-249"><a href="#cb50-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-250"><a href="#cb50-250" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rt <span class="sc">~</span> freq_z <span class="sc">+</span> length_z <span class="sc">+</span> freq_z<span class="sc">:</span>length_z, </span>
-<span id="cb50-251"><a href="#cb50-251" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> df_freq_full) <span class="sc">|&gt;</span> </span>
-<span id="cb50-252"><a href="#cb50-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
-<span id="cb50-253"><a href="#cb50-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-254"><a href="#cb50-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-255"><a href="#cb50-255" aria-hidden="true" tabindex="-1"></a>Or, we can simply connect the two predictors with an asterisk (<span class="in">`*`</span>) to indicate that we want to look at both predictors and their interaction.</span>
-<span id="cb50-256"><a href="#cb50-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-259"><a href="#cb50-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-260"><a href="#cb50-260" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rt <span class="sc">~</span> freq_z<span class="sc">*</span>length_z, </span>
-<span id="cb50-261"><a href="#cb50-261" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> df_freq_full) <span class="sc">|&gt;</span> </span>
-<span id="cb50-262"><a href="#cb50-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
-<span id="cb50-263"><a href="#cb50-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-264"><a href="#cb50-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-265"><a href="#cb50-265" aria-hidden="true" tabindex="-1"></a>The model estimates are the same for both models. The intercept is the predicted reaction time for a word with the mean length and mean frequency. Notice that the interaction slope is negative, meaning when both <span class="in">`freq`</span> and <span class="in">`length`</span> increase, reaction times will decrease.</span>
-<span id="cb50-266"><a href="#cb50-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-267"><a href="#cb50-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-268"><a href="#cb50-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-269"><a href="#cb50-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-270"><a href="#cb50-270" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model assumptions</span></span>
-<span id="cb50-271"><a href="#cb50-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-272"><a href="#cb50-272" aria-hidden="true" tabindex="-1"></a>We've already discussed the assumptions of normality and homoscedasticity (constant variance), which both refer to the residuals of a model. We typically assess these assumptions visually, with histogram and Q-Q plots.</span>
-<span id="cb50-273"><a href="#cb50-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-274"><a href="#cb50-274" aria-hidden="true" tabindex="-1"></a><span class="fu">### Normality and Homoscedasticity</span></span>
-<span id="cb50-275"><a href="#cb50-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-276"><a href="#cb50-276" aria-hidden="true" tabindex="-1"></a>For our model</span>
-<span id="cb50-277"><a href="#cb50-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-280"><a href="#cb50-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-281"><a href="#cb50-281" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="ot">&lt;-</span></span>
-<span id="cb50-282"><a href="#cb50-282" aria-hidden="true" tabindex="-1"></a>fit_freq_z <span class="sc">|&gt;</span> </span>
-<span id="cb50-283"><a href="#cb50-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb50-284"><a href="#cb50-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> .resid) <span class="sc">+</span></span>
-<span id="cb50-285"><a href="#cb50-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb50-286"><a href="#cb50-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb50-287"><a href="#cb50-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Histogram'</span>, <span class="at">x=</span><span class="st">'Residuals'</span>, <span class="at">y=</span><span class="st">'Count'</span>)</span>
-<span id="cb50-288"><a href="#cb50-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-289"><a href="#cb50-289" aria-hidden="true" tabindex="-1"></a>fig_qq <span class="ot">&lt;-</span></span>
-<span id="cb50-290"><a href="#cb50-290" aria-hidden="true" tabindex="-1"></a>fit_freq_z <span class="sc">|&gt;</span> </span>
-<span id="cb50-291"><a href="#cb50-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb50-292"><a href="#cb50-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">sample =</span> .resid) <span class="sc">+</span></span>
-<span id="cb50-293"><a href="#cb50-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>(<span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb50-294"><a href="#cb50-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb50-295"><a href="#cb50-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Q-Q Plot'</span>, <span class="at">x=</span><span class="st">'Theoretical quantiles'</span>, <span class="at">y=</span><span class="st">'Sample quantiles'</span>)</span>
-<span id="cb50-296"><a href="#cb50-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-297"><a href="#cb50-297" aria-hidden="true" tabindex="-1"></a>fig_res <span class="ot">&lt;-</span></span>
-<span id="cb50-298"><a href="#cb50-298" aria-hidden="true" tabindex="-1"></a>  fit_freq_z <span class="sc">|&gt;</span> </span>
-<span id="cb50-299"><a href="#cb50-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb50-300"><a href="#cb50-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid) <span class="sc">+</span></span>
-<span id="cb50-301"><a href="#cb50-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb50-302"><a href="#cb50-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb50-303"><a href="#cb50-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Residual vs. Fitted Values Plot'</span>, <span class="at">x=</span><span class="st">'Fitted Values'</span>, <span class="at">y=</span><span class="st">'Residuals'</span>)</span>
-<span id="cb50-304"><a href="#cb50-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-305"><a href="#cb50-305" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="sc">+</span> fig_qq <span class="sc">+</span> fig_res</span>
-<span id="cb50-306"><a href="#cb50-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-307"><a href="#cb50-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-308"><a href="#cb50-308" aria-hidden="true" tabindex="-1"></a>The histogram looks approximately normally distributed, with a bit of a positive skew. The Q-Q plot suggests a less-normal distribution, with the model estimates fitting larger reaction times more poorly. The residual plot also shows that the variance of the residuals is not constant, with much larger residual variance for larger fitted values. This tells us we should probably log reaction times. Let's try it all again, with log-transformed reaction times.</span>
-<span id="cb50-309"><a href="#cb50-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-310"><a href="#cb50-310" aria-hidden="true" tabindex="-1"></a><span class="fu">### Log-transformed response variable</span></span>
-<span id="cb50-311"><a href="#cb50-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-314"><a href="#cb50-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-315"><a href="#cb50-315" aria-hidden="true" tabindex="-1"></a>fit_freq_log_z <span class="ot">&lt;-</span></span>
-<span id="cb50-316"><a href="#cb50-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> freq_z<span class="sc">*</span>length_z,</span>
-<span id="cb50-317"><a href="#cb50-317" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_full)</span>
-<span id="cb50-318"><a href="#cb50-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-319"><a href="#cb50-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-322"><a href="#cb50-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-323"><a href="#cb50-323" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_log_z)<span class="sc">$</span>r.squared</span>
-<span id="cb50-324"><a href="#cb50-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-325"><a href="#cb50-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-328"><a href="#cb50-328" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-329"><a href="#cb50-329" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_log_z) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
-<span id="cb50-330"><a href="#cb50-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-331"><a href="#cb50-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-332"><a href="#cb50-332" aria-hidden="true" tabindex="-1"></a>We see now that our values are much smaller, because they're on the log-scale.</span>
-<span id="cb50-333"><a href="#cb50-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-336"><a href="#cb50-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-337"><a href="#cb50-337" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">6.63</span> <span class="sc">+</span> <span class="sc">-</span><span class="fl">0.0826</span><span class="sc">*</span><span class="dv">5</span> <span class="sc">+</span> <span class="fl">0.0524</span><span class="sc">*</span><span class="dv">2</span>)</span>
-<span id="cb50-338"><a href="#cb50-338" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">6.63</span> <span class="sc">+</span> <span class="sc">-</span><span class="fl">0.0826</span><span class="sc">*</span><span class="dv">4</span> <span class="sc">+</span> <span class="fl">0.0524</span><span class="sc">*</span><span class="dv">2</span>)</span>
-<span id="cb50-339"><a href="#cb50-339" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">6.63</span> <span class="sc">+</span> <span class="sc">-</span><span class="fl">0.0826</span><span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.0524</span><span class="sc">*</span><span class="dv">6</span>)</span>
-<span id="cb50-340"><a href="#cb50-340" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_log_z)</span>
-<span id="cb50-341"><a href="#cb50-341" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-342"><a href="#cb50-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-343"><a href="#cb50-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-346"><a href="#cb50-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-347"><a href="#cb50-347" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="ot">&lt;-</span></span>
-<span id="cb50-348"><a href="#cb50-348" aria-hidden="true" tabindex="-1"></a>fit_freq_log_z <span class="sc">|&gt;</span> </span>
-<span id="cb50-349"><a href="#cb50-349" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb50-350"><a href="#cb50-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> .resid) <span class="sc">+</span></span>
-<span id="cb50-351"><a href="#cb50-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb50-352"><a href="#cb50-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb50-353"><a href="#cb50-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Histogram'</span>, <span class="at">x=</span><span class="st">'Residuals'</span>, <span class="at">y=</span><span class="st">'Count'</span>)</span>
-<span id="cb50-354"><a href="#cb50-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-355"><a href="#cb50-355" aria-hidden="true" tabindex="-1"></a>fig_qq <span class="ot">&lt;-</span></span>
-<span id="cb50-356"><a href="#cb50-356" aria-hidden="true" tabindex="-1"></a>fit_freq_log_z <span class="sc">|&gt;</span> </span>
-<span id="cb50-357"><a href="#cb50-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb50-358"><a href="#cb50-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">sample =</span> .resid) <span class="sc">+</span></span>
-<span id="cb50-359"><a href="#cb50-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>(<span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb50-360"><a href="#cb50-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb50-361"><a href="#cb50-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Q-Q Plot'</span>, <span class="at">x=</span><span class="st">'Theoretical quantiles'</span>, <span class="at">y=</span><span class="st">'Sample quantiles'</span>)</span>
-<span id="cb50-362"><a href="#cb50-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-363"><a href="#cb50-363" aria-hidden="true" tabindex="-1"></a>fig_res <span class="ot">&lt;-</span></span>
-<span id="cb50-364"><a href="#cb50-364" aria-hidden="true" tabindex="-1"></a>  fit_freq_log_z <span class="sc">|&gt;</span> </span>
-<span id="cb50-365"><a href="#cb50-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb50-366"><a href="#cb50-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid) <span class="sc">+</span></span>
-<span id="cb50-367"><a href="#cb50-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb50-368"><a href="#cb50-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb50-369"><a href="#cb50-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Residual vs. Fitted Values Plot'</span>, <span class="at">x=</span><span class="st">'Fitted Values'</span>, <span class="at">y=</span><span class="st">'Residuals'</span>)</span>
-<span id="cb50-370"><a href="#cb50-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-371"><a href="#cb50-371" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="sc">+</span> fig_qq <span class="sc">+</span> fig_res</span>
-<span id="cb50-372"><a href="#cb50-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-373"><a href="#cb50-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-374"><a href="#cb50-374" aria-hidden="true" tabindex="-1"></a>Looks much better.</span>
-<span id="cb50-375"><a href="#cb50-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-376"><a href="#cb50-376" aria-hidden="true" tabindex="-1"></a><span class="fu">### Collinearity</span></span>
-<span id="cb50-377"><a href="#cb50-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-378"><a href="#cb50-378" aria-hidden="true" tabindex="-1"></a>Collinearity refers to when continuous predictor variables are correlated, which can make the interpretation of their coefficients difficult, and the results spurious. Regression assumes there is an *absence* of collinearity, i.e., our predictor variables are not correlatded. </span>
-<span id="cb50-379"><a href="#cb50-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-380"><a href="#cb50-380" aria-hidden="true" tabindex="-1"></a>To assess collinearity, you can use the <span class="in">`vif()`</span> function from the <span class="in">`car`</span> package to compare *variance inflation factors*. VIF values close to 1 indicates there is not a high degree of collinearity between your variables.</span>
-<span id="cb50-381"><a href="#cb50-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-384"><a href="#cb50-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-385"><a href="#cb50-385" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(fit_freq_log_z)</span>
-<span id="cb50-386"><a href="#cb50-386" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-387"><a href="#cb50-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-388"><a href="#cb50-388" aria-hidden="true" tabindex="-1"></a>Collinearity is a conceptual problem, and is something that you need to consider in the planning stage. Typically, we want to include predictors that we have specific predictions or research questions about. Shoving a bunch of predictors in a model to see what comes out significant is bad practice. Rather, we should have a principled approach to model building and variable selection. This is not to say that exploratory analyses should be avoided, but that this comes with caveats.</span>
-<span id="cb50-389"><a href="#cb50-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-390"><a href="#cb50-390" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adjusted $R^2$</span></span>
-<span id="cb50-391"><a href="#cb50-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-392"><a href="#cb50-392" aria-hidden="true" tabindex="-1"></a>Although we should avoid throwing any old predictor into our model, adjusted $R^2$ is a more conservative version of $R^2$ that takes into account the number of predictors in a model. For each additional predictor, adjusted $R^2$ includes the number of predictors ($k$) in its denominator (bottom half of a division), which means that the more predictors there are, the smaller $R^2$ will be, unless each additional predictor explains sufficient variance to counteract this penalisation.</span>
-<span id="cb50-393"><a href="#cb50-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-396"><a href="#cb50-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-397"><a href="#cb50-397" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_log_z)<span class="sc">$</span>adj.r.squared</span>
-<span id="cb50-398"><a href="#cb50-398" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-399"><a href="#cb50-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-400"><a href="#cb50-400" aria-hidden="true" tabindex="-1"></a>If we were to look at the (adjusted) $R^2$ of our simple linear regression model, where log reaction times are predicted by standardised log frequency, we see that there is a large increase in our model which includes length and its interaction. This suggests that our model is not overfit, and that length contributes to the variance explained by the model.</span>
-<span id="cb50-401"><a href="#cb50-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-404"><a href="#cb50-404" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-405"><a href="#cb50-405" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(<span class="fu">lm</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> freq_z, <span class="at">data =</span> df_freq_full))<span class="sc">$</span>adj.r.squared</span>
-<span id="cb50-406"><a href="#cb50-406" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-407"><a href="#cb50-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-408"><a href="#cb50-408" aria-hidden="true" tabindex="-1"></a>If we likewise compare to the same model without an interaction term (log reaction times ~ frequency * length), we see that the adjusted $R^2$ is not very different. If the adjusted $R^2$ were much lower, this would indicate that including the interaction term leads to overfitting.</span>
-<span id="cb50-409"><a href="#cb50-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-412"><a href="#cb50-412" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-413"><a href="#cb50-413" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(<span class="fu">lm</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> freq_z <span class="sc">+</span> length_z, <span class="at">data =</span> df_freq_full))<span class="sc">$</span>adj.r.squared</span>
-<span id="cb50-414"><a href="#cb50-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-415"><a href="#cb50-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-416"><a href="#cb50-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-417"><a href="#cb50-417" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important terms {.unnumbered .smaller}</span></span>
-<span id="cb50-418"><a href="#cb50-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-419"><a href="#cb50-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-422"><a href="#cb50-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-423"><a href="#cb50-423" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb50-424"><a href="#cb50-424" aria-hidden="true" tabindex="-1"></a>content <span class="ot">&lt;-</span> </span>
-<span id="cb50-425"><a href="#cb50-425" aria-hidden="true" tabindex="-1"></a>  googlesheets4<span class="sc">::</span><span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing"</span>)</span>
-<span id="cb50-426"><a href="#cb50-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-427"><a href="#cb50-427" aria-hidden="true" tabindex="-1"></a>content <span class="sc">|&gt;</span> </span>
-<span id="cb50-428"><a href="#cb50-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Lecture topic</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"04 - Multiple regression"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb50-429"><a href="#cb50-429" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Lecture topic</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb50-430"><a href="#cb50-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() </span>
-<span id="cb50-431"><a href="#cb50-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-432"><a href="#cb50-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-433"><a href="#cb50-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-434"><a href="#cb50-434" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered .unlisted}</span></span>
-<span id="cb50-435"><a href="#cb50-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-436"><a href="#cb50-436" aria-hidden="true" tabindex="-1"></a>Today we learned...</span>
-<span id="cb50-437"><a href="#cb50-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-438"><a href="#cb50-438" aria-hidden="true" tabindex="-1"></a>Today we will learn...</span>
-<span id="cb50-439"><a href="#cb50-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-440"><a href="#cb50-440" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>what multiple regression is</span>
-<span id="cb50-441"><a href="#cb50-441" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to include multiple predictor variables</span>
-<span id="cb50-442"><a href="#cb50-442" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret slopes in multiple regression</span>
-<span id="cb50-443"><a href="#cb50-443" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret interaction effects</span>
-<span id="cb50-444"><a href="#cb50-444" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about the assumption of the absence of collinearity</span>
-<span id="cb50-445"><a href="#cb50-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-446"><a href="#cb50-446" aria-hidden="true" tabindex="-1"></a><span class="fu">## Task</span></span>
-<span id="cb50-447"><a href="#cb50-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-448"><a href="#cb50-448" aria-hidden="true" tabindex="-1"></a>Load in the <span class="in">`english`</span> dataset from the <span class="in">`languageR`</span> package <span class="co">[</span><span class="ot">@languageR-package</span><span class="co">]</span> (code below). You don't need to load in any CSV file, because this dataset is available if you have the package loaded. From the manual:</span>
-<span id="cb50-449"><a href="#cb50-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-450"><a href="#cb50-450" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This data set gives mean visual lexical decision latencies and word naming latencies to 2284 monomorphemic English nouns and verbs, averaged for old and young subjects, with various predictor variables.</span></span>
-<span id="cb50-451"><a href="#cb50-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-452"><a href="#cb50-452" aria-hidden="true" tabindex="-1"></a>(<span class="co">[</span><span class="ot">languageR manual, p. 29</span><span class="co">](https://cran.r-project.org/web/packages/languageR/languageR.pdf)</span>)</span>
-<span id="cb50-453"><a href="#cb50-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-456"><a href="#cb50-456" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-457"><a href="#cb50-457" aria-hidden="true" tabindex="-1"></a><span class="co"># load in 'english' dataset from languageR</span></span>
-<span id="cb50-458"><a href="#cb50-458" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="ot">&lt;-</span></span>
-<span id="cb50-459"><a href="#cb50-459" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(english) <span class="sc">|&gt;</span> </span>
-<span id="cb50-460"><a href="#cb50-460" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RTlexdec, RTnaming, Word, LengthInLetters, AgeSubject, WrittenFrequency) <span class="sc">|&gt;</span> </span>
-<span id="cb50-461"><a href="#cb50-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">rt_lexdec =</span> RTlexdec,</span>
-<span id="cb50-462"><a href="#cb50-462" aria-hidden="true" tabindex="-1"></a>         <span class="at">rt_naming =</span> RTnaming,</span>
-<span id="cb50-463"><a href="#cb50-463" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_written =</span> WrittenFrequency) <span class="sc">|&gt;</span> </span>
-<span id="cb50-464"><a href="#cb50-464" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb50-465"><a href="#cb50-465" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(word)</span>
-<span id="cb50-466"><a href="#cb50-466" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-467"><a href="#cb50-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-468"><a href="#cb50-468" aria-hidden="true" tabindex="-1"></a>We're keeping five variables:</span>
-<span id="cb50-469"><a href="#cb50-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-470"><a href="#cb50-470" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`word`</span>: a factor with 2284 words</span>
-<span id="cb50-471"><a href="#cb50-471" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`rt_lexdec`</span>: numeric vector of log RT in visual lexical decision</span>
-<span id="cb50-472"><a href="#cb50-472" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`rt_naming`</span>: numeric vector of log RT in word naming</span>
-<span id="cb50-473"><a href="#cb50-473" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`length_in_letters`</span>: numeric vector with length of the word in letters</span>
-<span id="cb50-474"><a href="#cb50-474" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`AgeSubject`</span>: a factor with as levels the age group of the subject: young versus old.</span>
-<span id="cb50-475"><a href="#cb50-475" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`freq_written`</span>: numeric vector with log frequency in the CELEX lexical database</span>
-<span id="cb50-476"><a href="#cb50-476" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-477"><a href="#cb50-477" aria-hidden="true" tabindex="-1"></a>Take the following steps:</span>
-<span id="cb50-478"><a href="#cb50-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-479"><a href="#cb50-479" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Perform an exploratory data analysis to understand the data (produce plots, tables, whatever you think necessary and can do).</span>
-<span id="cb50-480"><a href="#cb50-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-481"><a href="#cb50-481" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Model the data, with *back-transformed* (raw) reaction times as a response variable and written frequency and length in letters as predictors. Perform any tranformations you think necessary. Run model diagnostic checks and assess model fit.</span>
-<span id="cb50-482"><a href="#cb50-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-485"><a href="#cb50-485" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-486"><a href="#cb50-486" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb50-487"><a href="#cb50-487" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb50-488"><a href="#cb50-488" aria-hidden="true" tabindex="-1"></a>fit_freq_eng <span class="ot">&lt;-</span></span>
-<span id="cb50-489"><a href="#cb50-489" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">exp</span>(rt_lexdec) <span class="sc">~</span> freq_written <span class="sc">*</span> length_in_letters, <span class="at">data =</span> df_freq_eng)</span>
-<span id="cb50-490"><a href="#cb50-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-491"><a href="#cb50-491" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_freq_eng)</span>
-<span id="cb50-492"><a href="#cb50-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-493"><a href="#cb50-493" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(fit_freq_eng)</span>
-<span id="cb50-494"><a href="#cb50-494" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-495"><a href="#cb50-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-496"><a href="#cb50-496" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Re-run the model with log reaction times as a response variable and written frequency and length in letters as predictors. Perform any tranformations you think necessary. Run model diagnostic checks and assess model fit.</span>
-<span id="cb50-497"><a href="#cb50-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-498"><a href="#cb50-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-501"><a href="#cb50-501" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-502"><a href="#cb50-502" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb50-503"><a href="#cb50-503" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb50-504"><a href="#cb50-504" aria-hidden="true" tabindex="-1"></a>fit_freq_eng_log <span class="ot">&lt;-</span></span>
-<span id="cb50-505"><a href="#cb50-505" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt_lexdec <span class="sc">~</span> freq_written <span class="sc">*</span> length_in_letters, <span class="at">data =</span> df_freq_eng)</span>
-<span id="cb50-506"><a href="#cb50-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-507"><a href="#cb50-507" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_freq_eng_log)</span>
-<span id="cb50-508"><a href="#cb50-508" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_eng)</span>
-<span id="cb50-509"><a href="#cb50-509" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_eng_log)</span>
-<span id="cb50-510"><a href="#cb50-510" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(fit_freq_eng_log)</span>
-<span id="cb50-511"><a href="#cb50-511" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(fit_freq_eng)</span>
-<span id="cb50-512"><a href="#cb50-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-513"><a href="#cb50-513" aria-hidden="true" tabindex="-1"></a><span class="co"># interaction term highly corr'd with frequency</span></span>
-<span id="cb50-514"><a href="#cb50-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-515"><a href="#cb50-515" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(fit_freq_eng_log)</span>
-<span id="cb50-516"><a href="#cb50-516" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-517"><a href="#cb50-517" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-518"><a href="#cb50-518" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Remove length in letters as a predictor. How is model fit affected? What can you conclude?</span>
-<span id="cb50-519"><a href="#cb50-519" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-522"><a href="#cb50-522" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb50-523"><a href="#cb50-523" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb50-524"><a href="#cb50-524" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb50-525"><a href="#cb50-525" aria-hidden="true" tabindex="-1"></a>fit_freq_eng_simp <span class="ot">&lt;-</span></span>
-<span id="cb50-526"><a href="#cb50-526" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt_lexdec <span class="sc">~</span> freq_written, <span class="at">data =</span> df_freq_eng)</span>
-<span id="cb50-527"><a href="#cb50-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-528"><a href="#cb50-528" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_freq_eng_simp)</span>
-<span id="cb50-529"><a href="#cb50-529" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_eng_simp)</span>
-<span id="cb50-530"><a href="#cb50-530" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_eng_log)</span>
-<span id="cb50-531"><a href="#cb50-531" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-532"><a href="#cb50-532" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(fit_freq_eng_simp)</span>
-<span id="cb50-533"><a href="#cb50-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-534"><a href="#cb50-534" aria-hidden="true" tabindex="-1"></a><span class="co"># decision: should length and interaction effect be included? doesn't hurt or help model fit it seems</span></span>
-<span id="cb50-535"><a href="#cb50-535" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb50-536"><a href="#cb50-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-537"><a href="#cb50-537" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb52" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Multiple Regression"</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Regression for Linguists"</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Daniela Palleschi"</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> Humboldt-Universität zu Berlin</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co"># footer: "Lecture 1.1 - R und RStudio"</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> en</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "10/11/2023"</span></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary {.unnumbered .unlisted}</span></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we saw that the equation for a straight line boils down to its intercept and slope</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we fit our first linear model with a continuous predictor</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered .unlisted}</span></span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>Today we will learn...</span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>what multiple regression is</span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to include multiple predictor variables</span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret slopes in multiple regression</span>
+<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret interaction effects</span>
+<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about the assumption of the absence of collinearity</span>
+<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Set-up environment  {.unnumbered}</span></span>
+<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a><span class="co"># suppress scientific notation</span></span>
+<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span>
+<span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-37"><a href="#cb52-37" aria-hidden="true" tabindex="-1"></a>We'll also need to load in our required packages. Hopefully you've already install the required packages (if not, go to @sec-software).</span>
+<span id="cb52-38"><a href="#cb52-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-41"><a href="#cb52-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-42"><a href="#cb52-42" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
+<span id="cb52-43"><a href="#cb52-43" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb52-44"><a href="#cb52-44" aria-hidden="true" tabindex="-1"></a>               tidyverse,</span>
+<span id="cb52-45"><a href="#cb52-45" aria-hidden="true" tabindex="-1"></a>               here,</span>
+<span id="cb52-46"><a href="#cb52-46" aria-hidden="true" tabindex="-1"></a>               broom,</span>
+<span id="cb52-47"><a href="#cb52-47" aria-hidden="true" tabindex="-1"></a>               janitor,</span>
+<span id="cb52-48"><a href="#cb52-48" aria-hidden="true" tabindex="-1"></a>               languageR)</span>
+<span id="cb52-49"><a href="#cb52-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-50"><a href="#cb52-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-53"><a href="#cb52-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-54"><a href="#cb52-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb52-55"><a href="#cb52-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-56"><a href="#cb52-56" aria-hidden="true" tabindex="-1"></a><span class="co"># extra packages for the lecture notes/slides</span></span>
+<span id="cb52-57"><a href="#cb52-57" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb52-58"><a href="#cb52-58" aria-hidden="true" tabindex="-1"></a>               patchwork,</span>
+<span id="cb52-59"><a href="#cb52-59" aria-hidden="true" tabindex="-1"></a>               knitr,</span>
+<span id="cb52-60"><a href="#cb52-60" aria-hidden="true" tabindex="-1"></a>               kableExtra,</span>
+<span id="cb52-61"><a href="#cb52-61" aria-hidden="true" tabindex="-1"></a>               gt,</span>
+<span id="cb52-62"><a href="#cb52-62" aria-hidden="true" tabindex="-1"></a>               googlesheets4)</span>
+<span id="cb52-63"><a href="#cb52-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-64"><a href="#cb52-64" aria-hidden="true" tabindex="-1"></a><span class="co"># tell googlesheets4 we don't want private</span></span>
+<span id="cb52-65"><a href="#cb52-65" aria-hidden="true" tabindex="-1"></a><span class="fu">gs4_deauth</span>()</span>
+<span id="cb52-66"><a href="#cb52-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-67"><a href="#cb52-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-68"><a href="#cb52-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### Load data {.unnumbered .unlisted}</span></span>
+<span id="cb52-69"><a href="#cb52-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-70"><a href="#cb52-70" aria-hidden="true" tabindex="-1"></a>We'll use the full dataset of the frequency data.</span>
+<span id="cb52-71"><a href="#cb52-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-74"><a href="#cb52-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-75"><a href="#cb52-75" aria-hidden="true" tabindex="-1"></a>df_freq_full <span class="ot">&lt;-</span></span>
+<span id="cb52-76"><a href="#cb52-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"ELP_full_length_frequency.csv"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-77"><a href="#cb52-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb52-78"><a href="#cb52-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> <span class="dv">10</span><span class="sc">^</span>(log10freq), <span class="co"># inverse log10</span></span>
+<span id="cb52-79"><a href="#cb52-79" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_log =</span> <span class="fu">log</span>(freq)) <span class="sc">|&gt;</span>  <span class="co"># use natural logarithm</span></span>
+<span id="cb52-80"><a href="#cb52-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(word, rt, length, freq, freq_log)</span>
+<span id="cb52-81"><a href="#cb52-81" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-82"><a href="#cb52-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-83"><a href="#cb52-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-84"><a href="#cb52-84" aria-hidden="true" tabindex="-1"></a>We have 4 variables:</span>
+<span id="cb52-85"><a href="#cb52-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-86"><a href="#cb52-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`word`</span></span>
+<span id="cb52-87"><a href="#cb52-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`length`</span></span>
+<span id="cb52-88"><a href="#cb52-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`rt`</span></span>
+<span id="cb52-89"><a href="#cb52-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`freq`</span></span>
+<span id="cb52-90"><a href="#cb52-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`freq_log`</span></span>
+<span id="cb52-91"><a href="#cb52-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`log10freq`</span></span>
+<span id="cb52-92"><a href="#cb52-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-93"><a href="#cb52-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple regression</span></span>
+<span id="cb52-94"><a href="#cb52-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-95"><a href="#cb52-95" aria-hidden="true" tabindex="-1"></a>So far we've worked with simple linear models, which fit a model to a predictor and response variable. These models do not differ so greatly from a one- or two-sample *t*-test (for a categorical predictor) or Pearson's *r* (for a standardised continuous predictor). You might be wondering then we would bother with linear regression. One reason is that it allows us to include *multiple* predictors in our models, which still boils down to modeling the mean, but while condintioning the mean on multiple variables at once.</span>
+<span id="cb52-96"><a href="#cb52-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-97"><a href="#cb52-97" aria-hidden="true" tabindex="-1"></a>Recall the equation of a line (\ref{eq-simple-lin-2}), which states that any value of $y$ equals the intercept ($b_0$) plus the corresponding value of $x$ multiplied by the slope ($b_1x$), plus the error, which are our residuals ($e$). In multiple regression, we can include more than one slope (\ref{eq-multiple-reg}).</span>
+<span id="cb52-98"><a href="#cb52-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-99"><a href="#cb52-99" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb52-100"><a href="#cb52-100" aria-hidden="true" tabindex="-1"></a>y &amp;= b_0 + b_1x + e \label{eq-simple-lin-2} <span class="sc">\\</span></span>
+<span id="cb52-101"><a href="#cb52-101" aria-hidden="true" tabindex="-1"></a>y &amp;= b_0 + b_1x + b_2x + ... + e \label{eq-multiple-reg}</span>
+<span id="cb52-102"><a href="#cb52-102" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb52-103"><a href="#cb52-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-106"><a href="#cb52-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
+<span id="cb52-107"><a href="#cb52-107" aria-hidden="true" tabindex="-1"></a>%%| echo: false</span>
+<span id="cb52-108"><a href="#cb52-108" aria-hidden="true" tabindex="-1"></a>%%| label: fig<span class="ot">-f</span>lowchart</span>
+<span id="cb52-109"><a href="#cb52-109" aria-hidden="true" tabindex="-1"></a>%%| fig<span class="ot">-c</span>ap: Flowchart of common steps <span class="kw">for</span> linear <span class="ot">and</span> non<span class="ot">-l</span>inear transformations of continuous variables. Such decision trees are <span class="ot">not</span> a one<span class="ot">-s</span>ize<span class="ot">-f</span>its-all solution <span class="ot">and</span> cannot replace critical thinking <span class="ot">and</span> understanding of your data.</span>
+<span id="cb52-110"><a href="#cb52-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-111"><a href="#cb52-111" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb52-112"><a href="#cb52-112" aria-hidden="true" tabindex="-1"></a>  A[Continuous variable] </span>
+<span id="cb52-113"><a href="#cb52-113" aria-hidden="true" tabindex="-1"></a>  A --&gt; F[Zero<span class="ot">-t</span>runcated with positive skew \n e.g., reaction <span class="fu">times</span>]</span>
+<span id="cb52-114"><a href="#cb52-114" aria-hidden="true" tabindex="-1"></a>  A --&gt; H[Interval i.e., lower <span class="ot">and</span> upperbound \n e.g., rating scale]</span>
+<span id="cb52-115"><a href="#cb52-115" aria-hidden="true" tabindex="-1"></a>  H --&gt; I[Centre on median value]</span>
+<span id="cb52-116"><a href="#cb52-116" aria-hidden="true" tabindex="-1"></a>  I --&gt; E(Response)</span>
+<span id="cb52-117"><a href="#cb52-117" aria-hidden="true" tabindex="-1"></a>  E --&gt; Z[Done]</span>
+<span id="cb52-118"><a href="#cb52-118" aria-hidden="true" tabindex="-1"></a>  F --&gt; G[Non<span class="ot">-l</span>inear transformation \n e.g., <span class="fu">log</span><span class="ot">-t</span>ransform]</span>
+<span id="cb52-119"><a href="#cb52-119" aria-hidden="true" tabindex="-1"></a>  G --&gt; B(Predictor)</span>
+<span id="cb52-120"><a href="#cb52-120" aria-hidden="true" tabindex="-1"></a>  I --&gt; B(Predictor)</span>
+<span id="cb52-121"><a href="#cb52-121" aria-hidden="true" tabindex="-1"></a>  B --&gt; C{One predictor}</span>
+<span id="cb52-122"><a href="#cb52-122" aria-hidden="true" tabindex="-1"></a>  C --&gt; X[Centre]</span>
+<span id="cb52-123"><a href="#cb52-123" aria-hidden="true" tabindex="-1"></a>  D --&gt; Y[Centre <span class="ot">and</span> standardise]</span>
+<span id="cb52-124"><a href="#cb52-124" aria-hidden="true" tabindex="-1"></a>  B --&gt; D{Two predictor}</span>
+<span id="cb52-125"><a href="#cb52-125" aria-hidden="true" tabindex="-1"></a>  G --&gt; E(Response)</span>
+<span id="cb52-126"><a href="#cb52-126" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-127"><a href="#cb52-127" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-128"><a href="#cb52-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-129"><a href="#cb52-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-130"><a href="#cb52-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-131"><a href="#cb52-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### One predictor</span></span>
+<span id="cb52-132"><a href="#cb52-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-133"><a href="#cb52-133" aria-hidden="true" tabindex="-1"></a>Let's re-run our simple model with this dataset. Let's keep reaction times in the raw milliseconds for now for interpretability.</span>
+<span id="cb52-134"><a href="#cb52-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-137"><a href="#cb52-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-138"><a href="#cb52-138" aria-hidden="true" tabindex="-1"></a>fit_freq_full <span class="ot">&lt;-</span></span>
+<span id="cb52-139"><a href="#cb52-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt <span class="sc">~</span> <span class="fu">log</span>(freq), <span class="at">data =</span> df_freq_full)</span>
+<span id="cb52-140"><a href="#cb52-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-141"><a href="#cb52-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-144"><a href="#cb52-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-145"><a href="#cb52-145" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_full)</span>
+<span id="cb52-146"><a href="#cb52-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-147"><a href="#cb52-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-148"><a href="#cb52-148" aria-hidden="true" tabindex="-1"></a>We see there is a decrease in reaction times (-37.5 milliseconds) for a 1-unit increase in log frequency. Let's look at the model fit using <span class="in">`glance()`</span>.</span>
+<span id="cb52-149"><a href="#cb52-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-152"><a href="#cb52-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-153"><a href="#cb52-153" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_full)<span class="sc">$</span>r.squared</span>
+<span id="cb52-154"><a href="#cb52-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-155"><a href="#cb52-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-156"><a href="#cb52-156" aria-hidden="true" tabindex="-1"></a>We see that the *R*-squared is 0.383, meaning our model describes 38% of the variance in response times. We can't be sure that this described variance is due solely to frequency, however. Our models only know what we tell them! Other effects that are correlated with frequency might be conflating the frequency effect, e.g., more frequent words tend to be shorter <span class="co">[</span><span class="ot">@zipf_1949</span><span class="co">]</span>. Let's expand our model to include word length <span class="co">[</span><span class="ot">\ref{eq-freq-length}</span><span class="co">]</span>.</span>
+<span id="cb52-157"><a href="#cb52-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-158"><a href="#cb52-158" aria-hidden="true" tabindex="-1"></a>\begin{equation}</span>
+<span id="cb52-159"><a href="#cb52-159" aria-hidden="true" tabindex="-1"></a>y = b_0 + b_1*log frequency + b_2*word length \label{eq-freq-length}</span>
+<span id="cb52-160"><a href="#cb52-160" aria-hidden="true" tabindex="-1"></a>\end{equation} </span>
+<span id="cb52-161"><a href="#cb52-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-162"><a href="#cb52-162" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding a predictor</span></span>
+<span id="cb52-163"><a href="#cb52-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-164"><a href="#cb52-164" aria-hidden="true" tabindex="-1"></a>Let's add <span class="in">`length`</span> as a predictor to our model.</span>
+<span id="cb52-165"><a href="#cb52-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-168"><a href="#cb52-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-169"><a href="#cb52-169" aria-hidden="true" tabindex="-1"></a>fit_freq_mult <span class="ot">&lt;-</span></span>
+<span id="cb52-170"><a href="#cb52-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt <span class="sc">~</span> <span class="fu">log</span>(freq) <span class="sc">+</span> length, <span class="at">data =</span> df_freq_full)</span>
+<span id="cb52-171"><a href="#cb52-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-172"><a href="#cb52-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-175"><a href="#cb52-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-176"><a href="#cb52-176" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_mult) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
+<span id="cb52-177"><a href="#cb52-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-178"><a href="#cb52-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-179"><a href="#cb52-179" aria-hidden="true" tabindex="-1"></a>We see that length is also a significant predictor of reaction times, with an increase in word length (+1 letter) corresponds to a 20ms increase in reaction times. Our intercept is also now 748ms, instead of 907ms. The 907ms intercept corresponds to the prediction for reaction times to a word with 0 log frequency and 0 word length, but this is not very interpretable. If we were to center both prdictors, the intercept would be the reaction time for a wrd with average frequency and average length.</span>
+<span id="cb52-180"><a href="#cb52-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-181"><a href="#cb52-181" aria-hidden="true" tabindex="-1"></a>The slope for log frequency has also changed: from -37.5 to -29.5. This change tells us that some of the effect in our first model was confounded with length, as controlling for length weakens the effect of frequency.</span>
+<span id="cb52-182"><a href="#cb52-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-185"><a href="#cb52-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-186"><a href="#cb52-186" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_mult)<span class="sc">$</span>r.squared</span>
+<span id="cb52-187"><a href="#cb52-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-188"><a href="#cb52-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-189"><a href="#cb52-189" aria-hidden="true" tabindex="-1"></a>We also see that including <span class="in">`length`</span> increases the variance described by our model, reflected in the *R*-squared values (<span class="in">`r glance(fit_freq_mult)$r.squared`</span> instead of <span class="in">`r glance(fit_freq_full)$r.squared`</span>.</span>
+<span id="cb52-190"><a href="#cb52-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-191"><a href="#cb52-191" aria-hidden="true" tabindex="-1"></a><span class="fu">## Standardising our predictors</span></span>
+<span id="cb52-192"><a href="#cb52-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-193"><a href="#cb52-193" aria-hidden="true" tabindex="-1"></a>Recall that, when we have multiple continuous predictors, standardising them can help their interpretation, as their slopes are comparable. We could achieve this by centering each variable and then dividing by the standard deviation, or we could use the <span class="in">`scale()`</span> function, which does just this.</span>
+<span id="cb52-194"><a href="#cb52-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-197"><a href="#cb52-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-198"><a href="#cb52-198" aria-hidden="true" tabindex="-1"></a><span class="co"># centre and then standardize</span></span>
+<span id="cb52-199"><a href="#cb52-199" aria-hidden="true" tabindex="-1"></a>df_freq_full <span class="sc">|&gt;</span> </span>
+<span id="cb52-200"><a href="#cb52-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb52-201"><a href="#cb52-201" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_z1 =</span> (freq<span class="sc">-</span><span class="fu">mean</span>(freq))<span class="sc">/</span><span class="fu">sd</span>(freq),</span>
+<span id="cb52-202"><a href="#cb52-202" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_z2 =</span> <span class="fu">scale</span>(freq)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-203"><a href="#cb52-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(freq_z1, freq_z2) <span class="sc">|&gt;</span> </span>
+<span id="cb52-204"><a href="#cb52-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
+<span id="cb52-205"><a href="#cb52-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-206"><a href="#cb52-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-207"><a href="#cb52-207" aria-hidden="true" tabindex="-1"></a>Let's use <span class="in">`scale()`</span> for <span class="in">`freq`</span> and <span class="in">`length`</span>.</span>
+<span id="cb52-208"><a href="#cb52-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-211"><a href="#cb52-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-212"><a href="#cb52-212" aria-hidden="true" tabindex="-1"></a>df_freq_full <span class="ot">&lt;-</span></span>
+<span id="cb52-213"><a href="#cb52-213" aria-hidden="true" tabindex="-1"></a>  df_freq_full <span class="sc">|&gt;</span> </span>
+<span id="cb52-214"><a href="#cb52-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq_z =</span> <span class="fu">scale</span>(freq_log),</span>
+<span id="cb52-215"><a href="#cb52-215" aria-hidden="true" tabindex="-1"></a>         <span class="at">length_z =</span> <span class="fu">scale</span>(length))</span>
+<span id="cb52-216"><a href="#cb52-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-217"><a href="#cb52-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-220"><a href="#cb52-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-221"><a href="#cb52-221" aria-hidden="true" tabindex="-1"></a>fit_freq_z <span class="ot">&lt;-</span></span>
+<span id="cb52-222"><a href="#cb52-222" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt <span class="sc">~</span> freq_z <span class="sc">+</span> length_z, <span class="at">data =</span> df_freq_full)</span>
+<span id="cb52-223"><a href="#cb52-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-224"><a href="#cb52-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-225"><a href="#cb52-225" aria-hidden="true" tabindex="-1"></a>First, let's check the *$R^2$*:</span>
+<span id="cb52-226"><a href="#cb52-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-229"><a href="#cb52-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-230"><a href="#cb52-230" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_z)<span class="sc">$</span>r.squared</span>
+<span id="cb52-231"><a href="#cb52-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-232"><a href="#cb52-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-233"><a href="#cb52-233" aria-hidden="true" tabindex="-1"></a>We see that our *$R^2$* value is <span class="in">`r glance(fit_freq_z)$r.squared`</span>,  just like above. This serves as a reminder that the predictors still represent the same variance in the underlying model, their units and scales have simply changed. What about our coefficients:</span>
+<span id="cb52-234"><a href="#cb52-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-237"><a href="#cb52-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-238"><a href="#cb52-238" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_z) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
+<span id="cb52-239"><a href="#cb52-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-240"><a href="#cb52-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-241"><a href="#cb52-241" aria-hidden="true" tabindex="-1"></a>Here, a 1-unit change always corresponds to a change of 1 standard deviation. Now we see that frequency has a larger magnitude than the effect of length. So, for each instease in frequency by 1 standard deviation (holiding length constant), reaction times decrease by 29.5 ms.</span>
+<span id="cb52-242"><a href="#cb52-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-243"><a href="#cb52-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding an interaction term</span></span>
+<span id="cb52-244"><a href="#cb52-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-245"><a href="#cb52-245" aria-hidden="true" tabindex="-1"></a>We won't spent much time talking about interactions, but please check out Ch. 8 (Interations and nonlinear effects) in @winter_statistics_2019 for a more in-depth treatment. For now, what's important to know is that interactions describe how effects of one predictor may be influenced by changes in another predictor. We can add interactin terms of two predictors by connecting them with a colon (<span class="in">`:`</span>).</span>
+<span id="cb52-246"><a href="#cb52-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-249"><a href="#cb52-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-250"><a href="#cb52-250" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rt <span class="sc">~</span> freq_z <span class="sc">+</span> length_z <span class="sc">+</span> freq_z<span class="sc">:</span>length_z, </span>
+<span id="cb52-251"><a href="#cb52-251" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> df_freq_full) <span class="sc">|&gt;</span> </span>
+<span id="cb52-252"><a href="#cb52-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
+<span id="cb52-253"><a href="#cb52-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-254"><a href="#cb52-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-255"><a href="#cb52-255" aria-hidden="true" tabindex="-1"></a>Or, we can simply connect the two predictors with an asterisk (<span class="in">`*`</span>) to indicate that we want to look at both predictors and their interaction.</span>
+<span id="cb52-256"><a href="#cb52-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-259"><a href="#cb52-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-260"><a href="#cb52-260" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rt <span class="sc">~</span> freq_z<span class="sc">*</span>length_z, </span>
+<span id="cb52-261"><a href="#cb52-261" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> df_freq_full) <span class="sc">|&gt;</span> </span>
+<span id="cb52-262"><a href="#cb52-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
+<span id="cb52-263"><a href="#cb52-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-264"><a href="#cb52-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-265"><a href="#cb52-265" aria-hidden="true" tabindex="-1"></a>The model estimates are the same for both models. The intercept is the predicted reaction time for a word with the mean length and mean frequency. Notice that the interaction slope is negative, meaning when both <span class="in">`freq`</span> and <span class="in">`length`</span> increase, reaction times will decrease.</span>
+<span id="cb52-266"><a href="#cb52-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-267"><a href="#cb52-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-268"><a href="#cb52-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-269"><a href="#cb52-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-270"><a href="#cb52-270" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model assumptions</span></span>
+<span id="cb52-271"><a href="#cb52-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-272"><a href="#cb52-272" aria-hidden="true" tabindex="-1"></a>We've already discussed the assumptions of normality and homoscedasticity (constant variance), which both refer to the residuals of a model. We typically assess these assumptions visually, with histogram and Q-Q plots.</span>
+<span id="cb52-273"><a href="#cb52-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-274"><a href="#cb52-274" aria-hidden="true" tabindex="-1"></a><span class="fu">### Normality and Homoscedasticity</span></span>
+<span id="cb52-275"><a href="#cb52-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-276"><a href="#cb52-276" aria-hidden="true" tabindex="-1"></a>For our model</span>
+<span id="cb52-277"><a href="#cb52-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-280"><a href="#cb52-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-281"><a href="#cb52-281" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="ot">&lt;-</span></span>
+<span id="cb52-282"><a href="#cb52-282" aria-hidden="true" tabindex="-1"></a>fit_freq_z <span class="sc">|&gt;</span> </span>
+<span id="cb52-283"><a href="#cb52-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb52-284"><a href="#cb52-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> .resid) <span class="sc">+</span></span>
+<span id="cb52-285"><a href="#cb52-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb52-286"><a href="#cb52-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb52-287"><a href="#cb52-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Histogram'</span>, <span class="at">x=</span><span class="st">'Residuals'</span>, <span class="at">y=</span><span class="st">'Count'</span>)</span>
+<span id="cb52-288"><a href="#cb52-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-289"><a href="#cb52-289" aria-hidden="true" tabindex="-1"></a>fig_qq <span class="ot">&lt;-</span></span>
+<span id="cb52-290"><a href="#cb52-290" aria-hidden="true" tabindex="-1"></a>fit_freq_z <span class="sc">|&gt;</span> </span>
+<span id="cb52-291"><a href="#cb52-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb52-292"><a href="#cb52-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">sample =</span> .resid) <span class="sc">+</span></span>
+<span id="cb52-293"><a href="#cb52-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>(<span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb52-294"><a href="#cb52-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb52-295"><a href="#cb52-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Q-Q Plot'</span>, <span class="at">x=</span><span class="st">'Theoretical quantiles'</span>, <span class="at">y=</span><span class="st">'Sample quantiles'</span>)</span>
+<span id="cb52-296"><a href="#cb52-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-297"><a href="#cb52-297" aria-hidden="true" tabindex="-1"></a>fig_res <span class="ot">&lt;-</span></span>
+<span id="cb52-298"><a href="#cb52-298" aria-hidden="true" tabindex="-1"></a>  fit_freq_z <span class="sc">|&gt;</span> </span>
+<span id="cb52-299"><a href="#cb52-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb52-300"><a href="#cb52-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid) <span class="sc">+</span></span>
+<span id="cb52-301"><a href="#cb52-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb52-302"><a href="#cb52-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb52-303"><a href="#cb52-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Residual vs. Fitted Values Plot'</span>, <span class="at">x=</span><span class="st">'Fitted Values'</span>, <span class="at">y=</span><span class="st">'Residuals'</span>)</span>
+<span id="cb52-304"><a href="#cb52-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-305"><a href="#cb52-305" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="sc">+</span> fig_qq <span class="sc">+</span> fig_res</span>
+<span id="cb52-306"><a href="#cb52-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-307"><a href="#cb52-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-308"><a href="#cb52-308" aria-hidden="true" tabindex="-1"></a>The histogram looks approximately normally distributed, with a bit of a positive skew. The Q-Q plot suggests a less-normal distribution, with the model estimates fitting larger reaction times more poorly. The residual plot also shows that the variance of the residuals is not constant, with much larger residual variance for larger fitted values. This tells us we should probably log reaction times. Let's try it all again, with log-transformed reaction times.</span>
+<span id="cb52-309"><a href="#cb52-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-310"><a href="#cb52-310" aria-hidden="true" tabindex="-1"></a><span class="fu">### Log-transformed response variable</span></span>
+<span id="cb52-311"><a href="#cb52-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-314"><a href="#cb52-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-315"><a href="#cb52-315" aria-hidden="true" tabindex="-1"></a>fit_freq_log_z <span class="ot">&lt;-</span></span>
+<span id="cb52-316"><a href="#cb52-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> freq_z<span class="sc">*</span>length_z,</span>
+<span id="cb52-317"><a href="#cb52-317" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_full)</span>
+<span id="cb52-318"><a href="#cb52-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-319"><a href="#cb52-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-322"><a href="#cb52-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-323"><a href="#cb52-323" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_log_z)<span class="sc">$</span>r.squared</span>
+<span id="cb52-324"><a href="#cb52-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-325"><a href="#cb52-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-328"><a href="#cb52-328" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-329"><a href="#cb52-329" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_log_z) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
+<span id="cb52-330"><a href="#cb52-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-331"><a href="#cb52-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-332"><a href="#cb52-332" aria-hidden="true" tabindex="-1"></a>We see now that our values are much smaller, because they're on the log-scale.</span>
+<span id="cb52-333"><a href="#cb52-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-336"><a href="#cb52-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-337"><a href="#cb52-337" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">6.63</span> <span class="sc">+</span> <span class="sc">-</span><span class="fl">0.0826</span><span class="sc">*</span><span class="dv">5</span> <span class="sc">+</span> <span class="fl">0.0524</span><span class="sc">*</span><span class="dv">2</span>)</span>
+<span id="cb52-338"><a href="#cb52-338" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">6.63</span> <span class="sc">+</span> <span class="sc">-</span><span class="fl">0.0826</span><span class="sc">*</span><span class="dv">4</span> <span class="sc">+</span> <span class="fl">0.0524</span><span class="sc">*</span><span class="dv">2</span>)</span>
+<span id="cb52-339"><a href="#cb52-339" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">6.63</span> <span class="sc">+</span> <span class="sc">-</span><span class="fl">0.0826</span><span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.0524</span><span class="sc">*</span><span class="dv">6</span>)</span>
+<span id="cb52-340"><a href="#cb52-340" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_log_z)</span>
+<span id="cb52-341"><a href="#cb52-341" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-342"><a href="#cb52-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-343"><a href="#cb52-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-346"><a href="#cb52-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-347"><a href="#cb52-347" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="ot">&lt;-</span></span>
+<span id="cb52-348"><a href="#cb52-348" aria-hidden="true" tabindex="-1"></a>fit_freq_log_z <span class="sc">|&gt;</span> </span>
+<span id="cb52-349"><a href="#cb52-349" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb52-350"><a href="#cb52-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> .resid) <span class="sc">+</span></span>
+<span id="cb52-351"><a href="#cb52-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb52-352"><a href="#cb52-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb52-353"><a href="#cb52-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Histogram'</span>, <span class="at">x=</span><span class="st">'Residuals'</span>, <span class="at">y=</span><span class="st">'Count'</span>)</span>
+<span id="cb52-354"><a href="#cb52-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-355"><a href="#cb52-355" aria-hidden="true" tabindex="-1"></a>fig_qq <span class="ot">&lt;-</span></span>
+<span id="cb52-356"><a href="#cb52-356" aria-hidden="true" tabindex="-1"></a>fit_freq_log_z <span class="sc">|&gt;</span> </span>
+<span id="cb52-357"><a href="#cb52-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb52-358"><a href="#cb52-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">sample =</span> .resid) <span class="sc">+</span></span>
+<span id="cb52-359"><a href="#cb52-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>(<span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb52-360"><a href="#cb52-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb52-361"><a href="#cb52-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Q-Q Plot'</span>, <span class="at">x=</span><span class="st">'Theoretical quantiles'</span>, <span class="at">y=</span><span class="st">'Sample quantiles'</span>)</span>
+<span id="cb52-362"><a href="#cb52-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-363"><a href="#cb52-363" aria-hidden="true" tabindex="-1"></a>fig_res <span class="ot">&lt;-</span></span>
+<span id="cb52-364"><a href="#cb52-364" aria-hidden="true" tabindex="-1"></a>  fit_freq_log_z <span class="sc">|&gt;</span> </span>
+<span id="cb52-365"><a href="#cb52-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb52-366"><a href="#cb52-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid) <span class="sc">+</span></span>
+<span id="cb52-367"><a href="#cb52-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb52-368"><a href="#cb52-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb52-369"><a href="#cb52-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">'Residual vs. Fitted Values Plot'</span>, <span class="at">x=</span><span class="st">'Fitted Values'</span>, <span class="at">y=</span><span class="st">'Residuals'</span>)</span>
+<span id="cb52-370"><a href="#cb52-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-371"><a href="#cb52-371" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="sc">+</span> fig_qq <span class="sc">+</span> fig_res</span>
+<span id="cb52-372"><a href="#cb52-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-373"><a href="#cb52-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-374"><a href="#cb52-374" aria-hidden="true" tabindex="-1"></a>Looks much better.</span>
+<span id="cb52-375"><a href="#cb52-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-376"><a href="#cb52-376" aria-hidden="true" tabindex="-1"></a><span class="fu">### Collinearity</span></span>
+<span id="cb52-377"><a href="#cb52-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-378"><a href="#cb52-378" aria-hidden="true" tabindex="-1"></a>Collinearity refers to when continuous predictor variables are correlated, which can make the interpretation of their coefficients difficult, and the results spurious. Regression assumes there is an *absence* of collinearity, i.e., our predictor variables are not correlatded. </span>
+<span id="cb52-379"><a href="#cb52-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-380"><a href="#cb52-380" aria-hidden="true" tabindex="-1"></a>To assess collinearity, you can use the <span class="in">`vif()`</span> function from the <span class="in">`car`</span> package to compare *variance inflation factors*. VIF values close to 1 indicates there is not a high degree of collinearity between your variables.</span>
+<span id="cb52-381"><a href="#cb52-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-384"><a href="#cb52-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-385"><a href="#cb52-385" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(fit_freq_log_z)</span>
+<span id="cb52-386"><a href="#cb52-386" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-387"><a href="#cb52-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-388"><a href="#cb52-388" aria-hidden="true" tabindex="-1"></a>Collinearity is a conceptual problem, and is something that you need to consider in the planning stage. Typically, we want to include predictors that we have specific predictions or research questions about. Shoving a bunch of predictors in a model to see what comes out significant is bad practice. Rather, we should have a principled approach to model building and variable selection. This is not to say that exploratory analyses should be avoided, but that this comes with caveats.</span>
+<span id="cb52-389"><a href="#cb52-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-390"><a href="#cb52-390" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adjusted $R^2$</span></span>
+<span id="cb52-391"><a href="#cb52-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-392"><a href="#cb52-392" aria-hidden="true" tabindex="-1"></a>Although we should avoid throwing any old predictor into our model, adjusted $R^2$ is a more conservative version of $R^2$ that takes into account the number of predictors in a model. For each additional predictor, adjusted $R^2$ includes the number of predictors ($k$) in its denominator (bottom half of a division), which means that the more predictors there are, the smaller $R^2$ will be, unless each additional predictor explains sufficient variance to counteract this penalisation.</span>
+<span id="cb52-393"><a href="#cb52-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-396"><a href="#cb52-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-397"><a href="#cb52-397" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_log_z)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb52-398"><a href="#cb52-398" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-399"><a href="#cb52-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-400"><a href="#cb52-400" aria-hidden="true" tabindex="-1"></a>If we were to look at the (adjusted) $R^2$ of our simple linear regression model, where log reaction times are predicted by standardised log frequency, we see that there is a large increase in our model which includes length and its interaction. This suggests that our model is not overfit, and that length contributes to the variance explained by the model.</span>
+<span id="cb52-401"><a href="#cb52-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-404"><a href="#cb52-404" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-405"><a href="#cb52-405" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(<span class="fu">lm</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> freq_z, <span class="at">data =</span> df_freq_full))<span class="sc">$</span>adj.r.squared</span>
+<span id="cb52-406"><a href="#cb52-406" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-407"><a href="#cb52-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-408"><a href="#cb52-408" aria-hidden="true" tabindex="-1"></a>If we likewise compare to the same model without an interaction term (log reaction times ~ frequency * length), we see that the adjusted $R^2$ is not very different. If the adjusted $R^2$ were much lower, this would indicate that including the interaction term leads to overfitting.</span>
+<span id="cb52-409"><a href="#cb52-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-412"><a href="#cb52-412" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-413"><a href="#cb52-413" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(<span class="fu">lm</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> freq_z <span class="sc">+</span> length_z, <span class="at">data =</span> df_freq_full))<span class="sc">$</span>adj.r.squared</span>
+<span id="cb52-414"><a href="#cb52-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-415"><a href="#cb52-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-416"><a href="#cb52-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-417"><a href="#cb52-417" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important terms {.unnumbered .smaller}</span></span>
+<span id="cb52-418"><a href="#cb52-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-419"><a href="#cb52-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-422"><a href="#cb52-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-423"><a href="#cb52-423" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb52-424"><a href="#cb52-424" aria-hidden="true" tabindex="-1"></a>content <span class="ot">&lt;-</span> </span>
+<span id="cb52-425"><a href="#cb52-425" aria-hidden="true" tabindex="-1"></a>  googlesheets4<span class="sc">::</span><span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing"</span>)</span>
+<span id="cb52-426"><a href="#cb52-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-427"><a href="#cb52-427" aria-hidden="true" tabindex="-1"></a>content <span class="sc">|&gt;</span> </span>
+<span id="cb52-428"><a href="#cb52-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Lecture topic</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"04 - Multiple regression"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-429"><a href="#cb52-429" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Lecture topic</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-430"><a href="#cb52-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() </span>
+<span id="cb52-431"><a href="#cb52-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-432"><a href="#cb52-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-433"><a href="#cb52-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-434"><a href="#cb52-434" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives  🏁 {.unnumbered .unlisted}</span></span>
+<span id="cb52-435"><a href="#cb52-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-436"><a href="#cb52-436" aria-hidden="true" tabindex="-1"></a>Today we learned...</span>
+<span id="cb52-437"><a href="#cb52-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-438"><a href="#cb52-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>what multiple regression is</span>
+<span id="cb52-439"><a href="#cb52-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to include multiple predictor variables</span>
+<span id="cb52-440"><a href="#cb52-440" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret slopes in multiple regression</span>
+<span id="cb52-441"><a href="#cb52-441" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret interaction effects</span>
+<span id="cb52-442"><a href="#cb52-442" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about the assumption of the absence of collinearity</span>
+<span id="cb52-443"><a href="#cb52-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-444"><a href="#cb52-444" aria-hidden="true" tabindex="-1"></a><span class="fu">## Task</span></span>
+<span id="cb52-445"><a href="#cb52-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-446"><a href="#cb52-446" aria-hidden="true" tabindex="-1"></a>Load in the <span class="in">`english`</span> dataset from the <span class="in">`languageR`</span> package <span class="co">[</span><span class="ot">@languageR-package</span><span class="co">]</span> (code below). You don't need to load in any CSV file, because this dataset is available if you have the package loaded. From the manual:</span>
+<span id="cb52-447"><a href="#cb52-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-448"><a href="#cb52-448" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This data set gives mean visual lexical decision latencies and word naming latencies to 2284 monomorphemic English nouns and verbs, averaged for old and young subjects, with various predictor variables.</span></span>
+<span id="cb52-449"><a href="#cb52-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-450"><a href="#cb52-450" aria-hidden="true" tabindex="-1"></a>(<span class="co">[</span><span class="ot">languageR manual, p. 29</span><span class="co">](https://cran.r-project.org/web/packages/languageR/languageR.pdf)</span>)</span>
+<span id="cb52-451"><a href="#cb52-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-454"><a href="#cb52-454" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-455"><a href="#cb52-455" aria-hidden="true" tabindex="-1"></a><span class="co"># load in 'english' dataset from languageR</span></span>
+<span id="cb52-456"><a href="#cb52-456" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="ot">&lt;-</span></span>
+<span id="cb52-457"><a href="#cb52-457" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(english) <span class="sc">|&gt;</span> </span>
+<span id="cb52-458"><a href="#cb52-458" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RTlexdec, RTnaming, Word, LengthInLetters, AgeSubject, WrittenFrequency) <span class="sc">|&gt;</span> </span>
+<span id="cb52-459"><a href="#cb52-459" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">rt_lexdec =</span> RTlexdec,</span>
+<span id="cb52-460"><a href="#cb52-460" aria-hidden="true" tabindex="-1"></a>         <span class="at">rt_naming =</span> RTnaming,</span>
+<span id="cb52-461"><a href="#cb52-461" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_written =</span> WrittenFrequency) <span class="sc">|&gt;</span> </span>
+<span id="cb52-462"><a href="#cb52-462" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb52-463"><a href="#cb52-463" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(word)</span>
+<span id="cb52-464"><a href="#cb52-464" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-465"><a href="#cb52-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-466"><a href="#cb52-466" aria-hidden="true" tabindex="-1"></a>We're keeping five variables:</span>
+<span id="cb52-467"><a href="#cb52-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-468"><a href="#cb52-468" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`word`</span>: a factor with 2284 words</span>
+<span id="cb52-469"><a href="#cb52-469" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`rt_lexdec`</span>: numeric vector of log RT in visual lexical decision</span>
+<span id="cb52-470"><a href="#cb52-470" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`rt_naming`</span>: numeric vector of log RT in word naming</span>
+<span id="cb52-471"><a href="#cb52-471" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`length_in_letters`</span>: numeric vector with length of the word in letters</span>
+<span id="cb52-472"><a href="#cb52-472" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`AgeSubject`</span>: a factor with as levels the age group of the subject: young versus old.</span>
+<span id="cb52-473"><a href="#cb52-473" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`freq_written`</span>: numeric vector with log frequency in the CELEX lexical database</span>
+<span id="cb52-474"><a href="#cb52-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-475"><a href="#cb52-475" aria-hidden="true" tabindex="-1"></a>Take the following steps:</span>
+<span id="cb52-476"><a href="#cb52-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-477"><a href="#cb52-477" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Perform an exploratory data analysis to understand the data (produce plots, tables, whatever you think necessary and can do).</span>
+<span id="cb52-478"><a href="#cb52-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-479"><a href="#cb52-479" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Model the data, with *back-transformed* (raw) reaction times as a response variable and written frequency and length in letters as predictors. Perform any tranformations you think necessary. Run model diagnostic checks and assess model fit.</span>
+<span id="cb52-480"><a href="#cb52-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-483"><a href="#cb52-483" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-484"><a href="#cb52-484" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb52-485"><a href="#cb52-485" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb52-486"><a href="#cb52-486" aria-hidden="true" tabindex="-1"></a>fit_freq_eng <span class="ot">&lt;-</span></span>
+<span id="cb52-487"><a href="#cb52-487" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">exp</span>(rt_lexdec) <span class="sc">~</span> freq_written <span class="sc">*</span> length_in_letters, <span class="at">data =</span> df_freq_eng)</span>
+<span id="cb52-488"><a href="#cb52-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-489"><a href="#cb52-489" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_freq_eng)</span>
+<span id="cb52-490"><a href="#cb52-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-491"><a href="#cb52-491" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(fit_freq_eng)</span>
+<span id="cb52-492"><a href="#cb52-492" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-493"><a href="#cb52-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-494"><a href="#cb52-494" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Re-run the model with log reaction times as a response variable and written frequency and length in letters as predictors. Perform any tranformations you think necessary. Run model diagnostic checks and assess model fit.</span>
+<span id="cb52-495"><a href="#cb52-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-496"><a href="#cb52-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-499"><a href="#cb52-499" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-500"><a href="#cb52-500" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb52-501"><a href="#cb52-501" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb52-502"><a href="#cb52-502" aria-hidden="true" tabindex="-1"></a>fit_freq_eng_log <span class="ot">&lt;-</span></span>
+<span id="cb52-503"><a href="#cb52-503" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt_lexdec <span class="sc">~</span> freq_written <span class="sc">*</span> length_in_letters, <span class="at">data =</span> df_freq_eng)</span>
+<span id="cb52-504"><a href="#cb52-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-505"><a href="#cb52-505" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_freq_eng_log)</span>
+<span id="cb52-506"><a href="#cb52-506" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_eng)</span>
+<span id="cb52-507"><a href="#cb52-507" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_eng_log)</span>
+<span id="cb52-508"><a href="#cb52-508" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(fit_freq_eng_log)</span>
+<span id="cb52-509"><a href="#cb52-509" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(fit_freq_eng)</span>
+<span id="cb52-510"><a href="#cb52-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-511"><a href="#cb52-511" aria-hidden="true" tabindex="-1"></a><span class="co"># interaction term highly corr'd with frequency</span></span>
+<span id="cb52-512"><a href="#cb52-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-513"><a href="#cb52-513" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(fit_freq_eng_log)</span>
+<span id="cb52-514"><a href="#cb52-514" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-515"><a href="#cb52-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-516"><a href="#cb52-516" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Remove length in letters as a predictor. How is model fit affected? What can you conclude?</span>
+<span id="cb52-517"><a href="#cb52-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-520"><a href="#cb52-520" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-521"><a href="#cb52-521" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb52-522"><a href="#cb52-522" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb52-523"><a href="#cb52-523" aria-hidden="true" tabindex="-1"></a>fit_freq_eng_simp <span class="ot">&lt;-</span></span>
+<span id="cb52-524"><a href="#cb52-524" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt_lexdec <span class="sc">~</span> freq_written, <span class="at">data =</span> df_freq_eng)</span>
+<span id="cb52-525"><a href="#cb52-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-526"><a href="#cb52-526" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_freq_eng_simp)</span>
+<span id="cb52-527"><a href="#cb52-527" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_eng_simp)</span>
+<span id="cb52-528"><a href="#cb52-528" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_eng_log)</span>
+<span id="cb52-529"><a href="#cb52-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-530"><a href="#cb52-530" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(fit_freq_eng_simp)</span>
+<span id="cb52-531"><a href="#cb52-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-532"><a href="#cb52-532" aria-hidden="true" tabindex="-1"></a><span class="co"># decision: should length and interaction effect be included? doesn't hurt or help model fit it seems</span></span>
+<span id="cb52-533"><a href="#cb52-533" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-534"><a href="#cb52-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-535"><a href="#cb52-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-536"><a href="#cb52-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-537"><a href="#cb52-537" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session Info {.unnumbered visibility="uncounted"}</span></span>
+<span id="cb52-538"><a href="#cb52-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-541"><a href="#cb52-541" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-542"><a href="#cb52-542" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb52-543"><a href="#cb52-543" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb52-544"><a href="#cb52-544" aria-hidden="true" tabindex="-1"></a><span class="fu">RStudio.Version</span>()<span class="sc">$</span>version</span>
+<span id="cb52-545"><a href="#cb52-545" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-546"><a href="#cb52-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-547"><a href="#cb52-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-548"><a href="#cb52-548" aria-hidden="true" tabindex="-1"></a>Developed with Quarto using <span class="in">`r R.version.string`</span> (<span class="in">`r R.version$nickname`</span>) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</span>
+<span id="cb52-549"><a href="#cb52-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-552"><a href="#cb52-552" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb52-553"><a href="#cb52-553" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb52-554"><a href="#cb52-554" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb52-555"><a href="#cb52-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-556"><a href="#cb52-556" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unlisted .unnumbered visibility="uncounted"}</span></span>
+<span id="cb52-557"><a href="#cb52-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-558"><a href="#cb52-558" aria-hidden="true" tabindex="-1"></a>::: {#refs custom-style="Bibliography"}</span>
+<span id="cb52-559"><a href="#cb52-559" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

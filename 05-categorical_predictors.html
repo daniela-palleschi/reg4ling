@@ -327,16 +327,27 @@ MathJax.Hub.Config({
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Mixed models I</span></span>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Mixed models II</span></span>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 5: TBD</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Mixed models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-independence_assumption.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Independence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-mixed_models1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed models 1: Random intercepts</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -367,6 +378,7 @@ MathJax.Hub.Config({
   <li><a href="#sum-contrasts-1" id="toc-sum-contrasts-1" class="nav-link" data-scroll-target="#sum-contrasts-1"><span class="header-section-number">5.4.2</span> Sum contrasts</a></li>
   <li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link" data-scroll-target="#multiple-regression"><span class="header-section-number">5.4.3</span> Multiple regression</a></li>
   </ul></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session Info</a></li>
   </ul>
 </nav>
     </div>
@@ -407,7 +419,7 @@ MathJax.Hub.Config({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 15, 2023</p>
+      <p class="date-modified">January 5, 2024</p>
     </div>
   </div>
     
@@ -932,8 +944,59 @@ Levels: old young</code></pre>
 </ol>
 </section>
 </section>
-<section id="literaturverzeichnis" class="level2 unlisted unnumbered" data-visibility="uncounted">
-<h2 class="unlisted unnumbered anchored" data-visibility="uncounted" data-anchor-id="literaturverzeichnis">Literaturverzeichnis</h2>
+<section id="session-info" class="level2 unnumbered" data-visibility="uncounted">
+<h2 class="unnumbered anchored" data-visibility="uncounted" data-anchor-id="session-info">Session Info</h2>
+<p>Developed with Quarto using R version 4.3.0 (2023-04-21) (Already Tomorrow) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.0 (2023-04-21)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Ventura 13.2.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/Berlin
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] kableExtra_1.3.4 knitr_1.44       patchwork_1.1.3  languageR_1.5.0 
+ [5] janitor_2.2.0    lme4_1.1-33      Matrix_1.5-4     broom_1.0.5     
+ [9] here_1.0.1       lubridate_1.9.2  forcats_1.0.0    stringr_1.5.0   
+[13] dplyr_1.1.3      purrr_1.0.2      readr_2.1.4      tidyr_1.3.0     
+[17] tibble_3.2.1     ggplot2_3.4.3    tidyverse_2.0.0 
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.4      xfun_0.39         htmlwidgets_1.6.2 lattice_0.21-8   
+ [5] tzdb_0.4.0        vctrs_0.6.3       tools_4.3.0       generics_0.1.3   
+ [9] parallel_4.3.0    fansi_1.0.4       highr_0.10        pacman_0.5.1     
+[13] pkgconfig_2.0.3   webshot_0.5.4     lifecycle_1.0.3   farver_2.1.1     
+[17] compiler_4.3.0    munsell_0.5.0     carData_3.0-5     snakecase_0.11.0 
+[21] htmltools_0.5.5   yaml_2.3.7        crayon_1.5.2      car_3.1-2        
+[25] pillar_1.9.0      nloptr_2.0.3      MASS_7.3-58.4     abind_1.4-5      
+[29] boot_1.3-28.1     nlme_3.1-162      tidyselect_1.2.0  rvest_1.0.3      
+[33] digest_0.6.33     stringi_1.7.12    labeling_0.4.3    splines_4.3.0    
+[37] rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.0        colorspace_2.1-0 
+[41] cli_3.6.1         magrittr_2.0.3    utf8_1.2.3        withr_2.5.0      
+[45] scales_1.2.1      backports_1.4.1   bit64_4.0.5       timechange_0.2.0 
+[49] rmarkdown_2.22    httr_1.4.6        bit_4.0.5         hms_1.1.3        
+[53] evaluate_0.21     viridisLite_0.4.2 mgcv_1.8-42       rlang_1.1.1      
+[57] Rcpp_1.0.11       glue_1.6.2        xml2_1.3.4        vroom_1.6.3      
+[61] svglite_2.1.1     rstudioapi_0.14   minqa_1.2.5       jsonlite_1.8.7   
+[65] R6_2.5.1          systemfonts_1.0.4</code></pre>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unlisted unnumbered" data-visibility="uncounted">
+<h2 class="unlisted unnumbered anchored" data-visibility="uncounted" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-custom-style="Bibliography" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-biondo_yesterday_2022" class="csl-entry" role="listitem">
 Biondo, N., Soilemezidi, M., &amp; Mancini, S. (2022). Yesterday is history, tomorrow is a mystery: <span>An</span> eye-tracking investigation of the processing of past and future time reference during sentence reading. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, <em>48</em>(7), 1001–1018. <a href="https://doi.org/10.1037/xlm0001053">https://doi.org/10.1037/xlm0001053</a>
@@ -1365,480 +1428,494 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb71" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Categorical predictors"</span></span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Regression for Linguists"</span></span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Daniela Palleschi"</span></span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> Humboldt-Universität zu Berlin</span></span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="co"># footer: "Lecture 1.1 - R und RStudio"</span></span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> en</span></span>
-<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "10/11/2023"</span></span>
-<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
-<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered .unlisted}</span></span>
-<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a>Today we will learn...</span>
-<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about cateogorical predictors</span>
-<span id="cb71-17"><a href="#cb71-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret different contrast coding</span>
-<span id="cb71-18"><a href="#cb71-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-19"><a href="#cb71-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Set-up environment  {.unnumbered}</span></span>
-<span id="cb71-20"><a href="#cb71-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-23"><a href="#cb71-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-24"><a href="#cb71-24" aria-hidden="true" tabindex="-1"></a><span class="co"># suppress scientific notation</span></span>
-<span id="cb71-25"><a href="#cb71-25" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span>
-<span id="cb71-26"><a href="#cb71-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-27"><a href="#cb71-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-28"><a href="#cb71-28" aria-hidden="true" tabindex="-1"></a>We'll also need to load in our required packages. </span>
-<span id="cb71-29"><a href="#cb71-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-32"><a href="#cb71-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-33"><a href="#cb71-33" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
-<span id="cb71-34"><a href="#cb71-34" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb71-35"><a href="#cb71-35" aria-hidden="true" tabindex="-1"></a>               tidyverse,</span>
-<span id="cb71-36"><a href="#cb71-36" aria-hidden="true" tabindex="-1"></a>               here,</span>
-<span id="cb71-37"><a href="#cb71-37" aria-hidden="true" tabindex="-1"></a>               broom,</span>
-<span id="cb71-38"><a href="#cb71-38" aria-hidden="true" tabindex="-1"></a>               lme4,</span>
-<span id="cb71-39"><a href="#cb71-39" aria-hidden="true" tabindex="-1"></a>               janitor,</span>
-<span id="cb71-40"><a href="#cb71-40" aria-hidden="true" tabindex="-1"></a>               languageR)</span>
-<span id="cb71-41"><a href="#cb71-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-42"><a href="#cb71-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-45"><a href="#cb71-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-46"><a href="#cb71-46" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb71-47"><a href="#cb71-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-48"><a href="#cb71-48" aria-hidden="true" tabindex="-1"></a><span class="co"># extra packages for the lecture notes/slides</span></span>
-<span id="cb71-49"><a href="#cb71-49" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb71-50"><a href="#cb71-50" aria-hidden="true" tabindex="-1"></a>               patchwork,</span>
-<span id="cb71-51"><a href="#cb71-51" aria-hidden="true" tabindex="-1"></a>               knitr,</span>
-<span id="cb71-52"><a href="#cb71-52" aria-hidden="true" tabindex="-1"></a>               kableExtra)</span>
-<span id="cb71-53"><a href="#cb71-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-54"><a href="#cb71-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-55"><a href="#cb71-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### Load data {.unnumbered .unlisted}</span></span>
-<span id="cb71-56"><a href="#cb71-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-57"><a href="#cb71-57" aria-hidden="true" tabindex="-1"></a>Let's continue working with the <span class="in">`english`</span> dataset from the <span class="in">`languageR`</span> package. Let's just call it <span class="in">`df_freq_eng`</span>.</span>
-<span id="cb71-58"><a href="#cb71-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-61"><a href="#cb71-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-62"><a href="#cb71-62" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="ot">&lt;-</span></span>
-<span id="cb71-63"><a href="#cb71-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(english) <span class="sc">|&gt;</span> </span>
-<span id="cb71-64"><a href="#cb71-64" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RTlexdec, RTnaming, Word, LengthInLetters, AgeSubject, WrittenFrequency) <span class="sc">|&gt;</span> </span>
-<span id="cb71-65"><a href="#cb71-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">rt_lexdec =</span> RTlexdec,</span>
-<span id="cb71-66"><a href="#cb71-66" aria-hidden="true" tabindex="-1"></a>         <span class="at">rt_naming =</span> RTnaming,</span>
-<span id="cb71-67"><a href="#cb71-67" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_written =</span> WrittenFrequency) <span class="sc">|&gt;</span> </span>
-<span id="cb71-68"><a href="#cb71-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb71-69"><a href="#cb71-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># standardize continuous predictors</span></span>
-<span id="cb71-70"><a href="#cb71-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb71-71"><a href="#cb71-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">freq_z =</span> <span class="fu">scale</span>(freq_written),</span>
-<span id="cb71-72"><a href="#cb71-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">length_z =</span> <span class="fu">scale</span>(length_in_letters)</span>
-<span id="cb71-73"><a href="#cb71-73" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb71-74"><a href="#cb71-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(word) <span class="sc">|&gt;</span> </span>
-<span id="cb71-75"><a href="#cb71-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(word)</span>
-<span id="cb71-76"><a href="#cb71-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-77"><a href="#cb71-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-78"><a href="#cb71-78" aria-hidden="true" tabindex="-1"></a>In your exploratory data analysis, you might've noticed a *bimodal* distribution.</span>
-<span id="cb71-79"><a href="#cb71-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-80"><a href="#cb71-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-83"><a href="#cb71-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-84"><a href="#cb71-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb71-85"><a href="#cb71-85" aria-hidden="true" tabindex="-1"></a>fig_hist_log <span class="ot">&lt;-</span> </span>
-<span id="cb71-86"><a href="#cb71-86" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-87"><a href="#cb71-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-88"><a href="#cb71-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rt_lexdec) <span class="sc">+</span></span>
-<span id="cb71-89"><a href="#cb71-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() </span>
-<span id="cb71-90"><a href="#cb71-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-91"><a href="#cb71-91" aria-hidden="true" tabindex="-1"></a>fig_dens_log <span class="ot">&lt;-</span> </span>
-<span id="cb71-92"><a href="#cb71-92" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-93"><a href="#cb71-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-94"><a href="#cb71-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rt_lexdec) <span class="sc">+</span></span>
-<span id="cb71-95"><a href="#cb71-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() </span>
-<span id="cb71-96"><a href="#cb71-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-97"><a href="#cb71-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-98"><a href="#cb71-98" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="ot">&lt;-</span></span>
-<span id="cb71-99"><a href="#cb71-99" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-100"><a href="#cb71-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-101"><a href="#cb71-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rt_lexdec, <span class="at">fill =</span> age_subject) <span class="sc">+</span></span>
-<span id="cb71-102"><a href="#cb71-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
-<span id="cb71-103"><a href="#cb71-103" aria-hidden="true" tabindex="-1"></a>  <span class="co"># facet_grid(.~age_subject) +</span></span>
-<span id="cb71-104"><a href="#cb71-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb71-105"><a href="#cb71-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-106"><a href="#cb71-106" aria-hidden="true" tabindex="-1"></a>fig_dens <span class="ot">&lt;-</span></span>
-<span id="cb71-107"><a href="#cb71-107" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-108"><a href="#cb71-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-109"><a href="#cb71-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rt_lexdec, <span class="at">colour =</span> age_subject, <span class="at">fill =</span> age_subject) <span class="sc">+</span></span>
-<span id="cb71-110"><a href="#cb71-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_density</span>(<span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb71-111"><a href="#cb71-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
-<span id="cb71-112"><a href="#cb71-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-113"><a href="#cb71-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-114"><a href="#cb71-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-115"><a href="#cb71-115" aria-hidden="true" tabindex="-1"></a>  (fig_hist_log <span class="sc">+</span> fig_dens_log) <span class="sc">/</span></span>
-<span id="cb71-116"><a href="#cb71-116" aria-hidden="true" tabindex="-1"></a>  (fig_hist <span class="sc">+</span> fig_dens)</span>
-<span id="cb71-117"><a href="#cb71-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-118"><a href="#cb71-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-119"><a href="#cb71-119" aria-hidden="true" tabindex="-1"></a>This looks like a *bimodal* distribution, i.e., there are two *modes* (most frequent value, i.e., peak in a histogram). What might be driving this? We know that there were two subject groups: old and young. How does the distribution of these two groups look?</span>
-<span id="cb71-120"><a href="#cb71-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-121"><a href="#cb71-121" aria-hidden="true" tabindex="-1"></a>Running our model of the log reaction times as predicted by frequency and length, we see:</span>
-<span id="cb71-122"><a href="#cb71-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-125"><a href="#cb71-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-126"><a href="#cb71-126" aria-hidden="true" tabindex="-1"></a>fit_freq_length <span class="ot">&lt;-</span></span>
-<span id="cb71-127"><a href="#cb71-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt_lexdec <span class="sc">~</span> freq_z<span class="sc">*</span>length_z,</span>
-<span id="cb71-128"><a href="#cb71-128" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_eng)</span>
-<span id="cb71-129"><a href="#cb71-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-130"><a href="#cb71-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-133"><a href="#cb71-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-134"><a href="#cb71-134" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_length)<span class="sc">$</span>r.squared</span>
-<span id="cb71-135"><a href="#cb71-135" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_length)<span class="sc">$</span>adj.r.squared</span>
-<span id="cb71-136"><a href="#cb71-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-137"><a href="#cb71-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-138"><a href="#cb71-138" aria-hidden="true" tabindex="-1"></a>Seems like we don't have any overfitting in our model ($R^2$ and adjusted $R^2$ are comparable). Let's look at our coeffiecients.</span>
-<span id="cb71-139"><a href="#cb71-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-142"><a href="#cb71-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-143"><a href="#cb71-143" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_length) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
-<span id="cb71-144"><a href="#cb71-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-145"><a href="#cb71-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-146"><a href="#cb71-146" aria-hidden="true" tabindex="-1"></a>There is a negative slope for frequency, indicating shorter reaction times for words with higher frequency (when holding length constant). There is a positive slope for length, indicating longer reaction times for longer words (holding frequency constant). There is also a negative interaction estimate, indicating that when both length and frequency increase, reaction times decrease. This seems similar to the dataset we explored in the previous sections. But, this bimodal distribution is suggesting we should include age group as a predictor, since the two groups seem to pattern differently in their reading times. Could it be that the effect of frequency and length also differ as a function of age group?</span>
-<span id="cb71-147"><a href="#cb71-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-148"><a href="#cb71-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Categorical predictors</span></span>
-<span id="cb71-149"><a href="#cb71-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-150"><a href="#cb71-150" aria-hidden="true" tabindex="-1"></a>In linguistic research we often want to compare the effect of *groups* or categories, such as native or non-native speakers, or grammatical or ungrammatical stimuli. We might expect longer reading times for non-native (compared to native) speakers of a language, or for ungrammatical (versus grammatical) sentences. With our current dataset, we'd predict longer reading times for older participants than younger participants (although we should hypothesise *before* collecting and visualising our data!). How might these age effects interact with effects of word frequency and length?</span>
-<span id="cb71-151"><a href="#cb71-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-152"><a href="#cb71-152" aria-hidden="true" tabindex="-1"></a><span class="fu">### Including a categorical predictor</span></span>
-<span id="cb71-153"><a href="#cb71-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-154"><a href="#cb71-154" aria-hidden="true" tabindex="-1"></a>What would happen if we just include <span class="in">`age_subject`</span> in our model?</span>
-<span id="cb71-155"><a href="#cb71-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-158"><a href="#cb71-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-159"><a href="#cb71-159" aria-hidden="true" tabindex="-1"></a>fit_age <span class="ot">&lt;-</span></span>
-<span id="cb71-160"><a href="#cb71-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt_lexdec <span class="sc">~</span> freq_z<span class="sc">*</span>length_z <span class="sc">+</span> age_subject,</span>
-<span id="cb71-161"><a href="#cb71-161" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_eng)</span>
-<span id="cb71-162"><a href="#cb71-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-163"><a href="#cb71-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-164"><a href="#cb71-164" aria-hidden="true" tabindex="-1"></a>First, we see that adding age to our model results in a large increase in variance explained, and that the $R^2$ and adjusted $R^2$ values are comparable. In addition, the VIF values for all coefficients are near 1. This indicates that our predictors all contribute to the variance explained by the model and are not correlated.</span>
-<span id="cb71-165"><a href="#cb71-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-168"><a href="#cb71-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-169"><a href="#cb71-169" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age)<span class="sc">$</span>r.squared</span>
-<span id="cb71-170"><a href="#cb71-170" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age)<span class="sc">$</span>adj.r.squared</span>
-<span id="cb71-171"><a href="#cb71-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-172"><a href="#cb71-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-175"><a href="#cb71-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-176"><a href="#cb71-176" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(fit_age)</span>
-<span id="cb71-177"><a href="#cb71-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-178"><a href="#cb71-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-179"><a href="#cb71-179" aria-hidden="true" tabindex="-1"></a>Now that we see that our model is not overfit and that our predictors are not correlatd, let's take a look at our model estimates.</span>
-<span id="cb71-180"><a href="#cb71-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-183"><a href="#cb71-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-184"><a href="#cb71-184" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_age) <span class="sc">|&gt;</span> <span class="fu">select</span>(term,estimate)</span>
-<span id="cb71-185"><a href="#cb71-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-186"><a href="#cb71-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-187"><a href="#cb71-187" aria-hidden="true" tabindex="-1"></a>In addition to the effects we observed in our earlier model, we see that there is a negative slope for <span class="in">`age_subjectyoung`</span>, indicating that reaction times decrease when...what? How do we interpret a slope for a categorical variable? Regression works with numerical values, so how does a categorical variable get fit to a line? If we feed a categorical variable into the <span class="in">`lm()`</span> function, the factor levels (i.e., the categories in a categorical variable) are given numerical values. We need to know what these values are in order to know how to interpret our model estimates. We call these numerical values mapped onto factor levels contrast coding, and we can check the contrasts of a given factor using the function <span class="in">`contrasts()`</span>.</span>
-<span id="cb71-188"><a href="#cb71-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-191"><a href="#cb71-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-192"><a href="#cb71-192" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
-<span id="cb71-193"><a href="#cb71-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-194"><a href="#cb71-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-195"><a href="#cb71-195" aria-hidden="true" tabindex="-1"></a>We see that <span class="in">`old`</span> was coded at $0$ and <span class="in">`young`</span> as $1$. This means that our slope for <span class="in">`age_subjectyoung`</span> represents the change in reaction times when we move from <span class="in">`old`</span> to <span class="in">`young`</span>, which corresponds to a 1-unit change in our predictor (because the difference between 0 and 1 is 1). This is called treatment coding, or dummy coding, where one factor level is coded as 0 and the other as 1. Let's remove the continuous variable for now and focus on <span class="in">`age_subject`</span>. Let's also look at raw reaction times, to more easily interpret the results.</span>
-<span id="cb71-196"><a href="#cb71-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-199"><a href="#cb71-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-200"><a href="#cb71-200" aria-hidden="true" tabindex="-1"></a>fit_age <span class="ot">&lt;-</span></span>
-<span id="cb71-201"><a href="#cb71-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">exp</span>(rt_lexdec) <span class="sc">~</span> age_subject,</span>
-<span id="cb71-202"><a href="#cb71-202" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_eng)</span>
-<span id="cb71-203"><a href="#cb71-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-204"><a href="#cb71-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-207"><a href="#cb71-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-208"><a href="#cb71-208" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age)<span class="sc">$</span>r.squared</span>
-<span id="cb71-209"><a href="#cb71-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-210"><a href="#cb71-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-211"><a href="#cb71-211" aria-hidden="true" tabindex="-1"></a>Our $R^2$ value is lower than when we included frequency and length, but higher still than our model with frequeny and length but no age.</span>
-<span id="cb71-212"><a href="#cb71-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-215"><a href="#cb71-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-216"><a href="#cb71-216" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_age) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
-<span id="cb71-217"><a href="#cb71-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-218"><a href="#cb71-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-219"><a href="#cb71-219" aria-hidden="true" tabindex="-1"></a>We see that there is an estimated decrease in reaction times of 157ms for the young group compared to the old group. But what does the intercept represent here? Let's look at our data again.</span>
-<span id="cb71-220"><a href="#cb71-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-223"><a href="#cb71-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-224"><a href="#cb71-224" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-225"><a href="#cb71-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rt_lexdec, age_subject) <span class="sc">|&gt;</span> </span>
-<span id="cb71-226"><a href="#cb71-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rt_lexdec =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">|&gt;</span> </span>
-<span id="cb71-227"><a href="#cb71-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
-<span id="cb71-228"><a href="#cb71-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-229"><a href="#cb71-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-230"><a href="#cb71-230" aria-hidden="true" tabindex="-1"></a>And how does <span class="in">`rt_lexdec`</span> differ between the groups?</span>
-<span id="cb71-231"><a href="#cb71-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-234"><a href="#cb71-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-235"><a href="#cb71-235" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-236"><a href="#cb71-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rt_lexdec, age_subject) <span class="sc">|&gt;</span> </span>
-<span id="cb71-237"><a href="#cb71-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rt_lexdec =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">|&gt;</span> </span>
-<span id="cb71-238"><a href="#cb71-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(rt_lexdec),</span>
-<span id="cb71-239"><a href="#cb71-239" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(rt_lexdec),</span>
-<span id="cb71-240"><a href="#cb71-240" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(rt_lexdec),</span>
-<span id="cb71-241"><a href="#cb71-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> <span class="st">"age_subject"</span></span>
-<span id="cb71-242"><a href="#cb71-242" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb71-243"><a href="#cb71-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-244"><a href="#cb71-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-245"><a href="#cb71-245" aria-hidden="true" tabindex="-1"></a>We see here that the intercept for our model actually corresponds to the mean reaction time for the old group. Why is this? Recall that the intercept corresponds to the $y$ value (reaction time) when $x$ is $0$. In treatment/dummy coding, one factor level is coded as $0$. In our case this was <span class="in">`old`</span>, and so the intercept corresponds to the mean reaction time for participants in the old group. How does R choose which variable to code as $0$? It simply takes the first level name alphabetically: <span class="in">`old`</span> comes before <span class="in">`young`</span>, so <span class="in">`old`</span> was automatically taken as the 'baseline' to which <span class="in">`young`</span> was compared.</span>
-<span id="cb71-246"><a href="#cb71-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-247"><a href="#cb71-247" aria-hidden="true" tabindex="-1"></a>And if we were to add the slope to the intercept, we would get the mean for the $young$ group. Why is this?</span>
-<span id="cb71-248"><a href="#cb71-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-251"><a href="#cb71-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-252"><a href="#cb71-252" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit_age)[<span class="st">'(Intercept)'</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit_age)[<span class="st">'age_subjectyoung'</span>]</span>
-<span id="cb71-253"><a href="#cb71-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-254"><a href="#cb71-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-255"><a href="#cb71-255" aria-hidden="true" tabindex="-1"></a>Why are the means for the two groups used? The mean is the value closest to all values in a univariate dataset, and regression aims to inimise residuals (recall the line of best fit). So, a line is fit between the means of these two factor levels to achieve minimal residuals. This actually is the same thing as a *t*-test:</span>
-<span id="cb71-256"><a href="#cb71-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-259"><a href="#cb71-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-260"><a href="#cb71-260" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">exp</span>(rt_lexdec) <span class="sc">~</span> age_subject, <span class="at">data =</span> df_freq_eng)</span>
-<span id="cb71-261"><a href="#cb71-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-262"><a href="#cb71-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-263"><a href="#cb71-263" aria-hidden="true" tabindex="-1"></a>If we compare this to our model, we see that the *t*- and *p*-values are identical (more on these later).</span>
-<span id="cb71-264"><a href="#cb71-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-267"><a href="#cb71-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-268"><a href="#cb71-268" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_age)</span>
-<span id="cb71-269"><a href="#cb71-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-270"><a href="#cb71-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-273"><a href="#cb71-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-274"><a href="#cb71-274" aria-hidden="true" tabindex="-1"></a>fig_nocontrasts <span class="ot">&lt;-</span></span>
-<span id="cb71-275"><a href="#cb71-275" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-276"><a href="#cb71-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-277"><a href="#cb71-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age_subject, <span class="at">y =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">+</span></span>
-<span id="cb71-278"><a href="#cb71-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"No contrasts"</span>) <span class="sc">+</span></span>
-<span id="cb71-279"><a href="#cb71-279" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_vline(xintercept = 0, linetype="dashed", size = .5) +  </span></span>
-<span id="cb71-280"><a href="#cb71-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">6</span>)) <span class="sc">+</span> </span>
-<span id="cb71-281"><a href="#cb71-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb71-282"><a href="#cb71-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb71-283"><a href="#cb71-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-284"><a href="#cb71-284" aria-hidden="true" tabindex="-1"></a>fig_treatment <span class="ot">&lt;-</span></span>
-<span id="cb71-285"><a href="#cb71-285" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-286"><a href="#cb71-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_subject =</span> <span class="fu">if_else</span>(age_subject<span class="sc">==</span><span class="st">"young"</span>,<span class="dv">1</span>,<span class="dv">0</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb71-287"><a href="#cb71-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-288"><a href="#cb71-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age_subject, <span class="at">y =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">+</span></span>
-<span id="cb71-289"><a href="#cb71-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Treatment contrasts"</span>) <span class="sc">+</span></span>
-<span id="cb71-290"><a href="#cb71-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb71-291"><a href="#cb71-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">6</span>)) <span class="sc">+</span> </span>
-<span id="cb71-292"><a href="#cb71-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb71-293"><a href="#cb71-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb71-294"><a href="#cb71-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-295"><a href="#cb71-295" aria-hidden="true" tabindex="-1"></a>fig_nocontrasts <span class="sc">+</span> fig_treatment</span>
-<span id="cb71-296"><a href="#cb71-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-297"><a href="#cb71-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-298"><a href="#cb71-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-299"><a href="#cb71-299" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sum contrasts</span></span>
-<span id="cb71-300"><a href="#cb71-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-301"><a href="#cb71-301" aria-hidden="true" tabindex="-1"></a>Treatment/dummy coding is the default contrast coding scheme. Sum coding is another frequently used coding scheme, which is essentially centring categorical variables. Just as with continuous variables, the motivation for sum contrast coding mainly lies in the interpretation of interaction effects. How can we tell R we want to use sum contrast coding, and not dummy coding? There are different ways to do this:</span>
-<span id="cb71-302"><a href="#cb71-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-305"><a href="#cb71-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-306"><a href="#cb71-306" aria-hidden="true" tabindex="-1"></a><span class="co"># first, make sure your variable is a factor</span></span>
-<span id="cb71-307"><a href="#cb71-307" aria-hidden="true" tabindex="-1"></a>df_freq_eng<span class="sc">$</span>age_subject <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
-<span id="cb71-308"><a href="#cb71-308" aria-hidden="true" tabindex="-1"></a><span class="co"># check</span></span>
-<span id="cb71-309"><a href="#cb71-309" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
-<span id="cb71-310"><a href="#cb71-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-311"><a href="#cb71-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-314"><a href="#cb71-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-315"><a href="#cb71-315" aria-hidden="true" tabindex="-1"></a><span class="co"># next, you could use the contr.sum() function</span></span>
-<span id="cb71-316"><a href="#cb71-316" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>) <span class="co"># where 2 means we have 2 levels</span></span>
-<span id="cb71-317"><a href="#cb71-317" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
-<span id="cb71-318"><a href="#cb71-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-319"><a href="#cb71-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-320"><a href="#cb71-320" aria-hidden="true" tabindex="-1"></a>Here we see that <span class="in">`old`</span> is coded as $-1$ and <span class="in">`young`</span> as $+1$. I prefer to use +/-0.5 for reasons we don't need to go into here. I would also prefer to have <span class="in">`young`</span> coded in the negative value, and <span class="in">`old`</span> in the positive value. This aids in the way I interpret the slope: a change in reaction times for the older group compared to the younger group.</span>
-<span id="cb71-321"><a href="#cb71-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-324"><a href="#cb71-324" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-325"><a href="#cb71-325" aria-hidden="true" tabindex="-1"></a><span class="co">#or, you could manually control the sum contrasts</span></span>
-<span id="cb71-326"><a href="#cb71-326" aria-hidden="true" tabindex="-1"></a><span class="do">## check the order of the levels</span></span>
-<span id="cb71-327"><a href="#cb71-327" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
-<span id="cb71-328"><a href="#cb71-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-329"><a href="#cb71-329" aria-hidden="true" tabindex="-1"></a><span class="do">## code 'old' as +.5 and 'young' as -.5</span></span>
-<span id="cb71-330"><a href="#cb71-330" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">+</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
-<span id="cb71-331"><a href="#cb71-331" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
-<span id="cb71-332"><a href="#cb71-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-333"><a href="#cb71-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-334"><a href="#cb71-334" aria-hidden="true" tabindex="-1"></a>You could also choose to store the contrast values in their own variable.</span>
-<span id="cb71-335"><a href="#cb71-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-338"><a href="#cb71-338" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-339"><a href="#cb71-339" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="ot">&lt;-</span> </span>
-<span id="cb71-340"><a href="#cb71-340" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-341"><a href="#cb71-341" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_numeric =</span> <span class="fu">ifelse</span>(age_subject <span class="sc">==</span> <span class="st">"young"</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>))</span>
-<span id="cb71-342"><a href="#cb71-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-343"><a href="#cb71-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-346"><a href="#cb71-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-347"><a href="#cb71-347" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-348"><a href="#cb71-348" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age_subject, age_numeric) <span class="sc">|&gt;</span> </span>
-<span id="cb71-349"><a href="#cb71-349" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
-<span id="cb71-350"><a href="#cb71-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-351"><a href="#cb71-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-352"><a href="#cb71-352" aria-hidden="true" tabindex="-1"></a>Now, we can run our model using either <span class="in">`age_subject`</span> or <span class="in">`age_numeric`</span>.</span>
-<span id="cb71-353"><a href="#cb71-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-356"><a href="#cb71-356" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-357"><a href="#cb71-357" aria-hidden="true" tabindex="-1"></a>fit_age_sum <span class="ot">&lt;-</span></span>
-<span id="cb71-358"><a href="#cb71-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">exp</span>(rt_lexdec) <span class="sc">~</span> age_subject,</span>
-<span id="cb71-359"><a href="#cb71-359" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_eng)</span>
-<span id="cb71-360"><a href="#cb71-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-361"><a href="#cb71-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-364"><a href="#cb71-364" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-365"><a href="#cb71-365" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age_sum)<span class="sc">$</span>r.squared</span>
-<span id="cb71-366"><a href="#cb71-366" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age)<span class="sc">$</span>r.squared</span>
-<span id="cb71-367"><a href="#cb71-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-368"><a href="#cb71-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-369"><a href="#cb71-369" aria-hidden="true" tabindex="-1"></a>No difference in variance account for by our model.</span>
-<span id="cb71-370"><a href="#cb71-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-373"><a href="#cb71-373" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-374"><a href="#cb71-374" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_age_sum) <span class="sc">|&gt;</span> <span class="fu">select</span>(term,estimate)</span>
-<span id="cb71-375"><a href="#cb71-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-376"><a href="#cb71-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-377"><a href="#cb71-377" aria-hidden="true" tabindex="-1"></a>But there is a difference in the intercept, and a change in sign in our slope. Why is this?</span>
-<span id="cb71-378"><a href="#cb71-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-381"><a href="#cb71-381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-382"><a href="#cb71-382" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-contrasts</span></span>
-<span id="cb71-383"><a href="#cb71-383" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: The difference in slope corresponds to which level is coded as 0 (dummy coding) or -5/-1 (sum coding)</span></span>
-<span id="cb71-384"><a href="#cb71-384" aria-hidden="true" tabindex="-1"></a>fig_sum1 <span class="ot">&lt;-</span></span>
-<span id="cb71-385"><a href="#cb71-385" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-386"><a href="#cb71-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_subject =</span> <span class="fu">if_else</span>(age_subject<span class="sc">==</span><span class="st">"young"</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb71-387"><a href="#cb71-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-388"><a href="#cb71-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age_subject, <span class="at">y =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">+</span></span>
-<span id="cb71-389"><a href="#cb71-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sum contrasts"</span>) <span class="sc">+</span></span>
-<span id="cb71-390"><a href="#cb71-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb71-391"><a href="#cb71-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">6</span>)) <span class="sc">+</span> </span>
-<span id="cb71-392"><a href="#cb71-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb71-393"><a href="#cb71-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb71-394"><a href="#cb71-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-395"><a href="#cb71-395" aria-hidden="true" tabindex="-1"></a>fig_sum5 <span class="ot">&lt;-</span></span>
-<span id="cb71-396"><a href="#cb71-396" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
-<span id="cb71-397"><a href="#cb71-397" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_subject =</span> <span class="fu">if_else</span>(age_subject<span class="sc">==</span><span class="st">"young"</span>,<span class="sc">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb71-398"><a href="#cb71-398" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-399"><a href="#cb71-399" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age_subject, <span class="at">y =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">+</span></span>
-<span id="cb71-400"><a href="#cb71-400" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sum contrasts"</span>) <span class="sc">+</span></span>
-<span id="cb71-401"><a href="#cb71-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb71-402"><a href="#cb71-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">6</span>)) <span class="sc">+</span> </span>
-<span id="cb71-403"><a href="#cb71-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb71-404"><a href="#cb71-404" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb71-405"><a href="#cb71-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-406"><a href="#cb71-406" aria-hidden="true" tabindex="-1"></a>fig_treatment <span class="sc">+</span> fig_sum5 <span class="sc">+</span> <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">"A"</span>)</span>
-<span id="cb71-407"><a href="#cb71-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-408"><a href="#cb71-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-409"><a href="#cb71-409" aria-hidden="true" tabindex="-1"></a>As we see in @fig-contrasts, the sign of the slope depends on how we've contrast coded our factor levels. In @fig-contrasts A, the <span class="in">`old`</span> group is coded as $0$ and <span class="in">`young`</span> as $1$. In @fig-contrasts B, the <span class="in">`young`</span> group is coded as $-.5$ and the <span class="in">`old`</span> group as $+.5$.</span>
-<span id="cb71-410"><a href="#cb71-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-411"><a href="#cb71-411" aria-hidden="true" tabindex="-1"></a>The intercept value is also now the overall mean of all observed reaction times, because now the $y$ value when $x$ equals zero lies in the middle of the two groups. The slope magnitude (i.e., size of the value) hasn't changed, because the difference betwen the two group means has not changed.</span>
-<span id="cb71-412"><a href="#cb71-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-415"><a href="#cb71-415" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-416"><a href="#cb71-416" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">exp</span>(df_freq_eng<span class="sc">$</span>rt_lexdec))</span>
-<span id="cb71-417"><a href="#cb71-417" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-418"><a href="#cb71-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-419"><a href="#cb71-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-420"><a href="#cb71-420" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exploring predicted values</span></span>
-<span id="cb71-421"><a href="#cb71-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-422"><a href="#cb71-422" aria-hidden="true" tabindex="-1"></a>Let's also explore the predicted values of our model with a categorical variable.</span>
-<span id="cb71-423"><a href="#cb71-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-426"><a href="#cb71-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-427"><a href="#cb71-427" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">fitted</span>(fit_age), <span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb71-428"><a href="#cb71-428" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-429"><a href="#cb71-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-430"><a href="#cb71-430" aria-hidden="true" tabindex="-1"></a>We see that there are only 2 values, 630 and 787. These correspond to the means for each group that we saw above. They also seem to be in a pattern: young-mean, old-mean, young-mean, old-mean, etc. How does this correspond to the age group of the participant for the first ten observations?</span>
-<span id="cb71-431"><a href="#cb71-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-434"><a href="#cb71-434" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-435"><a href="#cb71-435" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_freq_eng<span class="sc">$</span>age_subject, <span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb71-436"><a href="#cb71-436" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-437"><a href="#cb71-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-438"><a href="#cb71-438" aria-hidden="true" tabindex="-1"></a>The first ten observations in our data are in young-old pairs. What are the first values in the raw data?</span>
-<span id="cb71-439"><a href="#cb71-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-442"><a href="#cb71-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-443"><a href="#cb71-443" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">exp</span>(df_freq_eng<span class="sc">$</span>rt_lexdec), <span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb71-444"><a href="#cb71-444" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-445"><a href="#cb71-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-446"><a href="#cb71-446" aria-hidden="true" tabindex="-1"></a>And what is the difference between these reaction times and the fitted values?</span>
-<span id="cb71-447"><a href="#cb71-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-450"><a href="#cb71-450" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-451"><a href="#cb71-451" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">exp</span>(df_freq_eng<span class="sc">$</span>rt_lexdec), <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">-</span> <span class="fu">head</span>(<span class="fu">fitted</span>(fit_age), <span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb71-452"><a href="#cb71-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-453"><a href="#cb71-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-456"><a href="#cb71-456" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-457"><a href="#cb71-457" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">residuals</span>(fit_age))</span>
-<span id="cb71-458"><a href="#cb71-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-459"><a href="#cb71-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-460"><a href="#cb71-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-461"><a href="#cb71-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-462"><a href="#cb71-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-463"><a href="#cb71-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-464"><a href="#cb71-464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-465"><a href="#cb71-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-466"><a href="#cb71-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-467"><a href="#cb71-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-468"><a href="#cb71-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-469"><a href="#cb71-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-470"><a href="#cb71-470" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-471"><a href="#cb71-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-472"><a href="#cb71-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-473"><a href="#cb71-473" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary</span></span>
-<span id="cb71-474"><a href="#cb71-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-475"><a href="#cb71-475" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we saw that the equation for a straight line boils down to its intercept and slope</span>
-<span id="cb71-476"><a href="#cb71-476" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-477"><a href="#cb71-477" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we fit our first linear model with a categorical predictor</span>
-<span id="cb71-478"><a href="#cb71-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-479"><a href="#cb71-479" aria-hidden="true" tabindex="-1"></a><span class="fu">### Important terms {.unnumbered .smaller}</span></span>
-<span id="cb71-480"><a href="#cb71-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-483"><a href="#cb71-483" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-484"><a href="#cb71-484" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb71-485"><a href="#cb71-485" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb71-486"><a href="#cb71-486" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span><span class="st">"term"</span>, <span class="sc">~</span><span class="st">"description/other terms"</span>,</span>
-<span id="cb71-487"><a href="#cb71-487" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb71-488"><a href="#cb71-488" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>()</span>
-<span id="cb71-489"><a href="#cb71-489" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-490"><a href="#cb71-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-491"><a href="#cb71-491" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-492"><a href="#cb71-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered .unlisted}</span></span>
-<span id="cb71-493"><a href="#cb71-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-494"><a href="#cb71-494" aria-hidden="true" tabindex="-1"></a>Today we learned...</span>
-<span id="cb71-495"><a href="#cb71-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-496"><a href="#cb71-496" aria-hidden="true" tabindex="-1"></a><span class="fu">## Task</span></span>
-<span id="cb71-497"><a href="#cb71-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-498"><a href="#cb71-498" aria-hidden="true" tabindex="-1"></a>We'll use a dataset from @biondo_yesterday_2022, an eye-tracking reading study exploring the processing of adverb-tense concord in Spanish past and future tenses. Participants read sentences that began with a temporal adverb (e.g., yesterday/tomorrow), and had a verb marked with the congruent or incongruent tense (past/future).</span>
-<span id="cb71-499"><a href="#cb71-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-500"><a href="#cb71-500" aria-hidden="true" tabindex="-1"></a>Load in the data.</span>
-<span id="cb71-501"><a href="#cb71-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-504"><a href="#cb71-504" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-505"><a href="#cb71-505" aria-hidden="true" tabindex="-1"></a>df_tense <span class="ot">&lt;-</span></span>
-<span id="cb71-506"><a href="#cb71-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Biondo.Soilemezidi.Mancini_dataset_ET.csv"</span>),</span>
-<span id="cb71-507"><a href="#cb71-507" aria-hidden="true" tabindex="-1"></a>           <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"Latin1"</span>) <span class="co"># for special characters in Spanish</span></span>
-<span id="cb71-508"><a href="#cb71-508" aria-hidden="true" tabindex="-1"></a>           ) <span class="sc">|&gt;</span> </span>
-<span id="cb71-509"><a href="#cb71-509" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gramm =</span> <span class="fu">ifelse</span>(gramm <span class="sc">==</span> <span class="st">"0"</span>, <span class="st">"ungramm"</span>, <span class="st">"gramm"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb71-510"><a href="#cb71-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
-<span id="cb71-511"><a href="#cb71-511" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-512"><a href="#cb71-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-513"><a href="#cb71-513" aria-hidden="true" tabindex="-1"></a><span class="fu">### Treatment contrasts</span></span>
-<span id="cb71-514"><a href="#cb71-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-515"><a href="#cb71-515" aria-hidden="true" tabindex="-1"></a>We will look at the measure *total reading time* (`tt`) at the *verb* region (<span class="in">`roi == 4`</span>). Subset the data to only include the verb region.</span>
-<span id="cb71-516"><a href="#cb71-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-519"><a href="#cb71-519" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-520"><a href="#cb71-520" aria-hidden="true" tabindex="-1"></a>df_verb <span class="ot">&lt;-</span></span>
-<span id="cb71-521"><a href="#cb71-521" aria-hidden="true" tabindex="-1"></a>  df_tense <span class="sc">|&gt;</span> </span>
-<span id="cb71-522"><a href="#cb71-522" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(roi <span class="sc">==</span> <span class="dv">4</span>)</span>
-<span id="cb71-523"><a href="#cb71-523" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-524"><a href="#cb71-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-525"><a href="#cb71-525" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-526"><a href="#cb71-526" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Run a simple linear model with (log-transformed) total reading time (<span class="in">`tt`</span>) as an independent variable and grammaticality (<span class="in">`gramm`</span>) as a dependent variable. Use treatment contrasts.</span>
-<span id="cb71-527"><a href="#cb71-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-528"><a href="#cb71-528" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Inspect your coefficients again. What conclusions do you draw?</span>
-<span id="cb71-529"><a href="#cb71-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-530"><a href="#cb71-530" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Run model diagnostics:</span>
-<span id="cb71-531"><a href="#cb71-531" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>check model assumptions where relevant (normality, constant variance, collinearity)</span>
-<span id="cb71-532"><a href="#cb71-532" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>check model fit ($R^2$)</span>
-<span id="cb71-533"><a href="#cb71-533" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb71-534"><a href="#cb71-534" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sum contrasts</span></span>
-<span id="cb71-535"><a href="#cb71-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-536"><a href="#cb71-536" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Re-run your model with sum contrasts.</span>
-<span id="cb71-537"><a href="#cb71-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-538"><a href="#cb71-538" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Inspect your coefficients again. Do your conclusions change?</span>
-<span id="cb71-539"><a href="#cb71-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-540"><a href="#cb71-540" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Re-run your model diagnostics. How does it compare to your first model?</span>
-<span id="cb71-541"><a href="#cb71-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-542"><a href="#cb71-542" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple regression</span></span>
-<span id="cb71-543"><a href="#cb71-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-544"><a href="#cb71-544" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Add verb tense (<span class="in">`verb_t`</span>: past, future) as a predictor, including an interaction term. Use sum contrasts.</span>
-<span id="cb71-545"><a href="#cb71-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-546"><a href="#cb71-546" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Inspect your coefficients again. Do your conclusions change?</span>
-<span id="cb71-547"><a href="#cb71-547" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-548"><a href="#cb71-548" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Re-run your model diagnostics.  How does it compare to the last models?</span>
-<span id="cb71-549"><a href="#cb71-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-550"><a href="#cb71-550" aria-hidden="true" tabindex="-1"></a><span class="fu">## Literaturverzeichnis {.unlisted .unnumbered visibility="uncounted"}</span></span>
-<span id="cb71-551"><a href="#cb71-551" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-552"><a href="#cb71-552" aria-hidden="true" tabindex="-1"></a>::: {#refs custom-style="Bibliography"}</span>
-<span id="cb71-553"><a href="#cb71-553" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb71-554"><a href="#cb71-554" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb73" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Categorical predictors"</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Regression for Linguists"</span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Daniela Palleschi"</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> Humboldt-Universität zu Berlin</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="co"># footer: "Lecture 1.1 - R und RStudio"</span></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> en</span></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "10/11/2023"</span></span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered .unlisted}</span></span>
+<span id="cb73-13"><a href="#cb73-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-14"><a href="#cb73-14" aria-hidden="true" tabindex="-1"></a>Today we will learn...</span>
+<span id="cb73-15"><a href="#cb73-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-16"><a href="#cb73-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about cateogorical predictors</span>
+<span id="cb73-17"><a href="#cb73-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>how to interpret different contrast coding</span>
+<span id="cb73-18"><a href="#cb73-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-19"><a href="#cb73-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Set-up environment  {.unnumbered}</span></span>
+<span id="cb73-20"><a href="#cb73-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-23"><a href="#cb73-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-24"><a href="#cb73-24" aria-hidden="true" tabindex="-1"></a><span class="co"># suppress scientific notation</span></span>
+<span id="cb73-25"><a href="#cb73-25" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span>
+<span id="cb73-26"><a href="#cb73-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-27"><a href="#cb73-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-28"><a href="#cb73-28" aria-hidden="true" tabindex="-1"></a>We'll also need to load in our required packages. </span>
+<span id="cb73-29"><a href="#cb73-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-32"><a href="#cb73-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-33"><a href="#cb73-33" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
+<span id="cb73-34"><a href="#cb73-34" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb73-35"><a href="#cb73-35" aria-hidden="true" tabindex="-1"></a>               tidyverse,</span>
+<span id="cb73-36"><a href="#cb73-36" aria-hidden="true" tabindex="-1"></a>               here,</span>
+<span id="cb73-37"><a href="#cb73-37" aria-hidden="true" tabindex="-1"></a>               broom,</span>
+<span id="cb73-38"><a href="#cb73-38" aria-hidden="true" tabindex="-1"></a>               lme4,</span>
+<span id="cb73-39"><a href="#cb73-39" aria-hidden="true" tabindex="-1"></a>               janitor,</span>
+<span id="cb73-40"><a href="#cb73-40" aria-hidden="true" tabindex="-1"></a>               languageR)</span>
+<span id="cb73-41"><a href="#cb73-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-42"><a href="#cb73-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-45"><a href="#cb73-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-46"><a href="#cb73-46" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb73-47"><a href="#cb73-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-48"><a href="#cb73-48" aria-hidden="true" tabindex="-1"></a><span class="co"># extra packages for the lecture notes/slides</span></span>
+<span id="cb73-49"><a href="#cb73-49" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb73-50"><a href="#cb73-50" aria-hidden="true" tabindex="-1"></a>               patchwork,</span>
+<span id="cb73-51"><a href="#cb73-51" aria-hidden="true" tabindex="-1"></a>               knitr,</span>
+<span id="cb73-52"><a href="#cb73-52" aria-hidden="true" tabindex="-1"></a>               kableExtra)</span>
+<span id="cb73-53"><a href="#cb73-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-54"><a href="#cb73-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-55"><a href="#cb73-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### Load data {.unnumbered .unlisted}</span></span>
+<span id="cb73-56"><a href="#cb73-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-57"><a href="#cb73-57" aria-hidden="true" tabindex="-1"></a>Let's continue working with the <span class="in">`english`</span> dataset from the <span class="in">`languageR`</span> package. Let's just call it <span class="in">`df_freq_eng`</span>.</span>
+<span id="cb73-58"><a href="#cb73-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-61"><a href="#cb73-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-62"><a href="#cb73-62" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="ot">&lt;-</span></span>
+<span id="cb73-63"><a href="#cb73-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(english) <span class="sc">|&gt;</span> </span>
+<span id="cb73-64"><a href="#cb73-64" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RTlexdec, RTnaming, Word, LengthInLetters, AgeSubject, WrittenFrequency) <span class="sc">|&gt;</span> </span>
+<span id="cb73-65"><a href="#cb73-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">rt_lexdec =</span> RTlexdec,</span>
+<span id="cb73-66"><a href="#cb73-66" aria-hidden="true" tabindex="-1"></a>         <span class="at">rt_naming =</span> RTnaming,</span>
+<span id="cb73-67"><a href="#cb73-67" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_written =</span> WrittenFrequency) <span class="sc">|&gt;</span> </span>
+<span id="cb73-68"><a href="#cb73-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb73-69"><a href="#cb73-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># standardize continuous predictors</span></span>
+<span id="cb73-70"><a href="#cb73-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb73-71"><a href="#cb73-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">freq_z =</span> <span class="fu">scale</span>(freq_written),</span>
+<span id="cb73-72"><a href="#cb73-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">length_z =</span> <span class="fu">scale</span>(length_in_letters)</span>
+<span id="cb73-73"><a href="#cb73-73" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb73-74"><a href="#cb73-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(word) <span class="sc">|&gt;</span> </span>
+<span id="cb73-75"><a href="#cb73-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(word)</span>
+<span id="cb73-76"><a href="#cb73-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-77"><a href="#cb73-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-78"><a href="#cb73-78" aria-hidden="true" tabindex="-1"></a>In your exploratory data analysis, you might've noticed a *bimodal* distribution.</span>
+<span id="cb73-79"><a href="#cb73-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-80"><a href="#cb73-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-83"><a href="#cb73-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-84"><a href="#cb73-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb73-85"><a href="#cb73-85" aria-hidden="true" tabindex="-1"></a>fig_hist_log <span class="ot">&lt;-</span> </span>
+<span id="cb73-86"><a href="#cb73-86" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-87"><a href="#cb73-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-88"><a href="#cb73-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rt_lexdec) <span class="sc">+</span></span>
+<span id="cb73-89"><a href="#cb73-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() </span>
+<span id="cb73-90"><a href="#cb73-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-91"><a href="#cb73-91" aria-hidden="true" tabindex="-1"></a>fig_dens_log <span class="ot">&lt;-</span> </span>
+<span id="cb73-92"><a href="#cb73-92" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-93"><a href="#cb73-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-94"><a href="#cb73-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rt_lexdec) <span class="sc">+</span></span>
+<span id="cb73-95"><a href="#cb73-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() </span>
+<span id="cb73-96"><a href="#cb73-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-97"><a href="#cb73-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-98"><a href="#cb73-98" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="ot">&lt;-</span></span>
+<span id="cb73-99"><a href="#cb73-99" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-100"><a href="#cb73-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-101"><a href="#cb73-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rt_lexdec, <span class="at">fill =</span> age_subject) <span class="sc">+</span></span>
+<span id="cb73-102"><a href="#cb73-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
+<span id="cb73-103"><a href="#cb73-103" aria-hidden="true" tabindex="-1"></a>  <span class="co"># facet_grid(.~age_subject) +</span></span>
+<span id="cb73-104"><a href="#cb73-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb73-105"><a href="#cb73-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-106"><a href="#cb73-106" aria-hidden="true" tabindex="-1"></a>fig_dens <span class="ot">&lt;-</span></span>
+<span id="cb73-107"><a href="#cb73-107" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-108"><a href="#cb73-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-109"><a href="#cb73-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rt_lexdec, <span class="at">colour =</span> age_subject, <span class="at">fill =</span> age_subject) <span class="sc">+</span></span>
+<span id="cb73-110"><a href="#cb73-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_density</span>(<span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb73-111"><a href="#cb73-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb73-112"><a href="#cb73-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-113"><a href="#cb73-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-114"><a href="#cb73-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-115"><a href="#cb73-115" aria-hidden="true" tabindex="-1"></a>  (fig_hist_log <span class="sc">+</span> fig_dens_log) <span class="sc">/</span></span>
+<span id="cb73-116"><a href="#cb73-116" aria-hidden="true" tabindex="-1"></a>  (fig_hist <span class="sc">+</span> fig_dens)</span>
+<span id="cb73-117"><a href="#cb73-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-118"><a href="#cb73-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-119"><a href="#cb73-119" aria-hidden="true" tabindex="-1"></a>This looks like a *bimodal* distribution, i.e., there are two *modes* (most frequent value, i.e., peak in a histogram). What might be driving this? We know that there were two subject groups: old and young. How does the distribution of these two groups look?</span>
+<span id="cb73-120"><a href="#cb73-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-121"><a href="#cb73-121" aria-hidden="true" tabindex="-1"></a>Running our model of the log reaction times as predicted by frequency and length, we see:</span>
+<span id="cb73-122"><a href="#cb73-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-125"><a href="#cb73-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-126"><a href="#cb73-126" aria-hidden="true" tabindex="-1"></a>fit_freq_length <span class="ot">&lt;-</span></span>
+<span id="cb73-127"><a href="#cb73-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt_lexdec <span class="sc">~</span> freq_z<span class="sc">*</span>length_z,</span>
+<span id="cb73-128"><a href="#cb73-128" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_eng)</span>
+<span id="cb73-129"><a href="#cb73-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-130"><a href="#cb73-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-133"><a href="#cb73-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-134"><a href="#cb73-134" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_length)<span class="sc">$</span>r.squared</span>
+<span id="cb73-135"><a href="#cb73-135" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_freq_length)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb73-136"><a href="#cb73-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-137"><a href="#cb73-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-138"><a href="#cb73-138" aria-hidden="true" tabindex="-1"></a>Seems like we don't have any overfitting in our model ($R^2$ and adjusted $R^2$ are comparable). Let's look at our coeffiecients.</span>
+<span id="cb73-139"><a href="#cb73-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-142"><a href="#cb73-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-143"><a href="#cb73-143" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_freq_length) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
+<span id="cb73-144"><a href="#cb73-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-145"><a href="#cb73-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-146"><a href="#cb73-146" aria-hidden="true" tabindex="-1"></a>There is a negative slope for frequency, indicating shorter reaction times for words with higher frequency (when holding length constant). There is a positive slope for length, indicating longer reaction times for longer words (holding frequency constant). There is also a negative interaction estimate, indicating that when both length and frequency increase, reaction times decrease. This seems similar to the dataset we explored in the previous sections. But, this bimodal distribution is suggesting we should include age group as a predictor, since the two groups seem to pattern differently in their reading times. Could it be that the effect of frequency and length also differ as a function of age group?</span>
+<span id="cb73-147"><a href="#cb73-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-148"><a href="#cb73-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Categorical predictors</span></span>
+<span id="cb73-149"><a href="#cb73-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-150"><a href="#cb73-150" aria-hidden="true" tabindex="-1"></a>In linguistic research we often want to compare the effect of *groups* or categories, such as native or non-native speakers, or grammatical or ungrammatical stimuli. We might expect longer reading times for non-native (compared to native) speakers of a language, or for ungrammatical (versus grammatical) sentences. With our current dataset, we'd predict longer reading times for older participants than younger participants (although we should hypothesise *before* collecting and visualising our data!). How might these age effects interact with effects of word frequency and length?</span>
+<span id="cb73-151"><a href="#cb73-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-152"><a href="#cb73-152" aria-hidden="true" tabindex="-1"></a><span class="fu">### Including a categorical predictor</span></span>
+<span id="cb73-153"><a href="#cb73-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-154"><a href="#cb73-154" aria-hidden="true" tabindex="-1"></a>What would happen if we just include <span class="in">`age_subject`</span> in our model?</span>
+<span id="cb73-155"><a href="#cb73-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-158"><a href="#cb73-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-159"><a href="#cb73-159" aria-hidden="true" tabindex="-1"></a>fit_age <span class="ot">&lt;-</span></span>
+<span id="cb73-160"><a href="#cb73-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(rt_lexdec <span class="sc">~</span> freq_z<span class="sc">*</span>length_z <span class="sc">+</span> age_subject,</span>
+<span id="cb73-161"><a href="#cb73-161" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_eng)</span>
+<span id="cb73-162"><a href="#cb73-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-163"><a href="#cb73-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-164"><a href="#cb73-164" aria-hidden="true" tabindex="-1"></a>First, we see that adding age to our model results in a large increase in variance explained, and that the $R^2$ and adjusted $R^2$ values are comparable. In addition, the VIF values for all coefficients are near 1. This indicates that our predictors all contribute to the variance explained by the model and are not correlated.</span>
+<span id="cb73-165"><a href="#cb73-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-168"><a href="#cb73-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-169"><a href="#cb73-169" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age)<span class="sc">$</span>r.squared</span>
+<span id="cb73-170"><a href="#cb73-170" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb73-171"><a href="#cb73-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-172"><a href="#cb73-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-175"><a href="#cb73-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-176"><a href="#cb73-176" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(fit_age)</span>
+<span id="cb73-177"><a href="#cb73-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-178"><a href="#cb73-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-179"><a href="#cb73-179" aria-hidden="true" tabindex="-1"></a>Now that we see that our model is not overfit and that our predictors are not correlatd, let's take a look at our model estimates.</span>
+<span id="cb73-180"><a href="#cb73-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-183"><a href="#cb73-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-184"><a href="#cb73-184" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_age) <span class="sc">|&gt;</span> <span class="fu">select</span>(term,estimate)</span>
+<span id="cb73-185"><a href="#cb73-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-186"><a href="#cb73-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-187"><a href="#cb73-187" aria-hidden="true" tabindex="-1"></a>In addition to the effects we observed in our earlier model, we see that there is a negative slope for <span class="in">`age_subjectyoung`</span>, indicating that reaction times decrease when...what? How do we interpret a slope for a categorical variable? Regression works with numerical values, so how does a categorical variable get fit to a line? If we feed a categorical variable into the <span class="in">`lm()`</span> function, the factor levels (i.e., the categories in a categorical variable) are given numerical values. We need to know what these values are in order to know how to interpret our model estimates. We call these numerical values mapped onto factor levels contrast coding, and we can check the contrasts of a given factor using the function <span class="in">`contrasts()`</span>.</span>
+<span id="cb73-188"><a href="#cb73-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-191"><a href="#cb73-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-192"><a href="#cb73-192" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
+<span id="cb73-193"><a href="#cb73-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-194"><a href="#cb73-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-195"><a href="#cb73-195" aria-hidden="true" tabindex="-1"></a>We see that <span class="in">`old`</span> was coded at $0$ and <span class="in">`young`</span> as $1$. This means that our slope for <span class="in">`age_subjectyoung`</span> represents the change in reaction times when we move from <span class="in">`old`</span> to <span class="in">`young`</span>, which corresponds to a 1-unit change in our predictor (because the difference between 0 and 1 is 1). This is called treatment coding, or dummy coding, where one factor level is coded as 0 and the other as 1. Let's remove the continuous variable for now and focus on <span class="in">`age_subject`</span>. Let's also look at raw reaction times, to more easily interpret the results.</span>
+<span id="cb73-196"><a href="#cb73-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-199"><a href="#cb73-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-200"><a href="#cb73-200" aria-hidden="true" tabindex="-1"></a>fit_age <span class="ot">&lt;-</span></span>
+<span id="cb73-201"><a href="#cb73-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">exp</span>(rt_lexdec) <span class="sc">~</span> age_subject,</span>
+<span id="cb73-202"><a href="#cb73-202" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_eng)</span>
+<span id="cb73-203"><a href="#cb73-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-204"><a href="#cb73-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-207"><a href="#cb73-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-208"><a href="#cb73-208" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age)<span class="sc">$</span>r.squared</span>
+<span id="cb73-209"><a href="#cb73-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-210"><a href="#cb73-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-211"><a href="#cb73-211" aria-hidden="true" tabindex="-1"></a>Our $R^2$ value is lower than when we included frequency and length, but higher still than our model with frequeny and length but no age.</span>
+<span id="cb73-212"><a href="#cb73-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-215"><a href="#cb73-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-216"><a href="#cb73-216" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_age) <span class="sc">|&gt;</span> <span class="fu">select</span>(term, estimate)</span>
+<span id="cb73-217"><a href="#cb73-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-218"><a href="#cb73-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-219"><a href="#cb73-219" aria-hidden="true" tabindex="-1"></a>We see that there is an estimated decrease in reaction times of 157ms for the young group compared to the old group. But what does the intercept represent here? Let's look at our data again.</span>
+<span id="cb73-220"><a href="#cb73-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-223"><a href="#cb73-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-224"><a href="#cb73-224" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-225"><a href="#cb73-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rt_lexdec, age_subject) <span class="sc">|&gt;</span> </span>
+<span id="cb73-226"><a href="#cb73-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rt_lexdec =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">|&gt;</span> </span>
+<span id="cb73-227"><a href="#cb73-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb73-228"><a href="#cb73-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-229"><a href="#cb73-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-230"><a href="#cb73-230" aria-hidden="true" tabindex="-1"></a>And how does <span class="in">`rt_lexdec`</span> differ between the groups?</span>
+<span id="cb73-231"><a href="#cb73-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-234"><a href="#cb73-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-235"><a href="#cb73-235" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-236"><a href="#cb73-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rt_lexdec, age_subject) <span class="sc">|&gt;</span> </span>
+<span id="cb73-237"><a href="#cb73-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rt_lexdec =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">|&gt;</span> </span>
+<span id="cb73-238"><a href="#cb73-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(rt_lexdec),</span>
+<span id="cb73-239"><a href="#cb73-239" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(rt_lexdec),</span>
+<span id="cb73-240"><a href="#cb73-240" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(rt_lexdec),</span>
+<span id="cb73-241"><a href="#cb73-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> <span class="st">"age_subject"</span></span>
+<span id="cb73-242"><a href="#cb73-242" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb73-243"><a href="#cb73-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-244"><a href="#cb73-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-245"><a href="#cb73-245" aria-hidden="true" tabindex="-1"></a>We see here that the intercept for our model actually corresponds to the mean reaction time for the old group. Why is this? Recall that the intercept corresponds to the $y$ value (reaction time) when $x$ is $0$. In treatment/dummy coding, one factor level is coded as $0$. In our case this was <span class="in">`old`</span>, and so the intercept corresponds to the mean reaction time for participants in the old group. How does R choose which variable to code as $0$? It simply takes the first level name alphabetically: <span class="in">`old`</span> comes before <span class="in">`young`</span>, so <span class="in">`old`</span> was automatically taken as the 'baseline' to which <span class="in">`young`</span> was compared.</span>
+<span id="cb73-246"><a href="#cb73-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-247"><a href="#cb73-247" aria-hidden="true" tabindex="-1"></a>And if we were to add the slope to the intercept, we would get the mean for the $young$ group. Why is this?</span>
+<span id="cb73-248"><a href="#cb73-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-251"><a href="#cb73-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-252"><a href="#cb73-252" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit_age)[<span class="st">'(Intercept)'</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit_age)[<span class="st">'age_subjectyoung'</span>]</span>
+<span id="cb73-253"><a href="#cb73-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-254"><a href="#cb73-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-255"><a href="#cb73-255" aria-hidden="true" tabindex="-1"></a>Why are the means for the two groups used? The mean is the value closest to all values in a univariate dataset, and regression aims to inimise residuals (recall the line of best fit). So, a line is fit between the means of these two factor levels to achieve minimal residuals. This actually is the same thing as a *t*-test:</span>
+<span id="cb73-256"><a href="#cb73-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-259"><a href="#cb73-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-260"><a href="#cb73-260" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">exp</span>(rt_lexdec) <span class="sc">~</span> age_subject, <span class="at">data =</span> df_freq_eng)</span>
+<span id="cb73-261"><a href="#cb73-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-262"><a href="#cb73-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-263"><a href="#cb73-263" aria-hidden="true" tabindex="-1"></a>If we compare this to our model, we see that the *t*- and *p*-values are identical (more on these later).</span>
+<span id="cb73-264"><a href="#cb73-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-267"><a href="#cb73-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-268"><a href="#cb73-268" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_age)</span>
+<span id="cb73-269"><a href="#cb73-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-270"><a href="#cb73-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-273"><a href="#cb73-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-274"><a href="#cb73-274" aria-hidden="true" tabindex="-1"></a>fig_nocontrasts <span class="ot">&lt;-</span></span>
+<span id="cb73-275"><a href="#cb73-275" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-276"><a href="#cb73-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-277"><a href="#cb73-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age_subject, <span class="at">y =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">+</span></span>
+<span id="cb73-278"><a href="#cb73-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"No contrasts"</span>) <span class="sc">+</span></span>
+<span id="cb73-279"><a href="#cb73-279" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_vline(xintercept = 0, linetype="dashed", size = .5) +  </span></span>
+<span id="cb73-280"><a href="#cb73-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">6</span>)) <span class="sc">+</span> </span>
+<span id="cb73-281"><a href="#cb73-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb73-282"><a href="#cb73-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb73-283"><a href="#cb73-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-284"><a href="#cb73-284" aria-hidden="true" tabindex="-1"></a>fig_treatment <span class="ot">&lt;-</span></span>
+<span id="cb73-285"><a href="#cb73-285" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-286"><a href="#cb73-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_subject =</span> <span class="fu">if_else</span>(age_subject<span class="sc">==</span><span class="st">"young"</span>,<span class="dv">1</span>,<span class="dv">0</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb73-287"><a href="#cb73-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-288"><a href="#cb73-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age_subject, <span class="at">y =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">+</span></span>
+<span id="cb73-289"><a href="#cb73-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Treatment contrasts"</span>) <span class="sc">+</span></span>
+<span id="cb73-290"><a href="#cb73-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb73-291"><a href="#cb73-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">6</span>)) <span class="sc">+</span> </span>
+<span id="cb73-292"><a href="#cb73-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb73-293"><a href="#cb73-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb73-294"><a href="#cb73-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-295"><a href="#cb73-295" aria-hidden="true" tabindex="-1"></a>fig_nocontrasts <span class="sc">+</span> fig_treatment</span>
+<span id="cb73-296"><a href="#cb73-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-297"><a href="#cb73-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-298"><a href="#cb73-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-299"><a href="#cb73-299" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sum contrasts</span></span>
+<span id="cb73-300"><a href="#cb73-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-301"><a href="#cb73-301" aria-hidden="true" tabindex="-1"></a>Treatment/dummy coding is the default contrast coding scheme. Sum coding is another frequently used coding scheme, which is essentially centring categorical variables. Just as with continuous variables, the motivation for sum contrast coding mainly lies in the interpretation of interaction effects. How can we tell R we want to use sum contrast coding, and not dummy coding? There are different ways to do this:</span>
+<span id="cb73-302"><a href="#cb73-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-305"><a href="#cb73-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-306"><a href="#cb73-306" aria-hidden="true" tabindex="-1"></a><span class="co"># first, make sure your variable is a factor</span></span>
+<span id="cb73-307"><a href="#cb73-307" aria-hidden="true" tabindex="-1"></a>df_freq_eng<span class="sc">$</span>age_subject <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
+<span id="cb73-308"><a href="#cb73-308" aria-hidden="true" tabindex="-1"></a><span class="co"># check</span></span>
+<span id="cb73-309"><a href="#cb73-309" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
+<span id="cb73-310"><a href="#cb73-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-311"><a href="#cb73-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-314"><a href="#cb73-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-315"><a href="#cb73-315" aria-hidden="true" tabindex="-1"></a><span class="co"># next, you could use the contr.sum() function</span></span>
+<span id="cb73-316"><a href="#cb73-316" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>) <span class="co"># where 2 means we have 2 levels</span></span>
+<span id="cb73-317"><a href="#cb73-317" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
+<span id="cb73-318"><a href="#cb73-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-319"><a href="#cb73-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-320"><a href="#cb73-320" aria-hidden="true" tabindex="-1"></a>Here we see that <span class="in">`old`</span> is coded as $-1$ and <span class="in">`young`</span> as $+1$. I prefer to use +/-0.5 for reasons we don't need to go into here. I would also prefer to have <span class="in">`young`</span> coded in the negative value, and <span class="in">`old`</span> in the positive value. This aids in the way I interpret the slope: a change in reaction times for the older group compared to the younger group.</span>
+<span id="cb73-321"><a href="#cb73-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-324"><a href="#cb73-324" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-325"><a href="#cb73-325" aria-hidden="true" tabindex="-1"></a><span class="co">#or, you could manually control the sum contrasts</span></span>
+<span id="cb73-326"><a href="#cb73-326" aria-hidden="true" tabindex="-1"></a><span class="do">## check the order of the levels</span></span>
+<span id="cb73-327"><a href="#cb73-327" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
+<span id="cb73-328"><a href="#cb73-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-329"><a href="#cb73-329" aria-hidden="true" tabindex="-1"></a><span class="do">## code 'old' as +.5 and 'young' as -.5</span></span>
+<span id="cb73-330"><a href="#cb73-330" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">+</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb73-331"><a href="#cb73-331" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_freq_eng<span class="sc">$</span>age_subject)</span>
+<span id="cb73-332"><a href="#cb73-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-333"><a href="#cb73-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-334"><a href="#cb73-334" aria-hidden="true" tabindex="-1"></a>You could also choose to store the contrast values in their own variable.</span>
+<span id="cb73-335"><a href="#cb73-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-338"><a href="#cb73-338" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-339"><a href="#cb73-339" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="ot">&lt;-</span> </span>
+<span id="cb73-340"><a href="#cb73-340" aria-hidden="true" tabindex="-1"></a>  df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-341"><a href="#cb73-341" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_numeric =</span> <span class="fu">ifelse</span>(age_subject <span class="sc">==</span> <span class="st">"young"</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>))</span>
+<span id="cb73-342"><a href="#cb73-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-343"><a href="#cb73-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-346"><a href="#cb73-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-347"><a href="#cb73-347" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-348"><a href="#cb73-348" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age_subject, age_numeric) <span class="sc">|&gt;</span> </span>
+<span id="cb73-349"><a href="#cb73-349" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
+<span id="cb73-350"><a href="#cb73-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-351"><a href="#cb73-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-352"><a href="#cb73-352" aria-hidden="true" tabindex="-1"></a>Now, we can run our model using either <span class="in">`age_subject`</span> or <span class="in">`age_numeric`</span>.</span>
+<span id="cb73-353"><a href="#cb73-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-356"><a href="#cb73-356" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-357"><a href="#cb73-357" aria-hidden="true" tabindex="-1"></a>fit_age_sum <span class="ot">&lt;-</span></span>
+<span id="cb73-358"><a href="#cb73-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">exp</span>(rt_lexdec) <span class="sc">~</span> age_subject,</span>
+<span id="cb73-359"><a href="#cb73-359" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> df_freq_eng)</span>
+<span id="cb73-360"><a href="#cb73-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-361"><a href="#cb73-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-364"><a href="#cb73-364" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-365"><a href="#cb73-365" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age_sum)<span class="sc">$</span>r.squared</span>
+<span id="cb73-366"><a href="#cb73-366" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(fit_age)<span class="sc">$</span>r.squared</span>
+<span id="cb73-367"><a href="#cb73-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-368"><a href="#cb73-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-369"><a href="#cb73-369" aria-hidden="true" tabindex="-1"></a>No difference in variance account for by our model.</span>
+<span id="cb73-370"><a href="#cb73-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-373"><a href="#cb73-373" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-374"><a href="#cb73-374" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(fit_age_sum) <span class="sc">|&gt;</span> <span class="fu">select</span>(term,estimate)</span>
+<span id="cb73-375"><a href="#cb73-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-376"><a href="#cb73-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-377"><a href="#cb73-377" aria-hidden="true" tabindex="-1"></a>But there is a difference in the intercept, and a change in sign in our slope. Why is this?</span>
+<span id="cb73-378"><a href="#cb73-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-381"><a href="#cb73-381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-382"><a href="#cb73-382" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-contrasts</span></span>
+<span id="cb73-383"><a href="#cb73-383" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: The difference in slope corresponds to which level is coded as 0 (dummy coding) or -5/-1 (sum coding)</span></span>
+<span id="cb73-384"><a href="#cb73-384" aria-hidden="true" tabindex="-1"></a>fig_sum1 <span class="ot">&lt;-</span></span>
+<span id="cb73-385"><a href="#cb73-385" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-386"><a href="#cb73-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_subject =</span> <span class="fu">if_else</span>(age_subject<span class="sc">==</span><span class="st">"young"</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb73-387"><a href="#cb73-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-388"><a href="#cb73-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age_subject, <span class="at">y =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">+</span></span>
+<span id="cb73-389"><a href="#cb73-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sum contrasts"</span>) <span class="sc">+</span></span>
+<span id="cb73-390"><a href="#cb73-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb73-391"><a href="#cb73-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">6</span>)) <span class="sc">+</span> </span>
+<span id="cb73-392"><a href="#cb73-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb73-393"><a href="#cb73-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb73-394"><a href="#cb73-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-395"><a href="#cb73-395" aria-hidden="true" tabindex="-1"></a>fig_sum5 <span class="ot">&lt;-</span></span>
+<span id="cb73-396"><a href="#cb73-396" aria-hidden="true" tabindex="-1"></a>df_freq_eng <span class="sc">|&gt;</span> </span>
+<span id="cb73-397"><a href="#cb73-397" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_subject =</span> <span class="fu">if_else</span>(age_subject<span class="sc">==</span><span class="st">"young"</span>,<span class="sc">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb73-398"><a href="#cb73-398" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb73-399"><a href="#cb73-399" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age_subject, <span class="at">y =</span> <span class="fu">exp</span>(rt_lexdec)) <span class="sc">+</span></span>
+<span id="cb73-400"><a href="#cb73-400" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sum contrasts"</span>) <span class="sc">+</span></span>
+<span id="cb73-401"><a href="#cb73-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb73-402"><a href="#cb73-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">6</span>)) <span class="sc">+</span> </span>
+<span id="cb73-403"><a href="#cb73-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb73-404"><a href="#cb73-404" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb73-405"><a href="#cb73-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-406"><a href="#cb73-406" aria-hidden="true" tabindex="-1"></a>fig_treatment <span class="sc">+</span> fig_sum5 <span class="sc">+</span> <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">"A"</span>)</span>
+<span id="cb73-407"><a href="#cb73-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-408"><a href="#cb73-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-409"><a href="#cb73-409" aria-hidden="true" tabindex="-1"></a>As we see in @fig-contrasts, the sign of the slope depends on how we've contrast coded our factor levels. In @fig-contrasts A, the <span class="in">`old`</span> group is coded as $0$ and <span class="in">`young`</span> as $1$. In @fig-contrasts B, the <span class="in">`young`</span> group is coded as $-.5$ and the <span class="in">`old`</span> group as $+.5$.</span>
+<span id="cb73-410"><a href="#cb73-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-411"><a href="#cb73-411" aria-hidden="true" tabindex="-1"></a>The intercept value is also now the overall mean of all observed reaction times, because now the $y$ value when $x$ equals zero lies in the middle of the two groups. The slope magnitude (i.e., size of the value) hasn't changed, because the difference betwen the two group means has not changed.</span>
+<span id="cb73-412"><a href="#cb73-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-415"><a href="#cb73-415" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-416"><a href="#cb73-416" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">exp</span>(df_freq_eng<span class="sc">$</span>rt_lexdec))</span>
+<span id="cb73-417"><a href="#cb73-417" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-418"><a href="#cb73-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-419"><a href="#cb73-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-420"><a href="#cb73-420" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exploring predicted values</span></span>
+<span id="cb73-421"><a href="#cb73-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-422"><a href="#cb73-422" aria-hidden="true" tabindex="-1"></a>Let's also explore the predicted values of our model with a categorical variable.</span>
+<span id="cb73-423"><a href="#cb73-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-426"><a href="#cb73-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-427"><a href="#cb73-427" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">fitted</span>(fit_age), <span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb73-428"><a href="#cb73-428" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-429"><a href="#cb73-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-430"><a href="#cb73-430" aria-hidden="true" tabindex="-1"></a>We see that there are only 2 values, 630 and 787. These correspond to the means for each group that we saw above. They also seem to be in a pattern: young-mean, old-mean, young-mean, old-mean, etc. How does this correspond to the age group of the participant for the first ten observations?</span>
+<span id="cb73-431"><a href="#cb73-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-434"><a href="#cb73-434" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-435"><a href="#cb73-435" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_freq_eng<span class="sc">$</span>age_subject, <span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb73-436"><a href="#cb73-436" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-437"><a href="#cb73-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-438"><a href="#cb73-438" aria-hidden="true" tabindex="-1"></a>The first ten observations in our data are in young-old pairs. What are the first values in the raw data?</span>
+<span id="cb73-439"><a href="#cb73-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-442"><a href="#cb73-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-443"><a href="#cb73-443" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">exp</span>(df_freq_eng<span class="sc">$</span>rt_lexdec), <span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb73-444"><a href="#cb73-444" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-445"><a href="#cb73-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-446"><a href="#cb73-446" aria-hidden="true" tabindex="-1"></a>And what is the difference between these reaction times and the fitted values?</span>
+<span id="cb73-447"><a href="#cb73-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-450"><a href="#cb73-450" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-451"><a href="#cb73-451" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">exp</span>(df_freq_eng<span class="sc">$</span>rt_lexdec), <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">-</span> <span class="fu">head</span>(<span class="fu">fitted</span>(fit_age), <span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb73-452"><a href="#cb73-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-453"><a href="#cb73-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-456"><a href="#cb73-456" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-457"><a href="#cb73-457" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">residuals</span>(fit_age))</span>
+<span id="cb73-458"><a href="#cb73-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-459"><a href="#cb73-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-460"><a href="#cb73-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-461"><a href="#cb73-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-462"><a href="#cb73-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-463"><a href="#cb73-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-464"><a href="#cb73-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-465"><a href="#cb73-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-466"><a href="#cb73-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-467"><a href="#cb73-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-468"><a href="#cb73-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-469"><a href="#cb73-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-470"><a href="#cb73-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-471"><a href="#cb73-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-472"><a href="#cb73-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-473"><a href="#cb73-473" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary</span></span>
+<span id="cb73-474"><a href="#cb73-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-475"><a href="#cb73-475" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we saw that the equation for a straight line boils down to its intercept and slope</span>
+<span id="cb73-476"><a href="#cb73-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-477"><a href="#cb73-477" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we fit our first linear model with a categorical predictor</span>
+<span id="cb73-478"><a href="#cb73-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-479"><a href="#cb73-479" aria-hidden="true" tabindex="-1"></a><span class="fu">### Important terms {.unnumbered .smaller}</span></span>
+<span id="cb73-480"><a href="#cb73-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-483"><a href="#cb73-483" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-484"><a href="#cb73-484" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb73-485"><a href="#cb73-485" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb73-486"><a href="#cb73-486" aria-hidden="true" tabindex="-1"></a> <span class="sc">~</span><span class="st">"term"</span>, <span class="sc">~</span><span class="st">"description/other terms"</span>,</span>
+<span id="cb73-487"><a href="#cb73-487" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb73-488"><a href="#cb73-488" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>() <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>()</span>
+<span id="cb73-489"><a href="#cb73-489" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-490"><a href="#cb73-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-491"><a href="#cb73-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-492"><a href="#cb73-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered .unlisted}</span></span>
+<span id="cb73-493"><a href="#cb73-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-494"><a href="#cb73-494" aria-hidden="true" tabindex="-1"></a>Today we learned...</span>
+<span id="cb73-495"><a href="#cb73-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-496"><a href="#cb73-496" aria-hidden="true" tabindex="-1"></a><span class="fu">## Task</span></span>
+<span id="cb73-497"><a href="#cb73-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-498"><a href="#cb73-498" aria-hidden="true" tabindex="-1"></a>We'll use a dataset from @biondo_yesterday_2022, an eye-tracking reading study exploring the processing of adverb-tense concord in Spanish past and future tenses. Participants read sentences that began with a temporal adverb (e.g., yesterday/tomorrow), and had a verb marked with the congruent or incongruent tense (past/future).</span>
+<span id="cb73-499"><a href="#cb73-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-500"><a href="#cb73-500" aria-hidden="true" tabindex="-1"></a>Load in the data.</span>
+<span id="cb73-501"><a href="#cb73-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-504"><a href="#cb73-504" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-505"><a href="#cb73-505" aria-hidden="true" tabindex="-1"></a>df_tense <span class="ot">&lt;-</span></span>
+<span id="cb73-506"><a href="#cb73-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Biondo.Soilemezidi.Mancini_dataset_ET.csv"</span>),</span>
+<span id="cb73-507"><a href="#cb73-507" aria-hidden="true" tabindex="-1"></a>           <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"Latin1"</span>) <span class="co"># for special characters in Spanish</span></span>
+<span id="cb73-508"><a href="#cb73-508" aria-hidden="true" tabindex="-1"></a>           ) <span class="sc">|&gt;</span> </span>
+<span id="cb73-509"><a href="#cb73-509" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gramm =</span> <span class="fu">ifelse</span>(gramm <span class="sc">==</span> <span class="st">"0"</span>, <span class="st">"ungramm"</span>, <span class="st">"gramm"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb73-510"><a href="#cb73-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb73-511"><a href="#cb73-511" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-512"><a href="#cb73-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-513"><a href="#cb73-513" aria-hidden="true" tabindex="-1"></a><span class="fu">### Treatment contrasts</span></span>
+<span id="cb73-514"><a href="#cb73-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-515"><a href="#cb73-515" aria-hidden="true" tabindex="-1"></a>We will look at the measure *total reading time* (`tt`) at the *verb* region (<span class="in">`roi == 4`</span>). Subset the data to only include the verb region.</span>
+<span id="cb73-516"><a href="#cb73-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-519"><a href="#cb73-519" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-520"><a href="#cb73-520" aria-hidden="true" tabindex="-1"></a>df_verb <span class="ot">&lt;-</span></span>
+<span id="cb73-521"><a href="#cb73-521" aria-hidden="true" tabindex="-1"></a>  df_tense <span class="sc">|&gt;</span> </span>
+<span id="cb73-522"><a href="#cb73-522" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(roi <span class="sc">==</span> <span class="dv">4</span>)</span>
+<span id="cb73-523"><a href="#cb73-523" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-524"><a href="#cb73-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-525"><a href="#cb73-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-526"><a href="#cb73-526" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Run a simple linear model with (log-transformed) total reading time (<span class="in">`tt`</span>) as an independent variable and grammaticality (<span class="in">`gramm`</span>) as a dependent variable. Use treatment contrasts.</span>
+<span id="cb73-527"><a href="#cb73-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-528"><a href="#cb73-528" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Inspect your coefficients again. What conclusions do you draw?</span>
+<span id="cb73-529"><a href="#cb73-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-530"><a href="#cb73-530" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Run model diagnostics:</span>
+<span id="cb73-531"><a href="#cb73-531" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>check model assumptions where relevant (normality, constant variance, collinearity)</span>
+<span id="cb73-532"><a href="#cb73-532" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>check model fit ($R^2$)</span>
+<span id="cb73-533"><a href="#cb73-533" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb73-534"><a href="#cb73-534" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sum contrasts</span></span>
+<span id="cb73-535"><a href="#cb73-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-536"><a href="#cb73-536" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Re-run your model with sum contrasts.</span>
+<span id="cb73-537"><a href="#cb73-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-538"><a href="#cb73-538" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Inspect your coefficients again. Do your conclusions change?</span>
+<span id="cb73-539"><a href="#cb73-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-540"><a href="#cb73-540" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Re-run your model diagnostics. How does it compare to your first model?</span>
+<span id="cb73-541"><a href="#cb73-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-542"><a href="#cb73-542" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple regression</span></span>
+<span id="cb73-543"><a href="#cb73-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-544"><a href="#cb73-544" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Add verb tense (<span class="in">`verb_t`</span>: past, future) as a predictor, including an interaction term. Use sum contrasts.</span>
+<span id="cb73-545"><a href="#cb73-545" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-546"><a href="#cb73-546" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Inspect your coefficients again. Do your conclusions change?</span>
+<span id="cb73-547"><a href="#cb73-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-548"><a href="#cb73-548" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Re-run your model diagnostics.  How does it compare to the last models?</span>
+<span id="cb73-549"><a href="#cb73-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-550"><a href="#cb73-550" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session Info {.unnumbered visibility="uncounted"}</span></span>
+<span id="cb73-551"><a href="#cb73-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-554"><a href="#cb73-554" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-555"><a href="#cb73-555" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb73-556"><a href="#cb73-556" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb73-557"><a href="#cb73-557" aria-hidden="true" tabindex="-1"></a><span class="fu">RStudio.Version</span>()<span class="sc">$</span>version</span>
+<span id="cb73-558"><a href="#cb73-558" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-559"><a href="#cb73-559" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-560"><a href="#cb73-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-561"><a href="#cb73-561" aria-hidden="true" tabindex="-1"></a>Developed with Quarto using <span class="in">`r R.version.string`</span> (<span class="in">`r R.version$nickname`</span>) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</span>
+<span id="cb73-562"><a href="#cb73-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-565"><a href="#cb73-565" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-566"><a href="#cb73-566" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb73-567"><a href="#cb73-567" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-568"><a href="#cb73-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-569"><a href="#cb73-569" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unlisted .unnumbered visibility="uncounted"}</span></span>
+<span id="cb73-570"><a href="#cb73-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-571"><a href="#cb73-571" aria-hidden="true" tabindex="-1"></a>::: {#refs custom-style="Bibliography"}</span>
+<span id="cb73-572"><a href="#cb73-572" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

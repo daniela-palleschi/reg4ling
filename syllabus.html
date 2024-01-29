@@ -299,16 +299,27 @@ MathJax.Hub.Config({
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Mixed models I</span></span>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Mixed models II</span></span>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 5: TBD</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Mixed models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-independence_assumption.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Independence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-mixed_models1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed models 1: Random intercepts</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -341,23 +352,23 @@ MathJax.Hub.Config({
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="dlavepnbdb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dlavepnbdb table {
+<div id="okoxnfenpg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#okoxnfenpg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dlavepnbdb thead, #dlavepnbdb tbody, #dlavepnbdb tfoot, #dlavepnbdb tr, #dlavepnbdb td, #dlavepnbdb th {
+#okoxnfenpg thead, #okoxnfenpg tbody, #okoxnfenpg tfoot, #okoxnfenpg tr, #okoxnfenpg td, #okoxnfenpg th {
   border-style: none;
 }
 
-#dlavepnbdb p {
+#okoxnfenpg p {
   margin: 0;
   padding: 0;
 }
 
-#dlavepnbdb .gt_table {
+#okoxnfenpg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -383,12 +394,12 @@ MathJax.Hub.Config({
   border-left-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_caption {
+#okoxnfenpg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dlavepnbdb .gt_title {
+#okoxnfenpg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -400,7 +411,7 @@ MathJax.Hub.Config({
   border-bottom-width: 0;
 }
 
-#dlavepnbdb .gt_subtitle {
+#okoxnfenpg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -412,7 +423,7 @@ MathJax.Hub.Config({
   border-top-width: 0;
 }
 
-#dlavepnbdb .gt_heading {
+#okoxnfenpg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -424,13 +435,13 @@ MathJax.Hub.Config({
   border-right-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_bottom_border {
+#okoxnfenpg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_col_headings {
+#okoxnfenpg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -445,7 +456,7 @@ MathJax.Hub.Config({
   border-right-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_col_heading {
+#okoxnfenpg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -465,7 +476,7 @@ MathJax.Hub.Config({
   overflow-x: hidden;
 }
 
-#dlavepnbdb .gt_column_spanner_outer {
+#okoxnfenpg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -477,15 +488,15 @@ MathJax.Hub.Config({
   padding-right: 4px;
 }
 
-#dlavepnbdb .gt_column_spanner_outer:first-child {
+#okoxnfenpg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dlavepnbdb .gt_column_spanner_outer:last-child {
+#okoxnfenpg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dlavepnbdb .gt_column_spanner {
+#okoxnfenpg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -497,11 +508,11 @@ MathJax.Hub.Config({
   width: 100%;
 }
 
-#dlavepnbdb .gt_spanner_row {
+#okoxnfenpg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dlavepnbdb .gt_group_heading {
+#okoxnfenpg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -527,7 +538,7 @@ MathJax.Hub.Config({
   text-align: left;
 }
 
-#dlavepnbdb .gt_empty_group_heading {
+#okoxnfenpg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -542,15 +553,15 @@ MathJax.Hub.Config({
   vertical-align: middle;
 }
 
-#dlavepnbdb .gt_from_md > :first-child {
+#okoxnfenpg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dlavepnbdb .gt_from_md > :last-child {
+#okoxnfenpg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dlavepnbdb .gt_row {
+#okoxnfenpg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -569,7 +580,7 @@ MathJax.Hub.Config({
   overflow-x: hidden;
 }
 
-#dlavepnbdb .gt_stub {
+#okoxnfenpg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -582,7 +593,7 @@ MathJax.Hub.Config({
   padding-right: 5px;
 }
 
-#dlavepnbdb .gt_stub_row_group {
+#okoxnfenpg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -596,15 +607,15 @@ MathJax.Hub.Config({
   vertical-align: top;
 }
 
-#dlavepnbdb .gt_row_group_first td {
+#okoxnfenpg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dlavepnbdb .gt_row_group_first th {
+#okoxnfenpg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dlavepnbdb .gt_summary_row {
+#okoxnfenpg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -614,16 +625,16 @@ MathJax.Hub.Config({
   padding-right: 5px;
 }
 
-#dlavepnbdb .gt_first_summary_row {
+#okoxnfenpg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_first_summary_row.thick {
+#okoxnfenpg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dlavepnbdb .gt_last_summary_row {
+#okoxnfenpg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -633,7 +644,7 @@ MathJax.Hub.Config({
   border-bottom-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_grand_summary_row {
+#okoxnfenpg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -643,7 +654,7 @@ MathJax.Hub.Config({
   padding-right: 5px;
 }
 
-#dlavepnbdb .gt_first_grand_summary_row {
+#okoxnfenpg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -653,7 +664,7 @@ MathJax.Hub.Config({
   border-top-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_last_grand_summary_row_top {
+#okoxnfenpg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -663,11 +674,11 @@ MathJax.Hub.Config({
   border-bottom-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_striped {
+#okoxnfenpg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dlavepnbdb .gt_table_body {
+#okoxnfenpg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -676,7 +687,7 @@ MathJax.Hub.Config({
   border-bottom-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_footnotes {
+#okoxnfenpg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -690,7 +701,7 @@ MathJax.Hub.Config({
   border-right-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_footnote {
+#okoxnfenpg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -699,7 +710,7 @@ MathJax.Hub.Config({
   padding-right: 5px;
 }
 
-#dlavepnbdb .gt_sourcenotes {
+#okoxnfenpg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -713,7 +724,7 @@ MathJax.Hub.Config({
   border-right-color: #D3D3D3;
 }
 
-#dlavepnbdb .gt_sourcenote {
+#okoxnfenpg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -721,63 +732,63 @@ MathJax.Hub.Config({
   padding-right: 5px;
 }
 
-#dlavepnbdb .gt_left {
+#okoxnfenpg .gt_left {
   text-align: left;
 }
 
-#dlavepnbdb .gt_center {
+#okoxnfenpg .gt_center {
   text-align: center;
 }
 
-#dlavepnbdb .gt_right {
+#okoxnfenpg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dlavepnbdb .gt_font_normal {
+#okoxnfenpg .gt_font_normal {
   font-weight: normal;
 }
 
-#dlavepnbdb .gt_font_bold {
+#okoxnfenpg .gt_font_bold {
   font-weight: bold;
 }
 
-#dlavepnbdb .gt_font_italic {
+#okoxnfenpg .gt_font_italic {
   font-style: italic;
 }
 
-#dlavepnbdb .gt_super {
+#okoxnfenpg .gt_super {
   font-size: 65%;
 }
 
-#dlavepnbdb .gt_footnote_marks {
+#okoxnfenpg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dlavepnbdb .gt_asterisk {
+#okoxnfenpg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dlavepnbdb .gt_indent_1 {
+#okoxnfenpg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dlavepnbdb .gt_indent_2 {
+#okoxnfenpg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dlavepnbdb .gt_indent_3 {
+#okoxnfenpg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dlavepnbdb .gt_indent_4 {
+#okoxnfenpg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dlavepnbdb .gt_indent_5 {
+#okoxnfenpg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -856,31 +867,36 @@ MathJax.Hub.Config({
 </div></td></tr>
     <tr><td headers="Meeting" class="gt_row gt_center">2024-01-12</td>
 <td headers="Lecture" class="gt_row gt_right">10</td>
-<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>Linear mixed models</p>
+<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>Independence assumption</p>
 </div></td>
 <td headers="Vorbereitung" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>📚 Winter (2019): Ch. 14
 Winter &amp; Grice (2021); until Section 3</p>
 </div></td></tr>
     <tr><td headers="Meeting" class="gt_row gt_center">2024-01-12</td>
 <td headers="Lecture" class="gt_row gt_right">11</td>
-<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>Linear mixed models</p>
+<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>LMMs 1: random intercepts</p>
+</div></td>
+<td headers="Vorbereitung" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>📚 Winter (2019): Ch. 14</p>
+</div></td></tr>
+    <tr><td headers="Meeting" class="gt_row gt_center">2024-01-26</td>
+<td headers="Lecture" class="gt_row gt_right">12</td>
+<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>GLMMs</p>
 </div></td>
 <td headers="Vorbereitung" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td></tr>
     <tr><td headers="Meeting" class="gt_row gt_center">2024-01-26</td>
-<td headers="Lecture" class="gt_row gt_right">12</td>
-<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td>
-<td headers="Vorbereitung" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td></tr>
-    <tr><td headers="Meeting" class="gt_row gt_center">2024-01-26</td>
 <td headers="Lecture" class="gt_row gt_right">13</td>
-<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td>
+<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>LMMs 2: random slopes</p>
+</div></td>
 <td headers="Vorbereitung" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td></tr>
     <tr><td headers="Meeting" class="gt_row gt_center">2024-02-09</td>
 <td headers="Lecture" class="gt_row gt_right">14</td>
-<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td>
+<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>TBD</p>
+</div></td>
 <td headers="Vorbereitung" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td></tr>
     <tr><td headers="Meeting" class="gt_row gt_center">2024-02-09</td>
 <td headers="Lecture" class="gt_row gt_right">15</td>
-<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td>
+<td headers="Topic" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"><div class="gt_from_md"><p>TBD</p>
+</div></td>
 <td headers="Vorbereitung" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3;"></td></tr>
   </tbody>
   
