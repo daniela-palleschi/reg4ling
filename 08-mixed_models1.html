@@ -9,7 +9,7 @@
 <meta name="author" content="Daniela Palleschi">
 <meta name="dcterms.date" content="2024-01-12">
 
-<title>Regression for Linguists - 9&nbsp; Mixed models 1: Random intercepts</title>
+<title>Regression for Linguists - 9&nbsp; Random intercepts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,6 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./09-mixed_models2.html" rel="next">
 <link href="./07-independence_assumption.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -139,7 +140,7 @@ MathJax.Hub.Config({
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="twitter:title" content="Regression for Linguists - 9&nbsp; Mixed models 1: Random intercepts">
+<meta name="twitter:title" content="Regression for Linguists - 9&nbsp; Random intercepts">
 <meta name="twitter:description" content="What, why, when, and how?">
 <meta name="twitter:image" content="08-mixed_models1_files/figure-html/fig-pooling_sj-1.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -190,7 +191,7 @@ MathJax.Hub.Config({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-independence_assumption.html">Mixed models</a></li><li class="breadcrumb-item"><a href="./08-mixed_models1.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed models 1: Random intercepts</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-independence_assumption.html">Mixed models</a></li><li class="breadcrumb-item"><a href="./08-mixed_models1.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random intercepts</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -311,7 +312,7 @@ MathJax.Hub.Config({
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Report</span></a>
+ <span class="menu-text">Report 1</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -319,7 +320,7 @@ MathJax.Hub.Config({
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reports/report1.html" class="sidebar-item-text sidebar-link">
+  <a href="./reports/report 1/report1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Report 1</span></span></a>
   </div>
 </li>
@@ -343,7 +344,42 @@ MathJax.Hub.Config({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-mixed_models1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed models 1: Random intercepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random intercepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-mixed_models2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Random slopes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-shrinkage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shrinkage and Partial Pooling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-model_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Report 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reports/report 2/report2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
   </div>
 </li>
       </ul>
@@ -406,7 +442,7 @@ MathJax.Hub.Config({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed models 1: Random intercepts</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random intercepts</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">What, why, when, and how?</p>
 </div>
 
@@ -438,7 +474,7 @@ MathJax.Hub.Config({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 24, 2024</p>
+      <p class="date-modified">February 13, 2024</p>
     </div>
   </div>
     
@@ -823,7 +859,7 @@ y_i = b_0 + b_1x_i + b_2x_1 + ... +e_i \label{eq-mult_reg}
 
 </div>
 </div>
-<p>But if we look at each participants observations, e.g., their first-pass reading times for past versus future tensed verbs, we see there is quite some variation in their means and in the effect of tense. <a href="#fig-pooling_sj">Figure&nbsp;<span>9.1</span></a> shows by-participant variation in first-pass reading times for past and future tenses from seven example participants, in raw milliseconds (A) and log-transformed first-pass reading times (B). In each plot, the vertical grey dotted line indicates <span class="math inline">\(x = 0\)</span> (because we used sum contrast coding <span class="math inline">\(x = 0\)</span> is smack dab in the middle between past and future), the blue line represents the by-participant intercept and slope, while the black line represents the intercept and slope from our model. The black line therefore represents the population-level values, i.e., the mean of all first-pass reading times and the mean effect of tense.</p>
+<p>But if we look at each participants observations, e.g., their first-pass reading times for past versus future tensed verbs, we see there is quite some variation in their means and in the effect of tense. <a href="09-mixed_models2.html#fig-pooling_sj">Figure&nbsp;<span>10.2</span></a> shows by-participant variation in first-pass reading times for past and future tenses from seven example participants, in raw milliseconds (A) and log-transformed first-pass reading times (B). In each plot, the vertical grey dotted line indicates <span class="math inline">\(x = 0\)</span> (because we used sum contrast coding <span class="math inline">\(x = 0\)</span> is smack dab in the middle between past and future), the blue line represents the by-participant intercept and slope, while the black line represents the intercept and slope from our model. The black line therefore represents the population-level values, i.e., the mean of all first-pass reading times and the mean effect of tense.</p>
 <div class="cell" data-fig.asp="0.8">
 <details>
 <summary>Code for plots</summary>
@@ -883,7 +919,7 @@ y_i = b_0 + b_1x_i + b_2x_1 + ... +e_i \label{eq-mult_reg}
 </div>
 </div>
 </div>
-<p>Note in <a href="#fig-pooling_sj">Figure&nbsp;<span>9.1</span></a> that there is variation in the central tendency of observations per participant. For example, Participant 10 had overall longer first-pass reading times than the other participants, as did Participant 1. Conversely, some participants had overall faster first-pass reading times, such as Participants 46 and 63. Meanwhile, some participants were pretty near the grand mean, like Participants 2 and 57. This is not to mention the differences in the slopes: some participants have a flatter slope than the model’s fitted slope (e.g., Participants 35 and 46), while some even have a slope in the opposite direction (e.g., Participants 1 and 63).</p>
+<p>Note in <a href="09-mixed_models2.html#fig-pooling_sj">Figure&nbsp;<span>10.2</span></a> that there is variation in the central tendency of observations per participant. For example, Participant 10 had overall longer first-pass reading times than the other participants, as did Participant 1. Conversely, some participants had overall faster first-pass reading times, such as Participants 46 and 63. Meanwhile, some participants were pretty near the grand mean, like Participants 2 and 57. This is not to mention the differences in the slopes: some participants have a flatter slope than the model’s fitted slope (e.g., Participants 35 and 46), while some even have a slope in the opposite direction (e.g., Participants 1 and 63).</p>
 <p><a href="#fig-pooling_item">Figure&nbsp;<span>9.2</span></a> shows the same trend across a sample of seven experimental items. Some by-item intercepts were similar to the model intercept (e.g., items 1 and 85), while some deviated (e.g., item 10 and 26).</p>
 <div class="cell" data-fig.asp="0.8">
 <details>
@@ -956,7 +992,7 @@ y_i = b_0 + b_1x_i + b_2x_1 + ... +e_i \label{eq-mult_reg}
 </div>
 </div>
 </div>
-<p>We see saw in seven examples in <a href="#fig-pooling_sj">Figure&nbsp;<span>9.1</span></a> and <span class="citation" data-cites="fit-pooling_item">(<a href="00-course_overview.html#ref-fit-pooling_item" role="doc-biblioref"><strong>fit-pooling_item?</strong></a>)</span>, and across all participants and items in <a href="#fig-means">Figure&nbsp;<span>9.3</span></a>, that there is a lot of variability in terms of the overall mean (intercept, which would correspond to the grey dotted line) across items and participants, as well and in the differences between past and future verbs. Firstly, focusing on the intercept (values crossing the vertical grey dotted line), there is a range of approximately 300 to 675 ms between items, and a range of 250 and 875 between participants. Compared to the overall mean of 440.5ms, this is quite some variation. Looking now at the effect of tense, i.e.&nbsp;the <em>slope</em>, we see not only differences in the magnitude of effects between items and participants (i.e., how steep the slope is), but also in the <em>direction</em> of the effect: There are quite a few items and participants that have a slope in the opposite direction of the overall mean in black, which is positive.</p>
+<p>We see saw in seven examples in <a href="09-mixed_models2.html#fig-pooling_sj">Figure&nbsp;<span>10.2</span></a> and <span class="citation" data-cites="fit-pooling_item">(<a href="00-course_overview.html#ref-fit-pooling_item" role="doc-biblioref"><strong>fit-pooling_item?</strong></a>)</span>, and across all participants and items in <a href="#fig-means">Figure&nbsp;<span>9.3</span></a>, that there is a lot of variability in terms of the overall mean (intercept, which would correspond to the grey dotted line) across items and participants, as well and in the differences between past and future verbs. Firstly, focusing on the intercept (values crossing the vertical grey dotted line), there is a range of approximately 300 to 675 ms between items, and a range of 250 and 875 between participants. Compared to the overall mean of 440.5ms, this is quite some variation. Looking now at the effect of tense, i.e.&nbsp;the <em>slope</em>, we see not only differences in the magnitude of effects between items and participants (i.e., how steep the slope is), but also in the <em>direction</em> of the effect: There are quite a few items and participants that have a slope in the opposite direction of the overall mean in black, which is positive.</p>
 <p>So why does it matter that there’s variability by item and by participant? All of this data was already included in our model, and so it was taken into consideration when calculating standard error and confidence intervals, so why should this matter? The answer is simply: dependence of data points affects the number of observations, which in turn affects our degrees of freedom and measures like standard error and confidence intervals. In essence, it alters our measures of uncertainty in the presence or absence of a reliable effect.</p>
 <p>To drive this point home, let’s look at an ordered plot of by-item and -participant intercepts with 95% confidence intervals (<a href="#fig-b0">Figure&nbsp;<span>9.4</span></a>) and boxplots of the raw observations of first-pass reading times at the verb region (<a href="#fig-sj-item-boxplot">Figure&nbsp;<span>9.5</span></a>). In <a href="#fig-b0">Figure&nbsp;<span>9.4</span></a>, we see the intercept value on the x-axis, again highlighting the range of varying intercept values for across items and participants. In <a href="#fig-sj-item-boxplot">Figure&nbsp;<span>9.5</span></a>, we see the range in the spread of values, with wider inter-quartile ranges especially for particpants with higher a median first-pass reading time. This was also represented in <a href="#fig-b0">Figure&nbsp;<span>9.4</span></a> by wider 95% confidence intervals for both items and participants with higher intercepts.</p>
 <div class="cell">
@@ -1646,16 +1682,14 @@ fp_i &amp;= \beta_0 + \alpha_{j[i]} + \alpha_{k[i]}+ \beta_{verb\_t}x + \beta_{g
 </section>
 <section id="reporting-your-model" class="level2" data-number="9.7">
 <h2 data-number="9.7" class="anchored" data-anchor-id="reporting-your-model"><span class="header-section-number">9.7</span> Reporting your model</h2>
-<ul>
-<li><p>according to <span class="citation" data-cites="sonderegger_regression_nodate-1">Sonderegger (<a href="00-course_overview.html#ref-sonderegger_regression_nodate-1" role="doc-biblioref">2023</a>)</span> (p.&nbsp;297), we should report:</p>
+<p>According to <span class="citation" data-cites="sonderegger_regression_nodate-1">Sonderegger (<a href="00-course_overview.html#ref-sonderegger_regression_nodate-1" role="doc-biblioref">2023</a>)</span> (p.&nbsp;297), we should report:</p>
 <ol type="1">
 <li>model definition (sometimes in ‘Data Analysis’ section)</li>
 <li>Fixed effects</li>
 <li>Random effects</li>
 <li>Sample size (number of observations, number of levels for each grouping factor)</li>
 <li>one or more quantitative summaries of the model, e.g., AIC, BIC, or logLik (although they’re only informative in comparison to another model fit to the same data)</li>
-</ol></li>
-</ul>
+</ol>
 <section id="model-definition" class="level3" data-number="9.7.1">
 <h3 data-number="9.7.1" class="anchored" data-anchor-id="model-definition"><span class="header-section-number">9.7.1</span> Model definition</h3>
 <p>Below is an example of a write-up of a model definition from <span class="citation" data-cites="biondo_yesterday_2022">Biondo et al. (<a href="00-course_overview.html#ref-biondo_yesterday_2022" role="doc-biblioref">2022</a>)</span> (p.&nbsp;9). Note that I’ve highlighted some aspects that we’ve already covered, which you should remember to define in write ups.</p>
@@ -1844,23 +1878,23 @@ Citing packages
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="fwmpxoreig" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fwmpxoreig table {
+<div id="zplpmmqxhg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zplpmmqxhg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fwmpxoreig thead, #fwmpxoreig tbody, #fwmpxoreig tfoot, #fwmpxoreig tr, #fwmpxoreig td, #fwmpxoreig th {
+#zplpmmqxhg thead, #zplpmmqxhg tbody, #zplpmmqxhg tfoot, #zplpmmqxhg tr, #zplpmmqxhg td, #zplpmmqxhg th {
   border-style: none;
 }
 
-#fwmpxoreig p {
+#zplpmmqxhg p {
   margin: 0;
   padding: 0;
 }
 
-#fwmpxoreig .gt_table {
+#zplpmmqxhg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1886,12 +1920,12 @@ Citing packages
   border-left-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_caption {
+#zplpmmqxhg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fwmpxoreig .gt_title {
+#zplpmmqxhg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1903,7 +1937,7 @@ Citing packages
   border-bottom-width: 0;
 }
 
-#fwmpxoreig .gt_subtitle {
+#zplpmmqxhg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1915,7 +1949,7 @@ Citing packages
   border-top-width: 0;
 }
 
-#fwmpxoreig .gt_heading {
+#zplpmmqxhg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1927,13 +1961,13 @@ Citing packages
   border-right-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_bottom_border {
+#zplpmmqxhg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_col_headings {
+#zplpmmqxhg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1948,7 +1982,7 @@ Citing packages
   border-right-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_col_heading {
+#zplpmmqxhg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1968,7 +2002,7 @@ Citing packages
   overflow-x: hidden;
 }
 
-#fwmpxoreig .gt_column_spanner_outer {
+#zplpmmqxhg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1980,15 +2014,15 @@ Citing packages
   padding-right: 4px;
 }
 
-#fwmpxoreig .gt_column_spanner_outer:first-child {
+#zplpmmqxhg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fwmpxoreig .gt_column_spanner_outer:last-child {
+#zplpmmqxhg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fwmpxoreig .gt_column_spanner {
+#zplpmmqxhg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2000,11 +2034,11 @@ Citing packages
   width: 100%;
 }
 
-#fwmpxoreig .gt_spanner_row {
+#zplpmmqxhg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fwmpxoreig .gt_group_heading {
+#zplpmmqxhg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2030,7 +2064,7 @@ Citing packages
   text-align: left;
 }
 
-#fwmpxoreig .gt_empty_group_heading {
+#zplpmmqxhg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2045,15 +2079,15 @@ Citing packages
   vertical-align: middle;
 }
 
-#fwmpxoreig .gt_from_md > :first-child {
+#zplpmmqxhg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fwmpxoreig .gt_from_md > :last-child {
+#zplpmmqxhg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fwmpxoreig .gt_row {
+#zplpmmqxhg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2072,7 +2106,7 @@ Citing packages
   overflow-x: hidden;
 }
 
-#fwmpxoreig .gt_stub {
+#zplpmmqxhg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2085,7 +2119,7 @@ Citing packages
   padding-right: 5px;
 }
 
-#fwmpxoreig .gt_stub_row_group {
+#zplpmmqxhg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2099,15 +2133,15 @@ Citing packages
   vertical-align: top;
 }
 
-#fwmpxoreig .gt_row_group_first td {
+#zplpmmqxhg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fwmpxoreig .gt_row_group_first th {
+#zplpmmqxhg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fwmpxoreig .gt_summary_row {
+#zplpmmqxhg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2117,16 +2151,16 @@ Citing packages
   padding-right: 5px;
 }
 
-#fwmpxoreig .gt_first_summary_row {
+#zplpmmqxhg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_first_summary_row.thick {
+#zplpmmqxhg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fwmpxoreig .gt_last_summary_row {
+#zplpmmqxhg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2136,7 +2170,7 @@ Citing packages
   border-bottom-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_grand_summary_row {
+#zplpmmqxhg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2146,7 +2180,7 @@ Citing packages
   padding-right: 5px;
 }
 
-#fwmpxoreig .gt_first_grand_summary_row {
+#zplpmmqxhg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2156,7 +2190,7 @@ Citing packages
   border-top-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_last_grand_summary_row_top {
+#zplpmmqxhg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2166,11 +2200,11 @@ Citing packages
   border-bottom-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_striped {
+#zplpmmqxhg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fwmpxoreig .gt_table_body {
+#zplpmmqxhg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2179,7 +2213,7 @@ Citing packages
   border-bottom-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_footnotes {
+#zplpmmqxhg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2193,7 +2227,7 @@ Citing packages
   border-right-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_footnote {
+#zplpmmqxhg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2202,7 +2236,7 @@ Citing packages
   padding-right: 5px;
 }
 
-#fwmpxoreig .gt_sourcenotes {
+#zplpmmqxhg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2216,7 +2250,7 @@ Citing packages
   border-right-color: #D3D3D3;
 }
 
-#fwmpxoreig .gt_sourcenote {
+#zplpmmqxhg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2224,63 +2258,63 @@ Citing packages
   padding-right: 5px;
 }
 
-#fwmpxoreig .gt_left {
+#zplpmmqxhg .gt_left {
   text-align: left;
 }
 
-#fwmpxoreig .gt_center {
+#zplpmmqxhg .gt_center {
   text-align: center;
 }
 
-#fwmpxoreig .gt_right {
+#zplpmmqxhg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fwmpxoreig .gt_font_normal {
+#zplpmmqxhg .gt_font_normal {
   font-weight: normal;
 }
 
-#fwmpxoreig .gt_font_bold {
+#zplpmmqxhg .gt_font_bold {
   font-weight: bold;
 }
 
-#fwmpxoreig .gt_font_italic {
+#zplpmmqxhg .gt_font_italic {
   font-style: italic;
 }
 
-#fwmpxoreig .gt_super {
+#zplpmmqxhg .gt_super {
   font-size: 65%;
 }
 
-#fwmpxoreig .gt_footnote_marks {
+#zplpmmqxhg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fwmpxoreig .gt_asterisk {
+#zplpmmqxhg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fwmpxoreig .gt_indent_1 {
+#zplpmmqxhg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fwmpxoreig .gt_indent_2 {
+#zplpmmqxhg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fwmpxoreig .gt_indent_3 {
+#zplpmmqxhg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fwmpxoreig .gt_indent_4 {
+#zplpmmqxhg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fwmpxoreig .gt_indent_5 {
+#zplpmmqxhg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2355,7 +2389,7 @@ other attached packages:
 [25] tidyverse_2.0.0     broman_0.80        
 
 loaded via a namespace (and not attached):
- [1] sandwich_3.0-2      rlang_1.1.1         magrittr_2.0.3     
+ [1] sandwich_3.0-2      rlang_1.1.3         magrittr_2.0.3     
  [4] multcomp_1.4-23     snakecase_0.11.0    furrr_0.3.1        
  [7] compiler_4.3.0      mgcv_1.8-42         systemfonts_1.0.4  
 [10] vctrs_0.6.3         rvest_1.0.3         crayon_1.5.2       
@@ -2836,10 +2870,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./09-mixed_models2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Random slopes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb55" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Mixed models 1: Random intercepts"</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Random intercepts"</span></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "What, why, when, and how?"</span></span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Daniela Palleschi"</span></span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> Humboldt-Universität zu Berlin</span></span>
@@ -3853,7 +3890,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb55-1101"><a href="#cb55-1101" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-1102"><a href="#cb55-1102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reporting your model</span></span>
 <span id="cb55-1103"><a href="#cb55-1103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-1104"><a href="#cb55-1104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>according to @sonderegger_regression_nodate-1 (p. 297), we should report:</span>
+<span id="cb55-1104"><a href="#cb55-1104" aria-hidden="true" tabindex="-1"></a>According to @sonderegger_regression_nodate-1 (p. 297), we should report:</span>
 <span id="cb55-1105"><a href="#cb55-1105" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb55-1106"><a href="#cb55-1106" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>model definition (sometimes in 'Data Analysis' section)</span>
 <span id="cb55-1107"><a href="#cb55-1107" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>Fixed effects</span>

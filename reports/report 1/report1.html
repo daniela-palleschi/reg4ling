@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Regression for Linguists - 7&nbsp; Report 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../07-independence_assumption.html" rel="next">
+<link href="../../06-logistic_regression.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: {autoNumber: "AMS"} },
+  tex2jax: {inlineMath: [ ['$','$'], ["\\(","\\)"] ]}
+});
+</script>
+
+<!-- This is what works with Quarto -->
+<script>
+  MathJax = {
+    tex: {
+      tags: 'ams'  // should be 'ams', 'none', or 'all'
+    }
+  };
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="twitter:title" content="Regression for Linguists - 7&nbsp; Report 1">
+<meta name="twitter:description" content="Linear and logistic regression">
+<meta name="twitter:image" content="report1_files/figure-html/fig-fit_verb_tt-1.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Regression for Linguists</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://daniela-palleschi.github.io/" rel="" target=""><i class="bi bi-home" role="img">
+</i> 
+ <span class="menu-text">D. Palleschi</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/daniela-palleschi/reg4ling" rel="" target=""><i class="bi bi-github" role="img" aria-label="Source Code">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://moodle.hu-berlin.de/course/view.php?id=121978" rel="" target=""><i class="bi bi-life-preserver" role="img" aria-label="Course Moodle">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+    <a href="../../Regression-for-Linguists.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../reports/report 1/report1.html">Report 1</a></li><li class="breadcrumb-item"><a href="../../reports/report 1/report1.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Report 1</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../00-course_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources and Set-up</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Day 1: Simple linear regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01-equation_of_a_line.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Understanding straight lines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02-simple_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simple linear regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-continuous_predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Continuous predictors</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Day 2: Multiple regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../04-multiple_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../05-categorical_predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Categorical predictors</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Day 3: Logistic regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../06-logistic_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Report 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reports/report 1/report1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Report 1</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Mixed models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../07-independence_assumption.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Independence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../08-mixed_models1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random intercepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../09-mixed_models2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Random slopes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../10-shrinkage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shrinkage and Partial Pooling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../11-model_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Report 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reports/report 2/report2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset"><span class="header-section-number">7.1</span> Dataset</a></li>
+  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up"><span class="header-section-number">7.2</span> Set-up</a>
+  <ul class="collapse">
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">7.2.1</span> Packages</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">7.2.2</span> Data</a></li>
+  </ul></li>
+  <li><a href="#how-to-report-your-models" id="toc-how-to-report-your-models" class="nav-link" data-scroll-target="#how-to-report-your-models"><span class="header-section-number">7.3</span> How to report your models</a>
+  <ul class="collapse">
+  <li><a href="#example-model-report" id="toc-example-model-report" class="nav-link" data-scroll-target="#example-model-report"><span class="header-section-number">7.3.1</span> Example model report</a></li>
+  </ul></li>
+  <li><a href="#variable-prep" id="toc-variable-prep" class="nav-link" data-scroll-target="#variable-prep"><span class="header-section-number">7.4</span> Variable prep</a>
+  <ul class="collapse">
+  <li><a href="#centring-continuous-variables" id="toc-centring-continuous-variables" class="nav-link" data-scroll-target="#centring-continuous-variables"><span class="header-section-number">7.4.1</span> Centring continuous variables</a></li>
+  <li><a href="#contrast-coding" id="toc-contrast-coding" class="nav-link" data-scroll-target="#contrast-coding"><span class="header-section-number">7.4.2</span> Contrast coding</a></li>
+  </ul></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression"><span class="header-section-number">7.5</span> Linear regression</a>
+  <ul class="collapse">
+  <li><a href="#fitting-our-model" id="toc-fitting-our-model" class="nav-link" data-scroll-target="#fitting-our-model"><span class="header-section-number">7.5.1</span> Fitting our model</a></li>
+  <li><a href="#assessing-assumptions" id="toc-assessing-assumptions" class="nav-link" data-scroll-target="#assessing-assumptions"><span class="header-section-number">7.5.2</span> Assessing assumptions</a></li>
+  <li><a href="#extracting-predictions" id="toc-extracting-predictions" class="nav-link" data-scroll-target="#extracting-predictions"><span class="header-section-number">7.5.3</span> Extracting predictions</a></li>
+  <li><a href="#report-model" id="toc-report-model" class="nav-link" data-scroll-target="#report-model"><span class="header-section-number">7.5.4</span> Report model</a></li>
+  </ul></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">7.6</span> Logistic regression</a>
+  <ul class="collapse">
+  <li><a href="#fit-model" id="toc-fit-model" class="nav-link" data-scroll-target="#fit-model"><span class="header-section-number">7.6.1</span> Fit model</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">7.6.2</span> Interpretation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Report 1</span></h1>
+<p class="subtitle lead">Linear and logistic regression</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>The goal of this report is to review and consolidate what we learned together in the first block of the course. You are not required to do anything that we have not already seen.</p>
+<p><em>For students enrolled in this course in the Winter Semester 2023/24:</em> The report is due <strong>January 11, 2024 at 11:59pm</strong>, but I encourage you to submit before the holidays if you have the capacity to do so. Please submit your Quarto script, as well as a rendered copy (preferably HTML, but PDF is also fine) to Moodle (under ‘Reports’).</p>
+<section id="dataset" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="dataset"><span class="header-section-number">7.1</span> Dataset</h2>
+<p>For this report you will continue using the data from <span class="citation" data-cites="biondo_yesterday_2022">Biondo et al. (<a href="../../00-course_overview.html#ref-biondo_yesterday_2022" role="doc-biblioref">2022</a>)</span>, an eye-tracking reading study on adverb-tense congruence effects on reading time measures. Participants’ eye movements were recorded as they read Spanish sentences where temporal adverbs and verb tense were either congruent or incongruent. For both sentence regions, the time reference was either past (e.g., yesterda, bought) or future (e.g., tomorrow, will buy). Example stimuli from this experiment are given in <a href="../report 2/report2.html#tbl-stimuli">Table&nbsp;<span>13.1</span></a>. You will be fitting models to different eye-tracking reading measures from this experiment, with the predictors <em>verb tense</em> and <em>grammaticality</em>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-stimuli" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;7.1: Example stimuli</caption>
+<colgroup>
+<col style="width: 88%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sentence</th>
+<th style="text-align: left;">adverb</th>
+<th style="text-align: left;">verb</th>
+<th style="text-align: left;">gramm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A la salida del trabajo, <strong>ayer</strong> las chicas <strong>compraron</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>yesterday</strong> <em>the girls</em> <strong>bought</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">past</td>
+<td style="text-align: left;">past</td>
+<td style="text-align: left;">gramm</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A la salida del trabajo, <strong>ayer</strong> las chicas <strong>*comprarán</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>yesterday</strong> <em>the girls</em> <strong>*will buy</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">past</td>
+<td style="text-align: left;">future</td>
+<td style="text-align: left;">ungramm</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A la salida del trabajo, <strong>mañana</strong> las chicas <strong>comprarán</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>tomorrow</strong> <em>the girls</em> <strong>will buy</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">future</td>
+<td style="text-align: left;">future</td>
+<td style="text-align: left;">gramm</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A la salida del trabajo, <strong>mañana</strong> las chicas <strong>*compraron</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>tomorrow</strong> <em>the girls</em> <strong>*bought</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">future</td>
+<td style="text-align: left;">past</td>
+<td style="text-align: left;">ungramm</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="set-up" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="set-up"><span class="header-section-number">7.2</span> Set-up</h2>
+<p>Make sure you begin with a <em>clear</em> working environment. To achieve this, you can go to <code>Session &gt; Restart R</code>. Your Environment should have no objects in it, and you should not have any packages loaded.</p>
+<section id="packages" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">7.2.1</span> Packages</h3>
+<p>Load the packages below. Give a short description of why we load in each package, i.e., what these packages help us do (1-2 sentences each). Tip: remember you can type <code>?tidyverse</code> into the Console to get an overview of a package or function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  tidyverse,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  janitor,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  here,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  broom</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><code>tidyverse</code>:</li>
+<li><code>janitor</code>:</li>
+<li><code>here</code>:</li>
+</ol>
+</section>
+<section id="data" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="data"><span class="header-section-number">7.2.2</span> Data</h3>
+<p>Run the code below. Give a short description of what each line of code does (you can skip the <code>locale</code> line). Tip: <code>roi == 2</code> corresponds to the <em>temporal adverb</em> condiiton.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_tense <span class="ot">&lt;-</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Biondo.Soilemezidi.Mancini_dataset_ET.csv"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"Latin1"</span>) <span class="do">## for special characters in Spanish</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           ) <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gramm =</span> <span class="fu">ifelse</span>(gramm <span class="sc">==</span> <span class="st">"0"</span>, <span class="st">"ungramm"</span>, <span class="st">"gramm"</span>))  <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(roi <span class="sc">==</span> <span class="dv">2</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         adv_type <span class="sc">==</span> <span class="st">"Deic"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">length =</span> <span class="fu">nchar</span>(label))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can write your answer like this, for example:</p>
+<ol type="1">
+<li><code>df_tense &lt;-</code> :</li>
+<li><code>read_csv</code>:</li>
+<li><code>clean_names</code>:</li>
+<li><code>mutate</code>:</li>
+<li><code>filter</code>:</li>
+</ol>
+</section>
+</section>
+<section id="how-to-report-your-models" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="how-to-report-your-models"><span class="header-section-number">7.3</span> How to report your models</h2>
+<p>You will be running linear and logisitc regression models. Our variables of interest will be:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 79%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">description</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>fp</code></td>
+<td style="text-align: left;">first-pass reading time (summation of fixations from when a reader first fixates on a region to when they first leave that region)</td>
+<td style="text-align: left;">dependent</td>
+<td style="text-align: left;">continuous</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tt</code></td>
+<td style="text-align: left;">total reading time (summation of all fixations within a region during a trial)</td>
+<td style="text-align: left;">dependent</td>
+<td style="text-align: left;">continuous</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ri</code></td>
+<td style="text-align: left;">regressions in (whether there was at least one regression into a region)</td>
+<td style="text-align: left;">dependent</td>
+<td style="text-align: left;">binomial</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ro</code></td>
+<td style="text-align: left;">regressions out (whether there was at least one regression out of a region)</td>
+<td style="text-align: left;">dependent</td>
+<td style="text-align: left;">binomial</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>verb_t</code></td>
+<td style="text-align: left;">verb tense: past or future</td>
+<td style="text-align: left;">independent</td>
+<td style="text-align: left;">categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>gramm</code></td>
+<td style="text-align: left;">grammaticality: grammatical or ungrammatical</td>
+<td style="text-align: left;">independent</td>
+<td style="text-align: left;">categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>length</code></td>
+<td style="text-align: left;">region length in letters</td>
+<td style="text-align: left;">independent</td>
+<td style="text-align: left;">continuous</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="example-model-report" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="example-model-report"><span class="header-section-number">7.3.1</span> Example model report</h3>
+<p>Imagine we fit a linear model, called <code>fit_verb_tt</code>, to log-tranformed total reading times at the verb region. Our fixed effects (i.e., predictors) are verb tense, grammaticality, and their interaction. Below I report the findings of the model, which is what you should aim to do with the models you run.</p>
+<blockquote class="blockquote">
+<p>The model summary is given in <span class="quarto-unresolved-ref">?tbl-fit_verb_tt</span>, with back-transformed model predictions visualised in <a href="#fig-fit_verb_tt">Figure&nbsp;<span>7.1</span></a>. A main effect of grammaticality was found in total reading times at the verb region, with ungrammatical conditions eliciting longer total reading times than grammatical conditions (Est = -0.06, <em>t</em> = -2.4, <em>p</em> &lt; 0.05). A main effect of tense was also found, with the future condition eliciting longer total reading times than the past condition (Est = 0.07, <em>t</em> = 2.48, <em>p</em> &lt; .05). An interaction of tense and grammaticality was not significant (Est = 0.04, <em>t</em> = 1).</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(papaja)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fit_verb_tt <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apa_print</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apa_table</span>(<span class="at">label =</span> <span class="st">"tbl-fit_verb_tt"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">caption =</span> <span class="st">"Model summary for (log-transformed) total reading times at the verb region."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>(#tab:unnamed-chunk-12) Model summary for (log-transformed) total reading times at the verb region.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Predictor</th>
+<th style="text-align: left;"><span class="math inline">\(b\)</span></th>
+<th style="text-align: left;">95% CI</th>
+<th style="text-align: left;"><span class="math inline">\(t\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\mathit{df}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: left;">6.22</td>
+<td style="text-align: left;">[6.19, 6.26]</td>
+<td style="text-align: left;">332.72</td>
+<td style="text-align: left;">3791</td>
+<td style="text-align: left;">&lt; .001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Verb tPast</td>
+<td style="text-align: left;">-0.06</td>
+<td style="text-align: left;">[-0.11, -0.01]</td>
+<td style="text-align: left;">-2.38</td>
+<td style="text-align: left;">3791</td>
+<td style="text-align: left;">.017</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Grammungramm</td>
+<td style="text-align: left;">0.07</td>
+<td style="text-align: left;">[0.01, 0.12]</td>
+<td style="text-align: left;">2.47</td>
+<td style="text-align: left;">3791</td>
+<td style="text-align: left;">.013</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Verb tPast <span class="math inline">\(\times\)</span> Grammungramm</td>
+<td style="text-align: left;">0.04</td>
+<td style="text-align: left;">[-0.04, 0.11]</td>
+<td style="text-align: left;">1.01</td>
+<td style="text-align: left;">3791</td>
+<td style="text-align: left;">.312</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(fit_verb_tt, <span class="at">type =</span> <span class="st">"int"</span>) <span class="sc">+</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicted total reading times at the verb region"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Verb tense"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Reading time (ms)"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fit_verb_tt" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="report1_files/figure-html/fig-fit_verb_tt-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.1: Back-transformed model predictions for total reading time at the verb region (with 95% confidence intervals).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="variable-prep" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="variable-prep"><span class="header-section-number">7.4</span> Variable prep</h2>
+<p>We need to prepare our predictors: centering continuous variables and sum contrast coding categorical variables.</p>
+<section id="centring-continuous-variables" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="centring-continuous-variables"><span class="header-section-number">7.4.1</span> Centring continuous variables</h3>
+<p>Create a new variable <code>length_c</code> which contains the centred values of <code>length</code> (just centre, you don’t need to standardise). Centre using the <em>median</em> rather than the mean (hint: there is a function <code>median()</code>).</p>
+</section>
+<section id="contrast-coding" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="contrast-coding"><span class="header-section-number">7.4.2</span> Contrast coding</h3>
+<p>Set sum contrast coding for <code>tense</code> and <code>gramm</code>. You might need to first use the <code>as.factor()</code> function to save the variables as factors. Your contrasts should look like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_tense<span class="sc">$</span>gramm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        [,1]
+gramm   -0.5
+ungramm  0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_tense<span class="sc">$</span>verb_t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       [,1]
+Future  0.5
+Past   -0.5</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="linear-regression" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">7.5</span> Linear regression</h2>
+<p>We run linear regression when we have a continuous dependent variable. You will be fitting a. model to first-pass reading time.</p>
+<section id="fitting-our-model" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="fitting-our-model"><span class="header-section-number">7.5.1</span> Fitting our model</h3>
+<p>Fit a model of <em>log-transformed</em> first-pass reading times with verb tense, grammaticality, and their interaction as fixed effects (hint: you might want to use <code>*</code> in your model).</p>
+</section>
+<section id="assessing-assumptions" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="assessing-assumptions"><span class="header-section-number">7.5.2</span> Assessing assumptions</h3>
+<p>Visually assess the model assumptions of normality and homoscedasticity and write 1-2 sentences about each assumption, referring to the figures you produced.</p>
+</section>
+<section id="extracting-predictions" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="extracting-predictions"><span class="header-section-number">7.5.3</span> Extracting predictions</h3>
+<ol type="1">
+<li><p>Create objects <code>intercept</code>, <code>b1</code> (<code>verb_t</code>), and <code>b2</code> (<code>gramm</code>) that contain the corresponding model coefficient estimate for each term (hint: each object should contain a single value, which corresponds to the <em>estimate</em> for this term in your model summary output).</p></li>
+<li><p>Generate the fitted values for each of our four conditions. We covered a number of ways to do this in class:</p>
+<ol type="a">
+<li>Using our model formula (<span class="math inline">\(\ref{eq-fp}\)</span>) and the sum contrast values for each level of <code>verb_t</code> and <code>gramm</code> (i.e., +/-0.5, given in <a href="#tbl-contrasts">Table&nbsp;<span>7.2</span></a>), compute the <em>back-transformed</em> predicted total reading time for each condition. Recall: <span class="math inline">\(b_0\)</span> is our intercept, <span class="math inline">\(b_1\)</span> is our slope for <code>verb_t</code> (i.e., the value of the object you just named <code>verb_t</code>), and <span class="math inline">\(b_2\)</span> is our slope (estimate) for <code>gramm</code> (i.e., the value of the object you just named <code>gramm</code>).</li>
+<li>The <code>ggeffects</code> package: we used the <code>ggeffect()</code> function, but the <code>ggpredict()</code> function back-transforms the estimates for us.</li>
+</ol></li>
+</ol>
+<p><span class="math display">\[\begin{equation}
+fp = exp(b_0 + b_1*verb\_t + b_2*gramm) \label{eq-fp}
+\end{equation}\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-contrasts" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;7.2: Corresponding value of factor levels to be plugged into equation ef{eq-fp}</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">-0.5</th>
+<th style="text-align: left;">+0.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>verb_t</code></td>
+<td style="text-align: left;">past</td>
+<td style="text-align: left;">future</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>gramm</code></td>
+<td style="text-align: left;">gramm</td>
+<td style="text-align: left;">ungramm</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="report-model" class="level3" data-number="7.5.4">
+<h3 data-number="7.5.4" class="anchored" data-anchor-id="report-model"><span class="header-section-number">7.5.4</span> Report model</h3>
+<p>Write a short report of the model findings. Produce a table and plot like in the example above to supplement your report.</p>
+</section>
+</section>
+<section id="logistic-regression" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">7.6</span> Logistic regression</h2>
+<p>We run logistic regression when we have a binimial dependent variable. You will be fitting a logistic regression model to regression in.</p>
+<section id="fit-model" class="level3" data-number="7.6.1">
+<h3 data-number="7.6.1" class="anchored" data-anchor-id="fit-model"><span class="header-section-number">7.6.1</span> Fit model</h3>
+<p>Fit a generalied linear model (logistic regression) to the regression in data, with the same fixed effects as your linear model above (<code>verb_t</code>, <code>gramm</code>, and their interaction). Remember, you will need a different function (not <code>lm</code>), and to add another argument (<code>family = ...</code>).</p>
+</section>
+<section id="interpretation" class="level3" data-number="7.6.2">
+<h3 data-number="7.6.2" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">7.6.2</span> Interpretation</h3>
+<p>Write a short report of the model findings. Produce a table and plot like in the example above to supplement yor report. Recall that our coefficient estimates are in <em>log odds</em>).</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-biondo_yesterday_2022" class="csl-entry" role="listitem">
+Biondo, N., Soilemezidi, M., &amp; Mancini, S. (2022). Yesterday is history, tomorrow is a mystery: <span>An</span> eye-tracking investigation of the processing of past and future time reference during sentence reading. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, <em>48</em>(7), 1001–1018. <a href="https://doi.org/10.1037/xlm0001053">https://doi.org/10.1037/xlm0001053</a>
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+var custom_title = document.querySelectorAll('.custom .theorem-title');
+
+for (let i = 0; i < custom_title.length; i++ ) {
+   var mod_name = custom_title[i].innerHTML;
+   custom_title[i].innerHTML = mod_name.replace("Example", "");
+};
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../../06-logistic_regression.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Logistic regression</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../07-independence_assumption.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Independence</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

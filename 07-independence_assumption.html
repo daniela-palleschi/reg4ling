@@ -86,7 +86,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./08-mixed_models1.html" rel="next">
-<link href="./reports/report1.html" rel="prev">
+<link href="./reports/report 1/report1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -306,7 +306,7 @@ MathJax.Hub.Config({
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Report</span></a>
+ <span class="menu-text">Report 1</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -314,7 +314,7 @@ MathJax.Hub.Config({
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reports/report1.html" class="sidebar-item-text sidebar-link">
+  <a href="./reports/report 1/report1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Report 1</span></span></a>
   </div>
 </li>
@@ -338,7 +338,42 @@ MathJax.Hub.Config({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-mixed_models1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed models 1: Random intercepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random intercepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-mixed_models2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Random slopes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-shrinkage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shrinkage and Partial Pooling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-model_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Report 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reports/report 2/report2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
   </div>
 </li>
       </ul>
@@ -353,14 +388,29 @@ MathJax.Hub.Config({
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#independence-assumption" id="toc-independence-assumption" class="nav-link active" data-scroll-target="#independence-assumption"><span class="header-section-number">8.1</span> Independence assumption</a>
+  <li><a href="#independence-assumption" id="toc-independence-assumption" class="nav-link active" data-scroll-target="#independence-assumption"><span class="header-section-number">9</span> Independence assumption</a>
   <ul class="collapse">
-  <li><a href="#review-model-assumptions" id="toc-review-model-assumptions" class="nav-link" data-scroll-target="#review-model-assumptions"><span class="header-section-number">8.1.1</span> Review: Model assumptions</a></li>
-  <li><a href="#sources-of-dependence" id="toc-sources-of-dependence" class="nav-link" data-scroll-target="#sources-of-dependence"><span class="header-section-number">8.1.2</span> Sources of dependence</a></li>
+  <li><a href="#non-independence" id="toc-non-independence" class="nav-link" data-scroll-target="#non-independence"><span class="header-section-number">9.1</span> (Non-)Independence</a></li>
+  <li><a href="#repeated-measures-design" id="toc-repeated-measures-design" class="nav-link" data-scroll-target="#repeated-measures-design"><span class="header-section-number">9.2</span> Repeated measures design</a></li>
+  <li><a href="#other-sources-of-non-independence" id="toc-other-sources-of-non-independence" class="nav-link" data-scroll-target="#other-sources-of-non-independence"><span class="header-section-number">9.3</span> Other sources of non-independence</a></li>
   </ul></li>
-  <li><a href="#language-as-fixed-effect-fallacy" id="toc-language-as-fixed-effect-fallacy" class="nav-link" data-scroll-target="#language-as-fixed-effect-fallacy"><span class="header-section-number">8.2</span> Language-as-fixed-effect-fallacy</a></li>
-  <li><a href="#mixed-models-a-short-history" id="toc-mixed-models-a-short-history" class="nav-link" data-scroll-target="#mixed-models-a-short-history"><span class="header-section-number">8.3</span> Mixed models: A short history</a></li>
+  <li><a href="#pseudoreplication" id="toc-pseudoreplication" class="nav-link" data-scroll-target="#pseudoreplication"><span class="header-section-number">10</span> Pseudoreplication</a>
+  <ul class="collapse">
+  <li><a href="#problem-generalizability" id="toc-problem-generalizability" class="nav-link" data-scroll-target="#problem-generalizability"><span class="header-section-number">10.1</span> Problem: Generalizability</a></li>
+  <li><a href="#solution-1-averaging" id="toc-solution-1-averaging" class="nav-link" data-scroll-target="#solution-1-averaging"><span class="header-section-number">10.2</span> Solution 1: Averaging</a></li>
+  <li><a href="#solution-2-single-observations" id="toc-solution-2-single-observations" class="nav-link" data-scroll-target="#solution-2-single-observations"><span class="header-section-number">10.3</span> Solution 2: Single observations</a></li>
+  <li><a href="#solution-3-linear-mixed-models" id="toc-solution-3-linear-mixed-models" class="nav-link" data-scroll-target="#solution-3-linear-mixed-models"><span class="header-section-number">10.4</span> Solution 3: Linear mixed models</a></li>
+  </ul></li>
+  <li><a href="#history-of-mixed-effects-models" id="toc-history-of-mixed-effects-models" class="nav-link" data-scroll-target="#history-of-mixed-effects-models"><span class="header-section-number">11</span> History of mixed-effects models</a>
+  <ul class="collapse">
+  <li><a href="#language-as-fixed-effect-fallacy" id="toc-language-as-fixed-effect-fallacy" class="nav-link" data-scroll-target="#language-as-fixed-effect-fallacy"><span class="header-section-number">11.1</span> 1973: Language-as-fixed-effect-fallacy</a></li>
+  <li><a href="#anovas-aggregation" id="toc-anovas-aggregation" class="nav-link" data-scroll-target="#anovas-aggregation"><span class="header-section-number">11.2</span> ANOVAs: aggregation</a></li>
+  <li><a href="#baayen_mixed-effects_2008-and-lme4" id="toc-baayen_mixed-effects_2008-and-lme4" class="nav-link" data-scroll-target="#baayen_mixed-effects_2008-and-lme4"><span class="header-section-number">11.3</span> 2008: <span class="citation" data-cites="baayen_mixed-effects_2008">Baayen et al. (2008)</span> and <code>lme4</code></a></li>
+  </ul></li>
+  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task"><span class="header-section-number">12</span> Task</a>
+  <ul class="collapse">
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session Info</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -401,7 +451,7 @@ MathJax.Hub.Config({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 29, 2024</p>
+      <p class="date-modified">February 13, 2024</p>
     </div>
   </div>
     
@@ -410,47 +460,240 @@ MathJax.Hub.Config({
 
 </header>
 
-<p>This lecture covers <span class="citation" data-cites="winter_independence_2021">Winter &amp; Grice (<a href="00-course_overview.html#ref-winter_independence_2021" role="doc-biblioref">2021</a>)</span> (Sections 1 and 2), Chapter 14 'Mixed Models 1: Conceptual Introduction <span class="citation" data-cites="winter_statistics_2019">(until Section 14.8; <a href="00-course_overview.html#ref-winter_statistics_2019" role="doc-biblioref">Winter, 2019</a>)</span>, and <span class="citation" data-cites="winter_very_2014">Winter (<a href="00-course_overview.html#ref-winter_very_2014" role="doc-biblioref">2014</a>)</span> (until page 16).</p>
-<section id="learning-objectives" class="level2 unnumbered unlisted">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>In this chapter we will learn…</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Under construction
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This chapter is not fully translated from bullet points (from my slides) to prose. This will happen eventually (hopefully by spring 2024).</p>
+</div>
+</div>
+<p>This lecture covers <span class="citation" data-cites="winter_independence_2021">Winter &amp; Grice (<a href="00-course_overview.html#ref-winter_independence_2021" role="doc-biblioref">2021</a>)</span> (Sections 1 and 2), Chapter 14 'Mixed Models 1: Conceptual Introduction <span class="citation" data-cites="winter_statistics_2019">(Sections 14.1-14.3; <a href="00-course_overview.html#ref-winter_statistics_2019" role="doc-biblioref">Winter, 2019</a>)</span>, and Sections 8.1-8.2 from Ch. 8 (Mixed-effects models I: Linear Regression) in <span class="citation" data-cites="sonderegger_regression_2023">Sonderegger (<a href="00-course_overview.html#ref-sonderegger_regression_2023" role="doc-biblioref">2023</a>)</span>.</p>
+<section id="learning-objectives" class="level1 unnumbered unlisted">
+<h1 class="unnumbered unlisted">Learning Objectives</h1>
+<p>Today we will learn about…</p>
 <ul>
-<li>about the assumption of independence</li>
-<li>about sources of dependence in linguistic data</li>
+<li>the independence assumption</li>
+<li>types of non-independence in linguistic data</li>
+<li>the history of mixed models in linguistics</li>
 </ul>
 </section>
-<section id="independence-assumption" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="independence-assumption"><span class="header-section-number">8.1</span> Independence assumption</h2>
-<p>Language research very often involves data points that are linked to each other in one way or another, for example because they come from the same participant or the same text. However, regression models assume that data points are independent, and not taking into account the dependence between data points (e.g., data points from the same participant) violate this assumption. The assumption of independence (or independence assumption)</p>
-<section id="review-model-assumptions" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="review-model-assumptions"><span class="header-section-number">8.1.1</span> Review: Model assumptions</h3>
-</section>
-<section id="sources-of-dependence" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="sources-of-dependence"><span class="header-section-number">8.1.2</span> Sources of dependence</h3>
-</section>
-</section>
-<section id="language-as-fixed-effect-fallacy" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="language-as-fixed-effect-fallacy"><span class="header-section-number">8.2</span> Language-as-fixed-effect-fallacy</h2>
-<p>language-as-fixed-effect-fallacy <span class="citation" data-cites="clark_1973">(<a href="00-course_overview.html#ref-clark_1973" role="doc-biblioref"><strong>clark_1973?</strong></a>)</span> coined the term language-as-fixed-effect-fallacy.</p>
-</section>
-<section id="mixed-models-a-short-history" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="mixed-models-a-short-history"><span class="header-section-number">8.3</span> Mixed models: A short history</h2>
-<p>What do you think of when you think of the year 2008? It might be the inauguration of Barack Obama, the release of Beyoncé’s ‘<a href="https://youtu.be/4m1EFMoRFvY?si=vGpuDY74OJIdV36t">Single Ladies</a>’, or perhaps it’s the special issue on <em>Emerging Data Analysis</em> from the Journal of Memory and Language. It’s probably not the latter, but this JML special issue was just as big a deal in the linguistic community. There were two articles in particular that are often credited as the turning point for linguistic data analysis, turning from statistical tests to statistical models: <span class="citation" data-cites="jaeger_categorical_2008">Jaeger (<a href="00-course_overview.html#ref-jaeger_categorical_2008" role="doc-biblioref">2008</a>)</span> and <span class="citation" data-cites="baayen_mixed-effects_2008">Baayen et al. (<a href="00-course_overview.html#ref-baayen_mixed-effects_2008" role="doc-biblioref">2008</a>)</span>. Importantly, <span class="citation" data-cites="baayen_mixed-effects_2008">Baayen et al. (<a href="00-course_overview.html#ref-baayen_mixed-effects_2008" role="doc-biblioref">2008</a>)</span> introduced the <code>lme4</code> R-package for linear mixed models.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. After this point, many language researchers began using mixed models in their analyses, tending to use what’s called the random-intercepts only model. These models include a term for varying intercepts per some grouping factor (most typically participants and/or items), thereby taking into account some variation due to the non-independence of data points from each group level. This is what we will implement in the next chapter.</p>
-</section>
-<section id="learning-objectives-1" class="level2 unnumbered unlisted">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="learning-objectives-1">Learning Objectives 🏁</h2>
-<p>In this chapter we learned…</p>
+<section id="independence-assumption" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Independence assumption</h1>
 <ul>
-<li>about the assumption of independence ✅</li>
-<li>about sources of dependence in linguistic data ✅</li>
+<li>we already learned about some model assumptions
+<ul>
+<li>assumption of <em>normality</em> of residuals</li>
+<li><em>homoscedasticity</em> (constant variance) of residuals</li>
+<li>absence of <em>collinearity</em> of predictors</li>
+</ul></li>
+<li>there another, argulably more important assumption
+<ul>
+<li>assumption of <em>independence</em></li>
+</ul></li>
+</ul>
+<section id="non-independence" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="non-independence"><span class="header-section-number">9.1</span> (Non-)Independence</h2>
+<ul>
+<li>non-independence: any possible link or connection between groups of data points
+<ul>
+<li>e.g., two observations from the same participant will tend to be more similar than to completely independent observations</li>
+<li>any case where you might expect some clustering of observations by some grouping factor</li>
+</ul></li>
+<li>the independence assumption assumes that our data points are <em>not</em> linked
+<ul>
+<li>i.e., the value of one observation is completely independent from another</li>
+</ul></li>
+<li>violations of this assumption have major implications for Type I (alpha) error
+<ul>
+<li>i.e., the chances of observing an effect where there is none (false positive)</li>
+</ul></li>
+<li>it also artificially inflates sample size, which affects statistical power</li>
+</ul>
+</section>
+<section id="repeated-measures-design" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="repeated-measures-design"><span class="header-section-number">9.2</span> Repeated measures design</h2>
+<ul>
+<li>the reason most (experimental) linguistic data is non-independent is the use of the repeated-measures design
+<ul>
+<li>collecting multiple data points from e.g., the same participant and for the same item</li>
+<li>increases statistical power, needing fewer participants (more data points, lower variance due to control in variability between subjects)</li>
+<li>saves resources (fewer subjects)</li>
+</ul></li>
+</ul>
+</section>
+<section id="other-sources-of-non-independence" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="other-sources-of-non-independence"><span class="header-section-number">9.3</span> Other sources of non-independence</h2>
+<ul>
+<li>non-independence is prevalent in other fields of linguistics, e.g.,
+<ul>
+<li>corpus studies: text, author, language, dialect, register</li>
+<li>phonetic experiments: speaker, listener, exact repetitions</li>
+<li>socio-phonetics: dialect/geographical proximity, register, speaker</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="pseudoreplication" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Pseudoreplication</h1>
+<blockquote class="blockquote">
+<p>Pseudoreplication refers to the treatment of dependent observations as independent data points, which causes an overabundance of erroneously significant results.</p>
+</blockquote>
+<p>— <span class="citation" data-cites="winter_pseudoreplication_2011">Winter (<a href="00-course_overview.html#ref-winter_pseudoreplication_2011" role="doc-biblioref">2011</a>)</span>, p.&nbsp;2137</p>
+<ul>
+<li>analysing nonindependent data as if they were independent</li>
+<li>essentially, violating the independence assumption
+<ul>
+<li>very (<em>very</em>) common in older publications</li>
+</ul></li>
+<li>can also result in Type M (magnitude) and S (sign) error</li>
+<li>is one contributor (out of many) to the so-called replication crisis</li>
+</ul>
+<section id="problem-generalizability" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="problem-generalizability"><span class="header-section-number">10.1</span> Problem: Generalizability</h2>
+<ul>
+<li>beyond spurious results, how researchers interpret the implications of their findings is problematic</li>
+</ul>
+<blockquote class="blockquote">
+<p>Unfortunately, outside of a few domains such as psycholinguistics, it remains rare to see psychologists model stimuli as random effects – despite the fact that most inferences researchers draw are clearly meant to generalize over populations of stimuli.</p>
+</blockquote>
+<p>— <span class="citation" data-cites="yarkoni_generalizability_2022">Yarkoni (<a href="00-course_overview.html#ref-yarkoni_generalizability_2022" role="doc-biblioref">2022</a>)</span>, p.&nbsp;4</p>
+<ul>
+<li>if we don’t include grouping factors in our models, our findings are not generalisable beyond our sample
+<ul>
+<li>it could be that our findings are due to a few participants or experimental items who deviate from the rest</li>
+</ul></li>
+<li>we need to take this by-grouping factor variation into account, but how?</li>
+</ul>
+</section>
+<section id="solution-1-averaging" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="solution-1-averaging"><span class="header-section-number">10.2</span> Solution 1: Averaging</h2>
+<ul>
+<li>e.g., repeated measures ANOVA
+<ul>
+<li>seperate models for by-participant and by-item variance (with averaging) interpreted together</li>
+</ul></li>
+<li>PRO: takes both by-participant and -item variance into account</li>
+<li>CONs: not flexible or approrpriate for complex designs, and:
+<ul>
+<li>loses information regarding the variation across the grouped observations</li>
+<li>lowers N
+<ul>
+<li>e.g., if we average over participants, we’d have 1 only data point per participant!</li>
+</ul></li>
+<li>therefore loses statistical power (Type II error)</li>
+<li>inflates Type I error (chance of a false positive)</li>
+</ul></li>
+<li>in sum: not optimal</li>
+</ul>
+</section>
+<section id="solution-2-single-observations" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="solution-2-single-observations"><span class="header-section-number">10.3</span> Solution 2: Single observations</h2>
+<ul>
+<li>run an experiment without repeated measures
+<ul>
+<li>but this lowers statistical power</li>
+<li>and drastically reduces generalizability</li>
+</ul></li>
+<li>e.g., we could present 60 participants with a single item
+<ul>
+<li>or we could present 1 participant with 60 trials</li>
+<li>but these findings also can’t be generalised beyond that one item or one participant…</li>
+</ul></li>
+<li>in sum: not optimal</li>
+</ul>
+</section>
+<section id="solution-3-linear-mixed-models" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="solution-3-linear-mixed-models"><span class="header-section-number">10.4</span> Solution 3: Linear mixed models</h2>
+<ul>
+<li><p>best available solution: use repeated-measures design and mixed models</p></li>
+<li><p>a.k.a. mixed (effects) models/LM(E)Ms, multi-level models, hierarchical models</p></li>
+<li><p>“mixed” because they contain:</p>
+<ul>
+<li><strong>fixed effects</strong>: usually predictors; describe systematic variation in our data that we wish to explain</li>
+<li><strong>random effects</strong>: unsystematic variation that are due to random sampling</li>
+</ul></li>
+<li><p>random effects take dependence between observations into account</p>
+<ul>
+<li>contain varying intercepts and slopes per level of a <strong>grouping factor</strong></li>
+</ul></li>
+<li><p>fixed effects estimates are usually qualititatively unchanged</p>
+<ul>
+<li>what is affected in the measures of <em>variance</em></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="history-of-mixed-effects-models" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> History of mixed-effects models</h1>
+<section id="language-as-fixed-effect-fallacy" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="language-as-fixed-effect-fallacy"><span class="header-section-number">11.1</span> 1973: Language-as-fixed-effect-fallacy</h2>
+<ul>
+<li>none of these ideas are new to linguistics</li>
+<li><span class="citation" data-cites="clark_language-as-fixed-effect_1973">Clark (<a href="00-course_overview.html#ref-clark_language-as-fixed-effect_1973" role="doc-biblioref">1973</a>)</span>:
+<ul>
+<li>without including dependencies between repeated observations from the same <strong>linguistic items</strong> in our models, we cannot generalise our findings beyond our stimuli</li>
+<li>our results are relevant only for the subset of the population from which we sampled</li>
+</ul></li>
+</ul>
+<blockquote class="blockquote">
+<p>The remedies for the language-as-fixed-effect fallacy are for the most part obvious. They include doing the right statistics, choosing the appropriate experimental design, and selecting a random or representative sample of language.</p>
+</blockquote>
+<p>— <span class="citation" data-cites="clark_language-as-fixed-effect_1973">Clark (<a href="00-course_overview.html#ref-clark_language-as-fixed-effect_1973" role="doc-biblioref">1973</a>)</span>, p.&nbsp;347</p>
+</section>
+<section id="anovas-aggregation" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="anovas-aggregation"><span class="header-section-number">11.2</span> ANOVAs: aggregation</h2>
+<ul>
+<li>repeated measures ANOVAs were commonly used to take dependence between observations into account (and are still common in come fields today)
+<ul>
+<li>require aggregation (i.e., averaging) over items <em>or</em> subjects, not both simultaneously</li>
+<li>drastically reduces our number of observations</li>
+<li>loss of information in the variance of observed data</li>
+<li>i.e., a loss of power (Type II error) and inflated Type I error (false positive)</li>
+</ul></li>
+</ul>
+</section>
+<section id="baayen_mixed-effects_2008-and-lme4" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="baayen_mixed-effects_2008-and-lme4"><span class="header-section-number">11.3</span> 2008: <span class="citation" data-cites="baayen_mixed-effects_2008">Baayen et al. (<a href="00-course_overview.html#ref-baayen_mixed-effects_2008" role="doc-biblioref">2008</a>)</span> and <code>lme4</code></h2>
+<ul>
+<li><p>enter mixed models with <em>crossed</em> random effects</p></li>
+<li><p>Journal of Memory and Language, Special Issue: Emerging Data Analysis</p>
+<ul>
+<li><span class="citation" data-cites="baayen_mixed-effects_2008">Baayen et al. (<a href="00-course_overview.html#ref-baayen_mixed-effects_2008" role="doc-biblioref">2008</a>)</span>: introduction of <code>lme4</code> package for linear mixed models</li>
+<li><span class="citation" data-cites="jaeger_categorical_2008">Jaeger (<a href="00-course_overview.html#ref-jaeger_categorical_2008" role="doc-biblioref">2008</a>)</span>: overview of generalised linear mixed models</li>
+</ul></li>
+<li><p>in addition, <span class="citation" data-cites="baayen_analyzing_2008">Baayen (<a href="00-course_overview.html#ref-baayen_analyzing_2008" role="doc-biblioref">2008</a>)</span> was published, a textbook for analysing linguistic data with R with an emphasis on LMMs with <code>lme4</code></p></li>
+</ul>
+</section>
+</section>
+<section id="learning-objectives-1" class="level1 unnumbered unlisted">
+<h1 class="unnumbered unlisted">Learning Objectives 🏁</h1>
+<p>Today we learned about…</p>
+<ul>
+<li>the independence assumption ✅</li>
+<li>types of non-independence in linguistic data ✅</li>
 <li>the history of mixed models in linguistics ✅</li>
 </ul>
 </section>
+<section id="task" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Task</h1>
+<p>Discuss the following questions.</p>
+<ol type="1">
+<li>What is the independence assumption?</li>
+<li>What happens when the independence assumption is violated?</li>
+<li>What is the language-as-fixed-effect-fallacy?</li>
+<li>What other sources of variance might be present in language research?</li>
+<li>Why are repeated measures ANOVAs sub-optimal?</li>
+</ol>
 <section id="session-info" class="level2 unnumbered" data-visibility="uncounted">
 <h2 class="unnumbered anchored" data-visibility="uncounted" data-anchor-id="session-info">Session Info</h2>
 <p>Developed with Quarto using R version 4.3.0 (2023-04-21) (Already Tomorrow) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.0 (2023-04-21)
 Platform: aarch64-apple-darwin20 (64-bit)
@@ -473,21 +716,30 @@ loaded via a namespace (and not attached):
  [1] htmlwidgets_1.6.2 compiler_4.3.0    fastmap_1.1.1     cli_3.6.1        
  [5] tools_4.3.0       htmltools_0.5.5   rstudioapi_0.14   yaml_2.3.7       
  [9] rmarkdown_2.22    knitr_1.44        jsonlite_1.8.7    xfun_0.39        
-[13] digest_0.6.33     rlang_1.1.1       evaluate_0.21    </code></pre>
+[13] digest_0.6.33     rlang_1.1.3       evaluate_0.21    </code></pre>
 </div>
 </div>
 </section>
 <section id="references" class="level2 unlisted unnumbered" data-visibility="uncounted">
 <h2 class="unlisted unnumbered anchored" data-visibility="uncounted" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-custom-style="Bibliography" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-baayen_analyzing_2008" class="csl-entry" role="listitem">
+Baayen, R. H. (2008). <em>Analyzing <span>Linguistic Data</span>: <span>A Practical Introduction</span> to <span>Statistics</span> using <span>R</span></em>.
+</div>
 <div id="ref-baayen_mixed-effects_2008" class="csl-entry" role="listitem">
 Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, <em>59</em>(4), 390–412. <a href="https://doi.org/10.1016/j.jml.2007.12.005">https://doi.org/10.1016/j.jml.2007.12.005</a>
+</div>
+<div id="ref-clark_language-as-fixed-effect_1973" class="csl-entry" role="listitem">
+Clark, H. H. (1973). The language-as-fixed-effect fallacy: <span>A</span> critique of language statistics in psychological research. <em>Journal of Verbal Learning and Verbal Behavior</em>, <em>12</em>(4), 335–359. <a href="https://doi.org/10.1016/S0022-5371(73)80014-3">https://doi.org/10.1016/S0022-5371(73)80014-3</a>
 </div>
 <div id="ref-jaeger_categorical_2008" class="csl-entry" role="listitem">
 Jaeger, T. F. (2008). Categorical data analysis: <span>Away</span> from <span>ANOVAs</span> (transformation or not) and towards logit mixed models. <em>Journal of Memory and Language</em>, <em>59</em>(4), 434–446. <a href="https://doi.org/10.1016/j.jml.2007.11.007">https://doi.org/10.1016/j.jml.2007.11.007</a>
 </div>
-<div id="ref-winter_very_2014" class="csl-entry" role="listitem">
-Winter, B. (2014). <em>A very basic tutorial for performing linear mixed effects analyses (<span>Tutorial</span> 2)</em>.
+<div id="ref-sonderegger_regression_2023" class="csl-entry" role="listitem">
+Sonderegger, M. (2023). <em>Regression <span>Modeling</span> for <span>Linguistic Data</span></em>.
+</div>
+<div id="ref-winter_pseudoreplication_2011" class="csl-entry" role="listitem">
+Winter, B. (2011). <em><span>PSEUDOREPLICATION IN PHONETIC RESEARCH</span></em>.
 </div>
 <div id="ref-winter_statistics_2019" class="csl-entry" role="listitem">
 Winter, B. (2019). Statistics for <span>Linguists</span>: <span>An Introduction Using R</span>. In <em>Statistics for Linguists: An Introduction Using R</em>. <span>Routledge</span>. <a href="https://doi.org/10.4324/9781315165547">https://doi.org/10.4324/9781315165547</a>
@@ -495,17 +747,15 @@ Winter, B. (2019). Statistics for <span>Linguists</span>: <span>An Introduction 
 <div id="ref-winter_independence_2021" class="csl-entry" role="listitem">
 Winter, B., &amp; Grice, M. (2021). Independence and generalizability in linguistics. <em>Linguistics</em>, <em>59</em>(5), 1251–1277. <a href="https://doi.org/10.1515/ling-2019-0049">https://doi.org/10.1515/ling-2019-0049</a>
 </div>
+<div id="ref-yarkoni_generalizability_2022" class="csl-entry" role="listitem">
+Yarkoni, T. (2022). The generalizability crisis. <em>Behavioral and Brain Sciences</em>, <em>45</em>, e1. <a href="https://doi.org/10.1017/S0140525X20001685">https://doi.org/10.1017/S0140525X20001685</a>
+</div>
 </div>
 
 
 <!-- -->
 
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>This wasn’t the first introduction of mixed models for language sciences, but was the first to introduce <code>lme4</code><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -918,81 +1168,211 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./reports/report1.html" class="pagination-link">
+      <a href="./reports/report 1/report1.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Report 1</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./08-mixed_models1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mixed models 1: Random intercepts</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random intercepts</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Independence"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Motiviating mixed models"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Daniela Palleschi"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> Humboldt-Universität zu Berlin</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># footer: "Lecture 1.1 - R und RStudio"</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> en</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "01/12/2024"</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>This lecture covers @winter_independence_2021 (Sections 1 and 2), Chapter 14 \'Mixed Models 1: Conceptual Introduction <span class="co">[</span><span class="ot">until Section 14.8\; @winter_statistics_2019</span><span class="co">]</span>, and @winter_very_2014 (until page 16).</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered .unlisted}</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>In this chapter we will learn...</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about the assumption of independence</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about sources of dependence in linguistic data</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Independence assumption</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Language research very often involves data points that are linked to each other in one way or another, for example because they come from the same participant or the same text. However, regression models assume that data points are independent, and not taking into account the dependence between data points (e.g., data points from the same participant) violate this assumption.</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>The assumption of independence (or independence assumption) </span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### Review: Model assumptions</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sources of dependence</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Language-as-fixed-effect-fallacy</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>language-as-fixed-effect-fallacy @clark_1973 coined the term language-as-fixed-effect-fallacy.</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mixed models: A short history</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>What do you think of when you think of the year 2008? It might be the inauguration of Barack Obama, the release of Beyoncé's '<span class="co">[</span><span class="ot">Single Ladies</span><span class="co">](https://youtu.be/4m1EFMoRFvY?si=vGpuDY74OJIdV36t)</span>', or perhaps it's the special issue on *Emerging Data Analysis* from the Journal of Memory and Language. It's probably not the latter, but this JML special issue was just as big a deal in the linguistic community. There were two articles in particular that are often credited as the turning point for linguistic data analysis, turning from statistical tests to statistical models: @jaeger_categorical_2008 and @baayen_mixed-effects_2008. Importantly, @baayen_mixed-effects_2008 introduced the <span class="in">`lme4`</span> R-package for linear mixed models.^<span class="co">[</span><span class="ot">This wasn't the first introduction of mixed models for language sciences, but was the first to introduce `lme4`</span><span class="co">]</span>. After this point, many language researchers began using mixed models in their analyses, tending to use what's called the random-intercepts only model. These models include a term for varying intercepts per some grouping factor (most typically participants and/or items), thereby taking into account some variation due to the non-independence of data points from each group level. This is what we will implement in the next chapter.</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives  🏁 {.unnumbered .unlisted}</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>In this chapter we learned...</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about the assumption of independence ✅</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>about sources of dependence in linguistic data ✅</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the history of mixed models in linguistics ✅</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session Info {.unnumbered visibility="uncounted"}</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="fu">RStudio.Version</span>()<span class="sc">$</span>version</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>Developed with Quarto using <span class="in">`r R.version.string`</span> (<span class="in">`r R.version$nickname`</span>) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unlisted .unnumbered visibility="uncounted"}</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>::: {#refs custom-style="Bibliography"}</span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Independence"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Motiviating mixed models"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Daniela Palleschi"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> Humboldt-Universität zu Berlin</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># footer: "Lecture 1.1 - R und RStudio"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> en</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "01/12/2024"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="an">echo:</span><span class="co"> false</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu"># Under construction {.unnumbered .uncounted .unlisted}</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>This chapter is not fully translated from bullet points (from my slides) to prose. This will happen eventually (hopefully by spring 2024).</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>This lecture covers @winter_independence_2021 (Sections 1 and 2), Chapter 14 \'Mixed Models 1: Conceptual Introduction <span class="co">[</span><span class="ot">Sections 14.1-14.3\; @winter_statistics_2019</span><span class="co">]</span>, and Sections 8.1-8.2 from Ch. 8 (Mixed-effects models I: Linear Regression) in @sonderegger_regression_2023.</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu"># Learning Objectives {.unnumbered .unlisted}</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>Today we will learn about...</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the independence assumption</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>types of  non-independence in linguistic data</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the history of mixed models in linguistics</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu"># Independence assumption</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>we already learned about some model assumptions</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>assumption of *normality* of residuals</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>*homoscedasticity* (constant variance) of residuals</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>absence of *collinearity* of predictors</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>there another, argulably more important assumption</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>assumption of *independence*</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Non-)Independence</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>non-independence: any possible link or connection between groups of data points</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>e.g., two observations from the same participant will tend to be more similar than to completely independent observations</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>any case where you might expect some clustering of observations by some grouping factor</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the independence assumption assumes that our data points are *not* linked</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>i.e., the value of one observation is completely independent from another</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>violations of this assumption have major implications for Type I (alpha) error</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>i.e., the chances of observing an effect where there is none (false positive)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>it also artificially inflates sample size, which affects statistical power</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Repeated measures design</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the reason most (experimental) linguistic data is non-independent is the use of the repeated-measures design</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>collecting multiple data points from e.g., the same participant and for the same item</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>increases statistical power, needing fewer participants (more data points, lower variance due to control in variability between subjects)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>saves resources (fewer subjects)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Other sources of non-independence</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>non-independence is prevalent in other fields of linguistics, e.g., </span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>corpus studies: text, author, language, dialect, register</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>phonetic experiments: speaker, listener, exact repetitions</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>socio-phonetics: dialect/geographical proximity, register, speaker</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="fu"># Pseudoreplication</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Pseudoreplication refers to the treatment of dependent observations as independent data points, which causes an overabundance of erroneously significant results.</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>--- @winter_pseudoreplication_2011, p. 2137</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>analysing nonindependent data as if they were independent</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>essentially, violating the independence assumption</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>very (*very*) common in older publications</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>can also result in Type M (magnitude) and S (sign) error</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>is one contributor (out of many) to the so-called replication crisis</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problem: Generalizability</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>beyond spurious results, how researchers interpret the implications of their findings is problematic</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Unfortunately, outside of a few domains such as psycholinguistics, it remains rare to see psychologists model stimuli as random effects – despite the fact that most inferences researchers draw are clearly meant to generalize over populations of stimuli.</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>--- @yarkoni_generalizability_2022, p. 4</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>if we don't include grouping factors in our models, our findings are not generalisable beyond our sample</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>it could be that our findings are due to a few participants or experimental items who deviate from the rest</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>we need to take this by-grouping factor variation into account, but how?</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## Solution 1: Averaging</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>e.g., repeated measures ANOVA</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>seperate models for by-participant and by-item variance (with averaging) interpreted together</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PRO: takes both by-participant and -item variance into account</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>CONs: not flexible or approrpriate for complex designs, and:</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>loses information regarding the variation across the grouped observations</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>lowers N</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>e.g., if we average over participants, we'd have 1 only data point per participant!</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>therefore loses statistical power (Type II error)</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>inflates Type I error (chance of a false positive)</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>in sum: not optimal</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## Solution 2: Single observations</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>run an experiment without repeated measures</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>but this lowers statistical power</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>and drastically reduces generalizability</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>e.g., we could present 60 participants with a single item</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>or we could present 1 participant with 60 trials</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>but these findings also can't be generalised beyond that one item or one participant...</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>in sum: not optimal</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="fu">## Solution 3: Linear mixed models</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>best available solution: use repeated-measures design and mixed models</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a.k.a. mixed (effects) models/LM(E)Ms, multi-level models, hierarchical models</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"mixed" because they contain:</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>**fixed effects**: usually predictors; describe systematic variation in our data that we wish to explain</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>**random effects**: unsystematic variation that are due to random sampling</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>random effects take dependence between observations into account</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>contain varying intercepts and slopes per level of a **grouping factor**</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>fixed effects estimates are usually qualititatively unchanged</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>what is affected in the measures of *variance*</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="fu"># History of mixed-effects models</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1973: Language-as-fixed-effect-fallacy</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>none of these ideas are new to linguistics</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@clark_language-as-fixed-effect_1973:</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>without including dependencies between repeated observations from the same **linguistic items** in our models, we cannot generalise our findings beyond our stimuli</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>our results are relevant only for the subset of the population from which we sampled</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The remedies for the language-as-fixed-effect fallacy are for the most part obvious. They include doing the right statistics, choosing the appropriate experimental design, and selecting a random or representative sample of language.</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>--- @clark_language-as-fixed-effect_1973, p. 347</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## ANOVAs: aggregation</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>repeated measures ANOVAs were commonly used to take dependence between observations into account (and are still common in come fields today)</span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>require aggregation (i.e., averaging) over items *or* subjects, not both simultaneously</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>drastically reduces our number of observations</span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>loss of information in the variance of observed data</span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>i.e., a loss of power (Type II error) and inflated Type I error (false positive)</span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2008: @baayen_mixed-effects_2008 and `lme4`</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>enter mixed models with *crossed* random effects</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Journal of Memory and Language, Special Issue: Emerging Data Analysis</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>@baayen_mixed-effects_2008: introduction of <span class="in">`lme4`</span> package for linear mixed models</span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>@jaeger_categorical_2008: overview of generalised linear mixed models</span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>in addition, @baayen_analyzing_2008 was published, a textbook for analysing linguistic data with R with an emphasis on LMMs with <span class="in">`lme4`</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a><span class="fu"># Learning Objectives 🏁 {.unnumbered .unlisted}</span></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>Today we learned about...</span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the independence assumption ✅</span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>types of  non-independence in linguistic data ✅</span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the history of mixed models in linguistics ✅</span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a><span class="fu"># Task</span></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>Discuss the following questions.</span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>What is the independence assumption?</span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>What happens when the independence assumption is violated?</span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>What is the language-as-fixed-effect-fallacy?</span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>What other sources of variance might be present in language research?</span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Why are repeated measures ANOVAs sub-optimal?</span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## Session Info {.unnumbered visibility="uncounted"}</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a><span class="fu">RStudio.Version</span>()<span class="sc">$</span>version</span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>Developed with Quarto using <span class="in">`r R.version.string`</span> (<span class="in">`r R.version$nickname`</span>) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unlisted .unnumbered visibility="uncounted"}</span></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>::: {#refs custom-style="Bibliography"}</span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
