@@ -132,6 +132,9 @@ MathJax.Hub.Config({
   };
 </script>
 
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -219,12 +222,6 @@ MathJax.Hub.Config({
   <div class="sidebar-item-container"> 
   <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course overview</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -360,6 +357,12 @@ MathJax.Hub.Config({
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../12-model_selection_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model selection: Example</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -374,11 +377,17 @@ MathJax.Hub.Config({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../reports/report 2/report2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -444,47 +453,41 @@ MathJax.Hub.Config({
 <p><em>For students enrolled in this course in the Winter Semester 2023/24:</em> The report is due <strong>January 11, 2024 at 11:59pm</strong>, but I encourage you to submit before the holidays if you have the capacity to do so. Please submit your Quarto script, as well as a rendered copy (preferably HTML, but PDF is also fine) to Moodle (under ‘Reports’).</p>
 <section id="dataset" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="dataset"><span class="header-section-number">7.1</span> Dataset</h2>
-<p>For this report you will continue using the data from <span class="citation" data-cites="biondo_yesterday_2022">Biondo et al. (<a href="../../00-course_overview.html#ref-biondo_yesterday_2022" role="doc-biblioref">2022</a>)</span>, an eye-tracking reading study on adverb-tense congruence effects on reading time measures. Participants’ eye movements were recorded as they read Spanish sentences where temporal adverbs and verb tense were either congruent or incongruent. For both sentence regions, the time reference was either past (e.g., yesterda, bought) or future (e.g., tomorrow, will buy). Example stimuli from this experiment are given in <a href="../report 2/report2.html#tbl-stimuli">Table&nbsp;<span>13.1</span></a>. You will be fitting models to different eye-tracking reading measures from this experiment, with the predictors <em>verb tense</em> and <em>grammaticality</em>.</p>
+<p>For this report you will continue using the data from <span class="citation" data-cites="biondo_yesterday_2022">Biondo et al. (<a href="../../00-course_overview.html#ref-biondo_yesterday_2022" role="doc-biblioref">2022</a>)</span>, an eye-tracking reading study on adverb-tense congruence effects on reading time measures. Participants’ eye movements were recorded as they read Spanish sentences where temporal adverbs and verb tense were either congruent or incongruent. For both sentence regions, the time reference was either past (e.g., yesterda, bought) or future (e.g., tomorrow, will buy). Example stimuli from this experiment are given in <a href="../report 2/report2.html#tbl-stimuli">Table&nbsp;<span>14.1</span></a>. You will be fitting models to different eye-tracking reading measures from this experiment, with the predictors <em>verb tense</em> and <em>grammaticality</em>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stimuli" class="anchored">
-<table class="table table-sm table-striped small">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Table&nbsp;7.1: Example stimuli</caption>
-<colgroup>
-<col style="width: 88%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 4%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">sentence</th>
-<th style="text-align: left;">adverb</th>
-<th style="text-align: left;">verb</th>
-<th style="text-align: left;">gramm</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">sentence</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">adverb</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">verb</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">gramm</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">A la salida del trabajo, <strong>ayer</strong> las chicas <strong>compraron</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>yesterday</strong> <em>the girls</em> <strong>bought</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">A la salida del trabajo, **ayer** las chicas **compraron** pan en la tienda.&lt;br&gt; *After leaving work* **yesterday** *the girls* **bought** *bread at the shop*</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">gramm</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">A la salida del trabajo, <strong>ayer</strong> las chicas <strong>*comprarán</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>yesterday</strong> <em>the girls</em> <strong>*will buy</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">A la salida del trabajo, **ayer** las chicas **\*comprarán** pan en la tienda.&lt;br&gt; *After leaving work* **yesterday** *the girls* **\*will buy** *bread at the shop*</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">future</td>
 <td style="text-align: left;">ungramm</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">A la salida del trabajo, <strong>mañana</strong> las chicas <strong>comprarán</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>tomorrow</strong> <em>the girls</em> <strong>will buy</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">A la salida del trabajo, **mañana** las chicas **comprarán** pan en la tienda.&lt;br&gt; *After leaving work* **tomorrow** *the girls* **will buy** *bread at the shop*</td>
 <td style="text-align: left;">future</td>
 <td style="text-align: left;">future</td>
 <td style="text-align: left;">gramm</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">A la salida del trabajo, <strong>mañana</strong> las chicas <strong>*compraron</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>tomorrow</strong> <em>the girls</em> <strong>*bought</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">A la salida del trabajo, **mañana** las chicas **\*compraron** pan en la tienda.&lt;br&gt; *After leaving work* **tomorrow** *the girls* **\*bought** *bread at the shop*</td>
 <td style="text-align: left;">future</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">ungramm</td>
@@ -492,6 +495,8 @@ MathJax.Hub.Config({
 </tbody>
 </table>
 </div>
+
+
 </div>
 </div>
 </section>
@@ -544,66 +549,62 @@ MathJax.Hub.Config({
 <p>You will be running linear and logisitc regression models. Our variables of interest will be:</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 5%">
-<col style="width: 79%">
-<col style="width: 7%">
-<col style="width: 7%">
-</colgroup>
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;">variable</th>
-<th style="text-align: left;">description</th>
-<th style="text-align: left;">type</th>
-<th style="text-align: left;">class</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">description</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">class</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>fp</code></td>
+<td style="text-align: left;">`fp`</td>
 <td style="text-align: left;">first-pass reading time (summation of fixations from when a reader first fixates on a region to when they first leave that region)</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">continuous</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>tt</code></td>
+<td style="text-align: left;">`tt`</td>
 <td style="text-align: left;">total reading time (summation of all fixations within a region during a trial)</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">continuous</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>ri</code></td>
+<td style="text-align: left;">`ri`</td>
 <td style="text-align: left;">regressions in (whether there was at least one regression into a region)</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">binomial</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>ro</code></td>
+<td style="text-align: left;">`ro`</td>
 <td style="text-align: left;">regressions out (whether there was at least one regression out of a region)</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">binomial</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>verb_t</code></td>
+<td style="text-align: left;">`verb_t`</td>
 <td style="text-align: left;">verb tense: past or future</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">categorical</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>gramm</code></td>
+<td style="text-align: left;">`gramm`</td>
 <td style="text-align: left;">grammaticality: grammatical or ungrammatical</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">categorical</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>length</code></td>
+<td style="text-align: left;">`length`</td>
 <td style="text-align: left;">region length in letters</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">continuous</td>
 </tr>
 </tbody>
 </table>
+
+
 </div>
 </div>
 <section id="example-model-report" class="level3" data-number="7.3.1">
@@ -741,29 +742,31 @@ fp = exp(b_0 + b_1*verb\_t + b_2*gramm) \label{eq-fp}
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-contrasts" class="anchored">
-<table class="table table-sm table-striped small">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Table&nbsp;7.2: Corresponding value of factor levels to be plugged into equation ef{eq-fp}</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: left;">-0.5</th>
-<th style="text-align: left;">+0.5</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">-0.5</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">+0.5</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>verb_t</code></td>
+<td style="text-align: left;">`verb_t`</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">future</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>gramm</code></td>
+<td style="text-align: left;">`gramm`</td>
 <td style="text-align: left;">gramm</td>
 <td style="text-align: left;">ungramm</td>
 </tr>
 </tbody>
 </table>
 </div>
+
+
 </div>
 </div>
 </section>

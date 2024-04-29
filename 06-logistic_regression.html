@@ -228,12 +228,6 @@ MathJax.Hub.Config({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Syllabus</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./00-course_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources and Set-up</span></a>
   </div>
@@ -365,6 +359,12 @@ MathJax.Hub.Config({
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-model_selection_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model selection: Example</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -379,11 +379,17 @@ MathJax.Hub.Config({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reports/report 2/report2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -1191,18 +1197,20 @@ log\;odds &amp;= exp(odds) \label{eq3}
 <pre><code>$verb_t
 # Predicted probabilities of ri
 
-verb_t | Predicted |       95% CI
----------------------------------
-Future |      0.22 | [0.21, 0.24]
-Past   |      0.22 | [0.20, 0.24]
+verb_t | Predicted |     95% CI
+-------------------------------
+Future |      0.22 | 0.21, 0.24
+Past   |      0.22 | 0.20, 0.24
+
 
 $gramm
 # Predicted probabilities of ri
 
-gramm   | Predicted |       95% CI
-----------------------------------
-gramm   |      0.19 | [0.18, 0.21]
-ungramm |      0.26 | [0.24, 0.28]
+gramm   | Predicted |     95% CI
+--------------------------------
+gramm   |      0.19 | 0.18, 0.21
+ungramm |      0.26 | 0.24, 0.28
+
 
 attr(,"class")
 [1] "ggalleffects" "list"        
@@ -1214,19 +1222,19 @@ attr(,"model.name")
 <div class="cell-output cell-output-stdout">
 <pre><code># Predicted probabilities of ri
 
-# verb_t = Future
+verb_t: Future
 
-gramm   | Predicted |       95% CI
-----------------------------------
-gramm   |      0.20 | [0.18, 0.23]
-ungramm |      0.25 | [0.23, 0.28]
+gramm   | Predicted |     95% CI
+--------------------------------
+gramm   |      0.20 | 0.18, 0.23
+ungramm |      0.25 | 0.23, 0.28
 
-# verb_t = Past
+verb_t: Past
 
-gramm   | Predicted |       95% CI
-----------------------------------
-gramm   |      0.19 | [0.16, 0.21]
-ungramm |      0.26 | [0.23, 0.29]</code></pre>
+gramm   | Predicted |     95% CI
+--------------------------------
+gramm   |      0.19 | 0.16, 0.21
+ungramm |      0.26 | 0.23, 0.29</code></pre>
 </div>
 </div>
 </section>
@@ -1378,10 +1386,13 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<th></th>
-<th></th>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
 </tr>
-
+<tr class="even">
+<td style="text-align: left;">:----</td>
+<td style="text-align: left;">:-----------------------</td>
+</tr>
 </tbody>
 </table>
 
@@ -1395,23 +1406,23 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="qyfbmvethf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qyfbmvethf table {
+<div id="acoitftjiv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#acoitftjiv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qyfbmvethf thead, #qyfbmvethf tbody, #qyfbmvethf tfoot, #qyfbmvethf tr, #qyfbmvethf td, #qyfbmvethf th {
+#acoitftjiv thead, #acoitftjiv tbody, #acoitftjiv tfoot, #acoitftjiv tr, #acoitftjiv td, #acoitftjiv th {
   border-style: none;
 }
 
-#qyfbmvethf p {
+#acoitftjiv p {
   margin: 0;
   padding: 0;
 }
 
-#qyfbmvethf .gt_table {
+#acoitftjiv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1437,12 +1448,12 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_caption {
+#acoitftjiv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qyfbmvethf .gt_title {
+#acoitftjiv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1454,7 +1465,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-bottom-width: 0;
 }
 
-#qyfbmvethf .gt_subtitle {
+#acoitftjiv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1466,7 +1477,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-top-width: 0;
 }
 
-#qyfbmvethf .gt_heading {
+#acoitftjiv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1478,13 +1489,13 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_bottom_border {
+#acoitftjiv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_col_headings {
+#acoitftjiv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1499,7 +1510,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_col_heading {
+#acoitftjiv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1519,7 +1530,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   overflow-x: hidden;
 }
 
-#qyfbmvethf .gt_column_spanner_outer {
+#acoitftjiv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1531,15 +1542,15 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   padding-right: 4px;
 }
 
-#qyfbmvethf .gt_column_spanner_outer:first-child {
+#acoitftjiv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qyfbmvethf .gt_column_spanner_outer:last-child {
+#acoitftjiv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qyfbmvethf .gt_column_spanner {
+#acoitftjiv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1551,11 +1562,11 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   width: 100%;
 }
 
-#qyfbmvethf .gt_spanner_row {
+#acoitftjiv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qyfbmvethf .gt_group_heading {
+#acoitftjiv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1581,7 +1592,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   text-align: left;
 }
 
-#qyfbmvethf .gt_empty_group_heading {
+#acoitftjiv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1596,15 +1607,15 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   vertical-align: middle;
 }
 
-#qyfbmvethf .gt_from_md > :first-child {
+#acoitftjiv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qyfbmvethf .gt_from_md > :last-child {
+#acoitftjiv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qyfbmvethf .gt_row {
+#acoitftjiv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1623,7 +1634,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   overflow-x: hidden;
 }
 
-#qyfbmvethf .gt_stub {
+#acoitftjiv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1636,7 +1647,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   padding-right: 5px;
 }
 
-#qyfbmvethf .gt_stub_row_group {
+#acoitftjiv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1650,15 +1661,15 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   vertical-align: top;
 }
 
-#qyfbmvethf .gt_row_group_first td {
+#acoitftjiv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qyfbmvethf .gt_row_group_first th {
+#acoitftjiv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qyfbmvethf .gt_summary_row {
+#acoitftjiv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1668,16 +1679,16 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   padding-right: 5px;
 }
 
-#qyfbmvethf .gt_first_summary_row {
+#acoitftjiv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_first_summary_row.thick {
+#acoitftjiv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qyfbmvethf .gt_last_summary_row {
+#acoitftjiv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1687,7 +1698,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_grand_summary_row {
+#acoitftjiv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1697,7 +1708,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   padding-right: 5px;
 }
 
-#qyfbmvethf .gt_first_grand_summary_row {
+#acoitftjiv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1707,7 +1718,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_last_grand_summary_row_top {
+#acoitftjiv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1717,11 +1728,11 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_striped {
+#acoitftjiv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qyfbmvethf .gt_table_body {
+#acoitftjiv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1730,7 +1741,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_footnotes {
+#acoitftjiv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1744,7 +1755,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_footnote {
+#acoitftjiv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1753,7 +1764,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   padding-right: 5px;
 }
 
-#qyfbmvethf .gt_sourcenotes {
+#acoitftjiv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1767,7 +1778,7 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qyfbmvethf .gt_sourcenote {
+#acoitftjiv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1775,69 +1786,68 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
   padding-right: 5px;
 }
 
-#qyfbmvethf .gt_left {
+#acoitftjiv .gt_left {
   text-align: left;
 }
 
-#qyfbmvethf .gt_center {
+#acoitftjiv .gt_center {
   text-align: center;
 }
 
-#qyfbmvethf .gt_right {
+#acoitftjiv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qyfbmvethf .gt_font_normal {
+#acoitftjiv .gt_font_normal {
   font-weight: normal;
 }
 
-#qyfbmvethf .gt_font_bold {
+#acoitftjiv .gt_font_bold {
   font-weight: bold;
 }
 
-#qyfbmvethf .gt_font_italic {
+#acoitftjiv .gt_font_italic {
   font-style: italic;
 }
 
-#qyfbmvethf .gt_super {
+#acoitftjiv .gt_super {
   font-size: 65%;
 }
 
-#qyfbmvethf .gt_footnote_marks {
+#acoitftjiv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qyfbmvethf .gt_asterisk {
+#acoitftjiv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qyfbmvethf .gt_indent_1 {
+#acoitftjiv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qyfbmvethf .gt_indent_2 {
+#acoitftjiv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qyfbmvethf .gt_indent_3 {
+#acoitftjiv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qyfbmvethf .gt_indent_4 {
+#acoitftjiv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qyfbmvethf .gt_indent_5 {
+#acoitftjiv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
-    
     <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Term">Term</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Definition">Definition</th>
@@ -1902,17 +1912,17 @@ ungramm |      0.26 | [0.23, 0.29]</code></pre>
 </section>
 <section id="session-info" class="level2 unnumbered" data-visibility="uncounted">
 <h2 class="unnumbered anchored" data-visibility="uncounted" data-anchor-id="session-info">Session Info</h2>
-<p>Developed with Quarto using R version 4.3.0 (2023-04-21) (Already Tomorrow) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
+<p>Developed with Quarto using R version 4.4.0 (2024-04-24) (Puppy Cup) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.0 (2023-04-21)
-Platform: aarch64-apple-darwin20 (64-bit)
+<pre><code>R version 4.4.0 (2024-04-24)
+Platform: aarch64-apple-darwin20
 Running under: macOS Ventura 13.2.1
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
-LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -1921,45 +1931,43 @@ time zone: Europe/Berlin
 tzcode source: internal
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats     graphics  grDevices datasets  utils     methods   base     
 
 other attached packages:
- [1] papaja_0.1.1.9001   tinylabels_0.2.3    ggeffects_1.2.2    
- [4] sjPlot_2.8.14       gt_0.9.0            googlesheets4_1.1.0
- [7] kableExtra_1.3.4    knitr_1.44          patchwork_1.1.3    
-[10] languageR_1.5.0     janitor_2.2.0       lme4_1.1-33        
-[13] Matrix_1.5-4        broom_1.0.5         here_1.0.1         
-[16] lubridate_1.9.2     forcats_1.0.0       stringr_1.5.0      
-[19] dplyr_1.1.3         purrr_1.0.2         readr_2.1.4        
-[22] tidyr_1.3.0         tibble_3.2.1        ggplot2_3.4.3      
+ [1] papaja_0.1.2        tinylabels_0.2.4    ggeffects_1.5.2    
+ [4] sjPlot_2.8.15       gt_0.10.1           googlesheets4_1.1.1
+ [7] kableExtra_1.4.0    knitr_1.43          patchwork_1.2.0    
+[10] languageR_1.5.0     janitor_2.2.0       lme4_1.1-35.3      
+[13] Matrix_1.7-0        broom_1.0.5         here_1.0.1         
+[16] lubridate_1.9.3     forcats_1.0.0       stringr_1.5.1      
+[19] dplyr_1.1.4         purrr_1.0.2         readr_2.1.5        
+[22] tidyr_1.3.1         tibble_3.2.1        ggplot2_3.5.1      
 [25] tidyverse_2.0.0     broman_0.80        
 
 loaded via a namespace (and not attached):
- [1] DBI_1.1.3          sandwich_3.0-2     rlang_1.1.3        magrittr_2.0.3    
- [5] multcomp_1.4-23    snakecase_0.11.0   compiler_4.3.0     systemfonts_1.0.4 
- [9] vctrs_0.6.3        rvest_1.0.3        pkgconfig_2.0.3    crayon_1.5.2      
-[13] fastmap_1.1.1      backports_1.4.1    labeling_0.4.3     effectsize_0.8.3  
-[17] utf8_1.2.3         rmarkdown_2.22     tzdb_0.4.0         haven_2.5.2       
-[21] nloptr_2.0.3       bit_4.0.5          xfun_0.39          jsonlite_1.8.7    
-[25] highr_0.10         sjmisc_2.8.9       parallel_4.3.0     R6_2.5.1          
-[29] RColorBrewer_1.1-3 stringi_1.7.12     boot_1.3-28.1      cellranger_1.1.0  
-[33] estimability_1.4.1 Rcpp_1.0.11        modelr_0.1.11      zoo_1.8-12        
-[37] parameters_0.21.1  pacman_0.5.1       nnet_7.3-18        splines_4.3.0     
-[41] timechange_0.2.0   tidyselect_1.2.0   effects_4.2-2      rstudioapi_0.14   
-[45] yaml_2.3.7         codetools_0.2-19   sjlabelled_1.2.0   curl_5.0.1        
-[49] lattice_0.21-8     withr_2.5.0        bayestestR_0.13.1  coda_0.19-4       
-[53] evaluate_0.21      survival_3.5-5     survey_4.2-1       xml2_1.3.4        
-[57] pillar_1.9.0       carData_3.0-5      insight_0.19.3     generics_0.1.3    
-[61] vroom_1.6.3        rprojroot_2.0.3    hms_1.1.3          munsell_0.5.0     
-[65] scales_1.2.1       minqa_1.2.5        xtable_1.8-4       glue_1.6.2        
-[69] emmeans_1.8.6      tools_4.3.0        webshot_0.5.4      fs_1.6.2          
-[73] mvtnorm_1.2-3      grid_4.3.0         mitools_2.4        datawizard_0.7.1  
-[77] colorspace_2.1-0   nlme_3.1-162       performance_0.10.4 googledrive_2.1.0 
-[81] cli_3.6.1          fansi_1.0.4        gargle_1.4.0       viridisLite_0.4.2 
-[85] svglite_2.1.1      sjstats_0.18.2     gtable_0.3.4       sass_0.4.6        
-[89] digest_0.6.33      TH.data_1.1-2      htmlwidgets_1.6.2  farver_2.1.1      
-[93] htmltools_0.5.5    lifecycle_1.0.3    httr_1.4.6         bit64_4.0.5       
-[97] MASS_7.3-58.4     </code></pre>
+ [1] DBI_1.2.2          rlang_1.1.3        magrittr_2.0.3     snakecase_0.11.1  
+ [5] compiler_4.4.0     systemfonts_1.0.6  vctrs_0.6.5        pkgconfig_2.0.3   
+ [9] crayon_1.5.2       fastmap_1.1.1      backports_1.4.1    labeling_0.4.3    
+[13] effectsize_0.8.7   utf8_1.2.4         rmarkdown_2.24     tzdb_0.4.0        
+[17] haven_2.5.4        nloptr_2.0.3       bit_4.0.5          xfun_0.40         
+[21] jsonlite_1.8.7     highr_0.10         sjmisc_2.8.9       parallel_4.4.0    
+[25] R6_2.5.1           RColorBrewer_1.1-3 stringi_1.8.3      boot_1.3-30       
+[29] cellranger_1.1.0   estimability_1.5   Rcpp_1.0.12        modelr_0.1.11     
+[33] parameters_0.21.6  pacman_0.5.1       nnet_7.3-19        splines_4.4.0     
+[37] timechange_0.3.0   tidyselect_1.2.1   rstudioapi_0.16.0  effects_4.2-2     
+[41] yaml_2.3.7         sjlabelled_1.2.0   curl_5.2.1         lattice_0.22-6    
+[45] withr_3.0.0        bayestestR_0.13.2  coda_0.19-4.1      evaluate_0.21     
+[49] survival_3.5-8     survey_4.4-2       xml2_1.3.6         pillar_1.9.0      
+[53] carData_3.0-5      renv_1.0.7         insight_0.19.10    generics_0.1.3    
+[57] vroom_1.6.5        rprojroot_2.0.4    hms_1.1.3          munsell_0.5.1     
+[61] scales_1.3.0       minqa_1.2.6        xtable_1.8-4       glue_1.7.0        
+[65] emmeans_1.10.1     tools_4.4.0        fs_1.6.3           mvtnorm_1.2-4     
+[69] grid_4.4.0         mitools_2.4        datawizard_0.10.0  colorspace_2.1-0  
+[73] nlme_3.1-164       performance_0.11.0 googledrive_2.1.1  cli_3.6.2         
+[77] fansi_1.0.6        gargle_1.5.2       viridisLite_0.4.2  svglite_2.1.3     
+[81] sjstats_0.18.2     gtable_0.3.5       sass_0.4.7         digest_0.6.33     
+[85] htmlwidgets_1.6.4  farver_2.1.1       htmltools_0.5.8.1  lifecycle_1.0.4   
+[89] httr_1.4.7         bit64_4.0.5        MASS_7.3-60.2     </code></pre>
 </div>
 </div>
 </section>

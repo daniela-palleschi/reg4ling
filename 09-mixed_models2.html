@@ -225,12 +225,6 @@ MathJax.Hub.Config({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Syllabus</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./00-course_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources and Set-up</span></a>
   </div>
@@ -362,6 +356,12 @@ MathJax.Hub.Config({
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-model_selection_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model selection: Example</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -376,11 +376,17 @@ MathJax.Hub.Config({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reports/report 2/report2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -784,7 +790,7 @@ Number of obs: 3795, groups:  item, 96; sj, 60
 Fixed effects:
                Estimate Std. Error       df t value             Pr(&gt;|t|)    
 (Intercept)     440.069     18.251   80.092  24.112 &lt; 0.0000000000000002 ***
-verb_t1          35.937      7.027  546.900   5.114          0.000000437 ***
+verb_t1          35.937      7.027  546.898   5.114          0.000000437 ***
 gramm1            5.675      6.799 3637.459   0.835                0.404    
 verb_t1:gramm1   -7.192     13.597 3637.376  -0.529                0.597    
 ---
@@ -976,27 +982,27 @@ Formula: log(fp) ~ verb_t * gramm + (1 | sj) + (1 + verb_t + gramm | item)
    Data: df_biondo
  Subset: adv_type == "Deic" &amp; roi == 4
 
-REML criterion at convergence: 4215.4
+REML criterion at convergence: 4216.6
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--4.1677 -0.6069 -0.0211  0.6064  4.0416 
+-4.1835 -0.6107 -0.0210  0.6025  4.0583 
 
 Random effects:
- Groups   Name        Variance  Std.Dev. Corr       
- item     (Intercept) 0.0194226 0.13937             
-          verb_t1     0.0031136 0.05580   0.49      
-          gramm1      0.0004218 0.02054  -0.10 -0.92
- sj       (Intercept) 0.0663835 0.25765             
- Residual             0.1599961 0.40000             
+ Groups   Name        Variance    Std.Dev. Corr       
+ item     (Intercept) 0.019409202 0.139317            
+          verb_t1     0.000778023 0.027893  1.00      
+          gramm1      0.000006513 0.002552 -1.00 -1.00
+ sj       (Intercept) 0.066344003 0.257573            
+ Residual             0.160699038 0.400873            
 Number of obs: 3795, groups:  item, 96; sj, 60
 
 Fixed effects:
                   Estimate  Std. Error          df t value             Pr(&gt;|t|)
-(Intercept)       5.956396    0.036755   79.245291 162.059 &lt; 0.0000000000000002
-verb_t1           0.061692    0.014183  107.904449   4.350             0.000031
-gramm1            0.003348    0.013157  558.238407   0.254                0.799
-verb_t1:gramm1   -0.014422    0.025978 3546.179061  -0.555                0.579
+(Intercept)       5.956374    0.036746   79.259905 162.095 &lt; 0.0000000000000002
+verb_t1           0.061757    0.013325  706.103942   4.635           0.00000426
+gramm1            0.003276    0.013020 3510.875346   0.252                0.801
+verb_t1:gramm1   -0.014315    0.026034 3637.160805  -0.550                0.582
                   
 (Intercept)    ***
 verb_t1        ***
@@ -1007,8 +1013,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) vrb_t1 gramm1
-verb_t1      0.075              
-gramm1      -0.006 -0.061       
+verb_t1      0.083              
+gramm1      -0.007 -0.007       
 vrb_t1:grm1  0.000  0.002  0.000
 optimizer (nloptwrap) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
@@ -1380,9 +1386,9 @@ Number of obs: 3795, groups:  item, 96; sj, 60
 
 Fixed effects:
                   Estimate  Std. Error          df t value             Pr(&gt;|t|)
-(Intercept)       5.956384    0.036763   79.249351 162.023 &lt; 0.0000000000000002
-verb_t1           0.061733    0.013970   93.398427   4.419            0.0000267
-gramm1            0.003298    0.012999 3544.431926   0.254                 0.80
+(Intercept)       5.956384    0.036763   79.249350 162.023 &lt; 0.0000000000000002
+verb_t1           0.061733    0.013970   93.398429   4.419            0.0000267
+gramm1            0.003298    0.012999 3544.431928   0.254                 0.80
 verb_t1:gramm1   -0.014380    0.025998 3544.742546  -0.553                 0.58
                   
 (Intercept)    ***
@@ -1641,7 +1647,7 @@ verb_t1:gramm1 -0.01438    0.02600 3544.74255  -0.55312  0.58021</code></pre>
 <pre><code>               Estimate Std. Error         df   t value Pr(&gt;|t|)
 (Intercept)     5.95641    0.03676   79.17933 162.05485  0.00000
 verb_t1         0.06173    0.01415   91.56777   4.36365  0.00003
-gramm1          0.00329    0.01300 3544.45970   0.25349  0.79990
+gramm1          0.00329    0.01300 3544.45971   0.25349  0.79990
 verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
 </div>
 </div>
@@ -1775,23 +1781,23 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="hzjtllrfno" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hzjtllrfno table {
+<div id="mssmsnrlvi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mssmsnrlvi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hzjtllrfno thead, #hzjtllrfno tbody, #hzjtllrfno tfoot, #hzjtllrfno tr, #hzjtllrfno td, #hzjtllrfno th {
+#mssmsnrlvi thead, #mssmsnrlvi tbody, #mssmsnrlvi tfoot, #mssmsnrlvi tr, #mssmsnrlvi td, #mssmsnrlvi th {
   border-style: none;
 }
 
-#hzjtllrfno p {
+#mssmsnrlvi p {
   margin: 0;
   padding: 0;
 }
 
-#hzjtllrfno .gt_table {
+#mssmsnrlvi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1817,12 +1823,12 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_caption {
+#mssmsnrlvi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hzjtllrfno .gt_title {
+#mssmsnrlvi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1834,7 +1840,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-bottom-width: 0;
 }
 
-#hzjtllrfno .gt_subtitle {
+#mssmsnrlvi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1846,7 +1852,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-top-width: 0;
 }
 
-#hzjtllrfno .gt_heading {
+#mssmsnrlvi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1858,13 +1864,13 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_bottom_border {
+#mssmsnrlvi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_col_headings {
+#mssmsnrlvi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1879,7 +1885,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_col_heading {
+#mssmsnrlvi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1899,7 +1905,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   overflow-x: hidden;
 }
 
-#hzjtllrfno .gt_column_spanner_outer {
+#mssmsnrlvi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1911,15 +1917,15 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   padding-right: 4px;
 }
 
-#hzjtllrfno .gt_column_spanner_outer:first-child {
+#mssmsnrlvi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hzjtllrfno .gt_column_spanner_outer:last-child {
+#mssmsnrlvi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hzjtllrfno .gt_column_spanner {
+#mssmsnrlvi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1931,11 +1937,11 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   width: 100%;
 }
 
-#hzjtllrfno .gt_spanner_row {
+#mssmsnrlvi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hzjtllrfno .gt_group_heading {
+#mssmsnrlvi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1961,7 +1967,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   text-align: left;
 }
 
-#hzjtllrfno .gt_empty_group_heading {
+#mssmsnrlvi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1976,15 +1982,15 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   vertical-align: middle;
 }
 
-#hzjtllrfno .gt_from_md > :first-child {
+#mssmsnrlvi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hzjtllrfno .gt_from_md > :last-child {
+#mssmsnrlvi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hzjtllrfno .gt_row {
+#mssmsnrlvi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2003,7 +2009,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   overflow-x: hidden;
 }
 
-#hzjtllrfno .gt_stub {
+#mssmsnrlvi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2016,7 +2022,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   padding-right: 5px;
 }
 
-#hzjtllrfno .gt_stub_row_group {
+#mssmsnrlvi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2030,15 +2036,15 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   vertical-align: top;
 }
 
-#hzjtllrfno .gt_row_group_first td {
+#mssmsnrlvi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hzjtllrfno .gt_row_group_first th {
+#mssmsnrlvi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hzjtllrfno .gt_summary_row {
+#mssmsnrlvi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2048,16 +2054,16 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   padding-right: 5px;
 }
 
-#hzjtllrfno .gt_first_summary_row {
+#mssmsnrlvi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_first_summary_row.thick {
+#mssmsnrlvi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hzjtllrfno .gt_last_summary_row {
+#mssmsnrlvi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2067,7 +2073,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_grand_summary_row {
+#mssmsnrlvi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2077,7 +2083,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   padding-right: 5px;
 }
 
-#hzjtllrfno .gt_first_grand_summary_row {
+#mssmsnrlvi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2087,7 +2093,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_last_grand_summary_row_top {
+#mssmsnrlvi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2097,11 +2103,11 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_striped {
+#mssmsnrlvi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hzjtllrfno .gt_table_body {
+#mssmsnrlvi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2110,7 +2116,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_footnotes {
+#mssmsnrlvi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2124,7 +2130,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_footnote {
+#mssmsnrlvi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2133,7 +2139,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   padding-right: 5px;
 }
 
-#hzjtllrfno .gt_sourcenotes {
+#mssmsnrlvi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2147,7 +2153,7 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#hzjtllrfno .gt_sourcenote {
+#mssmsnrlvi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2155,69 +2161,68 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
   padding-right: 5px;
 }
 
-#hzjtllrfno .gt_left {
+#mssmsnrlvi .gt_left {
   text-align: left;
 }
 
-#hzjtllrfno .gt_center {
+#mssmsnrlvi .gt_center {
   text-align: center;
 }
 
-#hzjtllrfno .gt_right {
+#mssmsnrlvi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hzjtllrfno .gt_font_normal {
+#mssmsnrlvi .gt_font_normal {
   font-weight: normal;
 }
 
-#hzjtllrfno .gt_font_bold {
+#mssmsnrlvi .gt_font_bold {
   font-weight: bold;
 }
 
-#hzjtllrfno .gt_font_italic {
+#mssmsnrlvi .gt_font_italic {
   font-style: italic;
 }
 
-#hzjtllrfno .gt_super {
+#mssmsnrlvi .gt_super {
   font-size: 65%;
 }
 
-#hzjtllrfno .gt_footnote_marks {
+#mssmsnrlvi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hzjtllrfno .gt_asterisk {
+#mssmsnrlvi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hzjtllrfno .gt_indent_1 {
+#mssmsnrlvi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hzjtllrfno .gt_indent_2 {
+#mssmsnrlvi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hzjtllrfno .gt_indent_3 {
+#mssmsnrlvi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hzjtllrfno .gt_indent_4 {
+#mssmsnrlvi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hzjtllrfno .gt_indent_5 {
+#mssmsnrlvi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
-    
     <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Term">Term</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Definition">Definition</th>
@@ -2252,17 +2257,17 @@ verb_t1:gramm1 -0.01434    0.02599 3544.77121  -0.55150  0.58133</code></pre>
 </section>
 <section id="session-info" class="level3 unnumbered" data-visibility="uncounted">
 <h3 class="unnumbered anchored" data-visibility="uncounted" data-anchor-id="session-info">Session Info</h3>
-<p>Developed with Quarto using R version 4.3.0 (2023-04-21) (Already Tomorrow) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
+<p>Developed with Quarto using R version 4.4.0 (2024-04-24) (Puppy Cup) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.0 (2023-04-21)
-Platform: aarch64-apple-darwin20 (64-bit)
+<pre><code>R version 4.4.0 (2024-04-24)
+Platform: aarch64-apple-darwin20
 Running under: macOS Ventura 13.2.1
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
-LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -2271,52 +2276,50 @@ time zone: Europe/Berlin
 tzcode source: internal
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats     graphics  grDevices datasets  utils     methods   base     
 
 other attached packages:
- [1] gt_0.9.0            googlesheets4_1.1.0 kableExtra_1.3.4   
- [4] knitr_1.44          patchwork_1.1.3     lattice_0.21-8     
- [7] broom.mixed_0.2.9.4 lmerTest_3.1-3      lme4_1.1-33        
-[10] Matrix_1.5-4        sjPlot_2.8.14       ggeffects_1.2.2    
+ [1] gt_0.10.1           googlesheets4_1.1.1 kableExtra_1.4.0   
+ [4] knitr_1.43          patchwork_1.2.0     lattice_0.22-6     
+ [7] broom.mixed_0.2.9.5 lmerTest_3.1-3      lme4_1.1-35.3      
+[10] Matrix_1.7-0        sjPlot_2.8.15       ggeffects_1.5.2    
 [13] janitor_2.2.0       broom_1.0.5         here_1.0.1         
-[16] lubridate_1.9.2     forcats_1.0.0       stringr_1.5.0      
-[19] dplyr_1.1.3         purrr_1.0.2         readr_2.1.4        
-[22] tidyr_1.3.0         tibble_3.2.1        ggplot2_3.4.3      
+[16] lubridate_1.9.3     forcats_1.0.0       stringr_1.5.1      
+[19] dplyr_1.1.4         purrr_1.0.2         readr_2.1.5        
+[22] tidyr_1.3.1         tibble_3.2.1        ggplot2_3.5.1      
 [25] tidyverse_2.0.0     broman_0.80        
 
 loaded via a namespace (and not attached):
- [1] sandwich_3.0-2      rlang_1.1.3         magrittr_2.0.3     
- [4] multcomp_1.4-23     snakecase_0.11.0    furrr_0.3.1        
- [7] compiler_4.3.0      mgcv_1.8-42         systemfonts_1.0.4  
-[10] vctrs_0.6.3         rvest_1.0.3         crayon_1.5.2       
-[13] pkgconfig_2.0.3     fastmap_1.1.1       backports_1.4.1    
-[16] labeling_0.4.3      utf8_1.2.3          rmarkdown_2.22     
-[19] tzdb_0.4.0          nloptr_2.0.3        bit_4.0.5          
-[22] xfun_0.39           jsonlite_1.8.7      sjmisc_2.8.9       
-[25] parallel_4.3.0      R6_2.5.1            stringi_1.7.12     
-[28] parallelly_1.36.0   boot_1.3-28.1       cellranger_1.1.0   
-[31] numDeriv_2016.8-1.1 estimability_1.4.1  Rcpp_1.0.11        
-[34] modelr_0.1.11       zoo_1.8-12          pacman_0.5.1       
-[37] splines_4.3.0       timechange_0.2.0    tidyselect_1.2.0   
-[40] rstudioapi_0.14     yaml_2.3.7          codetools_0.2-19   
-[43] sjlabelled_1.2.0    curl_5.0.1          listenv_0.9.0      
-[46] plyr_1.8.8          withr_2.5.0         bayestestR_0.13.1  
-[49] coda_0.19-4         evaluate_0.21       future_1.32.0      
-[52] survival_3.5-5      xml2_1.3.4          pillar_1.9.0       
-[55] insight_0.19.3      generics_0.1.3      vroom_1.6.3        
-[58] rprojroot_2.0.3     hms_1.1.3           munsell_0.5.0      
-[61] scales_1.2.1        minqa_1.2.5         globals_0.16.2     
-[64] xtable_1.8-4        languageR_1.5.0     glue_1.6.2         
-[67] emmeans_1.8.6       tools_4.3.0         webshot_0.5.4      
-[70] fs_1.6.2            mvtnorm_1.2-3       cowplot_1.1.1      
-[73] grid_4.3.0          colorspace_2.1-0    nlme_3.1-162       
-[76] Rmisc_1.5.1         performance_0.10.4  googledrive_2.1.0  
-[79] cli_3.6.1           fansi_1.0.4         gargle_1.4.0       
-[82] viridisLite_0.4.2   svglite_2.1.1       sjstats_0.18.2     
-[85] gtable_0.3.4        sass_0.4.6          digest_0.6.33      
-[88] TH.data_1.1-2       farver_2.1.1        htmlwidgets_1.6.2  
-[91] htmltools_0.5.5     lifecycle_1.0.3     httr_1.4.6         
-[94] bit64_4.0.5         MASS_7.3-58.4      </code></pre>
+ [1] rlang_1.1.3         magrittr_2.0.3      snakecase_0.11.1   
+ [4] furrr_0.3.1         compiler_4.4.0      mgcv_1.9-1         
+ [7] systemfonts_1.0.6   vctrs_0.6.5         pkgconfig_2.0.3    
+[10] crayon_1.5.2        fastmap_1.1.1       backports_1.4.1    
+[13] labeling_0.4.3      utf8_1.2.4          rmarkdown_2.24     
+[16] tzdb_0.4.0          nloptr_2.0.3        bit_4.0.5          
+[19] xfun_0.40           jsonlite_1.8.7      sjmisc_2.8.9       
+[22] parallel_4.4.0      R6_2.5.1            stringi_1.8.3      
+[25] parallelly_1.37.1   boot_1.3-30         cellranger_1.1.0   
+[28] numDeriv_2016.8-1.1 estimability_1.5    Rcpp_1.0.12        
+[31] modelr_0.1.11       pacman_0.5.1        splines_4.4.0      
+[34] timechange_0.3.0    tidyselect_1.2.1    rstudioapi_0.16.0  
+[37] yaml_2.3.7          codetools_0.2-20    sjlabelled_1.2.0   
+[40] curl_5.2.1          listenv_0.9.1       plyr_1.8.9         
+[43] withr_3.0.0         bayestestR_0.13.2   coda_0.19-4.1      
+[46] evaluate_0.21       future_1.33.2       xml2_1.3.6         
+[49] pillar_1.9.0        renv_1.0.7          insight_0.19.10    
+[52] generics_0.1.3      vroom_1.6.5         rprojroot_2.0.4    
+[55] hms_1.1.3           munsell_0.5.1       scales_1.3.0       
+[58] minqa_1.2.6         globals_0.16.3      xtable_1.8-4       
+[61] languageR_1.5.0     glue_1.7.0          emmeans_1.10.1     
+[64] tools_4.4.0         fs_1.6.3            mvtnorm_1.2-4      
+[67] cowplot_1.1.3       grid_4.4.0          colorspace_2.1-0   
+[70] nlme_3.1-164        Rmisc_1.5.1         performance_0.11.0 
+[73] googledrive_2.1.1   cli_3.6.2           fansi_1.0.6        
+[76] gargle_1.5.2        viridisLite_0.4.2   svglite_2.1.3      
+[79] sjstats_0.18.2      gtable_0.3.5        sass_0.4.7         
+[82] digest_0.6.33       farver_2.1.1        htmlwidgets_1.6.4  
+[85] htmltools_0.5.8.1   lifecycle_1.0.4     httr_1.4.7         
+[88] bit64_4.0.5         MASS_7.3-60.2      </code></pre>
 </div>
 </div>
 

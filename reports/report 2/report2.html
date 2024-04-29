@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Regression for Linguists - 13&nbsp; Report 2</title>
+<title>Regression for Linguists - 14&nbsp; Report 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,7 +83,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../11-model_selection.html" rel="prev">
+<link href="../../references.html" rel="next">
+<link href="../../12-model_selection_example.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,8 +132,11 @@ MathJax.Hub.Config({
   };
 </script>
 
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
-<meta name="twitter:title" content="Regression for Linguists - 13&nbsp; Report 2">
+
+<meta name="twitter:title" content="Regression for Linguists - 14&nbsp; Report 2">
 <meta name="twitter:description" content="(Generalised) linear mixed models">
 <meta name="twitter:card" content="summary">
 </head>
@@ -182,7 +186,7 @@ MathJax.Hub.Config({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../reports/report 2/report2.html">Report 2</a></li><li class="breadcrumb-item"><a href="../../reports/report 2/report2.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../reports/report 2/report2.html">Report 2</a></li><li class="breadcrumb-item"><a href="../../reports/report 2/report2.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Report 2</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -215,12 +219,6 @@ MathJax.Hub.Config({
   <div class="sidebar-item-container"> 
   <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course overview</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -356,6 +354,12 @@ MathJax.Hub.Config({
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../12-model_selection_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model selection: Example</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -370,11 +374,17 @@ MathJax.Hub.Config({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../reports/report 2/report2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -385,30 +395,30 @@ MathJax.Hub.Config({
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset"><span class="header-section-number">13.1</span> Dataset</a></li>
-  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up"><span class="header-section-number">13.2</span> Set-up</a>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset"><span class="header-section-number">14.1</span> Dataset</a></li>
+  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up"><span class="header-section-number">14.2</span> Set-up</a>
   <ul class="collapse">
-  <li><a href="#quarto-yaml" id="toc-quarto-yaml" class="nav-link" data-scroll-target="#quarto-yaml"><span class="header-section-number">13.2.1</span> Quarto YAML</a></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">13.2.2</span> Packages</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">13.2.3</span> Data</a></li>
+  <li><a href="#quarto-yaml" id="toc-quarto-yaml" class="nav-link" data-scroll-target="#quarto-yaml"><span class="header-section-number">14.2.1</span> Quarto YAML</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">14.2.2</span> Packages</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">14.2.3</span> Data</a></li>
   </ul></li>
-  <li><a href="#model-set-up" id="toc-model-set-up" class="nav-link" data-scroll-target="#model-set-up"><span class="header-section-number">13.3</span> Model set up</a>
+  <li><a href="#model-set-up" id="toc-model-set-up" class="nav-link" data-scroll-target="#model-set-up"><span class="header-section-number">14.3</span> Model set up</a>
   <ul class="collapse">
-  <li><a href="#variable-transformations" id="toc-variable-transformations" class="nav-link" data-scroll-target="#variable-transformations"><span class="header-section-number">13.3.1</span> Variable transformations</a></li>
-  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection"><span class="header-section-number">13.3.2</span> Model selection</a></li>
+  <li><a href="#variable-transformations" id="toc-variable-transformations" class="nav-link" data-scroll-target="#variable-transformations"><span class="header-section-number">14.3.1</span> Variable transformations</a></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection"><span class="header-section-number">14.3.2</span> Model selection</a></li>
   </ul></li>
-  <li><a href="#linear-mixed-model" id="toc-linear-mixed-model" class="nav-link" data-scroll-target="#linear-mixed-model"><span class="header-section-number">13.4</span> Linear mixed model</a>
+  <li><a href="#linear-mixed-model" id="toc-linear-mixed-model" class="nav-link" data-scroll-target="#linear-mixed-model"><span class="header-section-number">14.4</span> Linear mixed model</a>
   <ul class="collapse">
-  <li><a href="#fit-a-model" id="toc-fit-a-model" class="nav-link" data-scroll-target="#fit-a-model"><span class="header-section-number">13.4.1</span> Fit a model</a></li>
-  <li><a href="#report-results" id="toc-report-results" class="nav-link" data-scroll-target="#report-results"><span class="header-section-number">13.4.2</span> Report results</a></li>
+  <li><a href="#fit-a-model" id="toc-fit-a-model" class="nav-link" data-scroll-target="#fit-a-model"><span class="header-section-number">14.4.1</span> Fit a model</a></li>
+  <li><a href="#report-results" id="toc-report-results" class="nav-link" data-scroll-target="#report-results"><span class="header-section-number">14.4.2</span> Report results</a></li>
   </ul></li>
-  <li><a href="#generalised-linear-mixed-model" id="toc-generalised-linear-mixed-model" class="nav-link" data-scroll-target="#generalised-linear-mixed-model"><span class="header-section-number">13.5</span> Generalised linear mixed model</a>
+  <li><a href="#generalised-linear-mixed-model" id="toc-generalised-linear-mixed-model" class="nav-link" data-scroll-target="#generalised-linear-mixed-model"><span class="header-section-number">14.5</span> Generalised linear mixed model</a>
   <ul class="collapse">
-  <li><a href="#fit-a-model-1" id="toc-fit-a-model-1" class="nav-link" data-scroll-target="#fit-a-model-1"><span class="header-section-number">13.5.1</span> Fit a model</a></li>
-  <li><a href="#report-results-1" id="toc-report-results-1" class="nav-link" data-scroll-target="#report-results-1"><span class="header-section-number">13.5.2</span> Report results</a></li>
+  <li><a href="#fit-a-model-1" id="toc-fit-a-model-1" class="nav-link" data-scroll-target="#fit-a-model-1"><span class="header-section-number">14.5.1</span> Fit a model</a></li>
+  <li><a href="#report-results-1" id="toc-report-results-1" class="nav-link" data-scroll-target="#report-results-1"><span class="header-section-number">14.5.2</span> Report results</a></li>
   </ul></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">13.6</span> Interpretation</a></li>
-  <li><a href="#render" id="toc-render" class="nav-link" data-scroll-target="#render"><span class="header-section-number">13.7</span> Render</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">14.6</span> Interpretation</a></li>
+  <li><a href="#render" id="toc-render" class="nav-link" data-scroll-target="#render"><span class="header-section-number">14.7</span> Render</a></li>
   </ul>
 </nav>
     </div>
@@ -417,7 +427,7 @@ MathJax.Hub.Config({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Report 2</span></h1>
 <p class="subtitle lead">(Generalised) linear mixed models</p>
 </div>
 
@@ -435,49 +445,43 @@ MathJax.Hub.Config({
 
 <p>The goal of this report is to review and consolidate what we learned together in the second block of the course. You are not required to do anything that we have not already seen.</p>
 <p><em>For students enrolled in this course in the Winter Semester 2023/24:</em> The report is due <strong>March 29, 2024 at 11:59pm</strong>. Please submit your Quarto script, as well as a rendered copy in HTML and PDF to Moodle (under ‘Reports’).</p>
-<section id="dataset" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="dataset"><span class="header-section-number">13.1</span> Dataset</h2>
-<p>For this report you will continue using the data from <span class="citation" data-cites="biondo_yesterday_2022">Biondo et al. (<a href="../../00-course_overview.html#ref-biondo_yesterday_2022" role="doc-biblioref">2022</a>)</span>, an eye-tracking reading study on adverb-tense congruence effects on reading time measures. Participants’ eye movements were recorded as they read Spanish sentences where temporal adverbs and verb tense were either congruent or incongruent. For both sentence regions, the time reference was either past (e.g., yesterday, bought) or future (e.g., tomorrow, will buy). Example stimuli from this experiment are given in <a href="#tbl-stimuli">Table&nbsp;<span>13.1</span></a>.</p>
+<section id="dataset" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="dataset"><span class="header-section-number">14.1</span> Dataset</h2>
+<p>For this report you will continue using the data from <span class="citation" data-cites="biondo_yesterday_2022">Biondo et al. (<a href="../../00-course_overview.html#ref-biondo_yesterday_2022" role="doc-biblioref">2022</a>)</span>, an eye-tracking reading study on adverb-tense congruence effects on reading time measures. Participants’ eye movements were recorded as they read Spanish sentences where temporal adverbs and verb tense were either congruent or incongruent. For both sentence regions, the time reference was either past (e.g., yesterday, bought) or future (e.g., tomorrow, will buy). Example stimuli from this experiment are given in <a href="#tbl-stimuli">Table&nbsp;<span>14.1</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stimuli" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Table&nbsp;13.1: Example stimuli</caption>
-<colgroup>
-<col style="width: 88%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 4%">
-</colgroup>
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table&nbsp;14.1: Example stimuli</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">sentence</th>
-<th style="text-align: left;">adverb</th>
-<th style="text-align: left;">verb</th>
-<th style="text-align: left;">gramm</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">sentence</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">adverb</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">verb</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">gramm</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">A la salida del trabajo, <strong>ayer</strong> las chicas <strong>compraron</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>yesterday</strong> <em>the girls</em> <strong>bought</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">A la salida del trabajo, **ayer** las chicas **compraron** pan en la tienda.&lt;br&gt; *After leaving work* **yesterday** *the girls* **bought** *bread at the shop*</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">gramm</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">A la salida del trabajo, <strong>ayer</strong> las chicas <strong>*comprarán</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>yesterday</strong> <em>the girls</em> <strong>*will buy</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">A la salida del trabajo, **ayer** las chicas **\*comprarán** pan en la tienda.&lt;br&gt; *After leaving work* **yesterday** *the girls* **\*will buy** *bread at the shop*</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">future</td>
 <td style="text-align: left;">ungramm</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">A la salida del trabajo, <strong>mañana</strong> las chicas <strong>comprarán</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>tomorrow</strong> <em>the girls</em> <strong>will buy</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">A la salida del trabajo, **mañana** las chicas **comprarán** pan en la tienda.&lt;br&gt; *After leaving work* **tomorrow** *the girls* **will buy** *bread at the shop*</td>
 <td style="text-align: left;">future</td>
 <td style="text-align: left;">future</td>
 <td style="text-align: left;">gramm</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">A la salida del trabajo, <strong>mañana</strong> las chicas <strong>*compraron</strong> pan en la tienda.<br> <em>After leaving work</em> <strong>tomorrow</strong> <em>the girls</em> <strong>*bought</strong> <em>bread at the shop</em></td>
+<td style="text-align: left;">A la salida del trabajo, **mañana** las chicas **\*compraron** pan en la tienda.&lt;br&gt; *After leaving work* **tomorrow** *the girls* **\*bought** *bread at the shop*</td>
 <td style="text-align: left;">future</td>
 <td style="text-align: left;">past</td>
 <td style="text-align: left;">ungramm</td>
@@ -485,15 +489,17 @@ MathJax.Hub.Config({
 </tbody>
 </table>
 </div>
+
+
 </div>
 </div>
 <p>You will be fitting models to different eye-tracking reading measures from this experiment, with the predictors <em>adverb time</em> and <em>grammaticality</em>.</p>
 </section>
-<section id="set-up" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="set-up"><span class="header-section-number">13.2</span> Set-up</h2>
+<section id="set-up" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="set-up"><span class="header-section-number">14.2</span> Set-up</h2>
 <p>Make sure you begin with a <em>clear</em> working environment. To achieve this, you can go to <code>Session &gt; Restart R</code>. Your Environment should have no objects in it, and you should not have any packages loaded.</p>
-<section id="quarto-yaml" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="quarto-yaml"><span class="header-section-number">13.2.1</span> Quarto YAML</h3>
+<section id="quarto-yaml" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="quarto-yaml"><span class="header-section-number">14.2.1</span> Quarto YAML</h3>
 <p>Make sure your YAML looks something like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
@@ -520,8 +526,8 @@ Render often
 </div>
 </div>
 </section>
-<section id="packages" class="level3" data-number="13.2.2">
-<h3 data-number="13.2.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">13.2.2</span> Packages</h3>
+<section id="packages" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">14.2.2</span> Packages</h3>
 <p>Load the following packages, however you prefer (i.e., you don’t have to use <code>pacman::p_load()</code>):</p>
 <ul>
 <li>tidyverse</li>
@@ -540,8 +546,8 @@ Render often
 <li><code>lmerTest</code>:</li>
 </ol>
 </section>
-<section id="data" class="level3" data-number="13.2.3">
-<h3 data-number="13.2.3" class="anchored" data-anchor-id="data"><span class="header-section-number">13.2.3</span> Data</h3>
+<section id="data" class="level3" data-number="14.2.3">
+<h3 data-number="14.2.3" class="anchored" data-anchor-id="data"><span class="header-section-number">14.2.3</span> Data</h3>
 <p>Load in the <span class="citation" data-cites="biondo_yesterday_2022">Biondo et al. (<a href="../../00-course_overview.html#ref-biondo_yesterday_2022" role="doc-biblioref">2022</a>)</span> data by running the following code chunk.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_biondo <span class="ot">&lt;-</span></span>
@@ -561,11 +567,11 @@ Render often
 <p>The last few lines add a new variable (<code>roi_length</code>) that contains region length (in letters). We will use this as a covariate in one of our models.</p>
 </section>
 </section>
-<section id="model-set-up" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="model-set-up"><span class="header-section-number">13.3</span> Model set up</h2>
+<section id="model-set-up" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="model-set-up"><span class="header-section-number">14.3</span> Model set up</h2>
 <p>You will be asked to run two models, one linear mixed model (<code>lmer()</code> from the <code>lme4</code> or <code>lmerTest</code> package) and one genearlised (logistic) linear mixed model (<code>glmer(family = "binomial")</code> from the <code>lme4</code> package).</p>
-<section id="variable-transformations" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="variable-transformations"><span class="header-section-number">13.3.1</span> Variable transformations</h3>
+<section id="variable-transformations" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="variable-transformations"><span class="header-section-number">14.3.1</span> Variable transformations</h3>
 <p>For each model, consider whether you need to implement the following steps:</p>
 <ul>
 <li>centre (sum contrast code) categorical predictors</li>
@@ -577,18 +583,18 @@ Render often
 </ul></li>
 </ul>
 </section>
-<section id="model-selection" class="level3" data-number="13.3.2">
-<h3 data-number="13.3.2" class="anchored" data-anchor-id="model-selection"><span class="header-section-number">13.3.2</span> Model selection</h3>
+<section id="model-selection" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="model-selection"><span class="header-section-number">14.3.2</span> Model selection</h3>
 <p>For each model, start with a “maximal” model justified by the design. If you encounter convergence issues, begin by first implementing “unintrusive” remedies. If you still have convergence issues (as indicated by warning messages and/or e.g., inspecting the variance-covariance matrix), reduce the random effects structure as you see fit. Be sure to document and justify your decisions step-by-step. N.B., the equivalent of <code>lmerControl</code> argument (for <code>lmer()</code> models) is <code>glmerControl</code> for <code>glmer()</code> models.</p>
 <p>If you choose to use the <code>lme4::allFit()</code> function, beware that it can take a long time to run, especially on ‘maximal’ models. I suggest you (i) save the output as an object (e.g., <code>allFit_model1 &lt;- allFit(model1)</code>) and (ii) plan another task that doesn’t involve running code when you run this function.</p>
 <p>I am not expecting any particular model/random effects structure that is correct, but am looking for explanations on how you made decisions regarding what to remove or keep in your model.</p>
 </section>
 </section>
-<section id="linear-mixed-model" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="linear-mixed-model"><span class="header-section-number">13.4</span> Linear mixed model</h2>
+<section id="linear-mixed-model" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="linear-mixed-model"><span class="header-section-number">14.4</span> Linear mixed model</h2>
 <p>Fit a linear mixed model to total reading times (<code>tt</code>) at the adverb region (<code>roi == 2</code>). Your fixed effects are adverb time reference (<code>adv_t</code>), grammaticality (<code>gramm</code>), their interaction, and (standardized) region length in characters as a covariate without any interaction. Include by-participant and -item random effects.</p>
-<section id="fit-a-model" class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1" class="anchored" data-anchor-id="fit-a-model"><span class="header-section-number">13.4.1</span> Fit a model</h3>
+<section id="fit-a-model" class="level3" data-number="14.4.1">
+<h3 data-number="14.4.1" class="anchored" data-anchor-id="fit-a-model"><span class="header-section-number">14.4.1</span> Fit a model</h3>
 <p>Start by defining your most maximal model justified by your design, and simplify accordingly. Remember to not delete the code for nonconverging models, instead set the code chunk to not run when you render your document, as in the code chunk below (<code>#| eval: false</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -603,30 +609,30 @@ Render often
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="report-results" class="level3" data-number="13.4.2">
-<h3 data-number="13.4.2" class="anchored" data-anchor-id="report-results"><span class="header-section-number">13.4.2</span> Report results</h3>
+<section id="report-results" class="level3" data-number="14.4.2">
+<h3 data-number="14.4.2" class="anchored" data-anchor-id="report-results"><span class="header-section-number">14.4.2</span> Report results</h3>
 <p>Once you’ve landed on a final model that converges, inspect the fixed and random effects (some useful functions we’ve already seen: <code>summary()</code>, <code>broom.mixed::tidy()</code>, <code>fixef()</code>, <code>ranef()</code>, <code>coef()</code>, <code>lattice::dotplot()</code>).</p>
 </section>
 </section>
-<section id="generalised-linear-mixed-model" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="generalised-linear-mixed-model"><span class="header-section-number">13.5</span> Generalised linear mixed model</h2>
+<section id="generalised-linear-mixed-model" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="generalised-linear-mixed-model"><span class="header-section-number">14.5</span> Generalised linear mixed model</h2>
 <p>We didn’t cover how to implement logistic mixed regression, however the relationship between <code>lm()</code> and <code>glm()</code> is the same in mixed models (<code>lmer()</code> and <code>glmer()</code>).</p>
-<section id="fit-a-model-1" class="level3" data-number="13.5.1">
-<h3 data-number="13.5.1" class="anchored" data-anchor-id="fit-a-model-1"><span class="header-section-number">13.5.1</span> Fit a model</h3>
+<section id="fit-a-model-1" class="level3" data-number="14.5.1">
+<h3 data-number="14.5.1" class="anchored" data-anchor-id="fit-a-model-1"><span class="header-section-number">14.5.1</span> Fit a model</h3>
 <p>Fit a generalised linear mixed model (<code>glmer()</code> from the <code>lme4</code> package, <code>lmerTest</code> does not have this function) to the regressions in (<code>ri</code>) to the adverb region (<code>roi == 2</code>). Your fixed effects are adverb time reference (<code>adv_t</code>), grammaticality (<code>gramm</code>), and their interaction. Remember to use <code>eval: false</code> in your code chunk options to stop Quarto from running all your non-final models when rendering.</p>
 </section>
-<section id="report-results-1" class="level3" data-number="13.5.2">
-<h3 data-number="13.5.2" class="anchored" data-anchor-id="report-results-1"><span class="header-section-number">13.5.2</span> Report results</h3>
+<section id="report-results-1" class="level3" data-number="14.5.2">
+<h3 data-number="14.5.2" class="anchored" data-anchor-id="report-results-1"><span class="header-section-number">14.5.2</span> Report results</h3>
 <p>Once you’ve landed on a final model that converges, inspect the fixed and random effects (some useful functions we’ve already seen: <code>summary()</code>, <code>broom.mixed::tidy()</code>, <code>fixef()</code>, <code>ranef()</code>, <code>coef()</code>, <code>lattice::dotplot()</code>)</p>
 <p>Recall that our coefficient estimates are in <em>log odds</em>. The interpretation of your coefficient estimates (fixed effects) is identical to that in genearlised linear models (i.e., without random effects).</p>
 </section>
 </section>
-<section id="interpretation" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">13.6</span> Interpretation</h2>
+<section id="interpretation" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">14.6</span> Interpretation</h2>
 <p>Write a short report of the findings from the two models. Produce a table and plot like in the example above to supplement your report.</p>
 </section>
-<section id="render" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="render"><span class="header-section-number">13.7</span> Render</h2>
+<section id="render" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="render"><span class="header-section-number">14.7</span> Render</h2>
 <p>Render your Quarto finished script. Upload the <code>.qmd</code>, <code>.pdf</code>, and <code>.html</code> files to Moodle. N.B., you need to have <code>tinytex</code> installed to be able to render PDFs.</p>
 
 
@@ -996,11 +1002,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="../../11-model_selection.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span>
+      <a href="../../12-model_selection_example.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model selection: Example</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -228,12 +228,6 @@ MathJax.Hub.Config({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Syllabus</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./00-course_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources and Set-up</span></a>
   </div>
@@ -365,6 +359,12 @@ MathJax.Hub.Config({
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-model_selection_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model selection: Example</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -379,11 +379,17 @@ MathJax.Hub.Config({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reports/report 2/report2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Report 2</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -576,102 +582,98 @@ MathJax.Hub.Config({
 <p><span class="quarto-unresolved-ref">?tbl-data_dictionary</span> gives an overview of the variables in the dataset. Relevant for this chapter are the variables <code>fp</code>, <code>verb_t</code>, <code>gramm</code>, and <code>roi</code>. For the tasks at the end of the chapter, you’ll also be working with <code>tt</code> and <code>adv_t</code>.</p>
 <div class="cell" data-label="tbl-data_dictionary">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 77%">
-<col style="width: 7%">
-<col style="width: 8%">
-</colgroup>
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;">variable</th>
-<th style="text-align: left;">description</th>
-<th style="text-align: left;">type</th>
-<th style="text-align: left;">class</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">description</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">class</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>sj</code></td>
+<td style="text-align: left;">`sj`</td>
 <td style="text-align: left;">participant ID</td>
 <td style="text-align: left;">grouping</td>
 <td style="text-align: left;">factor</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>item</code></td>
+<td style="text-align: left;">`item`</td>
 <td style="text-align: left;">item ID</td>
 <td style="text-align: left;">grouping</td>
 <td style="text-align: left;">factor</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>adv_type</code></td>
-<td style="text-align: left;">adverb type: <code>Deic</code>tic (e.g., on Monday), <code>Non-deic</code>tic (e.g., last Monday)</td>
+<td style="text-align: left;">`adv_type`</td>
+<td style="text-align: left;">adverb type: `Deic`tic (e.g., on Monday), `Non-deic`tic (e.g., last Monday)</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">factor</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>adv_t</code></td>
-<td style="text-align: left;">adverb tense: <code>Past</code>, <code>Future</code></td>
+<td style="text-align: left;">`adv_t`</td>
+<td style="text-align: left;">adverb tense: `Past`, `Future`</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">factor</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>verb_t</code></td>
-<td style="text-align: left;">verb tense: <code>Past</code>, <code>Future</code></td>
+<td style="text-align: left;">`verb_t`</td>
+<td style="text-align: left;">verb tense: `Past`, `Future`</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">factor</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>gramm</code></td>
-<td style="text-align: left;">grammaticality: <code>gram</code>atical or <code>ungram</code>atical</td>
+<td style="text-align: left;">`gramm`</td>
+<td style="text-align: left;">grammaticality: `gram`atical or `ungram`atical</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">categorical</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>roi</code></td>
-<td style="text-align: left;">sentence region (Region Of Interest); <code>2</code> = adverb, <code>4</code> = verb</td>
+<td style="text-align: left;">`roi`</td>
+<td style="text-align: left;">sentence region (Region Of Interest); `2` = adverb, `4` = verb</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">ordered factor</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>label</code></td>
+<td style="text-align: left;">`label`</td>
 <td style="text-align: left;">sentence region text</td>
 <td style="text-align: left;">independent</td>
 <td style="text-align: left;">string</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>fp</code></td>
+<td style="text-align: left;">`fp`</td>
 <td style="text-align: left;">first-pass reading time (summation of fixations from when a reader first fixates on a region to when they first leave that region)</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">continuous</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>gp</code></td>
+<td style="text-align: left;">`gp`</td>
 <td style="text-align: left;">regression path duration/go-past time</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">continuous</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>tt</code></td>
+<td style="text-align: left;">`tt`</td>
 <td style="text-align: left;">total reading time (summation of all fixations within a region during a trial)</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">continuous</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>ri</code></td>
+<td style="text-align: left;">`ri`</td>
 <td style="text-align: left;">regressions in (whether there was at least one regression into a region)</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">binomial</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>ro</code></td>
+<td style="text-align: left;">`ro`</td>
 <td style="text-align: left;">regressions out (whether there was at least one regression out of a region)</td>
 <td style="text-align: left;">dependent</td>
 <td style="text-align: left;">binomial</td>
 </tr>
 </tbody>
 </table>
+
+
 </div>
 </div>
 </section>
@@ -1878,23 +1880,23 @@ Citing packages
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="nmtrcvmmps" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nmtrcvmmps table {
+<div id="lqcbiwsvrv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lqcbiwsvrv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nmtrcvmmps thead, #nmtrcvmmps tbody, #nmtrcvmmps tfoot, #nmtrcvmmps tr, #nmtrcvmmps td, #nmtrcvmmps th {
+#lqcbiwsvrv thead, #lqcbiwsvrv tbody, #lqcbiwsvrv tfoot, #lqcbiwsvrv tr, #lqcbiwsvrv td, #lqcbiwsvrv th {
   border-style: none;
 }
 
-#nmtrcvmmps p {
+#lqcbiwsvrv p {
   margin: 0;
   padding: 0;
 }
 
-#nmtrcvmmps .gt_table {
+#lqcbiwsvrv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1920,12 +1922,12 @@ Citing packages
   border-left-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_caption {
+#lqcbiwsvrv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nmtrcvmmps .gt_title {
+#lqcbiwsvrv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1937,7 +1939,7 @@ Citing packages
   border-bottom-width: 0;
 }
 
-#nmtrcvmmps .gt_subtitle {
+#lqcbiwsvrv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1949,7 +1951,7 @@ Citing packages
   border-top-width: 0;
 }
 
-#nmtrcvmmps .gt_heading {
+#lqcbiwsvrv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1961,13 +1963,13 @@ Citing packages
   border-right-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_bottom_border {
+#lqcbiwsvrv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_col_headings {
+#lqcbiwsvrv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1982,7 +1984,7 @@ Citing packages
   border-right-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_col_heading {
+#lqcbiwsvrv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2002,7 +2004,7 @@ Citing packages
   overflow-x: hidden;
 }
 
-#nmtrcvmmps .gt_column_spanner_outer {
+#lqcbiwsvrv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2014,15 +2016,15 @@ Citing packages
   padding-right: 4px;
 }
 
-#nmtrcvmmps .gt_column_spanner_outer:first-child {
+#lqcbiwsvrv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nmtrcvmmps .gt_column_spanner_outer:last-child {
+#lqcbiwsvrv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nmtrcvmmps .gt_column_spanner {
+#lqcbiwsvrv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2034,11 +2036,11 @@ Citing packages
   width: 100%;
 }
 
-#nmtrcvmmps .gt_spanner_row {
+#lqcbiwsvrv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nmtrcvmmps .gt_group_heading {
+#lqcbiwsvrv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2064,7 +2066,7 @@ Citing packages
   text-align: left;
 }
 
-#nmtrcvmmps .gt_empty_group_heading {
+#lqcbiwsvrv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2079,15 +2081,15 @@ Citing packages
   vertical-align: middle;
 }
 
-#nmtrcvmmps .gt_from_md > :first-child {
+#lqcbiwsvrv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nmtrcvmmps .gt_from_md > :last-child {
+#lqcbiwsvrv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nmtrcvmmps .gt_row {
+#lqcbiwsvrv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2106,7 +2108,7 @@ Citing packages
   overflow-x: hidden;
 }
 
-#nmtrcvmmps .gt_stub {
+#lqcbiwsvrv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2119,7 +2121,7 @@ Citing packages
   padding-right: 5px;
 }
 
-#nmtrcvmmps .gt_stub_row_group {
+#lqcbiwsvrv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2133,15 +2135,15 @@ Citing packages
   vertical-align: top;
 }
 
-#nmtrcvmmps .gt_row_group_first td {
+#lqcbiwsvrv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nmtrcvmmps .gt_row_group_first th {
+#lqcbiwsvrv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nmtrcvmmps .gt_summary_row {
+#lqcbiwsvrv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2151,16 +2153,16 @@ Citing packages
   padding-right: 5px;
 }
 
-#nmtrcvmmps .gt_first_summary_row {
+#lqcbiwsvrv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_first_summary_row.thick {
+#lqcbiwsvrv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nmtrcvmmps .gt_last_summary_row {
+#lqcbiwsvrv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2170,7 +2172,7 @@ Citing packages
   border-bottom-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_grand_summary_row {
+#lqcbiwsvrv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2180,7 +2182,7 @@ Citing packages
   padding-right: 5px;
 }
 
-#nmtrcvmmps .gt_first_grand_summary_row {
+#lqcbiwsvrv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2190,7 +2192,7 @@ Citing packages
   border-top-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_last_grand_summary_row_top {
+#lqcbiwsvrv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2200,11 +2202,11 @@ Citing packages
   border-bottom-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_striped {
+#lqcbiwsvrv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nmtrcvmmps .gt_table_body {
+#lqcbiwsvrv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2213,7 +2215,7 @@ Citing packages
   border-bottom-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_footnotes {
+#lqcbiwsvrv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2227,7 +2229,7 @@ Citing packages
   border-right-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_footnote {
+#lqcbiwsvrv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2236,7 +2238,7 @@ Citing packages
   padding-right: 5px;
 }
 
-#nmtrcvmmps .gt_sourcenotes {
+#lqcbiwsvrv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2250,7 +2252,7 @@ Citing packages
   border-right-color: #D3D3D3;
 }
 
-#nmtrcvmmps .gt_sourcenote {
+#lqcbiwsvrv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2258,69 +2260,68 @@ Citing packages
   padding-right: 5px;
 }
 
-#nmtrcvmmps .gt_left {
+#lqcbiwsvrv .gt_left {
   text-align: left;
 }
 
-#nmtrcvmmps .gt_center {
+#lqcbiwsvrv .gt_center {
   text-align: center;
 }
 
-#nmtrcvmmps .gt_right {
+#lqcbiwsvrv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nmtrcvmmps .gt_font_normal {
+#lqcbiwsvrv .gt_font_normal {
   font-weight: normal;
 }
 
-#nmtrcvmmps .gt_font_bold {
+#lqcbiwsvrv .gt_font_bold {
   font-weight: bold;
 }
 
-#nmtrcvmmps .gt_font_italic {
+#lqcbiwsvrv .gt_font_italic {
   font-style: italic;
 }
 
-#nmtrcvmmps .gt_super {
+#lqcbiwsvrv .gt_super {
   font-size: 65%;
 }
 
-#nmtrcvmmps .gt_footnote_marks {
+#lqcbiwsvrv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nmtrcvmmps .gt_asterisk {
+#lqcbiwsvrv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nmtrcvmmps .gt_indent_1 {
+#lqcbiwsvrv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nmtrcvmmps .gt_indent_2 {
+#lqcbiwsvrv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nmtrcvmmps .gt_indent_3 {
+#lqcbiwsvrv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nmtrcvmmps .gt_indent_4 {
+#lqcbiwsvrv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nmtrcvmmps .gt_indent_5 {
+#lqcbiwsvrv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
-    
     <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Term">Term</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Definition">Definition</th>
@@ -2356,17 +2357,17 @@ Citing packages
 </section>
 <section id="session-info" class="level2 unnumbered" data-visibility="uncounted">
 <h2 class="unnumbered anchored" data-visibility="uncounted" data-anchor-id="session-info">Session Info</h2>
-<p>Developed with Quarto using R version 4.3.0 (2023-04-21) (Already Tomorrow) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
+<p>Developed with Quarto using R version 4.4.0 (2024-04-24) (Puppy Cup) and RStudio version 2023.9.0.463 (Desert Sunflower), and the following packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.0 (2023-04-21)
-Platform: aarch64-apple-darwin20 (64-bit)
+<pre><code>R version 4.4.0 (2024-04-24)
+Platform: aarch64-apple-darwin20
 Running under: macOS Ventura 13.2.1
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
-LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -2375,52 +2376,51 @@ time zone: Europe/Berlin
 tzcode source: internal
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats     graphics  grDevices datasets  utils     methods   base     
 
 other attached packages:
- [1] gt_0.9.0            googlesheets4_1.1.0 kableExtra_1.3.4   
- [4] knitr_1.44          patchwork_1.1.3     lattice_0.21-8     
- [7] broom.mixed_0.2.9.4 lmerTest_3.1-3      lme4_1.1-33        
-[10] Matrix_1.5-4        sjPlot_2.8.14       ggeffects_1.2.2    
+ [1] gt_0.10.1           googlesheets4_1.1.1 kableExtra_1.4.0   
+ [4] knitr_1.43          patchwork_1.2.0     lattice_0.22-6     
+ [7] broom.mixed_0.2.9.5 lmerTest_3.1-3      lme4_1.1-35.3      
+[10] Matrix_1.7-0        sjPlot_2.8.15       ggeffects_1.5.2    
 [13] janitor_2.2.0       broom_1.0.5         here_1.0.1         
-[16] lubridate_1.9.2     forcats_1.0.0       stringr_1.5.0      
-[19] dplyr_1.1.3         purrr_1.0.2         readr_2.1.4        
-[22] tidyr_1.3.0         tibble_3.2.1        ggplot2_3.4.3      
+[16] lubridate_1.9.3     forcats_1.0.0       stringr_1.5.1      
+[19] dplyr_1.1.4         purrr_1.0.2         readr_2.1.5        
+[22] tidyr_1.3.1         tibble_3.2.1        ggplot2_3.5.1      
 [25] tidyverse_2.0.0     broman_0.80        
 
 loaded via a namespace (and not attached):
- [1] sandwich_3.0-2      rlang_1.1.3         magrittr_2.0.3     
- [4] multcomp_1.4-23     snakecase_0.11.0    furrr_0.3.1        
- [7] compiler_4.3.0      mgcv_1.8-42         systemfonts_1.0.4  
-[10] vctrs_0.6.3         rvest_1.0.3         crayon_1.5.2       
-[13] pkgconfig_2.0.3     fastmap_1.1.1       backports_1.4.1    
-[16] labeling_0.4.3      utf8_1.2.3          rmarkdown_2.22     
-[19] tzdb_0.4.0          haven_2.5.2         nloptr_2.0.3       
-[22] bit_4.0.5           xfun_0.39           jsonlite_1.8.7     
-[25] highr_0.10          sjmisc_2.8.9        parallel_4.3.0     
-[28] R6_2.5.1            RColorBrewer_1.1-3  stringi_1.7.12     
-[31] parallelly_1.36.0   boot_1.3-28.1       cellranger_1.1.0   
-[34] numDeriv_2016.8-1.1 estimability_1.4.1  Rcpp_1.0.11        
-[37] modelr_0.1.11       zoo_1.8-12          pacman_0.5.1       
-[40] splines_4.3.0       timechange_0.2.0    tidyselect_1.2.0   
-[43] rstudioapi_0.14     yaml_2.3.7          codetools_0.2-19   
-[46] sjlabelled_1.2.0    curl_5.0.1          listenv_0.9.0      
-[49] plyr_1.8.8          withr_2.5.0         bayestestR_0.13.1  
-[52] coda_0.19-4         evaluate_0.21       future_1.32.0      
-[55] survival_3.5-5      xml2_1.3.4          pillar_1.9.0       
-[58] insight_0.19.3      generics_0.1.3      vroom_1.6.3        
-[61] rprojroot_2.0.3     hms_1.1.3           munsell_0.5.0      
-[64] scales_1.2.1        minqa_1.2.5         globals_0.16.2     
-[67] xtable_1.8-4        glue_1.6.2          emmeans_1.8.6      
-[70] tools_4.3.0         webshot_0.5.4       fs_1.6.2           
-[73] mvtnorm_1.2-3       grid_4.3.0          colorspace_2.1-0   
-[76] nlme_3.1-162        Rmisc_1.5.1         performance_0.10.4 
-[79] googledrive_2.1.0   cli_3.6.1           fansi_1.0.4        
-[82] gargle_1.4.0        viridisLite_0.4.2   svglite_2.1.1      
-[85] sjstats_0.18.2      gtable_0.3.4        sass_0.4.6         
-[88] digest_0.6.33       TH.data_1.1-2       farver_2.1.1       
-[91] htmlwidgets_1.6.2   htmltools_0.5.5     lifecycle_1.0.3    
-[94] httr_1.4.6          bit64_4.0.5         MASS_7.3-58.4      </code></pre>
+ [1] rlang_1.1.3         magrittr_2.0.3      snakecase_0.11.1   
+ [4] furrr_0.3.1         compiler_4.4.0      mgcv_1.9-1         
+ [7] systemfonts_1.0.6   vctrs_0.6.5         pkgconfig_2.0.3    
+[10] crayon_1.5.2        fastmap_1.1.1       backports_1.4.1    
+[13] labeling_0.4.3      utf8_1.2.4          rmarkdown_2.24     
+[16] tzdb_0.4.0          haven_2.5.4         nloptr_2.0.3       
+[19] bit_4.0.5           xfun_0.40           jsonlite_1.8.7     
+[22] highr_0.10          sjmisc_2.8.9        parallel_4.4.0     
+[25] R6_2.5.1            RColorBrewer_1.1-3  stringi_1.8.3      
+[28] parallelly_1.37.1   boot_1.3-30         cellranger_1.1.0   
+[31] numDeriv_2016.8-1.1 estimability_1.5    Rcpp_1.0.12        
+[34] modelr_0.1.11       pacman_0.5.1        splines_4.4.0      
+[37] timechange_0.3.0    tidyselect_1.2.1    rstudioapi_0.16.0  
+[40] yaml_2.3.7          codetools_0.2-20    sjlabelled_1.2.0   
+[43] curl_5.2.1          listenv_0.9.1       plyr_1.8.9         
+[46] withr_3.0.0         bayestestR_0.13.2   coda_0.19-4.1      
+[49] evaluate_0.21       future_1.33.2       xml2_1.3.6         
+[52] pillar_1.9.0        renv_1.0.7          insight_0.19.10    
+[55] generics_0.1.3      vroom_1.6.5         rprojroot_2.0.4    
+[58] hms_1.1.3           munsell_0.5.1       scales_1.3.0       
+[61] minqa_1.2.6         globals_0.16.3      xtable_1.8-4       
+[64] glue_1.7.0          emmeans_1.10.1      tools_4.4.0        
+[67] fs_1.6.3            mvtnorm_1.2-4       grid_4.4.0         
+[70] datawizard_0.10.0   colorspace_2.1-0    nlme_3.1-164       
+[73] Rmisc_1.5.1         performance_0.11.0  googledrive_2.1.1  
+[76] cli_3.6.2           fansi_1.0.6         gargle_1.5.2       
+[79] viridisLite_0.4.2   svglite_2.1.3       sjstats_0.18.2     
+[82] gtable_0.3.5        sass_0.4.7          digest_0.6.33      
+[85] farver_2.1.1        htmlwidgets_1.6.4   htmltools_0.5.8.1  
+[88] lifecycle_1.0.4     httr_1.4.7          bit64_4.0.5        
+[91] MASS_7.3-60.2      </code></pre>
 </div>
 </div>
 
