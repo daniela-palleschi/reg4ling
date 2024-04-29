@@ -52,7 +52,8 @@ pacman::p_load(
                knitr,
                kableExtra,
                gt,
-               googlesheets4)
+               googlesheets4,
+               performance)
 
 # tell googlesheets4 we don't want private
 gs4_deauth()

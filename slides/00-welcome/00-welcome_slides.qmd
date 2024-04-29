@@ -42,7 +42,7 @@ format:
 editor_options: 
   chunk_output_type: console
 bibliography: references.bib
-csl: ../apa.csl
+csl: ../../apa.csl
 ---
 
 ```{r setup, eval = T, echo = F}
