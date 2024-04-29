@@ -1,0 +1,310 @@
+---
+title: "Model selection"
+subtitle: "Strolling through the garden of forking paths"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-02-09
+format: 
+  pdf:
+    output-file: 10-model_selection.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  html:
+    code-tools: true
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  revealjs:
+    output-file: 10-model_selection_slides.html
+    include-in-header: ../../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    fig-dpi: 300
+editor_options: 
+  chunk_output_type: console
+bibliography: ../../references.bib
+csl: ../../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = F, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn about...
+
+- the history of mixed models (again)
+- strategies for model selection
+- variability in model selection
+
+# Resources {.unnumbered .unlisted}
+
+- relevant papers for this topic
+  - @barr_random_maximal_2013
+  - @bates_parsimonious_2015
+  - @matuschek_balancing_2017
+  - @brauer_linear_2018
+  - @meteyard_best_2020
+
+
+```{r hidden_packages}
+#| echo: false
+#| eval: true
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+  tidyverse,
+  here, janitor,
+               googlesheets4,
+               gt)
+
+# tell googlesheets4 we don't want private
+gs4_deauth()
+```
+
+```{r}
+#| echo: false
+#| eval: true
+df_biondo <-
+  read_csv(here("data", "Biondo.Soilemezidi.Mancini_dataset_ET.csv"),
+           locale = locale(encoding = "Latin1") ## for special characters in Spanish
+           ) |> 
+  clean_names() |> 
+  mutate(gramm = ifelse(gramm == "0", "ungramm", "gramm")) |> 
+  mutate_if(is.character,as_factor) |> # all character variables as factors
+  droplevels() |> 
+  filter(adv_type == "Deic")
+```
+
+# Review: random intercepts and slopes
+
+- violation of independence assumption --> increased Type I error (false positive)
+  + include random effects per plausible grouping factor [herein "unit", à la @barr_random_maximal_2013]
+- random-intercepts only models --> increased Type I error (false positive)
+  + add random slopes per within-unit manipulation, i.e., "maximal" models [@barr_random_maximal_2013]
+- but such models often fail to "converge"
+  + and have been shown to increase Type II error (false negative) [@bates_parsimonious_2015; @matuschek_balancing_2017]
+  
+- some questions remain:
+  + how to define our maximal model
+  + how to handle convergence issues
+
+# History of LMMs revisited
+
+- recall @clark_language-as-fixed-effect_1973's language-as-fixed-effect fallacy and the issue of generalisability [see also @winter_independence_2021; @yarkoni_generalizability_2022]
+- @baayen_mixed-effects_2008 motivated LMM's for linguistic data in the JML special issue
+  + effect: everybody adopted random-intercepts only models
+- @barr_random_maximal_2013: random-intercepts only models are overconfident, "keep it maximal!"
+  + effect: everybody adopted maximal models
+- @matuschek_balancing_2017 and @bates_parsimonious_2015: maximal models are underconfident and lower statistical power! Use data-driven model selection to find a "parsimonious" model!
+  + effect: some people adopt this method, but many psycholinguists just want a "recipe" to follow
+
+## 2013: Keep it maximal
+
+> A maximal model should optimize generalization of the findings to new subjects and new items.
+>
+> -- @barr_random_maximal_2013, p. 261
+
+- random-intercepts-only models tend to be underpowered
+- for this reason, @barr_random_maximal_2013 suggested using a maximal random effects structure justified by the experimental design
+
+## 2015 & 2017: Parsimonious models
+
+> [W]hile the maximal model indeed performs well as far as Type I error rates were concerned, power decreases substantially with model complexity.
+>
+> --- @matuschek_balancing_2017, p. 310-311
+
+- there is a trade-off between Type I (overconfidence) and Type II error (underconfidence)
+- i.e., maximal models can lead to over-fitting
+  + lowers statistical power, which increases Type II error (false rejection)
+- but we should strive for the most *parsimonious* model
+  + parsimonous models are a compromise between the maximal model justified by your design and theory, and a given data set
+- best way to maintain low Type I and II error: collect lots of data
+
+# Model building
+
+> Every statistical model is a description of some real or hypothetical state of affairs in the world.
+>
+> -- @yarkoni_generalizability_2022, p. 2
+
+- our models reflect not only our hypotheses or effects of interest, but any other plausible or known co-variates
+- our predictors should reflect our research questions or theories tested
+  + plus any plausible or previously motivated co-variates (e.g., trial order)
+  + plus known sources of nonindependence, i.e., our random effects
+
+
+## Choosing predictors
+
+- your model should be defined *a priori*
+  + i.e., you should define what predictors you will include and any covariates
+  + e.g., if you have a prediction about the effect of phonological neighbours on vowel duration
+    + define what phonological characteristics you will include (e.g., place of articulation? manner?)
+    + these should be related to specific hypotheses/research questions
+
+## Choosing a maximal random effects structure (RES)
+
+- how do we define our maximal model? Some tips from @barr_random_maximal_2013
+  + between-unit factor (e.g., age): include random intercept only
+  + within-unit factor with multiple observations per unit-level (e.g., age in longitudinal data): include random slopes
+- all factors in an interaction are within-unit: include by-unit random slopes for interaction terms
+      
+### Example: @biondo_yesterday_2022
+
+- @biondo_yesterday_2022: 2x2 design
+  + verb-tense (past, future) and grammaticality (grammatical, ungrammatical)
+  + repeated-measures: within-participant and -item design
+    + so we should have by-participant and -item random intercepts (multiple observations per unit level)
+  + each participant and item contributed multiple data points *per condition* (i.e., tense and grammaticality were manipulated within each unit level)
+    + so we should have varying tense and grammaticality slopes by- item and -participant
+
+```{r}
+#| eval: false
+#| warning: true
+#| output-location: fragment
+#| code-fold: true
+fit_verb_fp_mm <- lmer(log(fp) ~ verb_t*gramm + 
+                      (1 + verb_t*gramm|sj) +
+                      (1 + verb_t*gramm|item),
+                    data = df_biondo,
+                    subset = roi == 4)
+```
+
+## Observations per cell
+
+- if there is only a single observation per cell, e.g., you collected one observation from each participant per condition, then you can't fit random intercepts or slopes
+- ideally you would have at least 5 observations per cell (per unit level per condition, e.g., each participant has at least 5 observations per condition)
+- this is also a question of statistical power
+
+```{r}
+#| output-location: column-fragment
+#| eval: true
+# obvz per sj per condition
+df_biondo |> 
+  filter(roi == 4) |> 
+  count(sj, verb_t, gramm) |> 
+  count(n)
+```
+
+```{r}
+#| eval: true
+#| output-location: column-fragment
+# obvz per item per condition
+df_biondo |> 
+  filter(roi == 4) |> 
+  count(item, verb_t, gramm) |> 
+  arrange(desc(n)) |> 
+  count(n)
+```
+
+## Data structure
+
+- random effects must be factors/categorical
+- single observation per row
+  + generally speaking, there should be n(participants) * n(items) rows
+  + every fixed or random effect in your model should correspond to a column in your dataset
+
+# Variability in methods
+
+- @meteyard_best_2020
+  + survey of (psychology) researchers
+  + review of papers using LMMs
+- insecurity in researchers re: choosing models
+- great variation in papers in how models are built and reported
+
+## Researcher degrees of freedom
+
+> What we hope to make clear is that there is no single correct way in which LMM analyses should be conducted, and this has important implications for how the reporting of LMMs should be approached.
+>
+> --- @meteyard_best_2020, p. 9
+
+- the problem:
+  + 'researcher degrees of freedom' [@simmons_false-positive_2011], or 'the garden of forking paths' [@gelman_garden_2013]
+  + the same data can be analysed in a variety of ways
+- this leads to insecurity for many researchers
+
+## Justify and document
+
+> Replicability and reproducibility are critical for scientific progress, so the way in which researchers have implemented LMM analysis must be entirely transparent. We also hope that the sharing of analysis code and data becomes widespread, enabling the periodic re-analysis of raw data over multiple experiments as studies accumulate over time.
+>
+> --- @meteyard_best_2020, p. 9
+
+- the (partial) solution: 
+  + make model building/selection decisions a priori
+  + be transparent
+  + share your data and code
+
+# Moving forward
+
+- other alternatives that have fewer convergence issues:
+  + Julia
+    + e.g., in VS Code IDE
+  + Bayesian framework (e.g., `brms` R package)
+    + also run (G)LMMs, but abandons arbitrary p-values
+    + instead quantifies uncertainty
+- both are more more computationally powerful
+  + the are not (yet) as widely used in the field
+
+# Learning objectives 🏁 {.unnumbered .unlisted .uncounted}
+
+Today we learned...
+
+- the history of mixed models (again)  ✅
+- strategies for model selection  ✅
+- variability in model selection  ✅
+
+# Important terms {.unnumbered .smaller .uncounted}
+
+```{r terms}
+#| echo: false
+content <- 
+  googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing")
+
+content |> 
+  filter(`Lecture topic` == "08 - LMMs 1: random intercepts") |> 
+  select(-`Lecture topic`) |> 
+  gt() 
+```
+
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

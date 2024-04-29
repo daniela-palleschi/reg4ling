@@ -1,0 +1,1000 @@
+---
+title: "Random slopes"
+subtitle: "Mixed Models 2"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-01-12
+format: 
+  pdf:
+    output-file: 08-lmm2_random_slopes.pdf
+    toc: true
+    number-sections: true
+    colorlinks: true
+    code-overflow: wrap
+  revealjs:
+    include-in-header: ../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    fig-dpi: 300
+editor_options: 
+  chunk_output_type: console
+bibliography: ../references.bib
+csl: ../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+- how to fit a random-intercepts and slopes model
+- how to inspect and interpret random slopes
+
+
+# Resources {.unnumbered .unlisted}
+
+- this lecture covers
+  + Chapter 14 \'Mixed Models 1: Conceptual Introduction' [until Section 14.8\; @winter_statistics_2019]
+  + @winter_very_2014 (from page 16)
+  + Sections 8.4 onward in @sonderegger_regression_nodate-1
+  + [Blog post](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/) "Plotting partial pooling in mixed-effects models" from Tristin Mahr (2017)
+- we will be using the data from @biondo_yesterday_2022
+  
+# Set-up {.unnumbered}
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: Code for a function to format p-values
+library(broman)
+# function to format p-values
+format_pval <- function(pval){
+	dplyr::case_when(
+		pval < .001 ~ "< .001",
+		pval < .01 ~ "< .01",
+		pval < .05 ~ "< .05",
+		TRUE ~ broman::myround(pval, 3)
+	)
+}
+```
+
+## Load packages {.unnumbered}
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               janitor,
+               ggeffects,
+               sjPlot,
+               # new packages for mixed models:
+               lme4,
+               lmerTest,
+               broom.mixed,
+               lattice)
+```
+
+```{r}
+#| echo: false
+# set preferred ggplot2 theme
+theme_set(theme_bw() + theme(plot.title = element_text(size = 10)))
+```
+
+```{r}
+lmer <- lmerTest::lmer
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra,
+               googlesheets4,
+               gt)
+
+# tell googlesheets4 we don't want private
+gs4_deauth()
+```
+
+
+## Load data {.unnumbered}
+
+- data from @biondo_yesterday_2022
+
+```{r}
+df_biondo <-
+  read_csv(here("data", "Biondo.Soilemezidi.Mancini_dataset_ET.csv"),
+           locale = locale(encoding = "Latin1") ## for special characters in Spanish
+           ) |> 
+  clean_names() |> 
+  mutate(gramm = ifelse(gramm == "0", "ungramm", "gramm")) |> 
+  mutate_if(is.character,as_factor) |> # all character variables as factors
+  droplevels() |> 
+  filter(adv_type == "Deic")
+```
+
+## Set contrasts
+
+```{r}
+contrasts(df_biondo$verb_t) <- c(-0.5,+0.5)
+contrasts(df_biondo$gramm) <- c(-0.5,+0.5)
+```
+
+
+```{r}
+#| output-location: column-fragment
+contrasts(df_biondo$verb_t)
+```
+
+```{r}
+#| output-location: column-fragment
+contrasts(df_biondo$gramm)
+```
+
+# Review
+
+## Fixed-effects only models
+
+- do not include any grouping factors
+  + can be dangerously unconservative if violating independence assumption
+
+### Fixed-effects only equation
+
+\begin{align}
+fp_i &= \beta_0 + \beta_{verb\_t}x_i + \beta_{gramm}x_i + e_i \label{eq-fixed_effects}
+\end{align}
+
+- Equation \ref{eq-fixed_effects} shows the equation for such a model using first-pass reading times as a function of verb tense (`verb_t`) and grammaticality (`gramm`)
+  + where $i$ represents an observation ($i$ = 1:N)
+  + $\beta_0$ = intercept value
+  + $\beta_{verb\_t}x$ = tense slope multiplied by the corresponding level (+/- 0.5)
+  + $\beta_{gramm}x$ = grammaticality slope multiplied by the corresponding level (+/- 0.5)
+  + $e_i$ = residual error for this observation
+
+## Random intercepts only models
+
+- random intercepts: varying intercepts per e.g., participant
+  + intercept = mean when your predictor is centred (continuous) or sum contrast coded (categorical)
+- explains some additional variance (i.e., should reduce our residual error)
+
+### Random intercepts model equation
+  
+- Equation \ref{eq-random_intercepts} includes two additional terms:
+  + $\alpha_{j[i]}$ = random intercept ($\alpha$) for some grouping factor $j$
+    + e.g., participants, where $i = 1:60$
+  + $\alpha_{k[i]}$ = random intercept ($\alpha$) for some grouping factor $k$
+    + e.g., items, where $i = 1:96$
+
+\begin{align}
+fp_i &= \beta_0 + \alpha_{j[i]} + \alpha_{k[i]}+ \beta_{verb\_t}x_i + \beta_{gramm}x_i + e_i \label{eq-random_intercepts}
+\end{align}
+
+- $\alpha_{j[16]}$ = random intercept for participant 16
+- $\alpha_{j[7]}$ = random intercept for item 1
+
+## 
+
+::: {.callout-tip}
+## Missing values and subsetting conditions
+
+N.B., because we subsetted the data to include only `adv_type == "Deic"`, each participant did not contribute 96 data points to our current dataset, but 64.
+
+So, our overall N observations should be `64*60`, minus however many missing observations we have
+  + so $i$ in $fp_i$ has a value of 1:`r 64*60`, minus missing values.
+
+```{r}
+#| echo: false
+#| message: false
+fit_fp_1 <-
+  lmer(log(fp) ~ verb_t*gramm + 
+         (1 |sj) +
+         (1|item), 
+       data = df_biondo, 
+       subset = roi == 4) 
+```
+
+We can use the `nobs()` function to find out the number of observations in a model. For example our random-intercepts only model from the last class had `r nobs(fit_fp_1)` observations, meaning we had `r 64*60` - `r nobs(fit_fp_1)` = `r (64*60) - nobs(fit_fp_1)` missing observations. This amounts to `r round(((64*60) - nobs(fit_fp_1) ) / (64*60) * 100, 2)`\% or trials, which is fine (something around 5\% of trials is not out of the ordinary).
+
+```{r}
+nobs(fit_fp_1)
+```
+
+Why do we have missing values? This can depend on a lot of things, such as incorrect attention-check responses (not relevant for this data), measurement error, or pre-processing steps (likely the cause for this data, which is eye-tracking during reading).
+
+:::
+
+### Interpreting random effects
+
+- how can we interpret this output from a model, without knowing anything else about the model?
+
+```{r}
+#| echo: false
+
+df_lexdec <- languageR::lexdec |> 
+  mutate_if(is.character,as_factor) |> # all character variables as factors
+  mutate(freq_c = Frequency - mean(Frequency))
+
+contrasts(df_lexdec$NativeLanguage) <- c(-0.5,0.5)
+
+fit_lexdec <- lmer(exp(RT) ~ NativeLanguage + freq_c +
+                     (1|Subject) +
+                     (1|Word),
+                 data = df_lexdec)
+
+VarCorr(fit_lexdec)
+```
+
+### Formulating a model
+
+- can you formulate a model based on this output in the `lmer()` syntax?
+  + let's call the depedent variable `rt` for reaction time
+
+```{r}
+#| echo: false
+VarCorr(fit_lexdec)
+
+summary(fit_lexdec)$coefficients[,c(1:2,4)]
+```
+
+### Interpreting random effects
+
+```{r}
+#| echo: false
+VarCorr(fit_lexdec)
+```
+
+
+```{r}
+#| echo: false
+#| label: fig-lexdec
+#| fig-cap: lattice::dotplot(ranef(model))
+fig_lexdec_word <- lattice::dotplot(ranef(fit_lexdec))$Word
+fig_lexdec_subject <- lattice::dotplot(ranef(fit_lexdec))$Subject
+cowplot::plot_grid(fig_lexdec_subject, fig_lexdec_word, labels = c("A", "B"))
+```
+
+# Random slopes
+
+:::: {.columns}
+
+::: {.column width="45%"}
+- random slopes: varying slopes
+  + allows for different magnitude/sign of effects per e.g., participant
+
+- recall that our model still produces by-participant and -item slopes
+  + but they don't *vary* 
+:::
+
+::: {.column width="55%"} 
+```{r}
+#| output-location: fragment
+
+fixef(fit_fp_1)
+```
+
+```{r}
+#| output-location: fragment
+coef(fit_fp_1)$item |> 
+  rownames_to_column(var = "item") |> 
+  head()
+```
+:::
+
+::::
+  
+## A short history of varying slopes
+  
+> A lot of people construct random intercept-only models but conceptually, it makes hella sense to include random slopes most of the time. After all, you can almost always expect that people differ with how they react to an experimental manipulation!
+  
+--- @winter_very_2014, p. 17
+
+- after @baayen_mixed-effects_2008, linguists who adopted mixed models typically used random-intercepts only models
+  + but these have been shown time and again to drastically inflate Type I error rate (false positive) [e.g., @barr_random_maximal_2013]
+  + @barr_random_maximal_2013 began the credo "keep it maximal", meaning include all random slopes justified by your design and existing theories
+  + let's focus on adding just one varying slope for now
+
+## Random intercepts and slopes equation
+
+- Equation \ref{eq-random_slopes} gives an example of a model with by-participant varying slopes for grammaticality
+
+\begin{align}
+fp_i &= \beta_0 + \alpha_{j[i]} + \alpha_{k[i]} + \beta_{verb\_t}x_i + (\beta_{gramm} + \gamma_{j[i]})x_i + e_i \label{eq-random_slopes}
+\end{align}
+
+- we've changed $\beta_{grammt}x_i$ to $(\beta_{grammt} + \gamma_j[i])x_i$
+  + where $\gamma_{j[i]}$ is our by-participant varying slope for `gramm` for participant $i$
+- imagine observation 163 comes from participant ($j$) 6, item ($k$) 38, which is a Future-grammatical condition
+  + how could we plug these into the equation?
+
+### Visualising varying intercepts and slopes
+
+```{r}
+#| echo: false
+
+# overall intercept/slopes
+sum_overall_mean <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySE(measurevar = "log_fp", na.rm = T) |> 
+  mutate(effect = "intercept",
+         level = "intercept") |> 
+  relocate(effect, level) |> 
+  select(-`.id`)
+
+sum_overall_tense<-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("verb_t"), na.rm = T) |> 
+  mutate(effect = "verb_t") |> 
+  rename(level = verb_t) |> 
+  relocate(effect, level)
+
+sum_overall_gramm <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("gramm"), na.rm = T) |> 
+  mutate(effect = "gramm") |> 
+  rename(level = gramm) |> 
+  relocate(effect, level)
+
+sum_overall_effects <- rbind(sum_overall_mean, sum_overall_gramm, sum_overall_tense) |> 
+  mutate(
+    effect = factor(effect, levels = c("intercept", "verb_t", "gramm")),
+    level = factor(level, levels = c("intercept", "Past", "Future", "gramm", "ungramm"))
+  ) 
+
+
+# by-participant intercept/slopes
+sum_sj_mean <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("sj"), na.rm = T) |> 
+  mutate(effect = "intercept",
+         level = "intercept") |> 
+  relocate(sj, effect)
+
+
+sum_sj_tense <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("sj", "verb_t"), na.rm = T) |> 
+  mutate(effect = "verb_t") |> 
+  rename(level = verb_t) |> 
+  relocate(sj, effect)
+
+sum_sj_gramm <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("sj", "gramm"), na.rm = T) |> 
+  mutate(effect = "gramm") |> 
+  rename(level = gramm) |> 
+  relocate(sj, effect)
+
+sum_sj_effects <- rbind(sum_sj_mean, sum_sj_gramm, sum_sj_tense) |> 
+  mutate(
+    effect = factor(effect, levels = c("intercept", "verb_t", "gramm")),
+    level = factor(level, levels = c("intercept", "Past", "Future", "gramm", "ungramm"))
+  )
+```
+
+
+```{r}
+#| echo: false
+# plot by-sj intercept/slopes with grand mean/effects
+fig_sj_effects <-
+  sum_sj_effects |> 
+  filter(effect != "intercept") |> 
+  ggplot() +
+  aes(x = level, y = log_fp) +
+  facet_wrap(~effect, scales = "free_x") +
+  geom_point(alpha = .4, aes(colour = sj)) +
+  geom_line(alpha = .4,
+      aes(group = sj, colour = sj)) +
+  geom_vline(xintercept = 1.5, colour = "grey", linetype = "dashed") +
+  # geom_point(y = sum_overall_effects[sum_overall_effects$effect == "intercept","log_fp"], x = 1.5) +
+  # geom_hline(yintercept = sum_overall_effects[sum_overall_effects$effect == "intercept","log_fp"],
+  #            # aes(yintercept = log_fp),
+  #            linetype = "dashed",
+  #            alpha = 0.5) +
+  theme(legend.position = "none",
+        axis.title.x = element_blank()) +
+    stat_summary(
+    geom = "point",
+    fun.y = "mean",
+    col = "black",
+    size = 2.5,
+    shape = "square",
+    fill = "black"
+  ) +
+    stat_summary(
+    geom = "line",
+    group = 1,
+    fun.y = "mean",
+    col = "black",
+    size = 1
+  ) +
+  ylim(log(200),log(925))+
+  labs(title = "By-participant means per factor level")
+
+fig_sj_intercept <-
+  sum_sj_effects |> 
+  filter(effect == "intercept") |> 
+  ggplot() +
+  aes(x = reorder(sj,log_fp), y = log_fp) +
+  facet_wrap(~effect, scales = "free_x") +
+  geom_point(alpha = .4, aes(colour = sj))  +
+  geom_point(y = sum_overall_effects[sum_overall_effects$effect == "intercept","log_fp"], x = 30.5) +
+  geom_hline(yintercept = sum_overall_effects[sum_overall_effects$effect == "intercept","log_fp"],
+             linetype = "dashed",
+             alpha = 0.5) +
+  theme(legend.position = "none",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        axis.title.x = element_blank())+
+  ylim(log(200),log(925))+
+  labs(title = "By-participant overall means")
+  
+
+  
+```
+
+
+```{r}
+#| echo: false
+
+# overall intercept/slopes
+sum_overall_mean <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySE(measurevar = "log_fp", na.rm = T) |> 
+  mutate(effect = "intercept",
+         level = "intercept") |> 
+  relocate(effect, level) |> 
+  select(-`.id`)
+
+sum_overall_tense <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("verb_t"), na.rm = T) |> 
+  mutate(effect = "verb_t") |> 
+  rename(level = verb_t) |> 
+  relocate(effect, level)
+
+sum_overall_gramm <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("gramm"), na.rm = T) |> 
+  mutate(effect = "gramm") |> 
+  rename(level = gramm) |> 
+  relocate(effect, level)
+
+sum_overall_effects <- rbind(sum_overall_mean, sum_overall_gramm, sum_overall_tense) |> 
+  mutate(
+    effect = factor(effect, levels = c("intercept", "verb_t", "gramm")),
+    level = factor(level, levels = c("intercept", "Past", "Future", "gramm", "ungramm"))
+  ) 
+
+
+# by-item intercept/slopes
+sum_item_mean <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("item"), na.rm = T) |> 
+  mutate(effect = "intercept",
+         level = "intercept") |> 
+  relocate(item, effect)
+
+
+sum_item_tense <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("item", "verb_t"), na.rm = T) |> 
+  mutate(effect = "verb_t") |> 
+  rename(level = verb_t) |> 
+  relocate(item, effect)
+
+sum_item_gramm <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  mutate(log_fp = log(fp)) |> 
+  Rmisc::summarySEwithin(measurevar = "log_fp", withinvars = c("item", "gramm"), na.rm = T) |> 
+  mutate(effect = "gramm") |> 
+  rename(level = gramm) |> 
+  relocate(item, effect)
+
+sum_item_effects <- rbind(sum_item_mean, sum_item_gramm, sum_item_tense) |> 
+  mutate(
+    effect = factor(effect, levels = c("intercept", "verb_t", "gramm")),
+    level = factor(level, levels = c("intercept", "Past", "Future", "gramm", "ungramm"))
+  )
+
+# plot by-item intercept/slopes with grand mean/effects
+fig_item_effects <-
+  sum_item_effects |> 
+  filter(effect != "intercept") |> 
+  ggplot() +
+  aes(x = level, y = log_fp, colour = item) +
+  facet_wrap(~effect, scales = "free_x") +
+  geom_point(alpha = .4) +
+  geom_line(alpha = .4,
+      aes(group = item, colour = item)) +
+  geom_vline(xintercept = 1.5, colour = "grey", linetype = "dashed") +
+  theme(legend.position = "none",
+        axis.title.x = element_blank()) +
+    stat_summary(
+    geom = "point",
+    fun.y = "mean",
+    col = "black",
+    size = 2.5,
+    shape = "square",
+    fill = "black"
+  ) +
+    stat_summary(
+    geom = "line",
+    group = 1,
+    fun.y = "mean",
+    col = "black",
+    size = 1
+  ) +
+  ylim(log(200),log(925)) +
+  labs(title = "By-item means per factor level")
+
+fig_item_intercept <-
+  sum_item_effects |> 
+  filter(effect == "intercept") |> 
+  ggplot() +
+  aes(x = reorder(item,log_fp), y = log_fp) +
+  facet_wrap(~effect, scales = "free_x") +
+  geom_point(alpha = .4, aes(colour = item))  +
+  geom_point(data = sum_overall_effects[sum_overall_effects$effect == "intercept",],
+             aes(y = log_fp), x = 48.5) +
+  geom_hline(data = sum_overall_effects[sum_overall_effects$effect == "intercept",],
+             aes(yintercept = log_fp),
+             linetype = "dashed",
+             alpha = 0.5) +
+  theme(legend.position = "none",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        axis.title.x = element_blank())+
+  ylim(log(200),log(925)) +
+  labs(title = "By-item overall means")
+  
+
+  
+```
+
+
+```{r}
+#| label: fig-pred-fp-verb-intercept
+#| fig-cap: Mean effects by-participant overall (A) and per condition (B) with population-level effects in black, with the same plots by-item (C and D)
+#| echo: false
+#| fig-asp: .5
+
+(
+  fig_sj_intercept + fig_sj_effects +
+  plot_annotation(tag_levels = "A") +
+  plot_layout(widths = c(.3,.6))
+ ) /
+ (fig_item_intercept + fig_item_effects +
+  plot_annotation(tag_levels = "A") +
+  plot_layout(widths = c(.3,.6)) ) +
+  plot_annotation(tag_levels = "A")
+```
+
+## Comparing participant and item effects
+
+- we've already noted that there's more variation between participants in the overall first-pass reading times
+  + some tend to have higher, others lower, reading times
+  + this is taken into consideration with the by-participant and -item varying intercepts
+  + and we saw in our random effects parameters that the standard deviation for participant intercepts was larger
+
+- today we will focus on varying slopes
+  + there seems to be comparable inter-group slope variation in both participants and items
+
+# Random intercepts and slopes model
+
+- random slopes = taking group-level variance in effect direction/magnitude into account
+  + i.e., some participants might have a stronger effect, weaker effect, or effect in the opposite direction compared to the population-level
+  
+## Disclaimer!!!
+
+::: {.callout-warning}
+### Model building
+
+Today we are *exploring* the random effects of our model by adding and subtracting random slopes to 'see what happens'. You typically would NOT do this! 
+
+Generally, you would start with a pre-defined random effects structure justified by your experimental design and theory (your "maximal" model [@barr_random_maximal_2013]). We will get into model selection in the next (and last) session. Today we will be adding and removing varying slopes willy-nilly, which can amount to p-hacking, data dredging, or HARKing (Hypohtesisng After the Results are Known).
+
+:::
+
+## Random intercept-only model
+
+- recall our random intercept-only model
+
+```{r}
+fit_fp_1 <-
+  lmer(log(fp) ~ verb_t*gramm + 
+         (1 |sj) +
+         (1|item), 
+       data = df_biondo, 
+       subset = roi == 4) 
+```
+
+- and inspect the random effects parameters
+
+```{r}
+#| output-location: column-fragment
+# an alternative to VarCorr(fit_fp_1):
+summary(fit_fp_1)$varcor 
+```
+
+- what does this tell us?
+
+## Adding a slope
+
+- let's look at by-item varying slopes for tense to start
+
+```{r}
+fit_fp_item <-
+  lmerTest::lmer(log(fp) ~ verb_t*gramm + 
+         (1 |sj) +
+         (1 + verb_t|item), 
+       data = df_biondo, 
+       subset = roi == 4) 
+```
+
+- we've just added `+ gramm` to `(1|sj)`
+  + this reads as "*fit varying intercepts (`1`) per participant (`|sj`)*..."
+  + "*...and by-item varying intercpets (`1`) and tense slopes (`+ verb_t`) per item (`|item`) *"
+
+## summary()
+
+```{r}
+summary(fit_fp_item)
+```
+
+## Fixed effects {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Random intercept only
+
+```{r}
+#| output-location: fragment
+round(
+  summary(fit_fp_1)$coefficients,
+  5)
+```
+
+:::
+
+::: {.column width="50%"}
+
+Random intercept and slope
+
+```{r}
+#| output-location: fragment
+round(
+  summary(fit_fp_item)$coefficients,
+  5)
+```
+
+:::
+
+::::
+
+- the uncertainty around the effect of tense in `fit_fp_item` has changed
+  + slightly larger standard error
+  + much fewer degrees of freedom
+  + slightly smaller t-value value
+  + slightly larger larger p-value
+
+## Random effects
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| output-location: fragment
+summary(fit_fp_1)$varcor # or VarCorr(fit_fp_1)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| output-location: fragment
+summary(fit_fp_item)$varcor
+```
+
+:::
+
+::::
+
+- variance components are qualitatively unchanged
+- residual error is slightly lower
+- but we have a new row under the `item` group: `verb_t1`
+  + we see the standard deviation of by-participant varying slopes by tense (`0.05`)
+  + and we see a new columns: `Corr`
+
+### Correlation paramater
+
+- this is now what we call a variance-covariance matrix
+  + but we only have one correlation term, that of by-item intercepts with by-item tense slopes
+  + their correlation is `0.54`
+    + this is a positive correlation, meaning the *higher* a participant's intercept (overall first-pass reading times), the stronger the effect of tense
+  
+### Plotting
+
+- to make life simple, let's use `lattice::dotplot()`: what do these plots tell us?
+
+```{r}
+#| code-fold: true
+#| label: fig-lattice
+#| fig-cap: By-item varying intercepts and slopes (A), by-participant varying intercepts (B)
+fig_item <- lattice::dotplot(ranef(fit_fp_item))$item
+fig_sj <- lattice::dotplot(ranef(fit_fp_item))$sj
+
+cowplot::plot_grid(fig_item, fig_sj, rel_widths = c(2,1), labels = c("A", "B"))
+```
+
+## Correlation parameter
+
+- we can plot this relationship by extracting the intercept and slope values with `coef()`
+  + or `ranef` to get their deviances from the population-level intercept/slope
+
+```{r}
+#| code-fold: true
+#| label: fig-correlation
+#| fig-cap: Correlation of by-participant gramm1 slopes (x-axis) and intercepts (y-axis)
+coef(fit_fp_item)$item |> 
+  rownames_to_column(var = "item") |> 
+  rename(intercept = `(Intercept)`) |> 
+  # head()
+  ggplot() +
+  aes(x = verb_t1, y = intercept) +
+  geom_point() +
+  labs(
+    title = "Correlation of slopes and intercepts"
+  )
+```
+
+- participants with higher intercepts had a stronger effect of grammaticality
+  + with most participants estimated to have a positive effect
+
+## Model comparison
+
+- does including by-participant slopes for adverb type improve our model fit?
+
+```{r}
+#| output-location: fragment
+anova(fit_fp_1, fit_fp_item)
+```
+
+- not really
+  + log likelihood is slightly higher ("smaller" negative number) for `fit_fp_item`
+  + but p > 0.05
+- recall from our plots that there seemed to be by-participant variance in the slopes
+  + what if we add by-participant slopes?
+
+# Adding another slope
+
+- here we've added `+ verb_t` to `(1|sj)`
+
+```{r}
+#| message: true
+#| warning: true
+#| output-location: fragment
+fit_fp_sj_item <-
+  lmerTest::lmer(log(fp) ~ verb_t*gramm + 
+         (1 + verb_t|sj) +
+         (1 + verb_t|item), 
+       data = df_biondo, 
+       subset = roi == 4) 
+```
+
+- and we get a message about singular fit
+
+## Singular fit
+
+- `boundary (singular) fit: see help('isSingular')`
+  + follow this advice: run `help('isSingular')` in the Console and see what you find
+- you should *never* ignore such messages, nor report models with singular fit or convergence warnings!
+  + let's explore the model to see what went wrong
+  
+## Fixed effects {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| output-location: fragment
+round(
+  summary(fit_fp_item)$coefficients,
+  5)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| output-location: fragment
+round(
+  summary(fit_fp_sj_item)$coefficients,
+  5)
+```
+
+:::
+
+::::
+
+- we see again that the effect of tense is slightly changed, with an increase in the uncertainty around the effect
+
+## Random effects
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| output-location: fragment
+summary(fit_fp_item)$varcor # or VarCorr(fit_fp_1)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| output-location: fragment
+summary(fit_fp_sj_item)$varcor
+```
+
+:::
+
+::::
+
+- we see that by-participant tense has a comparatively smaller variance than the other terms
+  + and the correlation with by-item intercepts is 1
+  + this is a red flat: 1 or -1 correlation terms are an indication of convergence failure
+  
+### Plotting {.smaller}
+
+- in @fig-slopes we see by-participant varying tense slopes
+  + but the confidence intervals are tiny and hard to see
+  + and they constantly increase 
+  + this is because of the erroneous perfect correlation between them an the intercepts
+
+```{r}
+#| code-fold: true
+#| label: fig-slopes
+#| fig-cap: By-item (A) and by-participant (B) varying intercepts and slopes 
+fig_item <- lattice::dotplot(ranef(fit_fp_sj_item))$item
+fig_sj <- lattice::dotplot(ranef(fit_fp_sj_item))$sj
+
+cowplot::plot_grid(fig_item, fig_sj, labels = c("A", "B"))
+```
+
+## Convergence warnings
+
+- convergence warnings should not be ignored
+  + they are a sign that a reliable line fit could not be found (this is an oversimplification...)
+  + there can be many reasons for this: 
+    + impossible random effects structure (e.g., adding slopes that don't make sense)
+    + sparse data
+    + overfitting
+- these are topics that we can address next week when discussion model selection
+
+## Dealing with convergence issues
+
+- getting a convergence warning is an invitation to explore your random effects
+  + a first step is to remove terms that are giving you Correlation terms +/-1
+
+- so for now we would stick with `fit_fp_item`
+
+```{r}
+# extract formula
+formula(fit_fp_item)
+```
+
+# Reporting your model
+
+- an example for this particular model:
+
+> A linear-mixed model was fit to log-transformed first-pass reading times at the verb region with grammaticality, tense, and their interaction as fixed effects, and by-participant intercepts and by-item varying intercepts and tense slopes. Tense and grammaticality were sum contrast coded (past and grammatical = -0.5, future and ungrammatical = 0.5).
+
+- however, we've made a grave misstep in coming to our final model
+  + we did not start with a "maximal" model
+  
+- we'll talk about model selection and reduction next
+
+# Learning objectives 🏁 {.unnumbered .unlisted .uncounted}
+
+Today we learned...
+
+- how to fit a random-intercepts and slopes model ✅
+- how to inspect and interpret random slopes ✅
+
+# Important terms {.unnumbered .smaller .uncounted}
+
+```{r}
+#| echo: false
+content <- 
+  googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing")
+
+content |> 
+  filter(`Lecture topic` == "08 - LMMs 1: random intercepts") |> 
+  select(-`Lecture topic`) |> 
+  gt() 
+```
+
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

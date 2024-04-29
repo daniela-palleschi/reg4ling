@@ -1,0 +1,326 @@
+---
+title: "Mixed Models 1"
+subtitle: "Random intercepts"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-01-12
+format: 
+  pdf:
+    output-file: 08-lmm1_random_intercepts.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  revealjs:
+    include-in-header: ../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    output-location: fragment
+editor_options: 
+  chunk_output_type: console
+bibliography: ../references.bib
+csl: ../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+
+
+# Resources {.unnumbered .unlisted}
+
+- this lecture covers
+  + Sections 
+  
+# Set-up {.unnumbered}
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+options(pillar.sigfig = 5)
+```
+
+```{r}
+#| echo: false
+library(broman)
+# function to format p-values
+format_pval <- function(pval){
+	dplyr::case_when(
+		pval < .001 ~ "< .001",
+		pval < .01 ~ "< .01",
+		pval < .05 ~ "< .05",
+		TRUE ~ broman::myround(pval, 3)
+	)
+}
+```
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               janitor,
+               languageR)
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra)
+```
+
+```{r}
+# set preferred ggplot2 theme
+theme_set(theme_bw() + theme(plot.title = element_text(size = 10)))
+```
+
+### Load packages {.unnumbered}
+
+We'll also need to load in our required packages. Hopefully you've already install the required packages (if not, go to @sec-software).
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               janitor,
+               ggeffects,
+               sjPlot,
+               # new packages:
+               lme4,
+               lmerTest,
+               broom.mixed)
+```
+
+Here I also globally set my preferred `ggplot2` theme so that all of my plots are formatted how I like them, without have to repeat the code for each plot. This is completely optional.
+
+```{r}
+# set preferred ggplot2 theme
+theme_set(theme_bw() + theme(plot.title = element_text(size = 10)))
+```
+
+#### Resolve conflicts  {.unnumbered}
+
+- both `lme4` and `lmerTest` have a function `lmer()`   
+  + for now we want to use the `lme4` version
+
+```{r}
+lmer <- lme4::lmer
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra,
+               googlesheets4,
+               gt)
+
+# tell googlesheets4 we don't want private
+gs4_deauth()
+```
+
+
+### Load data {.unnumbered}
+
+- data from @biondo_yesterday_2022
+
+```{r}
+df_biondo <-
+  read_csv(here("data", "Biondo.Soilemezidi.Mancini_dataset_ET.csv"),
+           locale = locale(encoding = "Latin1") ## for special characters in Spanish
+           ) |> 
+  clean_names() |> 
+  mutate(gramm = ifelse(gramm == "0", "ungramm", "gramm")) |> 
+  mutate_if(is.character,as_factor) |> # all character variables as factors
+  filter(adv_type == "Deic")
+```
+
+And take a look at the data:
+
+```{r}
+head(df_biondo)
+```
+
+### Sum contrasts
+
+```{r}
+#| output-location: column-fragment
+contrasts(df_biondo$verb_t)
+contrasts(df_biondo$gramm)
+```
+
+```{r}
+contrasts(df_biondo$verb_t) <- c(-0.5,+0.5)
+contrasts(df_biondo$gramm) <- c(-0.5,+0.5)
+```
+
+
+```{r}
+#| output-location: column-fragment
+contrasts(df_biondo$verb_t)
+contrasts(df_biondo$gramm)
+
+```
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+# Genearlised linear mixed models
+
+- e.g., logistic regression (`family = "binomial"`)
+- the same logic as linear (mixed) regression
+- let's take a look at the regressions out in the verb region
+  - N.B., there's no `glmer()` function in `lmerTest`, we have to use `lme4`
+
+## 
+
+```{r}
+#| warning: true
+#| message: true
+fit_glmm_ro_sj_item <-
+  lme4::glmer(ro ~ verb_t*gramm +
+                    (1|sj) +
+                    (1|item),
+                  data = df_biondo,
+                  subset = roi == 4,
+        family = "binomial"
+        )
+```
+
+- we get a warning that our model failed to converge
+- let's check out summary output
+
+##
+
+```{r}
+summary(fit_glmm_ro_sj_item)
+```
+
+- the model output looks very similar to that for `lmer()`
+- our effects look really big (high t-values, small p-values)
+  + this seems unlikely
+- we also get a warning message at the very bottom: Model failed to converge
+  + we cannot report a model that fails to converge
+
+### Set optimizer and increase interations
+
+```{r}
+fit_glmm_ro_sj_item <-
+  lme4::glmer(ro ~ verb_t*gramm +
+                    (1|sj) +
+                    (1|item),
+                  data = df_biondo,
+                  subset = roi == 4,
+        family = "binomial",
+        # this line is used because we get a convergence warning without it:
+        glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 100000))
+        # we increase the number of iterations and set the optimizer to bobyqa
+        )
+```
+
+- no warnings, so we can report this model
+
+##
+
+```{r}
+summary(fit_glmm_ro_sj_item)
+```
+
+- we see firstly that we get the same information, plus measures of model fit (AIC, BIC, logLik)
+- our model estimates are in log odds
+  + `> 0` = regression in more likely than not
+  + `< 0` = regression in less likely than not
+- note also that we have *z*-values instead of *t*-values (this is always the case with logistic regression)
+
+## Convergence warnings
+
+- convergence warnings are very common when fitting linear mixed models in the Frequentist (i.e., not Bayesian) framework
+- some common strategies:
+  + try alternative optimizers
+  + increase iteration count
+  + failing this, you may need to simplify your random effects structure
+- convergence issues are the reason why many reported findings come from random intercepts-only models
+  + these models can still have an inflated Type I error rate
+  + the solution to this? Add random effects...which sometimes cause convergence issues...
+- the real solution: go Bayesian, or try Julia...
+
+# Learning objectives {.unnumbered .unlisted .uncounted}
+
+# Important terms {.unnumbered .smaller .uncounted}
+
+```{r}
+#| echo: false
+tribble(
+ ~"term", ~"description/other terms",
+ 
+) %>% kable() %>% kable_styling()
+```
+
+# Task
+
+1. Fit a linear model (`lm()` function) to log-transformed total reading times (`tt`) at the adverb region (`roi == 2`), with adverb time reference (`adv_t`) and gramm (`gramm`) and their interaction as fixed effects. Use sum contrast coding (`Past` and `gramm` = `-0.5`, `Future` and `ungramm` = `+0.5`). Save this model as `fit_lm_adv_tt`.
+
+2. Fit a linear mixed model similar to `fit_lm_adv_tt` by including by-participant and by-item varying intercepts. Save this model as `fit_lmm_adv_tt`.
+
+3. Inspect the fixed effects for both models. How do they differ? Describe the observed coefficients.
+
+5. Plot the fixed effects for `fit_lm_adv_tt` and `fit_lmm_adv_tt`.
+
+4. Inspect the random effects for `fit_lmm_adv_tt`. What do you see?
+
+6. Plot the random effects per participant and item.
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

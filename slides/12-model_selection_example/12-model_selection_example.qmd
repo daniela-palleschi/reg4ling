@@ -1,0 +1,810 @@
+---
+title: "Model selection"
+subtitle: "Parsimonious model selection"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-02-09
+format: 
+  pdf:
+    output-file: 11-parsimonious_model_selection.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  html:
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+    code-tools: true
+  revealjs:
+    output-file: 11-parsimonious_model_selection_slides.html
+    include-in-header: ../../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+    fig-dpi: 300
+editor_options: 
+  chunk_output_type: console
+bibliography: ../../references.bib
+csl: ../../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will...
+
+- apply remedies for nonconvergence
+- reduce our RES with a data-driven approach
+- compare a parsimonious model to maximal and intercept-only models
+
+# Resources {.unnumbered .unlisted}
+
+- this lecture covers
+  + Sections 10.3-5 in @sonderegger_regression_2023
+  + Section 15.7.3 'Convergence Issues' in @winter_statistics_2019
+  + @brauer_linear_2018
+  + @meteyard_best_2020 
+- we will continue using the data from @biondo_yesterday_2022
+
+# Set-up {.unnumbered}
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: Code for a function to format p-values
+library(broman)
+# function to format p-values
+format_pval <- function(pval){
+	dplyr::case_when(
+		pval < .001 ~ "< .001",
+		pval < .01 ~ "< .01",
+		pval < .05 ~ "< .05",
+		TRUE ~ broman::myround(pval, 3)
+	)
+}
+```
+
+## Load packages {.unnumbered}
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               janitor,
+               # new packages for mixed models:
+               lme4,
+               lmerTest,
+               broom.mixed,
+               lattice)
+```
+
+```{r}
+#| echo: false
+# set preferred ggplot2 theme
+theme_set(theme_bw() + theme(plot.title = element_text(size = 10)))
+```
+
+```{r}
+lmer <- lmerTest::lmer
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra,
+               googlesheets4,
+               gt)
+
+# tell googlesheets4 we don't want private
+gs4_deauth()
+```
+
+
+## Load data {.unnumbered}
+
+- data from @biondo_yesterday_2022
+
+```{r}
+df_biondo <-
+  read_csv(here("data", "Biondo.Soilemezidi.Mancini_dataset_ET.csv"),
+           locale = locale(encoding = "Latin1") ## for special characters in Spanish
+           ) |> 
+  clean_names() |> 
+  mutate(gramm = ifelse(gramm == "0", "ungramm", "gramm")) |> 
+  mutate_if(is.character,as_factor) |> # all character variables as factors
+  droplevels() |> 
+  filter(adv_type == "Deic")
+```
+
+## Set contrasts
+
+```{r}
+contrasts(df_biondo$verb_t) <- c(-0.5,+0.5)
+contrasts(df_biondo$gramm) <- c(-0.5,+0.5)
+```
+
+
+```{r}
+contrasts(df_biondo$verb_t)
+```
+
+```{r}
+contrasts(df_biondo$gramm)
+```
+
+# Start maximal
+
+- model structure should be decided *a priori*
+  + included fixed (predictors and covariates) and random effects
+  
+## Maximal model
+
+- starting point: most maximal model structure justified by your design
+  + if this converges, great!
+  + if it doesn't, what does this mean and what should we do?
+
+```{r}
+#| eval: false
+#| warning: true
+#| message: true
+#| output-location: fragment
+fit_verb_fp_mm <- lmer(log(fp) ~ verb_t*gramm + 
+                      (1 + verb_t*gramm|sj) +
+                      (1 + verb_t*gramm|item),
+                    data = df_biondo,
+                    subset = roi == 4)
+```
+
+- we get a warning of singular fit
+
+```{r}
+#| echo: false
+
+# saveRDS(fit_verb_fp_mm, here::here("slides", "12-model_selection_example", "rds", "fit_verb_fp_mm.rds"))
+
+fit_verb_fp_mm <- readRDS(here::here("slides", "12-model_selection_example", "rds", "fit_verb_fp_mm.rds"))
+```
+
+# Convergence issues
+
+- "*Convergence is not a metric of model quality*" [@sonderegger_regression_2023, p. 365, Box 10.2]
+  + convergence does not always indicate "overfitting" or "overparameterisation"
+  + can also be due to optimizer choice
+    + since default optimizer was changed to `nloptwrap` from `bobyqa`, there seem to be more 'false positive' convergence warnings
+
+- false-positive convergence: you get a convergence warning, but changing the optimizer and/or iteration count does not produce a warning
+- false-negative convergence: you do not get a warning, but your variance-covariance matrix might indicate overfitting
+
+## Nonconvergence remedies
+
+- unfortunately there is no one "right" way to deal with convergence issues
+  + important is to transparently report and justify your method
+- Table 17 in @brauer_linear_2018 (p. 404) suggests 20 remedies, whittled down to 10 suggestions in @sonderegger_regression_2023
+
+```{r}
+#| label: fig-table10
+#| fig-cap: "From @sonderegger_regression_2023, p. 366"
+#| echo: false
+include_graphics(here::here("media", "sonderegger_2023_convergence_table10.png"))
+```
+
+## Intrusive vs. Non-intrusive remedies
+
+- non-intrusive remedies amount to checking/adjusting data and model specifications
+
+- intrusive remedies involve reducing random effects structure
+  + there are different schools of thought
+    + random-intercepts only: increased Type I error rate = overconfident estimates
+    + maximal-but-singular-fit model [@barr_random_maximal_2013]: reduces power = underconfident estimates
+    + data-driven approach [@bates_parsimonious_2015]: can lose the forest for the trees, e.g., removing random slopes for predictors of interest
+- each strategy has its drawback
+  + important is to choose your strategy *a priori* and transparently report and justify your strategy
+  + even better: share/publish your data and code, which should be reproducible
+
+## `?convergence`
+
+- type `?convergence` in the Console and read the vignette
+  + what suggestions does it make?
+- compare this to `?isSingular`
+
+# Non-intrusive methods
+
+- check your data structure/variables
+  + check model assumptions (e.g., normality, missing transformations of variables)
+  + check your RES is justified by your experimental design/data structure
+  + centre your predictors (e.g., sum contrasts, or centring/standardizing) to reduce multicollinearity; reduces collinearity in the random effects (a possible source of nonconvergence)
+  + check observations per cell (e.g., is there a participant very few observations, or few observations per one condition? Should be at least >5 per cell)
+- alter model controls:
+  - increase iterations
+  - check optimizer
+  
+## Check optimzer
+
+- optimizer
+  + `lme4::allFit(model)` (can take a while to run)
+  
+```{r}
+#| output-location: column-fragment
+#| eval: false
+all_fit_verb_fp_mm <- allFit(fit_verb_fp_mm)
+# bobyqa : boundary (singular) fit: see help('isSingular')
+# [OK]
+# Nelder_Mead : [OK]
+# nlminbwrap : boundary (singular) fit: see help('isSingular')
+# [OK]
+# nmkbw : [OK]
+# optimx.L-BFGS-B : boundary (singular) fit: see help('isSingular')
+# [OK]
+# nloptwrap.NLOPT_LN_NELDERMEAD : boundary (singular) fit: see help('isSingular')
+# [OK]
+# nloptwrap.NLOPT_LN_BOBYQA : boundary (singular) fit: see help('isSingular')
+# [OK]
+# There were 11 warnings (use warnings() to see them)
+```
+
+```{r}
+#| echo: false
+
+# saveRDS(all_fit_verb_fp_mm, here::here("slides", "12-model_selection_example", "rds", "all_fit_verb_fp_mm.rds"))
+all_fit_verb_fp_mm <- readRDS(here::here("slides", "12-model_selection_example", "rds", "all_fit_verb_fp_mm.rds"))
+```
+
+## Optimizers
+
+  + default optimizer for `lmer()` is `nloptwrap`, formerly `bobyqa` (Bound Optimization by Quaradric Approximiation)
+    + usually changing to `bobyqa` helps
+  + see `?lmerControl` for more info
+
+- if fits are very similar (or all optimizeres except the default), the nonconvergent fit was a false positive
+  + it's safe to use the new optimizer
+
+```{r}
+summary(all_fit_verb_fp_mm)$llik
+```
+
+```{r}
+summary(all_fit_verb_fp_mm)$fixef
+```
+
+## Increase iterations
+
+- and/or increase number of iterations
+  + default is 10 000 (`1e5` in scientific notation)
+  + you can try 20 000, 100 000, etc.
+  + this usually helps with larger data or models with complex RES
+  
+```{r}
+# check n of iterations
+fit_verb_fp_mm@optinfo$feval
+```
+
+## `lmerControl()`
+
+```{r}
+#| eval: false
+#| warning: true
+#| output-location: fragment
+fit_verb_fp_mm <- lmer(log(fp) ~ verb_t*gramm + 
+                      (1 + verb_t*gramm|sj) +
+                      (1 + verb_t*gramm|item),
+                    data = df_biondo,
+                    subset = roi == 4,
+                    control = lmerControl(optimizer = "bobyqa",
+                                          optCtrl = list(maxfun = 2e5))
+)
+```
+
+- or you can just 'update' the model to save some syntax
+
+```{r}
+#| eval: true
+#| warning: true
+#| output-location: fragment
+fit_verb_fp_mm <- update(fit_verb_fp_mm,
+                         control = lmerControl(optimizer = "bobyqa", 
+                                                optCtrl = list(maxfun = 2e5)))
+```
+
+## Removing parameters
+
+- still won't converge?
+  + it's time to consider intrusive remedies: removing random effects parameters
+
+# Intrusive methods
+
+- nonconvergence in maximal models is often due to overfitting
+  + i.e., the model is overly complex given your data
+  + this is typically due to an overly complex random effects structure
+- if the non-intrusive methods don't lead to convergence, the problem is likely overfitting
+
+## Parsimonious vs. maximal
+
+- there are different camps on how to deal with this issue
+- I personally follow the suggestions in @bates_parsimonious_2015 (for now)
+    1. run random effects Principal Components Analysis (`summary(rePCA(model))`, `lme4` package)
+        + informs by how many parameters our model is overfit
+    2.  check variance-covariance matrix (`VarCorr(model)`)
+    3. remove parameters with very high or low Correlation terms and/or much lower variance compared to other terms
+    4. fit simplified model
+    5. wash, rinse, repeat
+- we'll practice this method today, but keep in mind that it's up to you to decide and justify which method you use
+
+## Random effects Principal Components Analysis
+
+- gives us a ranking of all parameters ('components') in our RES per unit
+
+```{r}
+#| output-location: fragment
+summary(rePCA(fit_verb_fp_mm))
+```
+
+###
+
+- important is the Cumulative Proportion
+  + how much of the cumulative variance explained by all the by-unit parameters does this one parameter contribute? 
+  + we see for item, the first component accounts for 66% of the variance explained, and the next contributes an additional 31%, and the next 3%
+  + so two components account for roughly 97% of variance explained by our RES
+  + in other words, we can remove one component for sure, and possibly another
+  + we could potentially remove 3 components from participant
+
+## Variance-covariance matrix
+
+- so we can remove 2 parameters from item and participant
+  + so either the varying intercept, or slope for tense, grammaticality, or their interaction
+- we can check this with `VarCorr(fit_verb_fp_mm)`
+
+```{r}
+#| output-location: fragment
+VarCorr(fit_verb_fp_mm)
+```
+
+- for item I would remove `gramm` because it has the lowest variance, and has a pretty high correlation with `verb_t` (which is unlikely to be true)
+- I would also remove `gramm` for participant for the same reason, as well as its high correlation with the intercept and `verb_t`
+
+### Alternate model 1
+
+- for now let's just remove the interaction term
+  + for reproducibility reasons, do not delete the code for a model that did not converge
+  + rather, write a comment on what decision was made (and why) for the new model
+
+```{r}
+#| message: true
+#| warning: true
+#| output-location: fragment
+
+fit_verb_fp_m1 <- lmer(log(fp) ~ verb_t*gramm + 
+                      (1 + verb_t+gramm|sj) +
+                      (1 + verb_t+gramm|item),
+                    data = df_biondo,
+                    subset = roi == 4,
+                    control = lmerControl(optimizer = "bobyqa",
+                                          optCtrl = list(maxfun = 2e5))
+)
+```
+
+#### `rePCA()`
+```{r}
+#| output-location: fragment
+summary(rePCA(fit_verb_fp_m1))
+```
+
+#### `VarCorr()`
+
+```{r}
+#| output-location: fragment
+VarCorr(fit_verb_fp_m1)
+```
+
+- when we see Corr +/-1, this tells us there was an error computing correlations between parameters
+  + it is an invitation to explore
+
+- this is not plausible, and indicates overfitting in our model
+  + we can remove all slopes from sj
+
+#### by-item random effects
+
+```{r}
+lattice::dotplot(ranef(fit_verb_fp_m1))$item
+```
+
+#### by-participant random effects (with +1 correlations)
+
+```{r}
+lattice::dotplot(ranef(fit_verb_fp_m1))$sj
+```
+
+  
+### Alternate model 2
+
+```{r}
+#| message: true
+#| warning: true
+#| output-location: fragment
+
+fit_verb_fp_m2 <- lmer(log(fp) ~ verb_t*gramm + 
+                      (1 |sj) +
+                      (1 + verb_t+gramm|item),
+                    data = df_biondo,
+                    subset = roi == 4,
+                    control = lmerControl(optimizer = "bobyqa",
+                                          optCtrl = list(maxfun = 2e5))
+)
+```
+
+#### `rePCA()`
+
+```{r}
+summary(rePCA(fit_verb_fp_m2))
+```
+
+#### `VarCorr()`
+
+```{r}
+VarCorr(fit_verb_fp_m2)
+```
+
+- by-item slopes for `gramm` and `verb_t` are highly correlated
+- `gramm` has least variance, so let's remove it
+
+#### by-item random effects
+
+```{r}
+lattice::dotplot(ranef(fit_verb_fp_m2))$item
+```
+
+
+### Alternate model 3
+
+```{r}
+#| message: true
+#| warning: true
+#| output-location: fragment
+
+fit_verb_fp_m3 <- lmer(log(fp) ~ verb_t*gramm + 
+                      (1 |sj) +
+                      (1 + verb_t|item),
+                    data = df_biondo,
+                    subset = roi == 4,
+                    control = lmerControl(optimizer = "bobyqa",
+                                          optCtrl = list(maxfun = 2e5))
+)
+```
+
+- converged!
+
+#### `rePCA()`
+
+```{r}
+summary(rePCA(fit_verb_fp_m3))
+```
+
+#### `VarCorr()`
+
+```{r}
+VarCorr(fit_verb_fp_m3)
+```
+
+### Alternate model 4
+
+- but we might've also decided to remove `verb_t`, so let's run that model
+
+```{r}
+#| message: true
+#| warning: true
+#| output-location: fragment
+
+fit_verb_fp_m4 <- lmer(log(fp) ~ verb_t*gramm + 
+                      (1 |sj) +
+                      (1 + gramm|item),
+                    data = df_biondo,
+                    subset = roi == 4,
+                    control = lmerControl(optimizer = "bobyqa",
+                                          optCtrl = list(maxfun = 2e5))
+)
+```
+
+- does not converge, so we're justified in keeping by-item `verb_t` slopes
+
+## Final model
+
+- the final model name should be some sort of convention to make your life easier
+  + so remove model index
+
+```{r}
+fit_verb_fp <- fit_verb_fp_m3
+```
+
+#### by-item random effects
+
+```{r}
+lattice::dotplot(ranef(fit_verb_fp))$sj
+```
+
+#### by-participant random effects
+
+```{r}
+lattice::dotplot(ranef(fit_verb_fp))$item
+```
+
+#### `summary()`
+
+```{r}
+summary(fit_verb_fp)
+```
+
+- IMPORTANTLY, only look at the fixed effects after you've got your final model!!!!
+  + i.e., run model -> convergence error -> `rePCA()` + `VarCorr()` -> run model -> ... -> converges -> only NOW run `summary(model)`
+
+# Comparing to 'bad' models
+
+- let's compare our final model to our 'bad' models
+  + random intercepts-only model (overconfident)
+  + maximal model (underconfident)
+  
+## Random-intercepts only
+
+```{r}
+#| message: true
+#| warning: true
+#| output-location: fragment
+
+fit_verb_fp_intercepts <- lmer(log(fp) ~ verb_t*gramm + 
+                      (1 |sj) +
+                      (1 |item),
+                    data = df_biondo,
+                    subset = roi == 4
+)
+```
+
+- converges
+
+```{r}
+#| code-fold: true
+sum_fit_verb_fp <-
+  tidy(fit_verb_fp,
+     effects = "fixed") |> 
+  as_tibble() |> 
+  mutate(p_value = format_pval(p.value),
+         model = "parsimonious") 
+
+sum_fit_verb_fp_mm <-
+  tidy(fit_verb_fp_mm,
+     effects = "fixed") |> 
+  as_tibble() |> 
+  mutate(p_value = format_pval(p.value),
+         model = "maximal") 
+
+sum_fit_verb_fp_intercepts <-
+  tidy(fit_verb_fp_intercepts,
+     effects = "fixed") |> 
+  as_tibble() |> 
+  mutate(p_value = format_pval(p.value),
+         model = "intercepts")
+```
+
+## coefficient estimates {.smaller}
+
+```{r}
+#| label: tbl-estimates
+#| code-fold: true
+#| tbl-cap: "Coefficient estimates for our parsimonious model, a random-intercepts only model, and a maximal model"
+rbind(sum_fit_verb_fp, sum_fit_verb_fp_intercepts, sum_fit_verb_fp_mm) |> 
+  select(term, estimate, model) |>
+  mutate(estimate = round(estimate,4)) |> 
+  pivot_wider(
+    id_cols = c(term),
+    names_from = model,
+    values_from = estimate
+  ) |> 
+  mutate(measure = "estimate") |> 
+  kable() |> 
+  kable_styling()
+```
+
+## standard error {.smaller}
+
+```{r}
+#| label: tbl-std_error
+#| code-fold: true
+#| tbl-cap: "Standard error of coefficient estimates for our parsimonious model, a random-intercepts only model, and a maximal model"
+rbind(sum_fit_verb_fp, sum_fit_verb_fp_intercepts, sum_fit_verb_fp_mm) |> 
+  select(term, std.error, model) |>
+  mutate(std.error = round(std.error,4)) |> 
+  pivot_wider(
+    id_cols = c(term),
+    names_from = model,
+    values_from = std.error
+  ) |> 
+  mutate(measure = "std.error") |> 
+  kable() |> 
+  kable_styling()
+```
+
+- standard error (\\$SE = \frac{\sigma}{\sqrt{n}}\\$) is a measure of uncertainty
+  + larger values reflect greater uncertainty
+  + because $n$ is in the denominator, SE gets smaller with more observations
+- compared to our parsimonious model with by-item varying `verb_t` slopes:
+  + smaller SE for our overconfident (intercepts) model
+  + larger SE for our underconfident (maximal) model
+  + but only for the estimate also included in the random effects
+
+## t-values {.smaller}
+
+```{r}
+#| label: tbl-t_value
+#| code-fold: true
+#| tbl-cap: "t-values of each estimates for our parsimonious model, a random-intercepts only model, and a maximal model"
+rbind(sum_fit_verb_fp, sum_fit_verb_fp_intercepts, sum_fit_verb_fp_mm) |> 
+  select(term, statistic, model) |>
+  mutate(statistic = round(statistic,4)) |> 
+  pivot_wider(
+    id_cols = c(term),
+    names_from = model,
+    values_from = statistic
+  ) |> 
+  mutate(measure = "statistic") |> 
+  kable() |> 
+  kable_styling()
+```
+
+- t-value (\\$t = \frac{\bar{x}_1 - \bar{x}_2}{SE}\\$) is a measure of uncertainty
+  + larger values reflect greater effect
+  + more $n$ increases $t$
+- again, `verb_t`: $t_{max}$ < $t_{pars}$ < $t_{int}$
+  
+## degrees of freedom {.smaller}
+
+```{r}
+#| label: tbl-df
+#| code-fold: true
+#| tbl-cap: "Degrees of freedom of each estimates for our parsimonious model, a random-intercepts only model, and a maximal model"
+rbind(sum_fit_verb_fp, sum_fit_verb_fp_intercepts, sum_fit_verb_fp_mm) |> 
+  select(term, df, model) |>
+  mutate(df = round(df,4)) |> 
+  pivot_wider(
+    id_cols = c(term),
+    names_from = model,
+    values_from = df
+  ) |> 
+  mutate(measure = "df") |> 
+  kable() |> 
+  kable_styling()
+```
+
+- degrees of freedom: not trivially defined in mixed models; we're using Satterthwaite approximiation (default in `lmerTest::lmer()`)
+  + larger degrees of freedom corresponds to larger $n$
+  + including more random effects reduces our $n$ and therefore reduces $df$
+- again, `verb_t`: $df_{max}$ < $df_{pars}$ < $df_{int}$
+  + and large differences between our maximal model and the other two for other terms
+
+## p-values {.smaller}
+
+```{r}
+#| label: tbl-p_value
+#| code-fold: true
+#| tbl-cap: "p-values of coefficient estimates for our parsimonious model, a random-intercepts only model, and a maximal model"
+rbind(sum_fit_verb_fp, sum_fit_verb_fp_intercepts, sum_fit_verb_fp_mm) |> 
+  select(term, p.value, model) |>
+  mutate(p.value = round(p.value, 8)) |> 
+  pivot_wider(
+    id_cols = c(term),
+    names_from = model,
+    values_from = p.value
+  ) |> 
+  mutate(measure = "p.value") |> 
+  kable() |> 
+  kable_styling()
+```
+
+- p-values: inversely related to t-values (larger t-values = smaller p-values)
+- again, `verb_t`: $p_{max}$ < $p_{pars}$ < $p_{int}$
+  + this would be important for 'signicance' if the values were closer to the convential alpha-levels (p < .05, p < .01, p < .001)
+  + but here the different random effects structures don't qualitatively change (all are < .001)
+- this is not always the case, however!
+  + this is why we do not peek at the fixed effects until we have our final model
+  + we don't want to be influenced (consciously or not) by seeing small p-values in one model but not another
+
+# Reporting
+
+- in Data Analysis section, e.g., 
+  
+> We included Time Reference (past, future), and Verb Match (match, mismatch) as fixed-effect factors in the models used to investigate the processing of past–future violations (Q1), by adopting sum contrast coding (Schad et al., 2020): past and match conditions were coded as –.5. while future and mismatch conditions were coded as .5. [...] Moreover, we included crossed random intercepts and random slopes for all fixed-effect parameters for subject and item grouping factors (Barr et al., 2013) in all models. 
+>
+> We reduced the complexity of the random effect structure of the maximal model by performing a principal component analysis so as to identify the most parsimonious model properly supported by the data (Bates et al., 2015). [...] all reading time data were log transformed before performing the analyses.
+>
+> --- @biondo_yesterday_2022, p. 9
+  
+## Formatted p-values
+
+- we can use the `format_pval()` function defined earlier to produce formatted p-values
+
+```{r}
+#| label: tbl-format_pval
+#| tbl-cap: "Table with formatted p-values from `format_pval()`"
+  tidy(fit_verb_fp,
+     effects = "fixed") |> 
+  as_tibble() |> 
+  mutate(p_value = format_pval(p.value)) |> 
+  select(-p.value) |> 
+  kable() |> 
+  kable_styling()
+           
+```
+
+
+# Learning objectives 🏁 {.unnumbered .unlisted .uncounted}
+
+Today we...
+
+- applied remedies for nonconvergence  ✅
+- reduced our RES with a data-driven approach  ✅
+- compared a parsimonious model to maximal and intercept-only models  ✅
+
+
+# Important terms {.unnumbered .smaller .uncounted}
+
+```{r terms}
+#| echo: false
+content <- 
+  googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing")
+
+content |> 
+  filter(`Lecture topic` == "08 - LMMs 1: random intercepts") |> 
+  select(-`Lecture topic`) |> 
+  gt() 
+```
+
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+

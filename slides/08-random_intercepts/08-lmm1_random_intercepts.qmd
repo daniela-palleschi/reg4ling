@@ -1,0 +1,1514 @@
+---
+title: "Mixed Models 1"
+subtitle: "Random intercepts"
+author: "Daniela Palleschi"
+institute: Humboldt-Universität zu Berlin
+lang: en
+date: 2024-01-12
+format: 
+  pdf:
+    output-file: 08-lmm1_random_intercepts.pdf
+    toc: true
+    number-sections: false
+    colorlinks: true
+    code-overflow: wrap
+  revealjs:
+    include-in-header: ../mathjax.html # for multiple equation hyperrefs
+    code-overflow: wrap
+    theme: [dark]
+    width: 1600
+    height: 900
+    progress: true
+    scrollable: true
+    # smaller: true
+    slide-number: c/t
+    code-link: true
+    # logo: logos/hu_logo.png
+    # css: logo.css
+    incremental: true
+    # number-sections: true
+    toc: false
+    toc-depth: 2
+    toc-title: 'Overview'
+    navigation-mode: linear
+    controls-layout: bottom-right
+    fig-cap-location: top
+    font-size: 0.6em
+    slide-level: 4
+    self-contained: true
+    title-slide-attributes: 
+      data-background-image: logos/logos.tif
+      data-background-size: 15%
+      data-background-position: 50% 92%
+    fig-align: center
+editor_options: 
+  chunk_output_type: console
+bibliography: ../references.bib
+csl: ../apa.csl
+---
+
+```{r setup, eval = T, echo = F}
+knitr::opts_chunk$set(echo = T, # print chunks?
+                      eval = T, # run chunks?
+                      error = F, # print errors?
+                      warning = F, # print warnings?
+                      message = F, # print messages?
+                      cache = F # cache?; be careful with this!
+                      )
+```
+
+# Learning Objectives {.unnumbered .unlisted}
+
+Today we will learn...
+
+- what linear mixed models are
+- how to fit a random-intercepts model
+- how to inspect and interpret a mixed effects model
+
+
+# Resources {.unnumbered .unlisted}
+
+- this lecture covers
+  + Chapter 14 \'Mixed Models 1: Conceptual Introduction' [until Section 14.8\; @winter_statistics_2019]
+  + @winter_very_2014 (until page 16)
+  + Sections 8.1-8.3 in @sonderegger_regression_nodate-1
+- we will be using the data from @biondo_yesterday_2022
+  
+# Set-up {.unnumbered}
+
+```{r}
+# suppress scientific notation
+options(scipen=999)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: Code for a function to format p-values
+library(broman)
+# function to format p-values
+format_pval <- function(pval){
+	dplyr::case_when(
+		pval < .001 ~ "< .001",
+		pval < .01 ~ "< .01",
+		pval < .05 ~ "< .05",
+		TRUE ~ broman::myround(pval, 3)
+	)
+}
+```
+
+## Load packages {.unnumbered}
+
+```{r}
+# load libraries
+pacman::p_load(
+               tidyverse,
+               here,
+               broom,
+               janitor,
+               ggeffects,
+               sjPlot,
+               # new packages for mixed models:
+               lme4,
+               lmerTest,
+               broom.mixed,
+               lattice)
+```
+
+```{r}
+#| echo: false
+# set preferred ggplot2 theme
+theme_set(theme_bw() + theme(plot.title = element_text(size = 10)))
+```
+
+### Resolve conflicts  {.unnumbered}
+
+- both `lme4` and `lmerTest` have a function `lmer()`   
+  + for now we want to use the `lme4` version
+
+```{r}
+lmer <- lme4::lmer
+```
+
+```{r}
+#| echo: false
+
+# extra packages for the lecture notes/slides
+pacman::p_load(
+               patchwork,
+               knitr,
+               kableExtra,
+               googlesheets4,
+               gt)
+
+# tell googlesheets4 we don't want private
+gs4_deauth()
+```
+
+
+## Load data {.unnumbered}
+
+- data from @biondo_yesterday_2022
+
+```{r}
+df_biondo <-
+  read_csv(here("data", "Biondo.Soilemezidi.Mancini_dataset_ET.csv"),
+           locale = locale(encoding = "Latin1") ## for special characters in Spanish
+           ) |> 
+  clean_names() |> 
+  mutate(gramm = ifelse(gramm == "0", "ungramm", "gramm")) |> 
+  mutate_if(is.character,as_factor) |> # all character variables as factors
+  filter(adv_type == "Deic") |> 
+  droplevels()
+```
+
+And take a look at the data:
+
+```{r}
+head(df_biondo)
+```
+
+## Set contrasts
+
+
+```{r}
+contrasts(df_biondo$verb_t) <- c(-0.5,+0.5)
+contrasts(df_biondo$gramm) <- c(-0.5,+0.5)
+```
+
+
+```{r}
+#| output-location: column-fragment
+contrasts(df_biondo$verb_t)
+```
+
+```{r}
+#| output-location: column-fragment
+contrasts(df_biondo$gramm)
+```
+
+# Linear mixed (effects) models
+
+- mixed models allow for varying intercepts and slopes per level of some grouping factor
+- recall that intercepts (can) represent the grand mean of the data
+- slopes represent a change in $y$ for a 1-unit change in $x$ ($\frac{\Delta y}{\Delta x}$, "rise over run")
+  + i.e., the difference between two categories, or for a 1-unit change of a continuous predictor
+
+- random intercepts take into account that each level of a grouping factor can vary in their mean
+- random slopes take into account that each level of a grouping factor can vary in the effect of a predictor
+
+## Random intercepts vs. random slopes
+
+- @biondo_yesterday_2022 used a within-participant, a.k.a. repeated measures design
+  + `r length(unique(df_biondo$sj))` participants saw `r length(unique(df_biondo$item))` items, rotated throughout the conditions in a Latin square design
+
+- we would expect some participants to be faster readers than others
+  + this would be reflected in a shorter mean reading time
+- some participants will tend to have a stronger effect of e.g., grammaticality than others
+  + this would be reflected in a steeper slope for `gramm`aticality
+- the same could be said for certain experimental items
+  + reading times will vary by item e.g., for word length or familiarity
+  + some items will also tend to have a stronger effect than others
+
+### By-participant variance
+
+```{r}
+#| echo: false
+#| label: fig-boxplot-sj
+#| fig-cap: By-participant boxplot of first-pass RTs at the verb region with overall median FP value in red
+df_biondo |> 
+  filter(roi == "4") |> 
+  mutate(sj_median = median(fp, na.rm = T), .by=sj) |> 
+  arrange(desc(sj_median)) |> 
+  ggplot() +
+  aes(x = reorder(sj, sj_median),
+      y = fp) +
+  labs(title = "By-participant first-pass RTs at the verb",
+       y = "First-pass reading times (ms)",
+       x = "Participant ID") +
+  geom_hline(
+    colour = "red", size = 1,
+    aes(yintercept = median(fp, na.rm = T))
+  ) +
+  geom_boxplot(alpha = 0.5) 
+```
+
+### By-item variance
+
+```{r}
+#| echo: false
+#| label: fig-boxplot-item
+#| fig-cap: By-item boxplot of first-pass RTs at the verb region with overall median FP value in red
+df_biondo |> 
+  filter(roi == "4") |> 
+  mutate(item_median = median(fp, na.rm = T), .by=item) |> 
+  arrange(desc(item_median)) |> 
+  ggplot()  +
+  aes(x = reorder(item, item_median),
+      y = fp) +
+  labs(title = "By-item first-pass RTs at the verb",
+       y = "First-pass reading times (ms)",
+       x = "Item ID")+
+  geom_hline(
+    colour = "red", size = 1,
+    aes(yintercept = median(fp, na.rm = T))
+  ) +
+  geom_boxplot(alpha = 0.5) 
+```
+
+### By-participant varying intercepts and slopes
+
+```{r}
+#| echo: false
+
+# overall intercept/slopes
+sum_overall_mean <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySE(measurevar = "fp", na.rm = T) |> 
+  mutate(effect = "intercept",
+         level = "intercept") |> 
+  relocate(effect, level) |> 
+  select(-`.id`)
+
+sum_overall_tense <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("verb_t"), na.rm = T) |> 
+  mutate(effect = "verb_t") |> 
+  rename(level = verb_t) |> 
+  relocate(effect, level)
+
+sum_overall_gramm <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("gramm"), na.rm = T) |> 
+  mutate(effect = "gramm") |> 
+  rename(level = gramm) |> 
+  relocate(effect, level)
+
+sum_overall_effects <- rbind(sum_overall_mean, sum_overall_gramm, sum_overall_tense) |> 
+  mutate(
+    effect = factor(effect, levels = c("intercept", "verb_t", "gramm")),
+    level = factor(level, levels = c("intercept", "Past", "Future", "gramm", "ungramm"))
+  ) 
+
+
+# by-participant intercept/slopes
+sum_sj_mean <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("sj"), na.rm = T) |> 
+  mutate(effect = "intercept",
+         level = "intercept") |> 
+  relocate(sj, effect)
+
+
+sum_sj_tense <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("sj", "verb_t"), na.rm = T) |> 
+  mutate(effect = "verb_t") |> 
+  rename(level = verb_t) |> 
+  relocate(sj, effect)
+
+sum_sj_gramm <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("sj", "gramm"), na.rm = T) |> 
+  mutate(effect = "gramm") |> 
+  rename(level = gramm) |> 
+  relocate(sj, effect)
+
+sum_sj_effects <- rbind(sum_sj_mean, sum_sj_gramm, sum_sj_tense) |> 
+  mutate(
+    effect = factor(effect, levels = c("intercept", "verb_t", "gramm")),
+    level = factor(level, levels = c("intercept", "Past", "Future", "gramm", "ungramm"))
+  )
+
+# plot by-sj intercept/slopes with grand mean/effects
+fig_sj_effects <-
+  sum_sj_effects |> 
+  filter(effect != "intercept") |> 
+  ggplot() +
+  aes(x = level, y = fp, colour = sj) +
+  facet_wrap(~effect, scales = "free_x") +
+  geom_point(alpha = .4) +
+  geom_line(alpha = .4,
+      aes(group = sj, colour = sj)) +
+  geom_vline(xintercept = 1.5, colour = "grey", linetype = "dashed") +
+  theme(legend.position = "none",
+        axis.title.x = element_blank()) +
+    stat_summary(
+    geom = "point",
+    fun.y = "mean",
+    col = "black",
+    size = 2.5,
+    shape = "square",
+    fill = "black"
+  ) +
+    stat_summary(
+    geom = "line",
+    group = 1,
+    fun.y = "mean",
+    col = "black",
+    size = 1
+  ) +
+  ylim(200,925)+
+  labs(title = "By-participant means per factor level")
+
+fig_sj_intercept <-
+  sum_sj_effects |> 
+  filter(effect == "intercept") |> 
+  ggplot() +
+  aes(x = reorder(sj,fp), y = fp) +
+  facet_wrap(~effect, scales = "free_x") +
+  geom_point(alpha = .4, aes(colour = sj))  +
+  geom_point(data = sum_overall_effects[sum_overall_effects$effect == "intercept",],
+             aes(y = fp), x = 30.5) +
+  geom_hline(data = sum_overall_effects[sum_overall_effects$effect == "intercept",],
+             aes(yintercept = fp),
+             linetype = "dashed",
+             alpha = 0.5) +
+  theme(legend.position = "none",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        axis.title.x = element_blank())+
+  ylim(200,925) +
+  labs(title = "By-participant overall means")
+  
+
+  
+```
+
+```{r}
+#| label: fig-pred-fp-verb-bypx
+#| fig-cap: Predicted by-participant varying intercepts (A) and slopes (B) with overall effects in black
+#| echo: false
+#| fig-asp: .5
+
+fig_sj_intercept + fig_sj_effects +
+  plot_annotation(tag_levels = "A") +
+  plot_layout(widths = c(.3,.6))
+```
+
+### By-item varying intercepts and slopes
+
+```{r}
+#| echo: false
+
+# overall intercept/slopes
+sum_overall_mean <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySE(measurevar = "fp", na.rm = T) |> 
+  mutate(effect = "intercept",
+         level = "intercept") |> 
+  relocate(effect, level) |> 
+  select(-`.id`)
+
+sum_overall_tense <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("verb_t"), na.rm = T) |> 
+  mutate(effect = "verb_t") |> 
+  rename(level = verb_t) |> 
+  relocate(effect, level)
+
+sum_overall_gramm <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("gramm"), na.rm = T) |> 
+  mutate(effect = "gramm") |> 
+  rename(level = gramm) |> 
+  relocate(effect, level)
+
+sum_overall_effects <- rbind(sum_overall_mean, sum_overall_gramm, sum_overall_tense) |> 
+  mutate(
+    effect = factor(effect, levels = c("intercept", "verb_t", "gramm")),
+    level = factor(level, levels = c("intercept", "Past", "Future", "gramm", "ungramm"))
+  ) 
+
+
+# by-item intercept/slopes
+sum_item_mean <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("item"), na.rm = T) |> 
+  mutate(effect = "intercept",
+         level = "intercept") |> 
+  relocate(item, effect)
+
+
+sum_item_tense <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("item", "verb_t"), na.rm = T) |> 
+  mutate(effect = "verb_t") |> 
+  rename(level = verb_t) |> 
+  relocate(item, effect)
+
+sum_item_gramm <-
+  df_biondo |>
+  filter(roi == "4") |> 
+  Rmisc::summarySEwithin(measurevar = "fp", withinvars = c("item", "gramm"), na.rm = T) |> 
+  mutate(effect = "gramm") |> 
+  rename(level = gramm) |> 
+  relocate(item, effect)
+
+sum_item_effects <- rbind(sum_item_mean, sum_item_gramm, sum_item_tense) |> 
+  mutate(
+    effect = factor(effect, levels = c("intercept", "verb_t", "gramm")),
+    level = factor(level, levels = c("intercept", "Past", "Future", "gramm", "ungramm"))
+  )
+
+# plot by-item intercept/slopes with grand mean/effects
+fig_item_effects <-
+  sum_item_effects |> 
+  filter(effect != "intercept") |> 
+  ggplot() +
+  aes(x = level, y = fp, colour = item) +
+  facet_wrap(~effect, scales = "free_x") +
+  geom_point(alpha = .4) +
+  geom_line(alpha = .4,
+      aes(group = item, colour = item)) +
+  geom_vline(xintercept = 1.5, colour = "grey", linetype = "dashed") +
+  theme(legend.position = "none",
+        axis.title.x = element_blank()) +
+    stat_summary(
+    geom = "point",
+    fun.y = "mean",
+    col = "black",
+    size = 2.5,
+    shape = "square",
+    fill = "black"
+  ) +
+    stat_summary(
+    geom = "line",
+    group = 1,
+    fun.y = "mean",
+    col = "black",
+    size = 1
+  ) +
+  ylim(200,925)+
+  labs(title = "By-item means per factor level")
+
+fig_item_intercept <-
+  sum_item_effects |> 
+  filter(effect == "intercept") |> 
+  ggplot() +
+  aes(x = reorder(item,fp), y = fp) +
+  facet_wrap(~effect, scales = "free_x") +
+  geom_point(alpha = .4, aes(colour = item))  +
+  geom_point(data = sum_overall_effects[sum_overall_effects$effect == "intercept",],
+             aes(y = fp), x = 48.5) +
+  geom_hline(data = sum_overall_effects[sum_overall_effects$effect == "intercept",],
+             aes(yintercept = fp),
+             linetype = "dashed",
+             alpha = 0.5) +
+  theme(legend.position = "none",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        axis.title.x = element_blank())+
+  ylim(200,925) +
+  labs(title = "By-item overall means")
+  
+
+  
+```
+
+```{r}
+#| label: fig-fp-verb-byitem
+#| fig-cap: By-item varying intercepts (A) and slopes (B) with overall effects in black
+#| echo: false
+#| fig-asp: .5
+
+fig_item_intercept + fig_item_effects +
+  plot_annotation(tag_levels = "A") +
+  plot_layout(widths = c(.3,.6))
+```
+
+## Comparing participant and item
+
+- just by eye-balling our data we see there was more variability in intercepts and effects by-participant than by-item
+  + this is typical: People tend to vary more than our highly controlled experimental items
+
+- how can we take this variability of both item and participant into account?
+  + mixed models!
+  + today we'll focus on varying intercepts, first for by-participants and then by-item
+
+# Random intercepts
+
+- random intercepts = taking group-level variance in overall tendencies into account
+
+## Random intercepts: one grouping factor
+
+- below is our first *mixed effects model*
+
+```{r}
+fit_lmm_fp_sj <-
+  lmer(log(fp) ~ verb_t*gramm + 
+         (1|sj), 
+       data = df_biondo, 
+       subset = roi == 4) 
+```
+1. create an object `fit_lmm_fp_sj`, which contains...
+1. a mixed model (`lmer()`): log first-pass RTs as a function of our fixed effects, plus...
+2. varying intercepts (`1`) by-participant (`|sj`)
+3. from our dataset
+4. subsetted to only include the verb region
+    + can also be done above the model using `filter(roi == 4)`
+
+### Summary {.smaller}
+
+- we can use the `summary()` function, just as we did with (`g`)`lm()`
+
+```{r}
+#| output-location: column-fragment
+summary(fit_lmm_fp_sj)
+```
+
+### Model info
+
+
+```{r}
+#| eval: false
+#| code-annotations: right
+Linear mixed model fit by REML ['lmerMod']. #<1>
+Formula: log(fp) ~ verb_t * gramm + (1 | sj) #<2>
+   Data: df_biondo #<3>
+ Subset: roi == 4 #<4>
+
+REML criterion at convergence: 4479.1 #<5>
+
+Scaled residuals: #<6>
+    Min      1Q  Median      3Q     Max 
+-4.0560 -0.6427 -0.0419  0.6168  4.0901 
+```
+
+1. Model description (object class = `lmerMod`)
+2. Model formula
+3. Data
+4. Any subsetting
+5. REML: Restricted Maximum Likelihood; important for model comparison, but not for us today
+6. Residuals: do these look normally distributed?
+
+### Fixed effects
+
+```{r}
+#| eval: false
+Fixed effects: #<1>
+                Estimate Std. Error t value #<2>
+(Intercept)     5.957102   0.033809 176.199 #<3>
+verb_t1         0.062209   0.013787   4.512 #<4>
+gramm1          0.003466   0.013787   0.251 #<5>
+verb_t1:gramm1 -0.015741   0.027573  -0.571 #<6>
+
+Correlation of Fixed Effects:  #<7>
+            (Intr) vrb_t1 gramm1
+verb_t1      0.000              
+gramm1       0.000 -0.002       
+vrb_t1:grm1  0.000  0.002  0.000
+```
+
+1. Our fixed effects:
+2. Estimate (coefficient), standard error, t-value (no p-value...)
+3. Intercept (grand mean)
+4. Effect of tense
+5. Effect of grammaticality
+6. Interaction Effect
+7. Correlation matrix of fixed effects
+
+### Random effects
+
+```{r}
+#| eval: false
+Random effects: #<1>
+ Groups   Name        Variance Std.Dev. #<2>
+ sj       (Intercept) 0.06573  0.2564  #<3>
+ Residual             0.18030  0.4246 #<4>
+Number of obs: 3795, groups:  sj, 60 #<5>
+```
+
+1. Random effects
+2. Grouping factor, effect name, overall variance and standard deviation
+3. By-participant random intercepts
+4. Residual error not accounted for by our random effects
+5. Number of observations and grouping factor levels
+
+## Interpreting random effects
+
+- we can also selectively print our random effects (variance components) using the `VarCorr()` function from `lme4`
+  + only gives us the standard deviation, which is the square root of the variance
+
+```{r}
+#| output-location: column-fragment
+VarCorr(fit_lmm_fp_sj)
+```
+
+- to also get the variance
+
+```{r}
+#| output-location: column-fragment
+print(VarCorr(fit_lmm_fp_sj), 
+      comp = c("Variance", "Std.Dev"))
+```
+
+- if we compute the mean, variance, and SD of the by-participant intercepts we get
+
+```{r}
+#| output-location: column-fragment
+#| code-fold: true
+coef(fit_lmm_fp_sj) |> 
+  pluck("sj") |> 
+as_tibble() |> rownames_to_column(var = "sj") |> 
+  rename(
+    intercept = 2
+  ) |> 
+  summarise(
+    mean = mean(intercept),
+    var = var(intercept),
+    sd = sd(intercept)
+  )
+```
+
+### 68-95% rule
+
+- in a normal distribution, 68% of the data will lie within +/-1 SD of the mean, and 95% will lie within +/-2 SDs of the mean
+- our model intercept is `r fixef(fit_lmm_fp_sj)[1]`, so 68% of our participant intercepts will lie roughly between `r fixef(fit_lmm_fp_sj)[1]-0.2563809` and `r fixef(fit_lmm_fp_sj)[1]+0.2563809`
+
+::: {.column width="35%"}
+```{r}
+#| echo: false
+print(VarCorr(fit_lmm_fp_sj), 
+      comp = c("Variance", "Std.Dev"))
+```
+
+- so we can interpret the standard deviation as quantifying the variability of the by-participant intercepts around the mean (i.e., intercept)
+:::
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+sj_int <- coef(fit_lmm_fp_sj) |> 
+  pluck(1) |> rename(intercept = `(Intercept)`)
+
+# set quantiles
+q5 <- quantile(sj_int$intercept,.025)
+q95 <- quantile(sj_int$intercept,.975)
+q16 <- quantile(sj_int$intercept,.16)
+q84 <- quantile(sj_int$intercept,.84)
+
+x.dens <- density(sj_int$intercept)
+df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
+
+# plot
+
+fig_res_density <-
+  sj_int |> 
+  ggplot() +
+  aes(x = intercept) +
+  labs(title = "By-participant varying intercepts density",
+       x = "Intercept",
+       y = "Density") +
+  geom_density() +
+  geom_area(data = subset(df.dens, x >= q5 & x <= q95), 
+              aes(x=x,y=y), fill = 'red',
+             alpha = .4) +
+  geom_area(data = subset(df.dens, x >= q16 & x <= q84), 
+              aes(x=x,y=y), fill = 'blue',
+             alpha = .4) +
+  geom_vline(colour = "black",
+             linetype = "dashed",
+             aes(xintercept = fixef(fit_lmm_fp_sj)[1])) +
+  geom_vline(colour = "blue",
+             linetype = "dashed",
+             aes(xintercept = q16)) +
+  geom_vline(colour = "blue",
+             linetype = "dashed",
+             aes(xintercept = q84)) +
+  geom_vline(colour = "red",
+             linetype = "dashed",
+             aes(xintercept = q5)) +
+    # add labels
+    geom_text(x = q5, y = 1, label = "mean - SD*1.96", angle = 90,
+              vjust = -.35,
+              colour = "red")+
+  geom_vline(colour = "red",
+             linetype = "dashed",
+             aes(xintercept = q95)) +
+    geom_text(x = q95, y = 1, label = "mean + SD*1.96",
+              colour = "red", angle = 90,
+              vjust = -.35) +
+    geom_text(x = q16, y = 1.3, label = "mean - SD",
+              colour = "blue", angle = 90,
+              vjust = -.35) +
+    geom_text(x = q84, y = 1.3, label = "mean + SD",
+              colour = "blue", angle = 90,
+              vjust = -.35) +
+    geom_text(aes(x = mean(intercept)), y = 1, label = "Intercept", angle = 90,
+              vjust = -.35) 
+```
+
+```{r}
+#| label: fig-density
+#| fig-cap: Density plot of by-participant intercepts with 95% (+/-SD*1.96) and 68% (+/-SD) ranges
+#| echo: false
+fig_res_density
+```
+
+:::
+
+## `lmerTest::lmer()`
+
+- recall we had a conflict for the function `lmer()` between `lme4` and `lmerTest`, and we set `lme4` to be our default for this function
+- let's refit our model using `lmerTest::lmer()`
+
+```{r}
+fit_lmm_fp_sj <-
+  lmerTest::lmer(log(fp) ~ verb_t*gramm + 
+         (1|sj), 
+       data = df_biondo, 
+       subset = roi == 4) 
+```
+
+- the only change is the addition of `lmerTest::`, which specifies which package to retreive the `lmer()` function from
+
+## {.smaller}
+
+- what's different in the summary?
+
+```{r}
+#| output-location: column
+summary(fit_lmm_fp_sj)
+```
+
+##
+
+```{r}
+#| eval: false
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest'] #<1>
+...
+
+Fixed effects:
+                  Estimate  Std. Error          df t value             Pr(>|t|)     #<2>
+(Intercept)       5.957102    0.033809   58.991899 176.199 < 0.0000000000000002 ***
+verb_t1           0.062209    0.013787 3732.065822   4.512           0.00000662 ***
+gramm1            0.003466    0.013787 3732.032139   0.251                0.802    
+verb_t1:gramm1   -0.015741    0.027573 3732.037124  -0.571                0.568    
+
+...
+```
+
+1. New: `Satterthwaite's method` and object class (`lmerModLmerTest`)
+2. Fixed effects include `df` (degrees of freedom) and *p*-values (`Pr(>|t|)`)
+
+- `lme4::lmer()` doesn't provide degrees of freedom or *p*-values
+  + defining degrees of freedom (and therefore calculating *p*-values) is more complex and not trivial in mixed models
+  + `lmerTest` uses the Satterthwaite method, which is fine for our purposes
+- importantly, everything else is exactly the same as when we use `lme4::lmer()`
+
+## Fixed effects for `lm()` and `lmer()`
+
+- let's compare our fixed effects to those from a model without random effects
+
+```{r}
+fit_lm_fp <-
+  lm(log(fp) ~ verb_t*gramm, 
+       data = df_biondo, 
+       subset = roi == 4) 
+```
+
+### Comparing fixed effects
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| label: tbl-lm_fp_sj
+#| tbl-cap: Fixed effects for `lm_fp_sj`
+tidy(fit_lm_fp) |> 
+  as_tibble() |> 
+  mutate(p.value = round(p.value,8),
+         across(c(estimate, std.error,statistic),round,3)) |> 
+  kable() |> 
+  kable_styling(font_size = 24)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| label: tbl-lmm_fp_sj
+#| tbl-cap: Fixed effects for `lmm_fp_sj`
+broom.mixed::tidy(fit_lmm_fp_sj,
+                    effects="fixed") |> 
+  mutate(p.value = round(p.value,8),
+         across(c(estimate, std.error,statistic),round,3),
+         df = round(df,0)) |> 
+  select(-effect) |> 
+  kable() |> 
+  kable_styling(font_size = 24)
+```
+:::
+
+
+::: {.column width="100%"}
+- so far we see that our model estimates are still descriptively similar, there are only some slight quantitative differences
+- your fixed effects will typically be unchanged with the addition of random effects
+  + what changes will be usually be the standard error, *t*-value (or *z*-value for generalised linear (mixed) models), confidence intervals, and *p*-values
+  + the magnitude of this change will depend on whether the inclusion of the random effects better accounts for variability in your data than your fixed effects alone
+  
+:::
+
+::::
+
+### Comparing residual error
+
+- the residual error for our fixed-effects-only model was is `r round(glance(fit_lm_fp)$sigma,2)`
+
+```{r}
+glance(fit_lm_fp)$sigma
+```
+
+- for our by-participant varying intercepts model it goes down to `r round(glance(fit_lmm_fp_sj)$sigma,2)`
+
+```{r}
+glance(fit_lmm_fp_sj)$sigma
+```
+
+- this tells us that our inclusion of by-participant varying intercepts accounts for some of the variance in the model that was not accounted for in fixed-effects-only model
+
+- are there any other possible sources of variance that we haven't taken into account?
+
+# Crossed random effects: two grouping factors
+
+- we still haven't taken by-item variance into account, let's now include *crossed* random effects in our model
+
+```{r}
+fit_lmm_fp_sj_item <-
+  lmerTest::lmer(log(fp) ~ verb_t*gramm +
+                   (1|sj) +
+                   (1|item),
+                 data = df_biondo,
+                 subset = roi == 4)
+```
+
+- crossed random effects refer to a property of your data (/experimental design), i.e., repeated measures for items *and* participants
+  + one level of a grouping factor contains observations from all levels from another grouping factor (e.g., each item has an observations from each participant and vice versa)
+
+###
+
+```{r}
+#| output-location: column
+summary(fit_lmm_fp_sj_item)
+```
+
+### Comparing random effects
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| label: tbl-lmm_fp_sj_res
+#| tbl-cap: By-participant varying variance component
+broom.mixed::tidy(fit_lmm_fp_sj,
+                    effects="ran_pars") |> 
+  select(-effect) |> 
+  kable() |> 
+  kable_styling(font_size = 24)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| label: tbl-lmm_fp_sj_item_res
+#| tbl-cap: By-participant and -item variance components
+broom.mixed::tidy(fit_lmm_fp_sj_item,
+                    effects="ran_pars") |> 
+  select(-effect) |> 
+  kable() |> 
+  kable_styling(font_size = 24)
+```
+:::
+
+::: {.column width="100%"}
+- we now have the variance of by-item random intercepts (@tbl-lmm_fp_sj_item_res)
+- the *variance component* for the by-subjects intercepts is not much changed
+  + the value is slightly different because it now also takes by-item variability into account
+- the *residual error* also goes down in `fit_lmm_fp_sj_item` (`r round(glance(fit_lmm_fp_sj_item)$sigma,2)`), because by-item intercepts account for some of the variance that was unaccounted for in `fit_lmm_fp_sj` (`r round(glance(fit_lmm_fp_sj)$sigma,2)`)
+- note that there is most by-participant than by-item variance, this is typical and reflects what we saw in our boxplots
+
+:::
+
+::::
+
+## Comparing fixed effects
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| label: tbl-lmm_fp_sj2
+#| tbl-cap: Fixed effects for `lmm_fp_sj`
+broom.mixed::tidy(fit_lmm_fp_sj,
+                    effects="fixed") |> 
+  mutate(p.value = round(p.value,8),
+         across(c(estimate, std.error,statistic),round,3),
+         df = round(df,0)) |> 
+  select(-effect) |> 
+  kable() |> 
+  kable_styling(font_size = 24)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| label: tbl-lmm_fp_sj_item
+#| tbl-cap: Fixed effects for `lmm_fp_sj_item`
+broom.mixed::tidy(fit_lmm_fp_sj_item,
+                    effects="fixed") |> 
+  mutate(p.value = round(p.value,8),
+         across(c(estimate, std.error,statistic),round,3),
+         df = round(df,0)) |> 
+  select(-effect) |> 
+  kable() |> 
+  kable_styling(font_size = 24)
+```
+:::
+
+
+::: {.column width="100%"}
+- again we see there isn't much change to our coefficient estimates
+:::
+
+::::
+
+### Comparing predictions {.smaller}
+
+```{r}
+#| label: fig-plot-comparison
+#| fig-cap: Comparison of predicted estimates and 95% confidence intervals for the three models
+#| code-fold: true
+#| code-summary: Code for plots
+#| out-width: "100%"
+#| fig-asp: .3
+sjPlot::plot_model(fit_lm_fp, type = "int") +
+  geom_line(position = position_dodge(.1)) +
+  ylim(340,440) +
+  labs(title = "fit_lm_fp") +
+
+sjPlot::plot_model(fit_lmm_fp_sj, type = "int") +
+  geom_line(position = position_dodge(.1)) +
+  ylim(340,440) +
+  labs(title = "fit_lmm_fp_sj") +
+
+sjPlot::plot_model(fit_lmm_fp_sj_item, type = "int") +
+  geom_line(position = position_dodge(.1)) +
+  ylim(340,440) +
+  labs(title = "fit_lmm_fp_sj_item") +
+  
+  plot_layout(guides = "collect")
+```
+
+- if we plot the results from all three models we've fit so far we see the estimates are similar but the confidence intervals are wider for the mixed models
+  + this is despite the fact that the *p*-values are significant for all three
+  
+### Model comparison {.smaller}
+
+- we can use the `anova()` function to compare model fit
+
+```{r}
+anova(fit_lmm_fp_sj, fit_lmm_fp_sj_item)
+```
+
+- here we see that the AIC, BIC, and logLik are all lower for our model with by-participant and -item varying intercepts
+  + *lower* AIC and BIC indicate better model fit
+  + *higher* logLik indicates better fit
+- the inclusion of by-item random intercepts significantly improves the fit of our model
+
+# Exploring our random effects estimates
+
+- what we saw in our model summary were the variance components
+  + a description of the variance of our by-item and by-participant random intercepts
+- our model also contains intercept estimates for each level of item and participant
+  + we can extract the intercept estimates
+  + or we extract their deviance from the model intercept
+
+## Extracting fixed effects
+
+- we've already used `coef()` to extract fixed effect estimates from `lm` objects
+
+```{r}
+#| output-location: column-fragment
+coef(fit_lm_fp)
+```
+
+- to extract our fixed effect estimates from `lmer` objects we need `fixef()`
+
+```{r}
+#| output-location: column-fragment
+fixef(fit_lmm_fp_sj_item)
+```
+
+- or we can append `$coefficients` to the model summary
+
+```{r}
+#| output-location: column-fragment
+summary(fit_lmm_fp_sj_item)$coefficients |> 
+  as_tibble()
+```
+
+### Extract random intercept estimates
+
+- `coef()` behaves very differently with `lmer` objects, extracting the random effects estimates per level
+
+```{r}
+coef(fit_lmm_fp_sj_item) |> pluck("item") |> 
+  rownames_to_column(var = "item") |> head()
+```
+
+- which outputs a `list` object, with one data frame for `item` and one for `sj`
+  + in the code above I've 'plucked' just the by-item coefficients
+
+##
+
+- we can extract just one or the other (`head()` is for presentation purposes):
+
+```{r}
+#| output-location: column-fragment
+coef(fit_lmm_fp_sj_item) |> pluck("item") |> 
+  rownames_to_column(var = "item") |> head()
+```
+
+```{r}
+#| output-location: column-fragment
+coef(fit_lmm_fp_sj_item) |> pluck("sj") |> 
+  rownames_to_column(var = "sj") |> head()
+```
+
+- why do our intercepts vary, but not `verb_t1`, `gramm1`, or `verb_t1:gramm1`?
+
+```{r}
+#| echo: false
+coef_fp_item_int <-
+  coef(fit_lmm_fp_sj_item) %>%
+  pluck("item") |> 
+  rownames_to_column(var = "item") |> 
+  rename(
+    intercept = 2
+  ) |> 
+  as_tibble()
+
+coef_fp_sj_int <-
+  coef(fit_lmm_fp_sj_item) %>%
+  pluck("sj") |> 
+  rownames_to_column(var = "sj") |> 
+  rename(
+    intercept = 2
+  ) |> 
+  as_tibble()
+
+
+```
+
+### Extract deviations from the intercept
+
+- the `ranef()` function provides the deviance from the model intercept and each random intercept estimate
+  + the output is a `list` with a one element per grouping factor
+
+```{r}
+ranef(fit_lmm_fp_sj_item)
+```
+
+## 
+
+:::: {.columns}
+
+::: {.column width="100%"}
+- `ranef()$grouping_factor` or `pluck("grouping_factor")` selects the relevant grouping factor
+:::
+
+::: {.column width="50%"}
+```{r}
+#| output-location: fragment
+ranef(fit_lmm_fp_sj_item)$sj |> 
+  head()
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| output-location: fragment
+ranef(fit_lmm_fp_sj_item) |> 
+  pluck("sj") |> head()
+```
+:::
+::::
+
+### Compare estimates and deviances
+
+- the values extracted by `ranef()` (`sj_dev` in @tbl-res-dev) equal the difference (`difference`) between the model intercept (`model_intercept`) and the by-participant random intercept estimates (`sj_est`)
+- so we can either look at each participant's (or item's) estimate, or look at how much it deviates from the model intercept
+
+```{r}
+#| echo: false
+#| label: tbl-res-dev
+#| tbl-cap: Random intercept estimates versus deviance
+coef_lmm_sj <-
+  coef(fit_lmm_fp_sj_item) |> 
+  pluck("sj") |> 
+  rownames_to_column(var = "sj") |> 
+  rename(
+         sj_est = 2)
+
+dev_lmm_sj <-
+  ranef(fit_lmm_fp_sj_item) |> 
+  pluck("sj") |> 
+  rownames_to_column(var = "sj") |> 
+  rename(
+         sj_dev = 2)
+
+left_join(coef_lmm_sj, dev_lmm_sj, by = "sj") |> 
+  relocate(sj, sj_est, sj_dev) |> 
+  select(sj, sj_est, sj_dev) |> 
+  mutate(est_minus_dev = sj_est - sj_dev,
+         model_intercept = fixef(fit_lmm_fp_sj_item)[1],
+         est_minus_intercept = sj_est - model_intercept) |> 
+  # relocate(sj) |> 
+  head() |> 
+  kable(digits = 3) |> 
+  kable_styling(font_size = 24) 
+```
+
+## Visualise random effects
+
+:::: {.columns}
+
+::: {.column width="100%"}
+- the `lattice` package automatically produces plots of random effects estimates
+:::
+
+::: {.column width="50%"}
+```{r}
+lattice::dotplot(ranef(fit_lmm_fp_sj_item))$item
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+lattice::dotplot(ranef(fit_lmm_fp_sj_item))$sj
+```
+:::
+
+::::
+
+# Reporting your model
+
+- according to @sonderegger_regression_nodate-1 (p. 297), we should report:
+  
+  1. model definition (sometimes in 'Data Analysis' section)
+  2. Fixed effects
+  3. Random effects
+  4. Sample size (number of observations, number of levels for each grouping factor)
+  5. one or more quantitative summaries of the model, e.g., AIC, BIC, or logLik (although they're only informative in comparison to another model fit to the same data)
+
+## Model definition
+
+> We conducted the analysis by fitting `linear mixed-effect models` to our data, using the R package lme4 (Bates et al., 2014). We included Time Reference (past, future), and Verb Match (match, mismatch) as `fixed-effect factors` [...] by adopting `sum contrast coding` (Schad et al., 2020): past and match conditions were `coded as –.5`. while future and mismatch conditions were `coded as .5`. [...] Moreover, we included `crossed random intercepts` and random slopes for all fixed-effect parameters `for subject and item` grouping factors (Barr et al., 2013) in all models. [...] Logit mixed-effect models were employed (Jaeger, 2008) for the analysis of the probability of regression measure. [...] P-values were derived by using the lmerTest package [@lmerTest_package].
+
+--- @biondo_yesterday_2022, p. 9
+
+###
+
+- could also explicitly mention method used for *p*-values, an example:
+
+> P-values for individual predictors were computed using `lmerTest`, with the `Satterthwaite` option for denominator degrees of freedom for F statistics.
+
+--- @troyer_catch_2020, p. 9
+
+- but here they don't cite the package
+  + so you see, there's alway something you miss...
+- FYI,  to get a package's citation, run `citation("lmerTest")` in the Console
+
+## Results
+
+- a combination of tables, figures, and in-text coefficient estimates is always key
+- in-text, the *t*- and *p*-values should be included at minimum, Estimate and standard error (*Est* = ..., *SE* = ...,) could also be included if you aren't reporting many effects but must at least be included in a table
+- figures will typically only show the distribution of raw observations and model predictions for fixed effects
+
+### In-text
+
+A main effect of tense was found in first-pass reading times at the verb region (*Est* = 0.062, *t* = 4.8, *p* < .001), with the future tense (*M* = `r round(mean(df_biondo$fp[df_biondo$roi=="4" & df_biondo$verb_t=="Future"], na.rm=T),0)`ms, *SD* = `r round(sd(df_biondo$fp[df_biondo$roi=="4" & df_biondo$verb_t=="Future"], na.rm=T),0)`ms) eliciting longer first-pass reading times than the past tense.
+
+### Tables
+
+#### Fixed effects
+
+```{r}
+#| label: tbl-report-fixed
+#| tbl-cap: Table of fixed effects from fit_lmm_fp_sj_item
+#| code-fold: true
+#| code-summary: Code for table
+tidy(fit_lmm_fp_sj_item,
+     effects = "fixed") |> 
+  as_tibble() |> 
+  select(-effect) |> 
+  mutate(p.value = format_pval(p.value),
+         across(c(estimate,std.error, statistic), round, 3),
+         df = round(df,1)) |> 
+  mutate(term = fct_recode(term,
+    "Intercept" = "(Intercept)",
+    "Tense" = "verb_t1",
+    "Grammticality" = "gramm1",
+    "Tense x Gramm" = "verb_t1:gramm1"
+  )) |> 
+  kable(
+        col.names = c("Coefficient", "$\\hat{\\beta}$", "SE", "t", "df", "p")) |> 
+  kable_styling()
+```
+
+#### Random effects
+
+```{r}
+#| label: tbl-report-res
+#| tbl-cap: Table of random effects from fit_lmm_fp_sj_item
+#| code-fold: true
+#| code-summary: Code for table
+as.data.frame(VarCorr(fit_lmm_fp_sj_item),comp=c("Variance","Std.Dev.")) |> 
+  as_tibble() |> 
+  select(-var2) |> 
+  # mutate(var1 = ifelse(var1 == "NA", " ", var1)) |>
+  kable(digits = 3,
+        col.names = c("Group", "Term", "Variance", "SD")) |> 
+  kable_styling()
+```
+
+### Figures
+
+- we don't usually include plots of our random effects in publications, but these can be useful for model exploration and can be included in supplementary materials
+
+#### `lattice`
+
+- as already mentioned, we can simply use the the `lattice` package
+
+```{r}
+#| label: fig-lattice
+#| fig-cap: By-participant varying slopes (`lattice::dotplot(res(model))`)
+library(lattice)
+
+dotplot(ranef(fit_lmm_fp_sj_item))["sj"]
+```
+
+#### `broom.mixed` {.smaller}
+
+- or we can also generate the same plots using `tidy()` from the `broom.mixed` package + `ggplot()` (@fig-report A)
+- and we can add the model intercept to get each by-participant estimate, i.e., the values we get with `coef()`  (@fig-report B)
+
+```{r}
+#| label: fig-report
+#| fig-cap: Back-transformed first-pass reading times (ms) at the verb region with 95% CIs
+#| code-fold: true
+#| code-summary: Code for plot
+#| out-width: "100%"
+#| fig-asp: .4
+
+fig_res_dev <-
+  broom.mixed::tidy(fit_lmm_fp_sj_item, effects = "ran_vals", conf.int = TRUE) |> 
+  filter(group == "sj") |> 
+  ggplot() +
+  aes(x = estimate, y = reorder(level, estimate))  +
+  labs(title = "By-participant varying intercepts with 95% CIs",
+       y = "Participant ID",
+       x = "Deviation from the intercept") +
+  geom_vline(xintercept = 0, colour = "red", linetype = "dashed") +
+  geom_point(colour = "blue") +
+  geom_errorbar(
+    aes(xmin = conf.low,
+        xmax = conf.high)
+  ) +
+  scale_x_continuous(breaks = c(-0.5,0,0.5)) +
+  facet_grid(~term)
+
+fig_res_est <- broom.mixed::tidy(fit_lmm_fp_sj_item, effects = "ran_vals", conf.int = TRUE) |> 
+  filter(group == "sj") |> 
+  # back-transform to ms
+  mutate(across(c(estimate,conf.low,conf.high),~.+fixef(fit_lmm_fp_sj_item)[1])) |> 
+  # mutate(across(c(estimate,conf.low,conf.high),exp)) |> 
+  # plot
+  ggplot() +
+  aes(x = estimate, y = reorder(level, estimate))  +
+  labs(title = "By-participant varying intercepts with 95% CIs",
+       y = "Participant ID",
+       x = "Estimate (log)") +
+  geom_vline(xintercept = fixef(fit_lmm_fp_sj)[1], colour = "red", linetype = "dashed") +
+  geom_point(colour = "blue") +
+  geom_errorbar(
+    aes(xmin = conf.low,
+        xmax = conf.high)
+  ) +
+  scale_x_continuous(breaks = c(5.457102,5.957102 ,6.457102)) +
+  facet_grid(~term)
+
+fig_res_dev + fig_res_est +
+  plot_annotation(tag_levels = "A")
+```
+
+### {.smaller}
+
+- and we can back-transform these values to milliseconds by exponentiating the estimates in the log scale (@fig-report-ms A)
+- and we can back-transform deviances by subtracting the exponentiating model estimate from the back-transformed estimates (@fig-report-ms B)
+
+```{r}
+#| label: fig-report-ms
+#| fig-cap: By-participant estimates back-transformed to milliseconds
+#| code-fold: true
+#| code-summary: Code for plot
+#| out-width: "100%"
+#| fig-asp: .4
+fig_res_est_ms <-
+  broom.mixed::tidy(fit_lmm_fp_sj_item, effects = "ran_vals", conf.int = TRUE) |> 
+  filter(group == "sj") |> 
+  # back-transform to ms
+  mutate(across(c(estimate,conf.low,conf.high),~.+fixef(fit_lmm_fp_sj_item)[1])) |> 
+  mutate(across(c(estimate,conf.low,conf.high),exp)) |>
+  # plot
+  ggplot() +
+  aes(x = estimate, y = reorder(level, estimate))  +
+  labs(title = "By-participant varying intercepts with 95% CIs",
+       y = "Participant ID",
+       x = "Estimate (ms)") +
+  geom_vline(xintercept = exp(fixef(fit_lmm_fp_sj)[1]), colour = "red", linetype = "dashed") +
+  geom_point(colour = "blue") +
+  geom_errorbar(
+    aes(xmin = conf.low,
+        xmax = conf.high)
+  ) +
+  scale_x_continuous(breaks = c(186.4884,386.4884, 586.4884, 786.4884)) +
+  facet_grid(~term)
+
+fig_res_dev_ms <-
+broom.mixed::tidy(fit_lmm_fp_sj_item, effects = "ran_vals", conf.int = TRUE) |> 
+  filter(group == "sj") |> 
+  # back-transform to ms
+  mutate(across(c(estimate,conf.low,conf.high),~.+fixef(fit_lmm_fp_sj_item)[1])) |> 
+  mutate(across(c(estimate,conf.low,conf.high),exp)) |>
+  mutate(across(c(estimate,conf.low,conf.high),~.-exp(fixef(fit_lmm_fp_sj_item)[1]))) |>
+  # plot
+  ggplot() +
+  aes(x = estimate, y = reorder(level, estimate))  +
+  labs(title = "Deviances in by-participant varying intercepts with 95% CIs",
+       y = "Participant ID",
+       x = "Deviance (ms)") +
+  geom_vline(xintercept = 0, colour = "red", linetype = "dashed") +
+  geom_point(colour = "blue") +
+  geom_errorbar(
+    aes(xmin = conf.low,
+        xmax = conf.high)
+  ) +
+  # scale_x_continuous(breaks = c(-0.5,0,0.5)) +
+  facet_grid(~term)
+
+fig_res_est_ms + fig_res_dev_ms + plot_annotation(tag_levels = "A")
+```
+
+# Learning objectives 🏁 {.unnumbered .unlisted .uncounted}
+
+Today we learned...
+
+- what linear mixed models are ✅
+- how to fit a random-intercepts model ✅
+- how to inspect and interpret a mixed effects model ✅
+
+# Important terms {.unnumbered .smaller .uncounted}
+
+```{r}
+#| echo: false
+content <- 
+  googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/17CqdxKL9lyy-PbTB2ZnfWNWs4oV--CcBvrqlh_aEPGQ/edit?usp=sharing")
+
+content |> 
+  filter(`Lecture topic` == "08 - LMMs 1: random intercepts") |> 
+  select(-`Lecture topic`) |> 
+  gt() 
+```
+
+# Task
+
+1. Fit a linear mixed model (`lm()` function) to log-transformed total reading times (`tt`) at the adverb region (`roi == 2`), with adverb time reference (`adv_t`) and gramm (`gramm`) and their interaction as fixed effects and by-participant and by-item varying intercepts. Use sum contrast coding (`Past` and `gramm` = `-0.5`, `Future` and `ungramm` = `+0.5`). Save this model as `fit_lmm_adv_tt`.
+
+```{r}
+#| echo: false
+#| eval: true
+
+contrasts(df_biondo$adv_t) <- c(-0.5,0.5)
+
+fit_lmm_adv_tt <-
+  lmerTest::lmer(
+    log(tt) ~ adv_t*gramm +
+      (1|sj) +
+      (1|item),
+    data = df_biondo,
+    subset = roi == 2
+  )
+```
+
+
+3. Inspect the fixed effect of your model.
+```{r}
+#| eval: false
+#| echo: false
+summary(fit_lmm_adv_tt)
+```
+
+5. Plot the fixed effects for `fit_lm_adv_tt` and `fit_lmm_adv_tt`.
+
+```{r}
+#| eval: false
+#| echo: false
+
+ggeffect(fit_lmm_adv_tt,
+          effects = "fixed",
+          terms = c("adv_t", "gramm")) |> 
+  as_tibble() |> 
+    # mutate(across(c(estimate,conf.low,conf.high),exp))
+  mutate(across(c(predicted,conf.low,conf.high),exp))
+```
+
+```{r}
+coef_fixed <- 
+  broom.mixed::tidy(
+  fit_lmm_adv_tt,
+  effects="fixed",
+  conf.int = T
+)
+
+pred_back <-
+  tibble(
+  tense = c(rep("Past",2),rep("Future",2)),
+  gramm = rep(c("gramm","ungramm"),2)
+  ) 
+```
+
+
+
+4. Inspect the random effects for `fit_lmm_adv_tt`. Describe what you see.
+
+6. Plot the random effects per participant and item.
+
+5. Write up a description of your model as if for a publication (model formula, contrasts, random effects structure, packages/methods used). 
+
+6. Write up the results (coefficient estimates, etc.).
+
+# References {.unlisted .unnumbered visibility="uncounted"}
+
+::: {#refs custom-style="Bibliography"}
+:::
+
+
